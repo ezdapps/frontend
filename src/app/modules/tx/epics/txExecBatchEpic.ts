@@ -24,8 +24,8 @@ import { Epic } from 'modules';
 import { txExecBatch, txBatchStatus } from '../actions';
 import { Observable } from 'rxjs/Observable';
 import keyring from 'lib/keyring';
-import { ITxStatusResponse } from 'genesis/api';
-import { ITransaction } from 'genesis/tx';
+import { ITxStatusResponse } from 'apla/api';
+import { ITransaction } from 'apla/tx';
 
 const BATCH_COOLDOWN_TIMER = 3000;
 const BATCH_COUNT = 10;

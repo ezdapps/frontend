@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'genesis/content' {
-    import { TProtypoElement } from 'genesis/protypo';
+declare module 'apla/content' {
+    import { TProtypoElement } from 'apla/protypo';
 
     type TMenu = {
         readonly name: string;

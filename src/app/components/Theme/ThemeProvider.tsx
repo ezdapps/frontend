@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import { ThemeProvider as ThemeProviderNative, ThemeProviderComponent } from 'styled-components';
-import { IThemeDefinition } from 'genesis/theme';
+import { IThemeDefinition } from 'apla/theme';
 
 const ThemeProvider: ThemeProviderComponent<IThemeDefinition> = ThemeProviderNative as ThemeProviderComponent<IThemeDefinition>;
 

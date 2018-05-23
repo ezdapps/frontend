@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'genesis/protypo' {
+declare module 'apla/protypo' {
     type TProtypoElement = {
         readonly tag: string;
         readonly id?: string;

@@ -24,7 +24,7 @@ import * as React from 'react';
 import * as uuid from 'uuid';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { IModal } from 'genesis/modal';
+import { IModal } from 'apla/modal';
 import { modalShow } from 'modules/modal/actions';
 
 import { Validator } from 'components/Validation/Validators';

@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { TWindowType } from 'genesis/gui';
+import { TWindowType } from 'apla/gui';
 
 const actionCreator = actionCreatorFactory('gui');
 export const switchWindow = actionCreator.async<TWindowType, TWindowType, void>('SWITCH_WINDOW');

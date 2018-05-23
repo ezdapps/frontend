@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import * as actions from './actions';
-import { IModal } from 'genesis/modal';
+import { IModal } from 'apla/modal';
 import { reducerWithInitialState } from 'typescript-fsa-reducers/dist';
 import modalShowHandler from './reducers/modalShowHandler';
 import modalCloseHandler from './reducers/modalCloseHandler';

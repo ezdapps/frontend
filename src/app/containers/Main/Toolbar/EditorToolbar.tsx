@@ -25,8 +25,8 @@ import { IRootState } from 'modules';
 import { connect } from 'react-redux';
 import { modalShow } from 'modules/modal/actions';
 import { editorSave, revertEditorTab, changeEditorTool } from 'modules/editor/actions';
-import { IModalResult } from 'genesis/modal';
-import { TEditorTab } from 'genesis/editor';
+import { IModalResult } from 'apla/modal';
+import { TEditorTab } from 'apla/editor';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 
 import EditorToolbar from 'components/Main/Toolbar/EditorToolbar';

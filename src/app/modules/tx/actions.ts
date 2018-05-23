@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IExecutionCall, ITransactionCall, ITxResult, ITxError, ITransactionBatchCall, ITransaction, TTransactionRequest } from 'genesis/tx';
+import { IExecutionCall, ITransactionCall, ITxResult, ITxError, ITransactionBatchCall, ITransaction, TTransactionRequest } from 'apla/tx';
 
 const actionCreator = actionCreatorFactory('tx');
 export const txCall = actionCreator<TTransactionRequest>('TX_CALL');

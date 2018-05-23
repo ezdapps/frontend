@@ -22,7 +22,7 @@
 
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 import AccountList from 'containers/Auth/Login/AccountList';
 import RoleList from 'containers/Auth/Login/RoleList';

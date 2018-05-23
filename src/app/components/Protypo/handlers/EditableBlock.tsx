@@ -22,7 +22,7 @@
 
 import * as React from 'react';
 import { OnPasteStripFormatting } from 'lib/constructor';
-import { IConstructorElementProps } from 'genesis/editor';
+import { IConstructorElementProps } from 'apla/editor';
 
 export interface IEditableBlockProps extends IConstructorElementProps {
     'className'?: string;

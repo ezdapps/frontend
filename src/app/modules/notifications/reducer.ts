@@ -22,7 +22,7 @@
 
 import * as actions from './actions';
 import { reducerWithInitialState } from 'typescript-fsa-reducers/dist';
-import { INotification } from 'genesis/notifications';
+import { INotification } from 'apla/notifications';
 import spawnNotificationHandler from './reducers/spawnNotificationHandler';
 import destroyNotificationHandler from './reducers/destroyNotificationHandler';
 import pushNotificationQueueHandler from './reducers/pushNotificationQueueHandler';

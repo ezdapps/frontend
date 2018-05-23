@@ -27,7 +27,7 @@ import StackGroup from 'components/Animation/StackGroup';
 import themed from 'components/Theme/themed';
 import Protypo from 'containers/Widgets/Protypo';
 import ResizeHandle from 'containers/Main/Navigation/ResizeHandle';
-import { TMenu } from 'genesis/content';
+import { TMenu } from 'apla/content';
 
 const StyledNavigation = themed.aside`
     &.navigation-collapsed {

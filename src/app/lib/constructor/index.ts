@@ -21,8 +21,8 @@
 // SOFTWARE.
 
 import { findDOMNode } from 'react-dom';
-import { TProtypoElement } from 'genesis/protypo';
-import { IFindTagResult } from 'genesis/editor';
+import { TProtypoElement } from 'apla/protypo';
+import { IFindTagResult } from 'apla/editor';
 import * as _ from 'lodash';
 import { html2json } from 'html2json';
 import resolveTagHandler from 'lib/constructor/tags';

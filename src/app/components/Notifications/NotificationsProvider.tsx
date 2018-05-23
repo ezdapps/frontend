@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import React from 'react';
-import { INotification, INotificationProto } from 'genesis/notifications';
+import { INotification, INotificationProto } from 'apla/notifications';
 
 import StreamGroup from '../Animation/StreamGroup';
 import Notification from './Notification';

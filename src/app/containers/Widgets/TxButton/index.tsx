@@ -26,7 +26,7 @@ import { OrderedMap } from 'immutable';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { txCall } from 'modules/tx/actions';
-import { TTransactionStatus, ITransaction } from 'genesis/tx';
+import { TTransactionStatus, ITransaction } from 'apla/tx';
 import { navigatePage } from 'modules/content/actions';
 
 import TxButton, { ITxButtonConfirm } from 'components/TxButton';

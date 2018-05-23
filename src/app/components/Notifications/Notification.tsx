@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import React from 'react';
-import { INotificationProto } from 'genesis/notifications';
+import { INotificationProto } from 'apla/notifications';
 
 import themed from 'components/Theme/themed';
 

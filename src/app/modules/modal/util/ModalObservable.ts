@@ -24,7 +24,7 @@ import { Action } from 'redux';
 import { Observable } from 'rxjs';
 import { ActionsObservable } from 'redux-observable';
 import { modalShow, modalClose } from '../actions';
-import { IModalCall, TModalResultReason } from 'genesis/modal';
+import { IModalCall, TModalResultReason } from 'apla/modal';
 
 const ModalObservable = <T>(action$: ActionsObservable<Action>, params: { modal: IModalCall, success?: (data: T) => Observable<Action>, failure?: (reason: TModalResultReason) => Observable<Action> }) =>
     Observable.merge(

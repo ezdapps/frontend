@@ -21,8 +21,8 @@
 // SOFTWARE.
 
 import CodeGenerator, { findTagById, convertToTreeData, updateChildrenText, copyObject } from 'lib/constructor';
-import { TProtypoElement } from 'genesis/protypo';
-import { TConstructorTreeElement, IFindTagResult } from 'genesis/editor';
+import { TProtypoElement } from 'apla/protypo';
+import { TConstructorTreeElement, IFindTagResult } from 'apla/editor';
 
 test('Constructor module', () => {
 

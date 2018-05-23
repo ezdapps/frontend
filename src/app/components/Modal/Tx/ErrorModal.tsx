@@ -23,7 +23,7 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { ITransactionCall, TTxError } from 'genesis/tx';
+import { ITransactionCall, TTxError } from 'apla/tx';
 
 import Modal from '../';
 

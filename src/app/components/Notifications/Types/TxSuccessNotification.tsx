@@ -22,8 +22,8 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { INotificationProto } from 'genesis/notifications';
-import { ITransactionCall } from 'genesis/tx';
+import { INotificationProto } from 'apla/notifications';
+import { ITransactionCall } from 'apla/tx';
 
 const TxSuccessNotification: INotificationProto<{ block: string, tx: ITransactionCall }> = {
     icon: 'o-checkround-1',

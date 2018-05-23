@@ -22,7 +22,7 @@
 
 import * as React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { TEditorTab } from 'genesis/editor';
+import { TEditorTab } from 'apla/editor';
 
 import ToolButton from './ToolButton';
 import SectionToolButton from './SectionToolButton';

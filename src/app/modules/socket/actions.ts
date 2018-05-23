@@ -21,8 +21,8 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IAccount } from 'genesis/auth';
-import { INotificationsMessage, IConnectCall } from 'genesis/socket';
+import { IAccount } from 'apla/auth';
+import { INotificationsMessage, IConnectCall } from 'apla/socket';
 
 const actionCreator = actionCreatorFactory('socket');
 export const connect = actionCreator.async<IConnectCall, { session: string, instance: ICentrifuge }, string>('CONNECT');

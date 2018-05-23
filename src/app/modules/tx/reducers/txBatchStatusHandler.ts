@@ -23,7 +23,7 @@
 import { State } from '../reducer';
 import { txBatchStatus } from '../actions';
 import { Reducer } from 'modules';
-import { ITransactionCollection } from 'genesis/tx';
+import { ITransactionCollection } from 'apla/tx';
 
 const txBatchStatusHandler: Reducer<typeof txBatchStatus, State> = (state, payload) => ({
     ...state,

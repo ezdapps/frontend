@@ -27,8 +27,8 @@ import { ActionsObservable } from 'redux-observable';
 import { copyTag } from '../actions';
 import copyTagEpic from './copyTagEpic';
 import dependencies from 'modules/dependencies';
-import { TProtypoElement } from 'genesis/protypo';
-import { TConstructorTreeElement } from 'genesis/editor';
+import { TProtypoElement } from 'apla/protypo';
+import { TConstructorTreeElement } from 'apla/editor';
 import mockStore from 'test/mockStore';
 
 describe('copyTagEpic', () => {

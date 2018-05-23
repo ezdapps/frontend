@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'genesis/api' {
-    import { TProtypoElement } from 'genesis/protypo';
+declare module 'apla/api' {
+    import { TProtypoElement } from 'apla/protypo';
 
     interface IUIDResponse {
         uid: string;

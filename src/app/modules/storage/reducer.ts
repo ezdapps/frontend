@@ -22,7 +22,7 @@
 
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import * as actions from './actions';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 import saveLocaleHandler from './reducers/saveLocaleHandler';
 import saveAccountHandler from './reducers/saveAccountHandler';
 import removeAccountHandler from './reducers/removeAccountHandler';

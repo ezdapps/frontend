@@ -25,7 +25,7 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { navigate } from 'modules/engine/actions';
 import { menuPush, navigatePage, displayData } from 'modules/content/actions';
-import { TProtypoElement } from 'genesis/protypo';
+import { TProtypoElement } from 'apla/protypo';
 
 import Protypo from 'components/Protypo';
 

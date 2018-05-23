@@ -21,8 +21,8 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IAccount, ILoginCall, IRole, ISession } from 'genesis/auth';
-import { ICreateAccountCall, IImportAccountCall } from 'genesis/auth';
+import { IAccount, ILoginCall, IRole, ISession } from 'apla/auth';
+import { ICreateAccountCall, IImportAccountCall } from 'apla/auth';
 
 const actionCreator = actionCreatorFactory('auth');
 export const login = actionCreator.async<ILoginCall, { account: IAccount, roles: IRole[], privateKey: string, publicKey: string, session: ISession }, string>('LOGIN');

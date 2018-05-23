@@ -24,7 +24,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { menuPop, menuPush, ecosystemInit } from 'modules/content/actions';
-import { TMenu } from 'genesis/content';
+import { TMenu } from 'apla/content';
 
 import Navigation from 'components/Main/Navigation';
 

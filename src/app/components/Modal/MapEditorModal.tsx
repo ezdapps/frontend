@@ -24,7 +24,7 @@ import * as React from 'react';
 import { List } from 'immutable';
 import { FormattedMessage } from 'react-intl';
 import { Button } from 'react-bootstrap';
-import { IMapEditorEvent } from 'genesis/geo';
+import { IMapEditorEvent } from 'apla/geo';
 
 import Modal, { IModalProps } from './';
 import Validation from 'components/Validation';

@@ -31,7 +31,7 @@ export interface IDocumentTitleProps {
 const DocumentTitle: React.SFC<IDocumentTitleProps & InjectedIntlProps> = props => {
     const staticTitle = props.intl.formatMessage({
         id: 'general.title',
-        defaultMessage: 'Genesis'
+        defaultMessage: 'Apla'
     });
 
     return (

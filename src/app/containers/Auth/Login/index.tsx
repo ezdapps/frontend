@@ -23,7 +23,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 import Login from 'components/Auth/Login';
 

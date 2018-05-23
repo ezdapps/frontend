@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'genesis/auth' {
+declare module 'apla/auth' {
     interface IAccount {
         id: string;
         encKey: string;

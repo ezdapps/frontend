@@ -23,7 +23,7 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import * as propTypes from 'prop-types';
-import { TProtypoElement } from 'genesis/protypo';
+import { TProtypoElement } from 'apla/protypo';
 
 import StyledComponent from './StyledComponent';
 import LongText from 'components/Protypo/components/LongText';

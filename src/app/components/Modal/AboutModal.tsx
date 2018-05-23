@@ -27,7 +27,7 @@ import imgLogo from 'images/logoInverse.svg';
 import Modal from './';
 import { FormattedMessage } from 'react-intl';
 
-const MAIN_WEBSITE = 'http://genesis.space';
+const MAIN_WEBSITE = 'https://apla.io';
 
 class AboutModal extends Modal<void, void> {
     openWebsite() {

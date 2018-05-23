@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import * as React from 'react';
-import { TEditorTab } from 'genesis/editor';
+import { TEditorTab } from 'apla/editor';
 import imgSim from './sim.svg';
 import imgTpl from './tpl.svg';
 

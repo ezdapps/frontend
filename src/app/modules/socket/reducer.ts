@@ -22,8 +22,8 @@
 
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import * as actions from './actions';
-import { INotificationsMessage } from 'genesis/socket';
-import { IAccount } from 'genesis/auth';
+import { INotificationsMessage } from 'apla/socket';
+import { IAccount } from 'apla/auth';
 import connectDoneHandler from './reducers/connectDoneHandler';
 import disconnectDoneHandler from './reducers/disconnectDoneHandler';
 import subscribeDoneHandler from './reducers/subscribeDoneHandler';

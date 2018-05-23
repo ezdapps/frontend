@@ -23,7 +23,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { INotification } from 'genesis/notifications';
+import { INotification } from 'apla/notifications';
 import { destroyNotification } from 'modules/notifications/actions';
 
 import Notifications from 'components/Notifications/NotificationsProvider';

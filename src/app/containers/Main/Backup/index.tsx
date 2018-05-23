@@ -27,7 +27,7 @@ import { modalShow } from 'modules/modal/actions';
 import { FormattedMessage } from 'react-intl';
 
 import Backup from 'components/Main/Backup';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 export interface IBackupContainerProps {
 }

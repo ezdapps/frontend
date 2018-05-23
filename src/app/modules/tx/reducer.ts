@@ -23,7 +23,7 @@
 import { OrderedMap } from 'immutable';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import * as actions from './actions';
-import { TTransactionStatus } from 'genesis/tx';
+import { TTransactionStatus } from 'apla/tx';
 import txExecHandler from './reducers/txExecHandler';
 import txExecDoneHandler from './reducers/txExecDoneHandler';
 import txExecFailedHandler from './reducers/txExecFailedHandler';

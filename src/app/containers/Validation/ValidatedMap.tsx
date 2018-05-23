@@ -25,8 +25,8 @@ import * as uuid from 'uuid';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { modalShow } from 'modules/modal/actions';
-import { IMapEditorEvent, TMapEditorType, TMapType } from 'genesis/geo';
-import { IModal } from 'genesis/modal';
+import { IMapEditorEvent, TMapEditorType, TMapType } from 'apla/geo';
+import { IModal } from 'apla/modal';
 
 import { Validator } from 'components/Validation/Validators';
 import ValidatedMap from 'components/Validation/ValidatedMap';

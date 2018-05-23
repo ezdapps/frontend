@@ -25,7 +25,7 @@ import { Dispatch, Action } from 'redux';
 import { IRootState } from 'modules';
 import { connect } from 'react-redux';
 import { logout, selectAccount } from 'modules/auth/actions';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 import UserMenu from 'components/Main//UserMenu';
 

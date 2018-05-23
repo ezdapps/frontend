@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IModalCall, IModalCloseCall } from 'genesis/modal';
+import { IModalCall, IModalCloseCall } from 'apla/modal';
 
 const actionCreator = actionCreatorFactory('modal');
 

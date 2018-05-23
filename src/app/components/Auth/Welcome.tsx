@@ -34,12 +34,12 @@ export interface IWelcomeProps {
 const Welcome: React.SFC<IWelcomeProps> = (props) => (
     <LocalizedDocumentTitle title="auth.welcome" defaultTitle="Welcome">
         <div>
-            <Heading>Genesis</Heading>
+            <Heading>Apla</Heading>
             <h4>
                 <FormattedMessage id="auth.welcome" defaultMessage="Welcome" />
             </h4>
             <p className="pv">
-                <FormattedMessage id="auth.welcome.guide" defaultMessage="Before proceeding, you will now be guided through the account creation process. This will not take too much of your time. After completing this process you will be able to use all features of Genesis" />
+                <FormattedMessage id="auth.welcome.guide" defaultMessage="Before proceeding, you will now be guided through the account creation process. This will not take too much of your time. After completing this process you will be able to use all features of Apla" />
             </p>
             <p>
                 <FormattedMessage id="auth.welcome.continue" defaultMessage="Press 'Get started' button to begin the process of creating or restoring your account" />

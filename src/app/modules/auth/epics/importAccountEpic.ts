@@ -24,7 +24,7 @@ import { Action } from 'redux';
 import { Epic } from 'modules';
 import { importAccount } from '../actions';
 import { Observable } from 'rxjs/Observable';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 import { navigate } from 'modules/engine/actions';
 import keyring from 'lib/keyring';
 

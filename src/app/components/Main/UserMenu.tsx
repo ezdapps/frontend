@@ -23,7 +23,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 import { CloseDropdownButton } from 'components/DropdownButton';
 import Avatar from 'containers/Avatar';

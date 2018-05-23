@@ -25,7 +25,7 @@ import { window } from './windows';
 
 const template: MenuItemConstructorOptions[] = [
     {
-        label: 'Genesis',
+        label: 'Apla',
         submenu: [
             { label: 'Quit', accelerator: 'Command+Q', click: app.quit }
         ]

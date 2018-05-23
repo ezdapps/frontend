@@ -22,8 +22,8 @@
 
 import * as React from 'react';
 import { OnPasteStripFormatting } from 'lib/constructor';
-import { IConstructorElementProps } from 'genesis/editor';
-import { TProtypoElement } from 'genesis/protypo';
+import { IConstructorElementProps } from 'apla/editor';
+import { TProtypoElement } from 'apla/protypo';
 
 export interface IEditableBlockProps extends IConstructorElementProps {
     'className'?: string;

@@ -27,8 +27,8 @@ import { ActionsObservable } from 'redux-observable';
 import { setTagCanDropPosition } from '../actions';
 import setTagCanDropPositionEpic from './setTagCanDropPositionEpic';
 import dependencies from 'modules/dependencies';
-import { TProtypoElement } from 'genesis/protypo';
-import { TConstructorTreeElement } from 'genesis/editor';
+import { TProtypoElement } from 'apla/protypo';
+import { TConstructorTreeElement } from 'apla/editor';
 import mockStore from 'test/mockStore';
 
 describe('setTagCanDropPositionEpic', () => {

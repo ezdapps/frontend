@@ -26,7 +26,7 @@ import { injectIntl, InjectedIntlProps } from 'react-intl';
 import { OrderedMap } from 'immutable';
 import { IRootState } from 'modules';
 import { txCall } from 'modules/tx/actions';
-import { TTransactionStatus, ITransaction } from 'genesis/tx';
+import { TTransactionStatus, ITransaction } from 'apla/tx';
 import * as uuid from 'uuid';
 
 import Validation from 'components/Validation';

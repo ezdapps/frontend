@@ -20,8 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'genesis/editor' {
-    import { TProtypoElement } from 'genesis/protypo';
+declare module 'apla/editor' {
+    import { TProtypoElement } from 'apla/protypo';
 
     type TConstructorData = {
         jsonData: TProtypoElement[],

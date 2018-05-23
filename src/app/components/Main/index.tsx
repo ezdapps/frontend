@@ -25,7 +25,7 @@ import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import LoadingBar from 'react-redux-loading-bar';
 import { OrderedMap } from 'immutable';
-import { TSection } from 'genesis/content';
+import { TSection } from 'apla/content';
 import { history } from 'store';
 
 import themed from 'components/Theme/themed';
@@ -37,7 +37,7 @@ import Toolbar from './Toolbar';
 import SectionButton from 'components/Main/SectionButton';
 import ToolButton from 'components/Main/Toolbar/ToolButton';
 import EditorToolbar from 'containers/Main/Toolbar/EditorToolbar';
-import { TTransactionStatus } from 'genesis/tx';
+import { TTransactionStatus } from 'apla/tx';
 // import TransactionsMenu from './TransactionsMenu';
 
 const StyledWrapper = themed.div`
@@ -133,7 +133,7 @@ class Main extends React.Component<IMainProps> {
     }
 
     render() {
-        const appTitle = `Genesis (${this.props.nodeUrl})`;
+        const appTitle = `Apla (${this.props.nodeUrl})`;
 
         return (
             <StyledWrapper className="wrapper component-main">

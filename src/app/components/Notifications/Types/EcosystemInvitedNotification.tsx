@@ -22,7 +22,7 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { INotificationProto } from 'genesis/notifications';
+import { INotificationProto } from 'apla/notifications';
 
 const EcosystemInvitedNotification: INotificationProto<{ ecosystem: string }> = {
     icon: 'o-checkround-1',

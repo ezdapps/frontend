@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import styled, { ThemedStyledInterface } from 'styled-components';
-import { IThemeDefinition } from 'genesis/theme';
+import { IThemeDefinition } from 'apla/theme';
 
 const themed: ThemedStyledInterface<IThemeDefinition> = styled;
 

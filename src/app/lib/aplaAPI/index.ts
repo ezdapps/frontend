@@ -23,7 +23,7 @@
 import queryString from 'query-string';
 import urlJoin from 'url-join';
 import urlTemplate from 'url-template';
-import { IUIDResponse, ILoginRequest, ILoginResponse, IRefreshResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IRefreshRequest, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITxCallRequest, ITxCallResponse, ITxPrepareRequest, ITxPrepareResponse, ITxStatusRequest, ITxStatusResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, ITxPrepareBatchRequest, ITxStatusBatchRequest, ITxPrepareBatchResponse, ITxCallBatchRequest, ITxCallBatchResponse, ITxStatusBatchResponse } from 'genesis/api';
+import { IUIDResponse, ILoginRequest, ILoginResponse, IRefreshResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IRefreshRequest, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITxCallRequest, ITxCallResponse, ITxPrepareRequest, ITxPrepareResponse, ITxStatusRequest, ITxStatusResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, ITxPrepareBatchRequest, ITxStatusBatchRequest, ITxPrepareBatchResponse, ITxCallBatchRequest, ITxCallBatchResponse, ITxStatusBatchResponse } from 'apla/api';
 
 export type TRequestMethod =
     'get' |
@@ -79,7 +79,7 @@ export interface IAPIOptions {
     requestOptions?: IRequestOptions<any, any>;
 }
 
-class GenesisAPI {
+class AplaAPI {
     private _defaultOptions: IRequestOptions<any, any> = {
         headers: {
             'Content-Type': 'multipart/form-data'
@@ -179,14 +179,14 @@ class GenesisAPI {
     }
 
     public to(apiHost: string) {
-        return new GenesisAPI({
+        return new AplaAPI({
             ...this._options,
             apiHost
         });
     }
 
     public authorize(session: string) {
-        return new GenesisAPI({
+        return new AplaAPI({
             ...this._options,
             session
         });
@@ -320,4 +320,4 @@ class GenesisAPI {
     }).then(res => res.body as string)
 }
 
-export default GenesisAPI;
+export default AplaAPI;

@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import * as React from 'react';
-import { TMapType, TMapEditorType } from 'genesis/geo';
+import { TMapType, TMapEditorType } from 'apla/geo';
 import { IMapValue, parseData } from 'components/Protypo/handlers/Map';
 
 import Validation from 'components/Validation';

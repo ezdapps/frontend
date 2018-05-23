@@ -24,7 +24,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { createAccount, importSeed, generateSeed } from 'modules/auth/actions';
-import { ICreateAccountCall } from 'genesis/auth';
+import { ICreateAccountCall } from 'apla/auth';
 import { sendAttachment } from 'modules/io/actions';
 
 import Create from 'components/Auth/Account/Create';

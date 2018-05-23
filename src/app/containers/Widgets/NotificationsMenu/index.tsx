@@ -24,7 +24,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { fetchNotifications } from 'modules/content/actions';
-import { TProtypoElement } from 'genesis/protypo';
+import { TProtypoElement } from 'apla/protypo';
 
 import NotificationsMenu from 'components/Main/NotificationsMenu';
 

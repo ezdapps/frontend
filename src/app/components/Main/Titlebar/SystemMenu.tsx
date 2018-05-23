@@ -61,7 +61,7 @@ const SystemMenu: React.SFC<ISystemMenuProps> = props => (
             rightMost={'right' === props.align}
             content={
                 <div>
-                    <div className="dropdown-heading">Genesis</div>
+                    <div className="dropdown-heading">Apla</div>
                     <ul className="dropdown-group">
                         <li>
                             <CloseDropdownButton onClick={props.onAbout}>

@@ -21,7 +21,7 @@
 // SOFTWARE.
 import 'rxjs';
 import 'lib/external/fsa';
-import GenesisAPI, { IRequestTransport,  } from 'lib/genesisAPI';
+import AplaAPI, { IRequestTransport,  } from 'lib/aplaAPI';
 
 describe('getPageTreeEpic', () => {
     it('gets page tree json', () => {
@@ -42,7 +42,7 @@ describe('getPageTreeEpic', () => {
             });
         };
 
-        const paramTestingAPIMock = () => new GenesisAPI({
+        const paramTestingAPIMock = () => new AplaAPI({
             apiHost: paramTestingAPIHost,
             apiEndpoint: paramTestingAPIEndpoint,
             transport: paramsTransportMock

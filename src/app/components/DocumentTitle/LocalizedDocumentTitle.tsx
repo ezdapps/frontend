@@ -32,7 +32,7 @@ const LocalizedDocumentTitle: React.SFC<ILocalizedDocumentTitleProps & InjectedI
     <DocumentTitle
         title={props.intl.formatMessage({
             id: 'general.title.format',
-            defaultMessage: '{title} | Genesis'
+            defaultMessage: '{title} | Apla'
         }, {
                 title: props.intl.formatMessage({
                     id: props.title,

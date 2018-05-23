@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import * as React from 'react';
-import { TMapType, IMapEditorEvent } from 'genesis/geo';
+import { TMapType, IMapEditorEvent } from 'apla/geo';
 
 import MapView from 'components/Map/MapView';
 

@@ -23,7 +23,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { IModal } from 'genesis/modal';
+import { IModal } from 'apla/modal';
 import { modalClose } from 'modules/modal/actions';
 import ModalProvider from 'components/Modal/ModalProvider';
 

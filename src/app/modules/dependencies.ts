@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import GenesisAPI from 'lib/genesisAPI';
+import AplaAPI from 'lib/aplaAPI';
 import CodeGenerator, { setIds, convertToTreeData, findTagById, copyObject, idGenerator, updateChildrenText, html2childrenTags, Properties } from 'lib/constructor';
 import getConstructorTemplate from 'lib/constructor/templates';
 import resolveTagHandler from 'lib/constructor/tags';
@@ -35,7 +35,7 @@ export interface IStoreDependencies {
 }
 
 export interface IAPIDependency {
-    (options: { apiHost: string, sessionToken?: string }): GenesisAPI;
+    (options: { apiHost: string, sessionToken?: string }): AplaAPI;
 }
 
 interface IConstructorDependenies {
@@ -53,7 +53,7 @@ interface IConstructorDependenies {
 }
 
 const storeDependencies: IStoreDependencies = {
-    api: (params: { apiHost: string, sessionToken?: string } = { apiHost: null }) => new GenesisAPI({
+    api: (params: { apiHost: string, sessionToken?: string } = { apiHost: null }) => new AplaAPI({
         transport: request => fetch(request.url, {
             method: request.method,
             headers: request.headers,

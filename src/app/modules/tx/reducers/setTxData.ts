@@ -22,7 +22,7 @@
 
 import { State } from '../reducer';
 import { Reducer } from 'modules';
-import { ITransaction, ITransactionCall } from 'genesis/tx';
+import { ITransaction, ITransactionCall } from 'apla/tx';
 
 const setTxData: Reducer<{ tx: ITransactionCall, data: Partial<ITransaction> }, State> = (state, payload) => {
     const tx = state.transactions.get(payload.tx.uuid) as ITransaction;

@@ -23,7 +23,7 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 import Avatar from 'containers/Avatar';
 import Validation from 'components/Validation';

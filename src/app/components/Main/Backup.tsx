@@ -25,7 +25,7 @@ import { Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import keyring from 'lib/keyring';
 import { sendAttachment } from 'lib/fs';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 import * as CopyToClipboard from 'react-copy-to-clipboard';
 import * as QRCode from 'qrcode.react';
 

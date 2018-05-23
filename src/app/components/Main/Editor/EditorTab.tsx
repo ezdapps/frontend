@@ -24,7 +24,7 @@ import React from 'react';
 import classNames from 'classnames';
 import imgClose from 'images/close.svg';
 import { FormattedMessage } from 'react-intl';
-import { TEditorTab } from 'genesis/editor';
+import { TEditorTab } from 'apla/editor';
 
 import themed from 'components/Theme/themed';
 

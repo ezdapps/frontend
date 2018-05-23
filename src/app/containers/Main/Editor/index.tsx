@@ -26,8 +26,8 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { modalShow } from 'modules/modal/actions';
 import { changeEditorTab, closeEditorTab, updateEditorTab, loadEditorTab, createEditorTab } from 'modules/editor/actions';
-import { TEditorTab } from 'genesis/editor';
-import { IModalResult } from 'genesis/modal';
+import { TEditorTab } from 'apla/editor';
+import { IModalResult } from 'apla/modal';
 
 import Editor from 'components/Main/Editor';
 

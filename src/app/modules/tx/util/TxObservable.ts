@@ -24,7 +24,7 @@ import { Action as ReduxAction } from 'redux';
 import { Observable } from 'rxjs';
 import { ActionsObservable } from 'redux-observable';
 import { txCall, txExec } from '../actions';
-import { ITransactionCall, ITxResult, ITxError } from 'genesis/tx';
+import { ITransactionCall, ITxResult, ITxError } from 'apla/tx';
 import { isType, Action } from 'typescript-fsa';
 
 const TxObservable = (action$: ActionsObservable<ReduxAction>, params: { tx: ITransactionCall, success?: (tx: ITxResult) => Observable<ReduxAction>, failure?: (error: ITxError) => Observable<ReduxAction> }) =>

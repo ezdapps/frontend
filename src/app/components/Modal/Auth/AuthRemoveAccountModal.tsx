@@ -23,7 +23,7 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 import Modal from '../';
 

@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'genesis/notifications' {
+declare module 'apla/notifications' {
     type TNotificationRenderer<P> =
         ((params: P) => React.ReactNode) |
         React.ReactNode;

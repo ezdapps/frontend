@@ -22,7 +22,7 @@
 
 import * as actions from './actions';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { TWindowType } from 'genesis/gui';
+import { TWindowType } from 'apla/gui';
 import switchWindowDoneHandler from './reducers/switchWindowDoneHandler';
 
 export type State = {

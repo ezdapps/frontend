@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import React from 'react';
-import { IModal, TModalResultReason } from 'genesis/modal';
+import { IModal, TModalResultReason } from 'apla/modal';
 
 import Wrapper from 'components/Modal/Wrapper';
 import DebugContractModal from 'components/Modal/Editor/DebugContractModal';

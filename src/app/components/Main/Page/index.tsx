@@ -22,7 +22,7 @@
 
 import * as React from 'react';
 import Protypo from 'containers/Widgets/Protypo';
-import { TPage } from 'genesis/content';
+import { TPage } from 'apla/content';
 
 import DocumentTitle from 'components/DocumentTitle';
 import Error from './Error';

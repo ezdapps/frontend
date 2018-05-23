@@ -26,7 +26,7 @@ import * as queryString from 'query-string';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { renderPage, ecosystemInit, renderLegacyPage, navigatePage, switchSection } from 'modules/content/actions';
-import { TSection } from 'genesis/content';
+import { TSection } from 'apla/content';
 import { LEGACY_PAGES } from 'lib/legacyPages';
 
 import Page from 'components/Main/Page';

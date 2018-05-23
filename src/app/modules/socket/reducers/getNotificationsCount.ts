@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 export default function (state: State, payload: { account: IAccount, role?: number }): number {
     if ('number' === typeof payload.role) {

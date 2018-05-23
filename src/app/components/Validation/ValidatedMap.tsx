@@ -24,7 +24,7 @@ import * as React from 'react';
 import { FormControl } from 'react-bootstrap';
 import { Validator } from './Validators';
 import * as propTypes from 'prop-types';
-import { IMapEditorEvent } from 'genesis/geo';
+import { IMapEditorEvent } from 'apla/geo';
 import { IMapEditorModalProps } from 'components/Modal/MapEditorModal';
 
 import ValidatedForm, { IValidatedControl } from './ValidatedForm';

@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 const actionCreator = actionCreatorFactory('storage');
 export const saveLocale = actionCreator<string>('SAVE_LOCALE');

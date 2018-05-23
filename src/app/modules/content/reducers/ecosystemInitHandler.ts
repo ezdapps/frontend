@@ -23,7 +23,7 @@
 import { State } from '../reducer';
 import { ecosystemInit } from '../actions';
 import { Reducer } from 'modules';
-import { TSection } from 'genesis/content';
+import { TSection } from 'apla/content';
 
 const ecosystemInitHandler: Reducer<typeof ecosystemInit.started, State> = (state, payload) => {
     const sections: { [key: string]: TSection } = {};

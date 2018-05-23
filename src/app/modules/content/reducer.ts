@@ -22,8 +22,8 @@
 
 import * as actions from './actions';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { TProtypoElement } from 'genesis/protypo';
-import { TSection } from 'genesis/content';
+import { TProtypoElement } from 'apla/protypo';
+import { TSection } from 'apla/content';
 import closeSectionHandler from './reducers/closeSectionHandler';
 import ecosystemInitDoneHandler from './reducers/ecosystemInitDoneHandler';
 import ecosystemInitFailedHandler from './reducers/ecosystemInitFailedHandler';

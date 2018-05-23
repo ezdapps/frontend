@@ -24,7 +24,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import classNames from 'classnames';
 import { injectIntl, FormattedMessage, InjectedIntlProps } from 'react-intl';
-import { IAccount } from 'genesis/auth';
+import { IAccount } from 'apla/auth';
 
 import LocalizedDocumentTitle from 'components/DocumentTitle/LocalizedDocumentTitle';
 import AccountButton from './AccountButton';

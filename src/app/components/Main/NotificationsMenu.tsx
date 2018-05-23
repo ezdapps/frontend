@@ -23,7 +23,7 @@
 import * as React from 'react';
 import Protypo from 'containers/Widgets/Protypo';
 import { FormattedMessage } from 'react-intl';
-import { TProtypoElement } from 'genesis/protypo';
+import { TProtypoElement } from 'apla/protypo';
 
 import SystemButton from './SystemButton';
 

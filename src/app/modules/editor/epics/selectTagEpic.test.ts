@@ -27,7 +27,7 @@ import { ActionsObservable } from 'redux-observable';
 import { selectTag } from '../actions';
 import selectTagEpic from './selectTagEpic';
 import dependencies from 'modules/dependencies';
-import { TConstructorTreeElement } from 'genesis/editor';
+import { TConstructorTreeElement } from 'apla/editor';
 import mockStore from 'test/mockStore';
 
 describe('selectTagEpic', () => {

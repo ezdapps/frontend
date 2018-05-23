@@ -20,7 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-declare module 'genesis/modal' {
+declare module 'apla/modal' {
     type TModalResultReason =
         // Dispatched when Modal component received active=false while modal was visible
         'CANCEL' |

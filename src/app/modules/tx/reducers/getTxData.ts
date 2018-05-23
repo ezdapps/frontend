@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { TTransactionStatus } from 'genesis/tx';
+import { TTransactionStatus } from 'apla/tx';
 
 export default function (state: State, uuid: string): TTransactionStatus {
     const parent = state.transactions.get(uuid);
