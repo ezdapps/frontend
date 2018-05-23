@@ -29,7 +29,7 @@ export default () => {
         minWidth: 800,
         minHeight: 600,
         frame: false,
-        backgroundColor: '#17437b',
+        backgroundColor: '#3d2c77',
         resizable: true,
         show: false,
         maximized: config.get('maximized') || false,

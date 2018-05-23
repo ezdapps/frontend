@@ -26,7 +26,7 @@ import calcScreenOffset from '../util/calcScreenOffset';
 export default () => {
     return new BrowserWindow({
         frame: false,
-        backgroundColor: '#17437b',
+        backgroundColor: '#3d2c77',
         resizable: false,
         show: false,
         ...calcScreenOffset({ width: 640, height: 470 })
