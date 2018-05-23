@@ -51,9 +51,9 @@ const baseTheme: IThemeDefinition = {
 
     editorBackground: '#c3c7ce',
 
-    modalHeaderBackground: '#4b7dbd',
+    modalHeaderBackground: '#7159c1',
     modalHeaderForeground: '#fff',
-    modalOutline: '#71a2e0',
+    modalOutline: '#9783da',
 
     notificationBackground: 'rgb(91, 71, 158, 0.9)',
     notificationForeground: 'rgba(255, 255, 255, 0.6)',
