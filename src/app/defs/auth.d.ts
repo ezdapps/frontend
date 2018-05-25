@@ -21,7 +21,7 @@
 // SOFTWARE.
 
 declare module 'apla/auth' {
-    interface IAccount {
+    interface IWallet {
         id: string;
         encKey: string;
         address: string;
@@ -42,16 +42,16 @@ declare module 'apla/auth' {
     }
 
     interface ILoginCall {
-        account: IAccount;
+        wallet: IWallet;
         password: string;
     }
 
-    interface ICreateAccountCall {
+    interface ICreateWalletCall {
         seed: string;
         password: string
     }
 
-    interface IImportAccountCall {
+    interface IImportWalletCall {
         backup: string;
         password: string;
         isDefault?: boolean
