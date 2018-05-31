@@ -35,6 +35,7 @@ const selectRoleEpic: Epic = (action$, store, { api }) => action$.ofAction(selec
 
         return Observable.from(client.getUid().then(uid => {
             const signature = keyring.sign(uid.uid, privateKey);
+
             return client.authorize(uid.token)
                 .login({
                     publicKey,
@@ -48,8 +49,8 @@ const selectRoleEpic: Epic = (action$, store, { api }) => action$.ofAction(selec
                 params: action.payload,
                 result: {
                     sessionToken: payload.token,
-                    refreshToken: payload.refresh,
-                },
+                    refreshToken: payload.refresh
+                }
             })
 
         ).catch(e =>

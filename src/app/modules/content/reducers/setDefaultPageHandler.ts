@@ -1,17 +1,17 @@
 // MIT License
-// 
-// Copyright (c) 2016-2018 AplaProject
-// 
+//
+// Copyright (c) 2016-2018 GenesisKernel
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,23 +21,19 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { selectRole } from '../actions';
+import { setDefaultPage } from '../actions';
 import { Reducer } from 'modules';
 
-const selectRoleDoneHandler: Reducer<typeof selectRole.done, State> = (state, payload) => ({
+const setDefaultPageHandler: Reducer<typeof setDefaultPage, State> = (state, payload) => ({
     ...state,
-    isAuthenticated: true,
-    isLoggingIn: false,
-    roles: null,
-    role: 'number' === typeof payload.params ? {
-        id: payload.params,
-        name: state.roles.find(l => l.id === payload.params).name
-    } : null,
-    session: {
-        ...state.session,
-        sessionToken: payload.result.sessionToken,
-        refreshToken: payload.result.refreshToken
+    inited: true,
+    sections: {
+        ...state.sections,
+        home: {
+            ...state.sections.home,
+            defaultPage: (payload ? payload : state.sections.home.defaultPage)
+        }
     }
 });
 
-export default selectRoleDoneHandler;
+export default setDefaultPageHandler;
