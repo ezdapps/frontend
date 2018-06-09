@@ -39,6 +39,7 @@ declare module 'apla/tx' {
     interface ITxError {
         type: TTxError;
         error: string;
+        params?: any[];
     }
 
     type TTransactionStatus =
@@ -80,7 +81,7 @@ declare module 'apla/tx' {
     interface ITransactionBatchCall extends ITransactionRequest {
         contracts: {
             name: string;
-            data: {
+            params: {
                 [key: string]: any;
             }[];
         }[];

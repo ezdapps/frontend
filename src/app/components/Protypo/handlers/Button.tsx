@@ -20,9 +20,9 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as React from 'react';
+import React from 'react';
+import propTypes from 'prop-types';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import * as propTypes from 'prop-types';
 
 import Protypo, { IParamsSpec } from '../Protypo';
 import ValidatedForm from 'components/Validation/ValidatedForm';
@@ -44,6 +44,10 @@ export interface IButtonProps {
             [key: string]: any;
         }[]
     }[];
+    'popup'?: {
+        header?: string;
+        width?: string;
+    };
     'page'?: string;
     'pageparams'?: IParamsSpec;
     'params'?: IParamsSpec;
@@ -97,11 +101,23 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
         }
     };
 
+    let popup: { title?: string, width?: number } = null;
+    if (props.popup) {
+        const width = parseInt(props.popup.width, 10);
+        popup = {
+            title: props.popup.header,
+            width: width === width ? width : null
+        };
+    }
+
     if (props.composite) {
         return (
             <TxBatchButton
                 className={props.class}
-                contracts={props.composite}
+                contracts={props.composite.map(l => ({
+                    name: l.name,
+                    params: l.data
+                }))}
                 confirm={props.alert && {
                     icon: props.alert.icon,
                     title: props.intl.formatMessage({ id: 'alert.confirmation', defaultMessage: 'Confirmation' }),
@@ -109,6 +125,7 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
                     confirmButton: props.alert.confirmbutton,
                     cancelButton: props.alert.cancelbutton
                 }}
+                popup={popup}
                 page={props.page}
                 pageParams={getPageParams}
             >
@@ -129,6 +146,7 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
                     confirmButton: props.alert.confirmbutton,
                     cancelButton: props.alert.cancelbutton
                 }}
+                popup={popup}
                 page={props.page}
                 pageParams={getPageParams}
             >

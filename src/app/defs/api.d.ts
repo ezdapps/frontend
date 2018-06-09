@@ -322,8 +322,7 @@ declare module 'apla/api' {
     }
 
     interface ITxPrepareBatchRequest {
-        name: string;
-        data: TTxParams[];
+        contracts: ITxPrepareRequest[];
     }
 
     interface ITxPrepareBatchResponse {

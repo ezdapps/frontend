@@ -22,43 +22,35 @@
 
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { reloadPage } from 'modules/content/actions';
+import { changePassword } from '../actions';
+import { modalShow, modalClose } from 'modules/modal/actions';
 
-const reloadPageEpic: Epic = (action$, store, { api }) => action$.ofAction(reloadPage.started)
+const changePasswordEpic: Epic = (action$, store, { api }) => action$.ofAction(changePassword.started)
     .flatMap(action => {
-        const state = store.getState();
-        const section = state.content.sections[state.content.section];
-        const client = api(state.auth.session);
-
-        return Observable.fromPromise(client.content({
-            type: 'page',
-            name: section.page.name,
-            params: section.page.params,
-            locale: state.storage.locale,
-
-        })).map(payload =>
-            reloadPage.done({
-                params: action.payload,
-                result: {
-                    params: section.page.params,
-                    menu: {
-                        name: payload.menu,
-                        content: payload.menutree
-                    },
-                    page: {
-                        params: section.page.params,
-                        name: section.page.name,
-                        content: payload.tree
+            const encKey = store.getState().auth.wallet.encKey;
+            return Observable.merge(
+                Observable.of(modalShow({
+                    id: 'AUTH_CHANGE_PASSWORD',
+                    type: 'AUTH_CHANGE_PASSWORD',
+                    params: {
+                        encKey
                     }
-                }
-            })
+                })),
+                action$.ofAction(modalClose)
+                    .take(1)
+                    .flatMap(result => {
+                        if ('RESULT' === result.payload.reason) {
+                            return Observable.of(changePassword.done({
+                                params: action.payload,
+                                result: result.payload.data
+                            }));
+                        }
+                        else {
+                            return Observable.empty<never>();
+                        }
+                    })
+            );
+        }
+    );
 
-        ).catch(e =>
-            Observable.of(reloadPage.failed({
-                params: action.payload,
-                error: e.error
-            }))
-        );
-    });
-
-export default reloadPageEpic;
+export default changePasswordEpic;

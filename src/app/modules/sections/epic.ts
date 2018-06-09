@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 AplaProject
+// Copyright (c) 2016-2018 GenesisKernel
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,16 +20,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Action } from 'redux';
-import { Epic } from 'redux-observable';
-import { IRootState } from 'modules';
-import { reset } from '../actions';
-import { login } from 'modules/auth/actions';
+import { combineEpics } from 'redux-observable';
+import closeSectionEpic from './epics/closeSectionEpic';
+import renderSectionEpic from './epics/renderSectionEpic';
+import resetEpic from './epics/resetEpic';
+import resetOnLoginEpic from './epics/resetOnLoginEpic';
+import navigatePageEpic from './epics/navigatePageEpic';
+import reloadPageEpic from './epics/reloadPageEpic';
+import renderLegacyPageEpic from './epics/renderLegacyPageEpic';
+import renderPageEpic from './epics/renderPageEpic';
+import sectionsInitEpic from './epics/sectionsInitEpic';
+import sectionsInitDoneEpic from './epics/sectionsInitDoneEpic';
 
-const resetOnWalletSelectEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(login.done)
-        .map(action =>
-            reset.started(null)
-        );
-
-export default resetOnWalletSelectEpic;
+export default combineEpics(
+    closeSectionEpic,
+    renderSectionEpic,
+    resetEpic,
+    resetOnLoginEpic,
+    navigatePageEpic,
+    reloadPageEpic,
+    renderLegacyPageEpic,
+    renderPageEpic,
+    sectionsInitEpic,
+    sectionsInitDoneEpic
+);

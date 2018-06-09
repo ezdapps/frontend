@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 AplaProject
+// Copyright (c) 2016-2018 GenesisKernel
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,19 +20,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { Epic } from 'modules';
-import { closeSection, renderSection } from 'modules/content/actions';
-import { Observable } from 'rxjs/Observable';
+import React from 'react';
 
-const closeSectionEpic: Epic = (action$, store) => action$.ofAction(closeSection)
-    .flatMap(action => {
-        const state = store.getState();
-        if (action.payload === state.content.section) {
-            return Observable.of(renderSection('home'));
-        }
-        else {
-            return Observable.empty<never>();
-        }
-    });
+import Modal from './';
+import Protypo from 'containers/Widgets/Protypo';
+import { TProtypoElement } from 'genesis/protypo';
 
-export default closeSectionEpic;
+export interface IPageModalProps {
+    title: string;
+    width?: number;
+    tree: TProtypoElement[];
+}
+
+class PageModal extends Modal<IPageModalProps, boolean> {
+    onSuccess(values: { [key: string]: any }) {
+        this.props.onResult(true);
+    }
+
+    render() {
+        return (
+            <div style={{ width: (this.props.params.width || 50) + 'vw', overflow: 'hidden' }}>
+                <Modal.Header>
+                    {this.props.params.title}
+                </Modal.Header>
+                <Modal.Body>
+                    <Protypo context="page" content={this.props.params.tree} />
+                </Modal.Body>
+            </div>
+        );
+    }
+}
+export default PageModal;

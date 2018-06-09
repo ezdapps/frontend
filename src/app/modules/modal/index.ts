@@ -21,10 +21,12 @@
 // SOFTWARE.
 
 import reducer, { State } from './reducer';
+import epic from './epic';
 import * as actions from './actions';
 
 export type State = State;
 export {
     actions,
-    reducer
+    reducer,
+    epic
 };

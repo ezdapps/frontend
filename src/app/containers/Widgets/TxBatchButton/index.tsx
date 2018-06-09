@@ -27,7 +27,7 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { txCall } from 'modules/tx/actions';
 import { TTransactionStatus, ITransactionCollection } from 'apla/tx';
-import { navigatePage } from 'modules/content/actions';
+import { navigatePage } from 'modules/sections/actions';
 
 import TxBatchButton, { ITxButtonConfirm } from 'components/TxBatchButton';
 
@@ -36,13 +36,17 @@ interface ITxBatchButtonContainerProps {
     className?: string;
     contracts: {
         name: string;
-        data: {
+        params: {
             [key: string]: any
         }[]
     }[];
     confirm?: ITxButtonConfirm;
     page?: string;
     pageParams?: { [key: string]: any };
+    popup?: {
+        title?: string;
+        width?: number;
+    };
     onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
     onExec?: (success: boolean) => void;
 }
@@ -59,7 +63,7 @@ interface ITxBatchButtonContainerDispatch {
 class TxBatchButtonContainer extends React.Component<ITxBatchButtonContainerProps & ITxBatchButtonContainerState & ITxBatchButtonContainerDispatch> {
     private _uuid: string;
 
-    execContracts(params: { contracts: { name: string, data: { [key: string]: any }[] }[] }) {
+    execContracts(params: { contracts: { name: string, params: { [key: string]: any }[] }[] }) {
         this._uuid = uuid.v4();
         this.props.execContracts({
             uuid: this._uuid,
@@ -110,6 +114,7 @@ class TxBatchButtonContainer extends React.Component<ITxBatchButtonContainerProp
             name: page,
             params: pageParams,
             confirm: this.props.confirm,
+            popup: this.props.popup,
             force: true
         });
     }
