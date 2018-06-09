@@ -24,7 +24,7 @@ import React from 'react';
 
 import Modal from './';
 import Protypo from 'containers/Widgets/Protypo';
-import { TProtypoElement } from 'genesis/protypo';
+import { TProtypoElement } from 'apla/protypo';
 
 export interface IPageModalProps {
     title: string;

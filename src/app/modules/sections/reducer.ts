@@ -22,7 +22,7 @@
 
 import * as actions from './actions';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { TSection } from 'genesis/content';
+import { TSection } from 'apla/content';
 import closeSectionHandler from './reducers/closeSectionHandler';
 import renderSectionHandler from './reducers/renderSectionHandler';
 import switchSectionHandler from './reducers/switchSectionHandler';

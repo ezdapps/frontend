@@ -21,8 +21,8 @@
 // SOFTWARE.
 
 import actionCreatorFactory from 'typescript-fsa';
-import { TMenu, TPage, TSection } from 'genesis/content';
-import { ITransactionConfirm } from 'genesis/tx';
+import { TMenu, TPage, TSection } from 'apla/content';
+import { ITransactionConfirm } from 'apla/tx';
 
 const actionCreator = actionCreatorFactory('section');
 

@@ -26,7 +26,7 @@ import { txCall, txAuthorize, txPrepare, txPrepareBatch } from '../actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
 import { isType } from 'typescript-fsa';
 import keyring from 'lib/keyring';
-import { ITransactionBatchCall } from 'genesis/tx';
+import { ITransactionBatchCall } from 'apla/tx';
 
 const txCallEpic: Epic = (action$, store) => action$.ofAction(txCall)
     // Show confirmation window if there is any
