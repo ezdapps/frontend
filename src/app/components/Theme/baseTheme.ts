@@ -24,16 +24,16 @@ import { IThemeDefinition } from 'apla/theme';
 import platform from 'lib/platform';
 
 const baseTheme: IThemeDefinition = {
-    headerBackground: '#5b479e',
+    headerBackground: '#586180',
     headerForeground: '#fff',
     headerBackgroundActive: '#f3f3f3',
-    headerForegroundActive: '#192a8a',
+    headerForegroundActive: '#194a8a',
     headerHeight: platform.select({ desktop: 28, web: 0 }),
 
     toolbarBackground: '#f3f3f3',
-    toolbarForeground: '#6c53bf',
+    toolbarForeground: '#194a8a',
     toolbarOutline: '#e5e5e5',
-    toolbarIconColor: '#734bf9',
+    toolbarIconColor: '#5b97e4',
     toolbarDisabled: '#93a7bf',
     toolbarHeight: 40,
 
@@ -42,20 +42,20 @@ const baseTheme: IThemeDefinition = {
     menuForeground: '#0a1d33',
     menuBackgroundActive: '#ececec',
     menuOutline: '#e5e4e5',
-    menuIconColor: '#785bda',
-    menuPrimaryForeground: '#7e5af5',
-    menuPrimaryActive: '#8a6af3',
+    menuIconColor: '#3577cc',
+    menuPrimaryForeground: '#2886ff',
+    menuPrimaryActive: '#7bb0f5',
 
     contentForeground: '#515253',
     contentBackground: '#f6f7fa',
 
     editorBackground: '#c3c7ce',
 
-    modalHeaderBackground: '#7159c1',
+    modalHeaderBackground: '#6d7696',
     modalHeaderForeground: '#fff',
-    modalOutline: '#9783da',
+    modalOutline: '#979eb7',
 
-    notificationBackground: 'rgb(91, 71, 158, 0.9)',
+    notificationBackground: 'rgba(62, 72, 111, 0.9)',
     notificationForeground: 'rgba(255, 255, 255, 0.6)',
     notificationIconColor: '#fff',
     notificationPrimaryForeground: '#fff',
@@ -69,10 +69,10 @@ const baseTheme: IThemeDefinition = {
     dropdownMenuBackground: '#fff',
     dropdownMenuForeground: '#666',
     dropdownMenuDisabled: '#ccc',
-    dropdownMenuOutline: '#d5c8ff',
+    dropdownMenuOutline: '#c5cbe2',
     dropdownMenuActive: 'rgba(0,0,0,0.1)',
     dropdownMenuSeparator: '#ddd',
-    dropdownMenuPrimary: '#7964bf',
+    dropdownMenuPrimary: '#4b7dbd',
     dropdownMenuSecondary: '#999',
 
     systemButtonSecondary: '#ffa500',
