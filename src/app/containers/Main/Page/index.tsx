@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 AplaProject
+// Copyright (c) 2016-2018 GenesisKernel
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -57,6 +57,7 @@ interface IPageContainerDispatch {
 class PageContainer extends React.Component<IPageContainerProps & IPageContainerState & IPageContainerDispatch> {
     componentDidMount() {
         this.props.ecosystemInit({
+            section: this.props.match.params.section
         });
     }
 

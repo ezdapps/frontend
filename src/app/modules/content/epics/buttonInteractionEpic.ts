@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 GenesisKernel
+// Copyright (c) 2016-2018 AplaProject
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,7 +24,7 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { buttonInteraction } from 'modules/content/actions';
 import { isType } from 'typescript-fsa';
-import { ITransactionCall } from 'genesis/tx';
+import { ITransactionCall } from 'apla/tx';
 import { txCall, txExecBatch, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose, modalPage } from 'modules/modal/actions';
 import { navigatePage } from 'modules/sections/actions';
