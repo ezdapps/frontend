@@ -20,20 +20,37 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { Reducer } from 'modules';
-import { ITransaction, ITransactionCall } from 'apla/tx';
+import { Action } from 'redux';
+import { Epic } from 'redux-observable';
+import { Observable } from 'rxjs';
+import { IRootState } from 'modules';
+import { txExec } from 'modules/tx/actions';
+import { reloadEditorTab } from '../actions';
 
-const setTxData: Reducer<{ tx: ITransactionCall, data: Partial<ITransaction> }, State> = (state, payload) => {
-    const tx = state.transactions.get(payload.tx.uuid) as ITransaction;
-    return {
-        ...state,
-        transactions: state.transactions.set(payload.tx.uuid, {
-            ...tx,
-            ...payload.data,
-            type: 'single'
-        })
-    };
+const connections = {
+    '@1EditBlock': 'block',
+    '@1EditContract': 'contract',
+    '@1EditMenu': 'menu'
 };
 
-export default setTxData;
+const editEntityEpic: Epic<Action, IRootState> = (action$, store) => action$.ofAction(txExec.done)
+    .flatMap(action => {
+        const contractName = action.payload.params.tx.contract && action.payload.params.tx.contract.name;
+        const entity = connections[contractName];
+
+        if (entity) {
+            const params = action.payload.params.tx.contract.params as { Id: string, Value?: string };
+            return Observable.of(reloadEditorTab({
+                type: entity,
+                id: params.Id,
+                data: {
+                    initialValue: params.Value
+                }
+            }));
+        }
+        else {
+            return Observable.empty();
+        }
+    });
+
+export default editEntityEpic;
