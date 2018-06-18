@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 GenesisKernel
+// Copyright (c) 2016-2018 AplaProject
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import { Observable } from 'rxjs';
 import { txExec } from '../actions';
 import keyring from 'lib/keyring';
 import { authorize } from 'modules/auth/actions';
-import { TTxError } from 'genesis/tx';
+import { TTxError } from 'apla/tx';
 import { enqueueNotification } from '../../notifications/actions';
 
 export const txExecEpic: Epic = (action$, store, { api }) => action$.ofAction(txExec.started)

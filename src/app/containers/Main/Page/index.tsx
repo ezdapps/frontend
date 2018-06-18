@@ -27,7 +27,7 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { ecosystemInit } from 'modules/content/actions';
 import { renderPage, renderLegacyPage, navigatePage, switchSection } from 'modules/sections/actions';
-import { TSection } from 'genesis/content';
+import { TSection } from 'apla/content';
 import { LEGACY_PAGES } from 'lib/legacyPages';
 
 import Page from 'components/Main/Page';

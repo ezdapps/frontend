@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 GenesisKernel
+// Copyright (c) 2016-2018 AplaProject
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ import StackGroup from 'components/Animation/StackGroup';
 import themed from 'components/Theme/themed';
 import Protypo from 'containers/Widgets/Protypo';
 import ResizeHandle from 'containers/Main/Navigation/ResizeHandle';
-import { TMenu } from 'genesis/content';
+import { TMenu } from 'apla/content';
 import ScrollArea from 'react-scrollbar';
 
 const StyledNavigation = themed.aside`

@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 GenesisKernel
+// Copyright (c) 2016-2018 AplaProject
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ import { Observable } from 'rxjs';
 import keyring from 'lib/keyring';
 import { txPrepareBatch, txExecBatch } from '../actions';
 import NodeObservable from 'modules/engine/util/NodeObservable';
-import { TTxParams } from 'genesis/api';
+import { TTxParams } from 'apla/api';
 import TxDissect from '../util/TxDissect';
 
 // 10 seconds max jitter between tx header validation

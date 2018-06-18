@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 GenesisKernel
+// Copyright (c) 2016-2018 AplaProject
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
 import * as actions from './actions';
 import { OrderedMap } from 'immutable';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
-import { ITransaction } from 'genesis/tx';
+import { ITransaction } from 'apla/tx';
 import txExecHandler from './reducers/txExecHandler';
 import txExecDoneHandler from './reducers/txExecDoneHandler';
 import txExecFailedHandler from './reducers/txExecFailedHandler';

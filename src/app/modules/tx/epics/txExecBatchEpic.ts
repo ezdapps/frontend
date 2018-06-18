@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 GenesisKernel
+// Copyright (c) 2016-2018 AplaProject
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,8 @@ import { Epic } from 'modules';
 import { txExecBatch } from '../actions';
 import { Observable } from 'rxjs/Observable';
 import keyring from 'lib/keyring';
-import { ITxCallBatchResponse } from 'genesis/api';
-import { ITransaction } from 'genesis/tx';
+import { ITxCallBatchResponse } from 'apla/api';
+import { ITransaction } from 'apla/tx';
 
 const TX_STATUS_INTERVAL = 3000;
 
