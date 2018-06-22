@@ -20,48 +20,36 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import * as commander from 'commander';
 import { IInferredArguments } from 'apla/gui';
 
-export type TPlatformType =
-    'desktop' | 'web' | 'win32' | 'linux' | 'darwin';
-
-const isElectron = navigator.userAgent.toLowerCase().indexOf(' electron/') > -1;
-const platform: TPlatformType = isElectron ? 'desktop' : 'web';
-
-let os: NodeJS.Platform = null;
-let args: IInferredArguments = {};
-
-if (isElectron) {
-    const electron = require('electron');
-    const process: NodeJS.Process = require('process');
-    os = process.platform;
-    args = electron.ipcRenderer.sendSync('getArgs') || {};
+// Normalize electron launch arguments
+const argv = process.argv.slice();
+const executable = argv.shift();
+if (!argv[0] || argv[0] && argv[0] !== '.') {
+    argv.unshift('');
 }
+argv.unshift(executable);
 
-export default {
-    // Platform.select will return only 1 value depending on which platform
-    // this application runs. If 'desktop' is specified instead of providing
-    // extact platform name - it will be returned instead
-    select: function <T>(platforms: {
-        desktop?: T,
-        web?: T,
-        win32?: T,
-        linux?: T,
-        darwin?: T
-    }): T {
-        if (isElectron && platforms[os]) {
-            return platforms[os];
-        }
-        else {
-            return platforms[platform];
-        }
-    },
+const command = commander
+    .option('-n, --full-node <url>', null, (value, stack) => {
+        stack.push(value);
+        return stack;
+    }, [])
+    .option('-k, --private-key <key>')
+    .option('-d, --dry')
+    .option('-x, --offset-x <value>', null, parseInt)
+    .option('-y, --offset-y <value>', null, parseInt)
+    .option('-s, --socket-url <url>', null)
+    .parse(argv);
 
-    on: (platformType: TPlatformType, callback: () => void) => {
-        if (platformType === platform) {
-            callback();
-        }
-    },
-
-    args
+const args: IInferredArguments = {
+    privateKey: command.privateKey,
+    fullNode: command.fullNode,
+    dry: command.dry,
+    offsetX: command.offsetX,
+    offsetY: command.offsetY,
+    socketUrl: command.socketUrl
 };
+
+export default args;

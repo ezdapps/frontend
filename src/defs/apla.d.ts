@@ -20,42 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React from 'react';
-import { connect } from 'react-redux';
-import { IRootState } from 'modules';
-import { initialize } from 'modules/engine/actions';
-import platform from 'lib/platform';
-
-export interface IInitHookProps {
+declare module 'apla' {
 
 }
-
-interface IInitHookState {
-
-}
-
-interface IInitHookDispatch {
-    initialize: typeof initialize.started;
-}
-
-class InitHook extends React.Component<IInitHookProps & IInitHookState & IInitHookDispatch> {
-    componentDidMount() {
-        this.props.initialize({
-            defaultKey: platform.args.privateKey
-        });
-    }
-
-    render() {
-        return null as JSX.Element;
-    }
-}
-
-const mapStateToProps = (state: IRootState) => ({
-
-});
-
-const mapDispatchToProps = {
-    initialize: initialize.started
-};
-
-export default connect<IInitHookState, IInitHookDispatch, IInitHookProps>(mapStateToProps, mapDispatchToProps)(InitHook);
