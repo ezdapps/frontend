@@ -20,23 +20,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as React from 'react';
-import * as propTypes from 'prop-types';
+import React from 'react';
+import propTypes from 'prop-types';
+import { ISource } from 'apla/protypo';
 
 import Protypo from '../';
 
-export interface IJsonToSourceProps {
+export interface IGetContractHistoryProps extends ISource {
     source: string;
-    columns: string[];
-    types: string[];
-    data: string[][];
 }
 
-interface IJsonContext {
+interface IGetContractHistoryContext {
     protypo: Protypo;
 }
 
-const JsonToSource: React.SFC<IJsonToSourceProps> = (props, context: IJsonContext) => {
+const SimpleSource: React.SFC<IGetContractHistoryProps> = (props, context: IGetContractHistoryContext) => {
     context.protypo.registerSource(props.source, {
         columns: props.columns,
         types: props.types,
@@ -45,8 +43,8 @@ const JsonToSource: React.SFC<IJsonToSourceProps> = (props, context: IJsonContex
     return null;
 };
 
-JsonToSource.contextTypes = {
+SimpleSource.contextTypes = {
     protypo: propTypes.object.isRequired
 };
 
-export default JsonToSource;
+export default SimpleSource;

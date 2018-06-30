@@ -32,6 +32,14 @@ declare module 'apla/protypo' {
         readonly tail?: TProtypoElement[] | null;
     };
 
+    interface ISource {
+        readonly columns: string[];
+        readonly types: string[];
+        readonly data: string[][];
+    }
+
+    type TChartType = 'bar' | 'line' | 'pie';
+
     interface IButtonConfirm {
         type?: string;
         title?: string;

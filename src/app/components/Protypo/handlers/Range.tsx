@@ -20,32 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as React from 'react';
-import * as propTypes from 'prop-types';
+import React from 'react';
+import { ISource } from 'apla/protypo';
 
-import Protypo from '../';
+import SimpleSource from './SimpleSource';
 
-export interface IRangeProps {
+export interface IRangeProps extends Pick<ISource, 'data' | 'columns'> {
     source?: string;
-    columns?: string[];
-    data?: string[][];
 }
 
-interface IRangeContext {
-    protypo: Protypo;
-}
-
-const Range: React.SFC<IRangeProps> = (props, context: IRangeContext) => {
-    context.protypo.registerSource(props.source, {
-        columns: props.columns,
-        types: [],
-        data: props.data
-    });
-    return null;
-};
-
-Range.contextTypes = {
-    protypo: propTypes.object.isRequired
-};
+const Range: React.SFC<IRangeProps> = props => (
+    <SimpleSource
+        source={props.source}
+        columns={props.columns}
+        types={[]}
+        data={props.data}
+    />
+);
 
 export default Range;
