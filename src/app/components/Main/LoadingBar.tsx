@@ -1,6 +1,6 @@
 // MIT License
 // 
-// Copyright (c) 2016-2018 AplaProject
+// Copyright (c) 2016-2018 GenesisKernel
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
@@ -20,38 +20,32 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import * as commander from 'commander';
-import { IInferredArguments } from 'apla/gui';
+import React from 'react';
+import LoadingBarNative from 'react-redux-loading-bar';
+import { withTheme } from 'styled-components';
+import { IThemeDefinition } from 'genesis/theme';
+import themed from 'components/Theme/themed';
 
-// Normalize electron launch arguments
-const argv = process.argv.slice();
-const executable = argv.shift();
-if (!argv[0] || argv[0] && argv[0] !== '.') {
-    argv.unshift('');
+export interface ILoadingBarProps {
+    theme: IThemeDefinition;
 }
-argv.unshift(executable);
 
-const command = commander
-    .option('-n, --full-node <url>', null, (value, stack) => {
-        stack.push(value);
-        return stack;
-    }, [])
-    .option('-k, --private-key <key>')
-    .option('-d, --dry')
-    .option('-x, --offset-x <value>', null, parseInt)
-    .option('-y, --offset-y <value>', null, parseInt)
-    .option('-s, --socket-url <url>', null)
-    .option('-u, --disable-full-nodes-sync', null)
-    .parse(argv);
+const StyledLoadingBar = themed(LoadingBarNative)`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+`;
 
-const args: IInferredArguments = {
-    privateKey: command.privateKey,
-    fullNode: command.fullNode,
-    dry: command.dry,
-    offsetX: command.offsetX,
-    offsetY: command.offsetY,
-    socketUrl: command.socketUrl,
-    disableFullNodesSync: command.disableFullNodesSync
-};
+const LoadingBar: React.SFC<ILoadingBarProps> = props => (
+    <StyledLoadingBar
+        showFastActions
+        style={{
+            backgroundColor: props.theme.progressBarForeground,
+            width: 'auto',
+            height: 2
+        }}
+    />
+);
 
-export default args;
+export default withTheme(LoadingBar);

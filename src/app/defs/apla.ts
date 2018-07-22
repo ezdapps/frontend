@@ -21,5 +21,9 @@
 // SOFTWARE.
 
 declare module 'apla' {
-
+    interface IWebSettings {
+        fullNodes?: string[];
+        socketUrl?: string;
+        disableFullNodesSync?: boolean;
+    }
 }

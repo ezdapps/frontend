@@ -33,7 +33,10 @@ declare module 'apla/theme' {
         toolbarOutline: string;
         toolbarDisabled: string;
         toolbarIconColor: string;
+        toolbarIconHighlight: string;
         toolbarHeight: number;
+
+        progressBarForeground: string;
 
         menuHeight: number;
         menuBackground: string;
