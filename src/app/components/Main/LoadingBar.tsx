@@ -23,7 +23,7 @@
 import React from 'react';
 import LoadingBarNative from 'react-redux-loading-bar';
 import { withTheme } from 'styled-components';
-import { IThemeDefinition } from 'genesis/theme';
+import { IThemeDefinition } from 'apla/theme';
 import themed from 'components/Theme/themed';
 
 export interface ILoadingBarProps {

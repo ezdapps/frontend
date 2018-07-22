@@ -24,7 +24,7 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs';
 import { connect } from 'modules/socket/actions';
 import { initialize, setLocale } from '../actions';
-import { IWebSettings } from 'genesis';
+import { IWebSettings } from 'apla';
 import urlJoin from 'url-join';
 import platform from 'lib/platform';
 import NodeObservable from '../util/NodeObservable';
