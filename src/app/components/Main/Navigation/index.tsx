@@ -29,6 +29,7 @@ import Protypo from 'containers/Widgets/Protypo';
 import ResizeHandle from 'containers/Main/Navigation/ResizeHandle';
 import { TMenu } from 'apla/content';
 import ScrollArea from 'react-scrollbar';
+import platform from 'lib/platform';
 
 const StyledNavigation = themed.aside`
     &.navigation-collapsed {
@@ -47,8 +48,8 @@ const StyledNavigation = themed.aside`
 
     position: absolute;
     top: 0;
-    left: 0;
-    bottom: 0;
+    left: ${platform.select({ win32: '1px' }) || 0};
+    bottom: ${platform.select({ win32: '1px' }) || 0};
     z-index: 150;
 `;
 
@@ -130,20 +131,20 @@ class Navigation extends React.Component<INavigationProps & InjectedIntlProps> {
                         <StackGroup
                             items={this.props.menus.map((menu, index) => (
                                 <ScrollArea
-                                       horizontal={false}
-                                       speed={0.2}
+                                    horizontal={false}
+                                    speed={0.2}
                                 >
                                     <StyledMenuContent>
-                                        <StyledBackButton onClick={() => this.props.menuPop()} disabled={1 >= this.props.menus.length} className={index === 0 ? 'disabled' : ''}>
-                                            <div className="title-wrap">
-                                                {index > 0 && (
+                                        {index > 0 && (
+                                            <StyledBackButton onClick={() => this.props.menuPop()} disabled={1 >= this.props.menus.length}>
+                                                <div className="title-wrap">
                                                     <span className="icon">
                                                         <em className="icon-arrow-left" />
                                                     </span>
-                                                )}
-                                                <span>{menu.name}</span>
-                                            </div>
-                                        </StyledBackButton>
+                                                    <span>{menu.name}</span>
+                                                </div>
+                                            </StyledBackButton>
+                                        )}
                                         <Protypo
                                             context="menu"
                                             content={menu.content}

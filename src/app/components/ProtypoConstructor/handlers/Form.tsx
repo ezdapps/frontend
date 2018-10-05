@@ -21,48 +21,29 @@
 // SOFTWARE.
 
 import * as React from 'react';
+import { FormattedMessage } from 'react-intl';
 import StyledComponent from 'components/Protypo/handlers/StyledComponent';
-import TagWrapper from '../components/TagWrapper';
 import DnDComponent from './DnDComponent';
-import * as classnames from 'classnames';
 import EditableBlock from './EditableBlock';
 
 class Form extends EditableBlock {
+    protected editableDisplay = 'block';
+    protected editable = true;
+
     onSubmit(e: any) {
         e.stopPropagation();
         e.preventDefault();
     }
 
-    render() {
-        const { connectDropTarget, connectDragSource, connectDragPreview, isOver } = this.props;
-
-        const classes = classnames({
-            [this.props.class]: true,
-            [this.props.className]: true,
-            'b-selected': this.props.selected
-        });
-
-        return connectDragPreview(connectDropTarget(
-            <span>
-                <TagWrapper
-                    display="block"
-                    selected={this.props.selected}
-                    canDrop={isOver}
-                    canDropPosition={this.props.canDropPosition}
-                    onClick={this.onClick.bind(this)}
-                    removeTag={this.removeTag.bind(this)}
-                    connectDragSource={connectDragSource}
-                    canMove={true}
-                >
-                    <form
-                        className={classes}
-                        onSubmit={this.onSubmit.bind(this)}
-                    >
-                        {this.props.children}
-                    </form>
-                </TagWrapper>
-            </span>
-        ));
+    renderChildren(classes: string) {
+        return (
+            <form
+                className={classes}
+                onSubmit={this.onSubmit.bind(this)}
+            >
+                {this.props.children || (<FormattedMessage id="editor.designer.emptyform" defaultMessage="Empty form. Drop elements here.<"/>)}
+            </form>
+        );
     }
 }
 

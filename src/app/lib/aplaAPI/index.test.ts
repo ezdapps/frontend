@@ -75,7 +75,7 @@ const apiPassthroughTransportMock: IRequestTransport = request => {
     return new Promise<any>((resolve, reject) => {
         setTimeout(() => {
             resolve({
-                body: request
+                json: request
             });
         }, 0);
     });
@@ -85,7 +85,7 @@ const paramsTransportMock: IRequestTransport = request => {
     return new Promise<any>((resolve, reject) => {
         setTimeout(() => {
             resolve({
-                body: {
+                json: {
                     __requestUrl: request.url,
                     body: request.body
                 }
@@ -482,61 +482,6 @@ test('ContentTest', () => {
                 numParam: 4815162342,
                 boolParam: true
             })
-        });
-    });
-});
-
-test('TxCall', () => {
-    const testRequest = {
-        pubkey: '4815162342',
-        signature: 'TEST_SIGN',
-        time: '4815162342',
-        requestID: 'RID-4815162342'
-    };
-
-    return paramTestingAPIMock().txCall(testRequest).then((response: any) => {
-        expect(response).toEqual({
-            __requestUrl: `${paramTestingAPIHost}/${paramTestingAPIEndpoint}/contract/RID-4815162342`,
-            body: mockFormData({
-                pubkey: '4815162342',
-                signature: 'TEST_SIGN',
-                time: '4815162342'
-            })
-        });
-    });
-});
-
-test('TxPrepare', () => {
-    const testRequest = {
-        name: 'TEST_TX',
-        params: {
-            strParam: 'hello?',
-            numParam: 4815162342,
-            boolParam: true
-        }
-    };
-
-    return paramTestingAPIMock().txPrepare(testRequest).then((response: any) => {
-        expect(response).toEqual({
-            __requestUrl: `${paramTestingAPIHost}/${paramTestingAPIEndpoint}/prepare/TEST_TX`,
-            body: mockFormData({
-                strParam: 'hello?',
-                numParam: 4815162342,
-                boolParam: true
-            })
-        });
-    });
-});
-
-test('TxStatus', () => {
-    const testRequest = {
-        hash: '4815162342'
-    };
-
-    return paramTestingAPIMock().txStatus(testRequest).then((response: any) => {
-        expect(response).toEqual({
-            __requestUrl: `${paramTestingAPIHost}/${paramTestingAPIEndpoint}/txstatus/4815162342`,
-            body: null
         });
     });
 });

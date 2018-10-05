@@ -23,7 +23,7 @@
 import queryString from 'query-string';
 import urlJoin from 'url-join';
 import urlTemplate from 'url-template';
-import { IUIDResponse, ILoginRequest, ILoginResponse, IRefreshResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IRefreshRequest, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITxCallRequest, ITxCallResponse, ITxPrepareRequest, ITxPrepareResponse, ITxStatusRequest, ITxStatusResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, ITxPrepareBatchRequest, ITxStatusBatchRequest, ITxPrepareBatchResponse, ITxCallBatchRequest, ITxCallBatchResponse, ITxStatusBatchResponse } from 'apla/api';
+import { IUIDResponse, ILoginRequest, ILoginResponse, IRefreshResponse, IRowRequest, IRowResponse, IPageResponse, IBlockResponse, IMenuResponse, IContentRequest, IContentResponse, IContentTestRequest, IContentJsonRequest, IContentJsonResponse, ITableResponse, ISegmentRequest, ITablesResponse, IDataRequest, IDataResponse, IHistoryRequest, IHistoryResponse, INotificationsRequest, IParamResponse, IParamsRequest, IParamsResponse, IRefreshRequest, IParamRequest, ITemplateRequest, IContractRequest, IContractResponse, IContractsResponse, ITableRequest, TConfigRequest, ISystemParamsRequest, ISystemParamsResponse, IContentHashRequest, IContentHashResponse, TTxCallRequest, TTxCallResponse, TTxStatusRequest, TTxStatusResponse, ITxStatus } from 'apla/api';
 
 export type TRequestMethod =
     'get' |
@@ -43,7 +43,7 @@ export interface IRequestOptions<P, R> {
         [key: string]: string;
     };
     requestTransformer?: (request: P) => { [key: string]: any };
-    responseTransformer?: (response: any) => R;
+    responseTransformer?: (response: any, text: string) => R;
 }
 
 export interface IEndpointFactory {
@@ -60,7 +60,7 @@ export interface IParameterLessEndpoint<R> {
 }
 
 export interface IRequestTransport {
-    (request: IRequest): Promise<{ body: any }>;
+    (request: IRequest): Promise<{ json: object, body: string }>;
 }
 
 export interface IRequestParams {
@@ -80,11 +80,7 @@ export interface IAPIOptions {
 }
 
 class AplaAPI {
-    private _defaultOptions: IRequestOptions<any, any> = {
-        headers: {
-            'Content-Type': 'multipart/form-data'
-        }
-    };
+    private _defaultOptions: IRequestOptions<any, any> = {};
     private _options: IAPIOptions;
 
     constructor(options: IAPIOptions) {
@@ -119,13 +115,7 @@ class AplaAPI {
         };
 
         let json: any = null;
-
-        const formData = new FormData();
-        for (let itr in params) {
-            if (params.hasOwnProperty(itr) && params[itr]) {
-                formData.append(itr, params[itr]);
-            }
-        }
+        let text: string = null;
 
         const query = 'get' === method ? queryString.stringify(params) : '';
         const body = 'get' === method ? null : this.serializeFormData(params);
@@ -137,7 +127,9 @@ class AplaAPI {
                 body,
                 headers: requestOptions.headers
             });
-            json = response.body;
+
+            json = response.json;
+            text = response.body;
         }
         catch (e) {
             // TODO: Not possible to catch with any other way
@@ -156,7 +148,7 @@ class AplaAPI {
             throw json;
         }
         else {
-            return requestOptions.responseTransformer ? requestOptions.responseTransformer(json) : json;
+            return requestOptions.responseTransformer ? requestOptions.responseTransformer(json, text) : json;
         }
     }
 
@@ -259,6 +251,10 @@ class AplaAPI {
         requestTransformer: request => ({
             ...request.params,
             lang: request.locale
+        }),
+        responseTransformer: (response, plainText) => ({
+            ...response,
+            plainText
         })
     });
     public contentTest = this.setSecuredEndpoint<IContentTestRequest, IContentResponse>('post', 'content', {
@@ -277,46 +273,31 @@ class AplaAPI {
         })
     });
 
-    // Transactions
-    public txCall = this.setSecuredEndpoint<ITxCallRequest, ITxCallResponse>('post', 'contract/{requestID}', {
+    public contentHash = this.setEndpoint<IContentHashRequest, IContentHashResponse>('post', 'content/hash/{name}', {
         requestTransformer: request => ({
-            time: request.time,
-            signature: request.signature,
-            pubkey: request.pubkey
+            ...request.params,
+            lang: request.locale,
+            ecosystem: request.ecosystem,
+            keyID: request.walletID,
+            roleID: request.role
         })
     });
-    public txPrepare = this.setSecuredEndpoint<ITxPrepareRequest, ITxPrepareResponse>('post', 'prepare/{name}', {
-        requestTransformer: request => request.params
-    });
-    public txStatus = this.setSecuredEndpoint<ITxStatusRequest, ITxStatusResponse>('get', 'txstatus/{hash}', { requestTransformer: () => null });
 
-    // Transactions batch-processing
-    public txPrepareBatch = this.setSecuredEndpoint<ITxPrepareBatchRequest, ITxPrepareBatchResponse>('post', 'prepareMultiple', {
-        requestTransformer: request => ({
-            data: JSON.stringify({
-                contracts: request.contracts.map(l => ({
-                    contract: l.name,
-                    params: l.params
-                }))
-            })
-        })
-    });
-    public txCallBatch = this.setSecuredEndpoint<ITxCallBatchRequest, ITxCallBatchResponse>('post', 'contractMultiple/{requestID}', {
-        requestTransformer: request => ({
-            data: JSON.stringify({
-                signatures: request.signatures,
-                pubkey: request.pubkey,
-                time: request.time
-            })
-        })
-    });
-    public txStatusBatch = this.setSecuredEndpoint<ITxStatusBatchRequest, ITxStatusBatchResponse>('post', 'txstatusMultiple', {
+    // Transactions
+    private _txSend = this.setSecuredEndpoint<{ [key: string]: Blob }, { hashes: { [key: string]: string } }>('post', 'sendTx');
+    public txSend = <T>(params: TTxCallRequest<T>) => this._txSend(params) as Promise<TTxCallResponse<T>>;
+
+    private _txStatus = this.setSecuredEndpoint<{ hashes: string[] }, { [hash: string]: ITxStatus; }>('post', 'txstatus', {
         requestTransformer: request => ({
             data: JSON.stringify({
                 hashes: request.hashes
             })
-        })
+        }),
+        responseTransformer: response => response.results
     });
+    public txStatus = <T>(params: TTxStatusRequest<T>) => this._txStatus({
+        hashes: Object.keys(params).map(l => params[l])
+    }) as Promise<TTxStatusResponse<T>>
 }
 
 export default AplaAPI;

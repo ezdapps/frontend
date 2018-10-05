@@ -20,23 +20,25 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { txExecBatch } from '../actions';
-import { Reducer } from 'modules';
+import Tag from './Tag';
 
-const txExecBatchHandler: Reducer<typeof txExecBatch.started, State> = (state, payload) => ({
-    ...state,
-    transactions: state.transactions.set(payload.uuid, {
-        uuid: payload.uuid,
-        contract: payload.tx.contract && payload.tx.contract.name,
-        block: null,
-        result: null,
-        error: null,
-        batch: {
-            pending: payload.prepare.forsign.length,
-            contracts: payload.tx.contracts.map(tx => tx.name)
-        }
-    })
-});
+class Hint extends Tag {
+    protected tagName: string = 'Hint';
+    public canHaveChildren: boolean = false;
+    protected attr: any = {
+        'icon': 'Icon',
+        'title': 'Title',
+        'text': 'Text'
+    };
 
-export default txExecBatchHandler;
+    protected newElementAttr: any = {
+        icon: 'icon-question',
+        title: 'Title',
+        text: 'Sample description'
+    };
+
+    protected editProps = ['icon', 'title', 'text'];
+    protected generateTextElement: boolean = false;
+}
+
+export default Hint;

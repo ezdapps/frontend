@@ -30,7 +30,7 @@ import BtnRadioButtons from './BtnRadioButtons';
 import FormatButtons from './FormatButtons';
 import Switch from './Switch';
 import PropertiesInput from './PropertiesInput';
-import { getInitialTagValue } from 'lib/constructor';
+import { getInitialTagValue } from 'lib/constructor/properties';
 import resolveTagHandler from 'lib/constructor/tags';
 import { params } from 'lib/constructor/tags/params';
 
@@ -228,6 +228,7 @@ export default class Properties extends React.Component<IPropertiesProps, IPrope
                             <Row className="g-padding-bottom">
                                 <Col xs={12}>
                                     <FormatButtons
+                                        tag={this.props.tag.tag}
                                         onClick={this.onToggleFormat.bind(this)}
                                     />
                                 </Col>

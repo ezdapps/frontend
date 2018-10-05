@@ -64,17 +64,11 @@ declare module 'apla/protypo' {
         uuid: string;
         silent?: boolean;
         confirm?: IButtonConfirm;
-        contract?: {
+        contracts: {
             name: string;
             params: {
                 [key: string]: any
-            };
-        };
-        contracts?: {
-            name: string;
-            params: {
-                [key: string]: any;
-            }[];
+            }[]
         }[];
         page?: IButtonPage;
         popup?: IButtonPopup;

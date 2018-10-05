@@ -26,15 +26,15 @@ import { ISource } from 'apla/protypo';
 
 import Protypo from '../';
 
-export interface IGetContractHistoryProps extends ISource {
+export interface ISimpleSourceProps extends ISource {
     source: string;
 }
 
-interface IGetContractHistoryContext {
+interface ISimpleSourceContext {
     protypo: Protypo;
 }
 
-const SimpleSource: React.SFC<IGetContractHistoryProps> = (props, context: IGetContractHistoryContext) => {
+const SimpleSource: React.SFC<ISimpleSourceProps> = (props, context: ISimpleSourceContext) => {
     context.protypo.registerSource(props.source, {
         columns: props.columns,
         types: props.types,

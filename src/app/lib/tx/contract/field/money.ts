@@ -1,17 +1,17 @@
 // MIT License
-// 
+//
 // Copyright (c) 2016-2018 AplaProject
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,25 +20,20 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import uuid from 'uuid';
-import { IRootState } from 'modules';
-import { Epic } from 'redux-observable';
-import { Observable } from 'rxjs';
-import { Action } from 'redux';
-import { txExecBatch, txPrepare } from '../actions';
-import { enqueueNotification } from 'modules/notifications/actions';
+import IField from './';
+import { toMoney } from 'lib/tx/convert';
 
-const txExecBatchDoneEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(txExecBatch.done)
-        .flatMap(action => Observable.if(
-            () => !!action.payload.params.tx.contract,
-            Observable.of(txPrepare(action.payload.params)),
-            Observable.of(enqueueNotification({
-                id: uuid.v4(),
-                type: 'TX_BATCH',
-                params: {}
-            }))
+class Money implements IField<string, string> {
+    private _value: string = '';
 
-        ));
+    set(value: string) {
+        const intermediary = value ? value.toString().replace(',', '.') : '0';
+        this._value = toMoney(intermediary);
+    }
 
-export default txExecBatchDoneEpic;
+    get() {
+        return this._value;
+    }
+}
+
+export default Money;

@@ -20,33 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { reloadPage } from '../actions';
-import { Reducer } from 'modules';
+import * as React from 'react';
+import DnDComponent from './DnDComponent';
+import EditableBlock from './EditableBlock';
+import { HintWrapper } from 'components/Protypo/handlers/Hint';
 
-const reloadPageDoneHandler: Reducer<typeof reloadPage.done, State> = (state, payload) => {
-    const menuIndex = state.sections[state.section].menus.findIndex(l =>
-        l.name === payload.result.menu.name);
+class Hint extends EditableBlock {
+    protected editableDisplay = 'inline';
+    protected editable = false;
+    renderChildren(classes: string) {
+        let className = 'tool-icon ' + (this.props.icon || 'icon-question');
+        return (
+            <HintWrapper>
+                <div className="tool-body">
+                    <em className={className}/>
+                </div>
+            </HintWrapper>
+        );
+    }
+}
 
-    return {
-        ...state,
-        sections: {
-            ...state.sections,
-            [state.section]: {
-                ...state.sections[state.section],
-                menus: -1 === menuIndex ? [...state.sections[state.section].menus, payload.result.menu] : [
-                    ...state.sections[state.section].menus.slice(0, menuIndex),
-                    payload.result.menu,
-                    ...state.sections[state.section].menus.slice(menuIndex + 1)
-                ],
-                page: {
-                    ...payload.result.page,
-                    params: payload.result.params
-                },
-                pending: false
-            }
-        }
-    };
-};
-
-export default reloadPageDoneHandler;
+export default DnDComponent(Hint);

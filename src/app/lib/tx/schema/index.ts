@@ -20,22 +20,12 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { txExecBatch } from '../actions';
-import { Reducer } from 'modules';
+import IField from 'lib/tx/contract/field';
 
-const txExecBatchDoneHandler: Reducer<typeof txExecBatch.done, State> = (state, payload) => {
-    const tx = state.transactions.get(payload.params.uuid);
-    return {
-        ...state,
-        transactions: state.transactions.set(payload.params.uuid, {
-            ...tx,
-            batch: {
-                ...tx.batch,
-                pending: 0
-            }
-        })
+export interface ISchema {
+    header: Uint8Array;
+    network: number;
+    fields: {
+        [type: string]: new () => IField<any>;
     };
-};
-
-export default txExecBatchDoneHandler;
+}

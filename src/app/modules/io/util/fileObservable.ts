@@ -1,17 +1,17 @@
 // MIT License
-// 
+//
 // Copyright (c) 2016-2018 AplaProject
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,23 +20,17 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import { State } from '../reducer';
-import { txExecBatch } from '../actions';
-import { Reducer } from 'modules';
+import { Observable } from 'rxjs';
 
-const txExecBatchFailedHandler: Reducer<typeof txExecBatch.failed, State> = (state, payload) => {
-    const tx = state.transactions.get(payload.params.uuid);
-    return {
-        ...state,
-        transactions: state.transactions.set(payload.params.uuid, {
-            ...tx,
-            error: payload.error,
-            batch: {
-                ...tx.batch,
-                pending: 0
-            }
-        })
-    };
-};
+const fileObservable = (blob: Blob): Observable<ArrayBuffer> => new Observable(obs => {
+    const reader = new FileReader();
 
-export default txExecBatchFailedHandler;
+    reader.onerror = err => obs.error(err);
+    reader.onabort = err => obs.error(err);
+    reader.onload = () => obs.next(reader.result as ArrayBuffer);
+    reader.onloadend = () => obs.complete();
+
+    return reader.readAsArrayBuffer(blob);
+});
+
+export default fileObservable;

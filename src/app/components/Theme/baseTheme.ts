@@ -25,6 +25,8 @@ import platform from 'lib/platform';
 
 const baseTheme: IThemeDefinition = {
     headerBackground: '#586180',
+    
+    windowBorder: '#4c7dbd',
     headerForeground: '#fff',
     headerBackgroundActive: '#f3f3f3',
     headerForegroundActive: '#194a8a',

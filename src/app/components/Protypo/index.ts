@@ -46,6 +46,7 @@ import Span from './handlers/Span';
 import Strong from './handlers/Strong';
 import Table from './handlers/Table';
 import Chart from './handlers/Chart';
+import Hint from './handlers/Hint';
 import SimpleSource from './handlers/SimpleSource';
 
 import setTitle from './functions/setTitle';
@@ -61,10 +62,7 @@ const handlers = {
     'em': Em,
     'forlist': ForList,
     'form': Form,
-    'getpagehistory': SimpleSource,
-    'getcontracthistory': SimpleSource,
-    'getmenuhistory': SimpleSource,
-    'getblockhistory': SimpleSource,
+    'gethistory': SimpleSource,
     'image': Image,
     'imageinput': ImageInput,
     'input': Input,
@@ -84,7 +82,8 @@ const handlers = {
     'span': Span,
     'strong': Strong,
     'table': Table,
-    'chart': Chart
+    'chart': Chart,
+    'hint': Hint
 };
 
 const functions = {

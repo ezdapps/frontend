@@ -23,18 +23,17 @@
 import { IRootState } from 'modules';
 import { Epic } from 'redux-observable';
 import { Action } from 'redux';
-import { txExecBatch } from '../actions';
-import { modalShow } from '../../modal/actions';
+import { txExec } from '../actions';
+import { reloadStylesheet } from 'modules/content/actions';
+import { Observable } from 'rxjs';
 
-export const txExecBatchFailedEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(txExecBatch.failed)
-        .filter(l => !!l.payload.error)
-        .map(action =>
-            modalShow({
-                id: 'TX_ERROR',
-                type: 'TX_ERROR',
-                params: action.payload.error
-            })
+const reloadStylesheetEpic: Epic<Action, IRootState> =
+    (action$, store) => action$.ofAction(txExec.done)
+        .filter(l => !!l.payload.params.contracts.find(c => /^(@1)?EditParameter$/.test(c.name) && !!c.params.find(p => 'stylesheet' === p.name)))
+        .flatMap(s => Observable.from(s.payload.params.contracts))
+        .flatMap(contract => Observable.from(contract.params))
+        .map(params =>
+            reloadStylesheet(params.value)
         );
 
-export default txExecBatchFailedEpic;
+export default reloadStylesheetEpic;
