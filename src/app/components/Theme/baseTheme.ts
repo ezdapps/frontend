@@ -24,9 +24,9 @@ import { IThemeDefinition } from 'apla/theme';
 import platform from 'lib/platform';
 
 const baseTheme: IThemeDefinition = {
-    headerBackground: '#586180',
-    
     windowBorder: '#4c7dbd',
+
+    headerBackground: '#586180',
     headerForeground: '#fff',
     headerBackgroundActive: '#f3f3f3',
     headerForegroundActive: '#194a8a',

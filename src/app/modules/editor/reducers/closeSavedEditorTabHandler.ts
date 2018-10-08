@@ -1,7 +1,7 @@
 // MIT License
-// 
+//
 // Copyright (c) 2016-2018 AplaProject
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
@@ -21,28 +21,15 @@
 // SOFTWARE.
 
 import { State } from '../reducer';
-import { sectionsInit } from '../actions';
+import { closeEditorTab } from '../actions';
 import { Reducer } from 'modules';
-import { TSection } from 'apla/content';
 
-const sectionsInitHandler: Reducer<typeof sectionsInit, State> = (state, payload) => {
-    const sections: { [key: string]: TSection } = {};
-    for (let itr in state.sections) {
-        if (state.sections.hasOwnProperty(itr)) {
-            sections[itr] = {
-                ...state.sections[itr],
-                pending: false,
-                page: null,
-                menus: []
-            };
-        }
-    }
+const closeEditorTabHandler: Reducer<typeof closeEditorTab, State> = (state, payload) => ({
+    ...state,
+    tabIndex: state.tabs.filter(l => l.dirty).length >= 0 ? 0 : -1,
+    tabs: [
+        ...state.tabs.filter(l => l.dirty)
+    ]
+});
 
-    return {
-        ...state,
-        section: payload,
-        sections
-    };
-};
-
-export default sectionsInitHandler;
+export default closeEditorTabHandler;
