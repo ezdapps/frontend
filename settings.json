@@ -1,0 +1,1 @@
+{"networks":[{"key":"prebuilt_mainnet","name":"Apla Main Network","networkID":1,"fullNodes":["https://main-node0.apla.io:7079","https://main-node1.apla.io:7079","https://main-node2.apla.io:7079"]},{"key":"prebuilt_testnet","name":"Apla Test Network","networkID":1,"fullNodes":["https://testapla0.apla.io:7079","https://testapla1.apla.io:7079","https://testapla2.apla.io:7079"]}]}
