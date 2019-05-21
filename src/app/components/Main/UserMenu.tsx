@@ -85,7 +85,7 @@ class UserMenu extends React.Component<IUserMenuProps> {
                                 <>
                                     <li>
                                         <CloseDropdownButton onClick={this.props.onChangePassword}>
-                                            <em className="icon icon-key text-muted." />
+                                            <em className="icon icon-key text-muted" />
                                             <span>
                                                 <FormattedMessage id="general.wallet.changepassword" defaultMessage="Change password" />
                                             </span>
