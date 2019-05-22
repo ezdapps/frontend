@@ -10,6 +10,7 @@ import Protypo from 'containers/Widgets/Protypo';
 import { TProtypoElement } from 'apla/protypo';
 
 export interface IPageModalProps {
+    name: string;
     title: string;
     width?: number;
     tree: TProtypoElement[];
