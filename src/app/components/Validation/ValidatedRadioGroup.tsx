@@ -71,6 +71,8 @@ export default class ValidatedRadioGroup extends React.Component<IValidatedRadio
         if (this.props.onChange) {
             this.props.onChange(e);
         }
+
+        (this.context.form as ValidatedForm).emitUpdate(this.props.name, (e.target as any).value);
     }
 
     onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
