@@ -23,9 +23,10 @@ const modalPageEpic: Epic = (action$, store, { api }) => action$.ofAction(modalP
 
         })).map(payload =>
             modalShow({
-                id: 'PAGE_MODAL',
+                id: 'PAGE_MODAL:' + action.payload.name,
                 type: 'PAGE_MODAL',
                 params: {
+                    name: action.payload.name,
                     title: action.payload.title || action.payload.name,
                     width: action.payload.width,
                     tree: payload.tree

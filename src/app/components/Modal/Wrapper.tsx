@@ -121,7 +121,20 @@ class ModalWrapper extends React.Component<IModalWrapperProps, IModalWrapperStat
     }
 
     componentWillReceiveProps(props: IModalWrapperProps & { children: React.ReactNode }) {
-        this.enqueueModal(props.children);
+        if (!this.props.children) {
+            this.enqueueModal(props.children);
+        }
+        else {
+            const updateProc = (this.props.children as any || {}).key === (props.children as any || {}).key;
+            if (updateProc) {
+                this.setState({
+                    activeModal: props.children
+                });
+            }
+            else {
+                this.enqueueModal(props.children);
+            }
+        }
     }
 
     onEntered = () => {
@@ -184,7 +197,7 @@ class ModalWrapper extends React.Component<IModalWrapperProps, IModalWrapperStat
                         </Transition>
                     </StyledModalWrapper>
                 )}
-            </Transition >
+            </Transition>
 
         );
     }
