@@ -11,6 +11,7 @@ import { modalClose } from 'modules/modal/actions';
 import { enqueueNotification } from 'modules/notifications/actions';
 
 import ModalProvider from 'components/Modal/ModalProvider';
+import { InjectedIntlProps, injectIntl } from 'react-intl';
 
 interface IModalProviderContainerProps {
 
@@ -25,13 +26,14 @@ interface IModalProviderContainerDispatch {
     enqueueNotification: typeof enqueueNotification;
 }
 
-class ModalProviderContainer extends React.Component<IModalProviderContainerProps & IModalProviderContainerState & IModalProviderContainerDispatch> {
+class ModalProviderContainer extends React.Component<IModalProviderContainerProps & IModalProviderContainerState & IModalProviderContainerDispatch & InjectedIntlProps> {
     render() {
         return (
             <ModalProvider
                 modal={this.props.modal}
                 onResult={this.props.modalClose}
                 enqueueNotification={this.props.enqueueNotification}
+                intl={this.props.intl}
             >
                 {this.props.children}
             </ModalProvider>
@@ -48,4 +50,4 @@ const mapDispatchToProps = {
     enqueueNotification: enqueueNotification
 };
 
-export default connect<IModalProviderContainerState, IModalProviderContainerDispatch, IModalProviderContainerProps>(mapStateToProps, mapDispatchToProps)(ModalProviderContainer);
+export default connect<IModalProviderContainerState, IModalProviderContainerDispatch, IModalProviderContainerProps>(mapStateToProps, mapDispatchToProps)(injectIntl(ModalProviderContainer));

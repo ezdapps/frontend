@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
+import { InjectedIntl } from 'react-intl';
 import { IModal, TModalResultReason } from 'apla/modal';
 import { INotification } from 'apla/notifications';
 import uuid from 'uuid';
@@ -65,8 +66,9 @@ const MODAL_COMPONENTS = {
 
 export interface IModalProviderProps {
     modal: IModal;
-    onResult: (params: { reason: TModalResultReason, data: any }) => void;
-    enqueueNotification: (params: INotification) => void;
+    intl: InjectedIntl;
+    onResult: (params: { reason: TModalResultReason, data: any }) => any;
+    enqueueNotification: (params: INotification) => any;
 }
 
 class ModalProvider extends React.Component<IModalProviderProps> {
@@ -100,6 +102,7 @@ class ModalProvider extends React.Component<IModalProviderProps> {
                     <Modal
                         key={this.props.modal.id}
                         active
+                        intl={this.props.intl}
                         onResult={this.onResult.bind(this)}
                         onCancel={this.onCancel.bind(this)}
                         notify={this.notify.bind(this)}
