@@ -1,0 +1,19 @@
+{
+    "locales": [
+        {
+            "key": "en-US",
+            "name": "English (US)",
+            "enabled": true
+        },
+        {
+            "key": "ru-RU",
+            "name": "Русский (RU)",
+            "enabled": true
+        },
+        {
+            "key": "de-DE",
+            "name": "Deutsch (DE)",
+            "enabled": false
+        }
+    ]
+}

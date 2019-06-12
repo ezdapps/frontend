@@ -9,7 +9,6 @@ import { IRootState } from 'modules';
 import { IModal } from 'apla/modal';
 import { modalClose } from 'modules/modal/actions';
 import { enqueueNotification } from 'modules/notifications/actions';
-import { setLocale } from 'modules/engine/actions';
 
 import ModalProvider from 'components/Modal/ModalProvider';
 
@@ -24,7 +23,6 @@ interface IModalProviderContainerState {
 interface IModalProviderContainerDispatch {
     modalClose: typeof modalClose;
     enqueueNotification: typeof enqueueNotification;
-    changeLocale: typeof setLocale.started;
 }
 
 class ModalProviderContainer extends React.Component<IModalProviderContainerProps & IModalProviderContainerState & IModalProviderContainerDispatch> {
@@ -34,7 +32,6 @@ class ModalProviderContainer extends React.Component<IModalProviderContainerProp
                 modal={this.props.modal}
                 onResult={this.props.modalClose}
                 enqueueNotification={this.props.enqueueNotification}
-                changeLocale={this.props.changeLocale}
             >
                 {this.props.children}
             </ModalProvider>
@@ -48,8 +45,7 @@ const mapStateToProps = (state: IRootState) => ({
 
 const mapDispatchToProps = {
     modalClose: modalClose,
-    enqueueNotification: enqueueNotification,
-    changeLocale: setLocale.started
+    enqueueNotification: enqueueNotification
 };
 
 export default connect<IModalProviderContainerState, IModalProviderContainerDispatch, IModalProviderContainerProps>(mapStateToProps, mapDispatchToProps)(ModalProviderContainer);

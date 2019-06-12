@@ -12,7 +12,6 @@ export interface IModalProps<P, R> {
     onResult: (data: R) => void;
     onCancel: () => void;
     notify: (type: string, params: any) => void;
-    changeLocale: (locale: string) => void;
     children: React.ReactNode[];
 }
 

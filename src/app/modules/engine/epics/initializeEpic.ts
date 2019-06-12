@@ -6,30 +6,24 @@
 import { Epic } from 'modules';
 import { Observable } from 'rxjs';
 import { initialize, setLocale } from '../actions';
-import urlJoin from 'url-join';
 import platform from 'lib/platform';
 import { saveWallet, savePreconfiguredNetworks } from 'modules/storage/actions';
 import { address, addressString } from 'lib/crypto';
 import keyring from 'lib/keyring';
-import webConfig from 'lib/settings';
 import { INetwork } from 'apla/auth';
+import webConfig from 'lib/settings/webConfig';
+import localeConfig from 'lib/settings/localeConfig';
+import ConfigObservable from '../util/ConfigObservable';
 
 const DEFAULT_NETWORK = '__DEFAULT';
 
-const initializeEpic: Epic = (action$, store, { api, defaultKey, defaultPassword }) => action$.ofAction(initialize.started)
+const initializeEpic: Epic = (action$, store, { defaultPassword }) => action$.ofAction(initialize.started)
     .flatMap(action => {
-        const requestUrl = platform.select({
-            web: urlJoin(process.env.PUBLIC_URL || location.origin, 'settings.json'),
-            desktop: './settings.json'
-        });
+        return Observable.zip(
+            ConfigObservable('settings').flatMap(result => webConfig.validate(result)),
+            ConfigObservable('locales/index').flatMap(result => localeConfig.validate(result))
 
-        return Observable.ajax.getJSON(
-            requestUrl
-
-        ).catch(e =>
-            Observable.of({})
-
-        ).defaultIfEmpty({}).flatMap(result => webConfig.validate(result)).flatMap(config => {
+        ).flatMap(([config, locales]) => {
             const state = store.getState();
             const preconfiguredNetworks: INetwork[] = [];
             let defaultNetworkSet = false;
@@ -72,7 +66,6 @@ const initializeEpic: Epic = (action$, store, { api, defaultKey, defaultPassword
             }));
 
             return Observable.concat(
-                Observable.of(setLocale.started(state.storage.locale)),
                 Observable.if(
                     () => !!preconfiguredKey,
                     Observable.of(saveWallet(preconfiguredKey)),
@@ -83,9 +76,11 @@ const initializeEpic: Epic = (action$, store, { api, defaultKey, defaultPassword
                     params: action.payload,
                     result: {
                         defaultNetwork: defaultNetworkSet ? DEFAULT_NETWORK : config.defaultNetwork,
-                        preconfiguredNetworks
+                        preconfiguredNetworks,
+                        locales: locales.locales
                     }
-                }))
+                })),
+                Observable.of(setLocale.started(state.storage.locale || config.defaultLocale))
             );
         }).catch(e => Observable.of(initialize.failed({
             params: action.payload,

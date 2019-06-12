@@ -26,7 +26,7 @@ export type State = {
 };
 
 export const initialState: State = {
-    locale: 'en-US',
+    locale: null,
     wallets: [],
     networks: [],
     navigationSize: 230,
