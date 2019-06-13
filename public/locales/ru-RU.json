@@ -170,6 +170,7 @@
     "interface.block": "Блок",
     "interface.menu": "Меню",
     "interface.page": "Страница",
+    "legal.about": "Molis - официальный программный клиент, разработанный для работы с сетями, работающими на базе протокола Apla",
     "legal.copy": "Apla © 2017-2019 - ",
     "legal.homepage": "https://apla.io",
     "map.area": "Площадь: {value}",
