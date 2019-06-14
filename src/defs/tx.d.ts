@@ -4,6 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 declare module 'apla/tx' {
+    import { ITransactionBody } from 'lib/tx/contract';
+
     type TTxError =
         'error' |
         'info' |
@@ -53,9 +55,7 @@ declare module 'apla/tx' {
         name: string,
         hash: string,
         status: ITxStatus;
-        params: {
-            [name: string]: ITransactionParam;
-        };
+        body: ITransactionBody;
     }
 
     interface ITransactionCall {

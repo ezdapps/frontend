@@ -27,6 +27,10 @@ class Integer implements IField<Int64BE | string | number, Int64BE> {
     get(): Int64BE {
         return this._value;
     }
+
+    toString() {
+        return this._value.toString();
+    }
 }
 
 export default Integer;

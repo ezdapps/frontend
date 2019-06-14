@@ -17,6 +17,10 @@ class Money implements IField<string, string> {
     get() {
         return this._value;
     }
+
+    toString() {
+        return this._value.toString();
+    }
 }
 
 export default Money;
