@@ -8,4 +8,10 @@ declare module 'apla' {
         name: string;
         message: string;
     }
+
+    interface ILocale {
+        key: string;
+        name: string;
+        enabled: boolean;
+    }
 }

@@ -10,7 +10,8 @@ import { Reducer } from 'modules';
 const initializeDoneHandler: Reducer<typeof initialize.done, State> = (state, payload) => ({
     ...state,
     isLoaded: true,
-    preconfiguredNetworks: payload.result.preconfiguredNetworks
+    preconfiguredNetworks: payload.result.preconfiguredNetworks,
+    locales: payload.result.locales
 });
 
 export default initializeDoneHandler;

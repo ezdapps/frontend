@@ -6,16 +6,17 @@
 import * as React from 'react';
 import { Button } from 'react-bootstrap';
 import imgLogo from 'images/logoInverse.svg';
-
-import Modal from './';
 import { FormattedMessage } from 'react-intl';
 
-const MAIN_WEBSITE = 'https://apla.io';
+import Modal from './';
 
 class AboutModal extends Modal<void, void> {
     openWebsite() {
         const electron = require('electron');
-        electron.shell.openExternal(MAIN_WEBSITE);
+        electron.shell.openExternal(this.props.intl.formatMessage({
+            id: 'legal.homepage',
+            defaultMessage: 'https://apla.io'
+        }));
     }
 
     render() {
@@ -25,13 +26,16 @@ class AboutModal extends Modal<void, void> {
                     <FormattedMessage id="general.about" defaultMessage="About" />
                 </Modal.Header>
                 <Modal.Body>
-                    <div className="text-center" style={{ padding: '10px 50px' }}>
+                    <div className="text-center" style={{ padding: '10px 20px', maxWidth: 350 }}>
                         <img src={imgLogo} style={{ height: 50 }} />
                         <div className="text-muted">
                             {process.env.REACT_APP_VERSION ? `v${process.env.REACT_APP_VERSION}` : 'DEVELOPER BUILD'}
                         </div>
+                        <div>
+                            <FormattedMessage id="legal.about" defaultMessage="Molis - a software product developed by Apla. It works with blockchain networks that are built to use Apla Protocol" />
+                        </div>
                         <Button bsStyle="link" onClick={this.openWebsite}>
-                            {MAIN_WEBSITE}
+                            <FormattedMessage id="legal.homepage" defaultMessage="https://apla.io" />
                         </Button>
                     </div>
                 </Modal.Body>

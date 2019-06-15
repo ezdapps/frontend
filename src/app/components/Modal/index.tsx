@@ -4,15 +4,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
+import { InjectedIntl } from 'react-intl';
 
 import themed from 'components/Theme/themed';
 
 export interface IModalProps<P, R> {
+    intl: InjectedIntl;
     params: P;
     onResult: (data: R) => void;
     onCancel: () => void;
     notify: (type: string, params: any) => void;
-    changeLocale: (locale: string) => void;
     children: React.ReactNode[];
 }
 
