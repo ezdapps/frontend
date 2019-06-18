@@ -11,6 +11,7 @@ const connectDoneHandler: Reducer<typeof connect.done, State> = (state, payload)
     ...state,
     session: payload.result.session,
     socket: payload.result.instance,
+    notifications: [],
     connected: true
 });
 

@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 import { discoverNetwork } from '../actions';
 import NodeObservable from '../util/NodeObservable';
 import { discover } from 'services/network';
-import { connect } from 'modules/socket/actions';
 import { mergeFullNodes } from 'modules/storage/actions';
 import NetworkError from 'services/network/errors';
 
@@ -37,13 +36,6 @@ const setNetworkEpic: Epic = (action$, store, { api, defaultKey }) => action$.of
                                 sessionToken: result.loginResult.token
                             }
                         }
-                    })),
-                    Observable.of(connect.started({
-                        wsHost: network.socketUrl || result.socketUrl,
-                        session: result.loginResult.token,
-                        socketToken: result.loginResult.notify_key,
-                        timestamp: result.loginResult.timestamp,
-                        userID: result.loginResult.key_id
                     })),
                     Observable.of(mergeFullNodes({
                         uuid: network.uuid,
