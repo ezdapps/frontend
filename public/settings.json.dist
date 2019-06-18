@@ -1,12 +1,18 @@
 {
-    "key": "DEFAULT_NETWORK",
-    "name": "Default Network",
-    "networkID": 1,
-    "fullNodes": [
-        "http://127.0.0.1:7079"
-    ],
-    "socketUrl": "",
-    "activationEmail": "",
-    "enableDemoMode": true,
-    "disableSync": false
+    "defaultLocale": "en-US",
+    "defaultNetwork": "DEFAULT_NETWORK",
+    "networks": [
+        {
+            "key": "DEFAULT_NETWORK",
+            "name": "Default Network",
+            "networkID": 1,
+            "fullNodes": [
+                "http://127.0.0.1:7079"
+            ],
+            "socketUrl": "",
+            "activationEmail": "",
+            "enableDemoMode": true,
+            "disableSync": false
+        }
+    ]
 }
