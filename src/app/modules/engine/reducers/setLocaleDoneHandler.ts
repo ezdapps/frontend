@@ -9,7 +9,8 @@ import { Reducer } from 'modules';
 
 const setLocaleDoneHandler: Reducer<typeof setLocale.done, State> = (state, payload) => ({
     ...state,
-    localeMessages: payload.result
+    locale: payload.result.locale,
+    localeMessages: payload.result.values
 });
 
 export default setLocaleDoneHandler;

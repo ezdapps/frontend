@@ -6,6 +6,7 @@
 import * as yup from 'yup';
 
 const webConfig = yup.object().shape({
+    defaultLocale: yup.string().notRequired(),
     defaultNetwork: yup.string().notRequired(),
     networks: yup.array().of(yup.object({
         key: yup.string().required(),

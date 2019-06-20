@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import imgLogo from 'images/logo.svg';
 import platform from 'lib/platform';
 
@@ -22,7 +22,7 @@ export interface IAuthProps {
     changeLocale: () => void;
 }
 
-const Auth: React.SFC<IAuthProps> = props => (
+const Auth: React.SFC<IAuthProps & InjectedIntlProps> = props => (
     <div className={props.className}>
         <div className="auth-window-container">
             <div className="auth-window">
@@ -48,7 +48,17 @@ const Auth: React.SFC<IAuthProps> = props => (
                     web: (
                         <div className="clearfix p-lg text-center text-white">
                             <div className="pull-left">
-                                <div>Apla &copy; 2017 - 2019 - <a href="https://apla.io">https://apla.io</a></div>
+                                <div>
+                                    <FormattedMessage id="legal.copy" defaultMessage="Apla © 2017-2019 - " />
+                                    <a
+                                        href={props.intl.formatMessage({
+                                            id: 'legal.homepage',
+                                            defaultMessage: 'https://apla.io'
+                                        })}
+                                    >
+                                        <FormattedMessage id="legal.homepage" defaultMessage="https://apla.io" />
+                                    </a>
+                                </div>
                             </div>
                             <div className="pull-right">
                                 <a href="#" onClick={props.changeLocale}>
@@ -63,7 +73,7 @@ const Auth: React.SFC<IAuthProps> = props => (
     </div>
 );
 
-export default themed(Auth)`
+export default themed(injectIntl(Auth))`
     display: ${platform.select({ web: 'table', desktop: 'block' })};
     width: 100%;
     height: 100%;

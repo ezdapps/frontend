@@ -48,7 +48,7 @@ const AppContainer: React.SFC<IAppContainerProps & IAppContainerState & IAppCont
 );
 
 const mapStateToProps = (state: IRootState) => ({
-    locale: state.storage.locale,
+    locale: state.engine.locale || 'en-US',
     localeMessages: state.engine.localeMessages,
     isAuthenticated: state.auth.isAuthenticated,
     isCollapsed: state.engine.isCollapsed,

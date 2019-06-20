@@ -13,6 +13,7 @@ import subscribeWalletsEpic from './epics/subscribeWalletsEpic';
 import subscribeReconnectEpic from './epics/subscribeReconnectEpic';
 import unsubscribeRemovedWalletEpic from './epics/unsubscribeRemovedWalletEpic';
 import subscribeWalletEpic from './epics/subscribeWalletEpic';
+import initConnectEpic from './epics/initConnectEpic';
 
 export default combineEpics(
     connectEpic,
@@ -23,5 +24,6 @@ export default combineEpics(
     subscribeWalletsEpic,
     subscribeWalletEpic,
     subscribeReconnectEpic,
-    unsubscribeRemovedWalletEpic
+    unsubscribeRemovedWalletEpic,
+    initConnectEpic
 );
