@@ -5,7 +5,9 @@
 
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { renderLegacyPage } from '..//actions';
+import { renderLegacyPage } from '../actions';
+import { LEGACY_PAGES } from 'lib/legacyPages';
+import { IContentResponse } from 'apla/api';
 
 const renderLegacyPageEpic: Epic = (action$, store, { api }) => action$.ofAction(renderLegacyPage.started)
     .flatMap(action => {
@@ -15,44 +17,62 @@ const renderLegacyPageEpic: Epic = (action$, store, { api }) => action$.ofAction
             sessionToken: state.auth.session.sessionToken
         });
 
-        if (action.payload.menu) {
-            return Observable.fromPromise(client.content({
-                type: 'menu',
-                name: action.payload.menu,
-                params: {},
-                locale: state.storage.locale
+        const LEGACY_PAGE = LEGACY_PAGES[action.payload.name];
+        const substitute = LEGACY_PAGE.renderSubstitute && LEGACY_PAGE.renderSubstitute(action.payload.params);
 
-            })).map(payload =>
-                renderLegacyPage.done({
-                    params: action.payload,
-                    result: {
-                        menu: {
-                            name: action.payload.menu,
-                            content: payload.tree
-                        }
-                    }
-                })
+        return Observable.zip(
+            Observable.if(
+                () => !!action.payload.menu,
+                Observable.defer(() => client.content({
+                    type: 'menu',
+                    name: action.payload.menu,
+                    params: {},
+                    locale: state.storage.locale
+                })),
+                Observable.of<IContentResponse>(null)
+            ),
+            Observable.if(
+                () => !!substitute,
+                Observable.defer(() => client.content({
+                    type: 'page',
+                    name: substitute.name,
+                    params: substitute.params,
+                    locale: state.storage.locale
+                })),
+                Observable.of<IContentResponse>(null)
+            )
 
-            ).catch(error =>
-                Observable.of(renderLegacyPage.done({
-                    params: action.payload,
-                    result: {
-                        menu: {
-                            name: action.payload.menu,
-                            content: []
-                        }
+        ).map(([menu, page]) => renderLegacyPage.done({
+            params: action.payload,
+            result: {
+                menu: {
+                    name: action.payload.menu,
+                    content: menu ? menu.tree : []
+                },
+                page: page ?
+                    {
+                        name: substitute.name,
+                        params: substitute.params,
+                        content: page.tree
+                    } :
+                    {
+                        name: '',
+                        params: {},
+                        content: []
                     }
-                }))
-            );
-        }
-        else {
-            return Observable.of(renderLegacyPage.done({
-                params: action.payload,
-                result: {
-                    menu: null
+            }
+
+        })).catch(e => Observable.of(renderLegacyPage.done({
+            params: action.payload,
+            result: {
+                menu: null,
+                page: {
+                    name: '',
+                    params: {},
+                    content: []
                 }
-            }));
-        }
+            }
+        })));
     });
 
 export default renderLegacyPageEpic;

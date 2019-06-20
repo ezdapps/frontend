@@ -8,7 +8,7 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs';
 import { txExec } from '../actions';
 import uuid from 'uuid';
-import Contract, { IContractParam } from 'lib/tx/contract';
+import Contract, { IContractParam, ITransactionBody } from 'lib/tx/contract';
 import defaultSchema from 'lib/tx/schema/defaultSchema';
 import fileObservable from 'modules/io/util/fileObservable';
 import { enqueueNotification } from 'modules/notifications/actions';
@@ -48,6 +48,10 @@ export const txExecEpic: Epic = (action$, store, { api }) => action$.ofAction(tx
                         const logParams: { [name: string]: IContractParam } = {};
 
                         proto.fields.forEach(field => {
+                            if (!params[field.name]) {
+                                return;
+                            }
+
                             const file = files.find(f => f.field === field.name);
                             txParams[field.name] = {
                                 type: field.type,
@@ -59,7 +63,7 @@ export const txExecEpic: Epic = (action$, store, { api }) => action$.ofAction(tx
                             };
                             logParams[field.name] = {
                                 type: field.type,
-                                value: file ? null : params[field.name]
+                                value: params[field.name].toString()
                             };
                         });
 
@@ -73,7 +77,10 @@ export const txExecEpic: Epic = (action$, store, { api }) => action$.ofAction(tx
                         }).sign(privateKey)).map(signature => ({
                             ...signature,
                             name: proto.name,
-                            params: logParams
+                            body: {
+                                ...signature.body,
+                                Params: logParams
+                            }
                         }));
                     })
 
@@ -84,11 +91,9 @@ export const txExecEpic: Epic = (action$, store, { api }) => action$.ofAction(tx
             , 1).flatMap(contracts => {
                 const request = {};
                 const jobs: {
-                    name: string,
-                    hash: string,
-                    params: {
-                        [name: string]: IContractParam;
-                    }
+                    name: string;
+                    hash: string;
+                    body: ITransactionBody;
                 }[] = [];
 
                 contracts.forEach(contract => {
@@ -96,7 +101,7 @@ export const txExecEpic: Epic = (action$, store, { api }) => action$.ofAction(tx
                     jobs.push({
                         name: contract.name,
                         hash: contract.hash,
-                        params: contract.params,
+                        body: contract.body
                     });
                 });
 
