@@ -10,7 +10,6 @@ import { FormattedMessage } from 'react-intl';
 
 export interface IPrintZoneProps {
     stylesheet: string;
-    onSave: (html: string) => void;
 }
 
 class PrintZone extends React.Component<IPrintZoneProps> {
