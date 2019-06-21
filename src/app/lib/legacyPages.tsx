@@ -31,7 +31,9 @@ const LEGACY_PAGES: { [page: string]: ILegacyPage<any, any> } = {
         menu: null,
         renderSubstitute: props => ({
             name: props.page,
-            params: props.txhashes
+            params: {
+                txhashes: props.txhashes
+            }
         }),
         render: props => <TxInfo {...props} />
     }
