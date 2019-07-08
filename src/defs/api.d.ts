@@ -42,7 +42,7 @@ declare module 'apla/api' {
         address: string;
         encKey: string;
         publicKey: string;
-        access: IKeyInfo[];
+        access: IEcosystemInfo[];
     }
 
     interface IRoleInfo {
@@ -50,10 +50,15 @@ declare module 'apla/api' {
         name: string;
     }
 
-    interface IKeyInfo {
+    interface IEcosystemInfo {
         ecosystem: string;
         name: string;
         roles: IRoleInfo[];
+    }
+
+    interface IKeyInfo {
+        account: string;
+        ecosystems: IEcosystemInfo[];
     }
 
     interface INotificationsRequest {

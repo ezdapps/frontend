@@ -28,6 +28,7 @@
     "auth.wallet.remove": "Удалить",
     "auth.wallet.share": "Копировать",
     "auth.wallet.share.long": "Копировать данные аккаунта",
+    "auth.wallet.unregistered": "Незарегистрированный аккаунт",
     "auth.authentication": "Аутентификация",
     "auth.create.success": "Аккаунт успешно создан",
     "auth.error.E_INVALID_KEY": "Указанный ключ содержит некорректные данные или повреждён",

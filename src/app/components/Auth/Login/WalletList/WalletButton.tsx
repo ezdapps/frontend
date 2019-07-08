@@ -7,7 +7,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { Button, Clearfix } from 'react-bootstrap';
-import { IAccount, IKeyInfo, IRoleInfo } from 'apla/api';
+import { IAccount, IRoleInfo, IEcosystemInfo } from 'apla/api';
 import { INotificationsMessage } from 'apla/socket';
 
 import Avatar from 'containers/Avatar';
@@ -19,7 +19,7 @@ export interface IWalletButtonProps {
     notifications: INotificationsMessage[];
     onCopy: () => void;
     onRemove: () => void;
-    onSelect: (params: { access: IKeyInfo, role: IRoleInfo }) => void;
+    onSelect: (params: { access: IEcosystemInfo, role: IRoleInfo }) => void;
     onRegister?: () => void;
 }
 
@@ -35,7 +35,14 @@ const WalletButton: React.SFC<IWalletButtonProps> = (props) => (
         </div>
         <div className="wallet-head">
             <h4 className="wallet-name">
-                {props.wallet.address}
+                {props.wallet.address ?
+                    (
+                        <span>{props.wallet.address}</span>
+                    ) :
+                    (
+                        <FormattedMessage id="auth.wallet.unregistered" defaultMessage="Unregistered account" />
+                    )
+                }
             </h4>
             {0 === props.wallet.access.length && props.onRegister && (
                 <div className="text-danger">

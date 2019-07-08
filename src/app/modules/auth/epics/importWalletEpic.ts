@@ -8,7 +8,7 @@ import { Epic } from 'modules';
 import { importWallet } from '../actions';
 import { Observable } from 'rxjs/Observable';
 import { navigate } from 'modules/engine/actions';
-import { address, addressString } from 'lib/crypto';
+import { publicToID } from 'lib/crypto';
 import keyring from 'lib/keyring';
 
 const importWalletEpic: Epic = (action$, store, { api }) => action$.ofAction(importWallet.started)
@@ -23,7 +23,7 @@ const importWalletEpic: Epic = (action$, store, { api }) => action$.ofAction(imp
         const privateKey = action.payload.backup;
         const publicKey = keyring.generatePublicKey(action.payload.backup);
         const encKey = keyring.encryptAES(privateKey, action.payload.password);
-        const keyID = address(publicKey);
+        const keyID = publicToID(publicKey);
 
         return Observable.of<Action>(
             importWallet.done({
@@ -31,8 +31,7 @@ const importWalletEpic: Epic = (action$, store, { api }) => action$.ofAction(imp
                 result: {
                     id: keyID,
                     encKey,
-                    publicKey,
-                    address: addressString(keyID)
+                    publicKey
                 }
             }),
             navigate('/')

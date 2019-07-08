@@ -209,7 +209,7 @@ class AplaAPI {
             roles: response.roles || []
         })
     });
-    public keyinfo = this.setEndpoint<{ id: string }, IKeyInfo[]>('get', 'keyinfo/{id}', {
+    public keyinfo = this.setEndpoint<{ id: string }, IKeyInfo>('get', 'keyinfo/{id}', {
         requestTransformer: request => null
     });
     public requestNotifications = this.setSecuredEndpoint<INotificationsRequest[], void>('post', 'updnotificator', {

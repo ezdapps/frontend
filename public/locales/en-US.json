@@ -28,6 +28,7 @@
     "auth.wallet.remove": "Remove",
     "auth.wallet.share": "Share",
     "auth.wallet.share.long": "Share account data",
+    "auth.wallet.unregistered": "Unregistered account",
     "auth.authentication": "Authentication",
     "auth.create.success": "Account has been successfully created",
     "auth.error.E_INVALID_KEY": "Provided key is corrupted or contains invalid data",

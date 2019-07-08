@@ -16,12 +16,12 @@ const loadSavedWalletEpic: Epic = (action$, store, { api }) => action$.ofAction(
         return Observable.from(client.keyinfo({
             id: action.payload.id
 
-        })).map(keys => loadWallet({
+        })).map(account => loadWallet({
             id: action.payload.id,
-            address: action.payload.address,
+            address: account.account,
             encKey: action.payload.encKey,
             publicKey: action.payload.publicKey,
-            access: keys.map(key => ({
+            access: account.ecosystems.map(key => ({
                 ...key,
                 roles: key.roles || []
             }))
