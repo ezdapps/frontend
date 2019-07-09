@@ -14,13 +14,17 @@ export interface ITxInfoProps {
 
 const findTx = (state: IRootState, hash: string) => {
     const keys = state.tx.transactions.keys();
-    for (var value = keys.next(); !value.done;) {
+
+    let value = keys.next();
+    while (!value.done) {
         const stack = state.tx.transactions.get(value.value).stack;
         const tx = stack.find(l => l.hash === hash);
 
         if (tx) {
             return tx;
         }
+
+        value = keys.next();
     }
 
     return undefined;
