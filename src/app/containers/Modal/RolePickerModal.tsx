@@ -12,14 +12,14 @@ import RolePickerModal from 'components/Modal/RolePickerModal';
 import { modalClose } from 'modules/modal/actions';
 
 export interface IRolePickerModalProps {
-    walletID: string;
+    account: string;
     ecosystem: string;
 }
 
 const mapStateToProps = (state: IRootState, props: IModalProps<IRolePickerModalProps, void>) => ({
     ...props,
     params: {
-        walletID: state.auth.wallet.wallet.id,
+        account: state.auth.wallet.wallet.address,
         ecosystem: props.params.ecosystem,
         ecosystemName: state.auth.wallets
             .find(w => w.id === state.auth.wallet.wallet.id).access.find(a => a.ecosystem === props.params.ecosystem).name,

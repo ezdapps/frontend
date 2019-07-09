@@ -70,7 +70,7 @@ const WalletButton: React.SFC<IWalletButtonProps> = (props) => (
                         <div className="pull-left">
                             <Avatar
                                 size={44}
-                                keyID={props.wallet.id}
+                                account={props.wallet.address}
                                 ecosystem={access.ecosystem}
                             />
                         </div>

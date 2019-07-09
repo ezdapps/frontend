@@ -156,7 +156,7 @@ class UserMenu extends React.Component<IUserMenuProps> {
                     <Avatar
                         className="user-avatar"
                         size={32}
-                        keyID={this.props.wallet.wallet.id}
+                        account={this.props.wallet.wallet.address}
                         ecosystem={this.props.wallet.access.ecosystem}
                     />
                 </StyledUserMenu>
