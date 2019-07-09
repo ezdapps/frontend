@@ -54,16 +54,15 @@ declare module 'apla/api' {
         ecosystem: string;
         name: string;
         roles: IRoleInfo[];
+        notifications: {
+            role_id: string;
+            count: string;
+        }[];
     }
 
     interface IKeyInfo {
         account: string;
         ecosystems: IEcosystemInfo[];
-    }
-
-    interface INotificationsRequest {
-        id: string;
-        ecosystem: string;
     }
 
     interface ISystemParamsRequest {

@@ -23,7 +23,7 @@ export interface IWalletButtonProps {
     onRegister?: () => void;
 }
 
-const getNotificationsCount = (notifications: INotificationsMessage[], role: number, ecosystem: string) => {
+const getNotificationsCount = (notifications: INotificationsMessage[], role: string, ecosystem: string) => {
     const value = notifications.find(l => l.role === role && l.ecosystem === ecosystem);
     return value ? value.count : 0;
 };
@@ -81,11 +81,11 @@ const WalletButton: React.SFC<IWalletButtonProps> = (props) => (
                                     <span>
                                         <FormattedMessage id="auth.login.as" defaultMessage="Login with role" />:
                                     </span>
-                                    <RoleButton className="wallet-btn" badge={getNotificationsCount(props.notifications, 0, access.ecosystem)} onClick={() => props.onSelect({ access, role: null })}>
+                                    <RoleButton className="wallet-btn" badge={getNotificationsCount(props.notifications, '0', access.ecosystem)} onClick={() => props.onSelect({ access, role: null })}>
                                         <FormattedMessage id="auth.role.guest" defaultMessage="Guest" />
                                     </RoleButton>
                                     {access.roles.map(role => (
-                                        <RoleButton key={role.id} className="wallet-btn" badge={getNotificationsCount(props.notifications, Number(role.id), access.ecosystem)} onClick={() => props.onSelect({ access, role })}>
+                                        <RoleButton key={role.id} className="wallet-btn" badge={getNotificationsCount(props.notifications, role.id, access.ecosystem)} onClick={() => props.onSelect({ access, role })}>
                                             {role.name}
                                         </RoleButton>
                                     ))}

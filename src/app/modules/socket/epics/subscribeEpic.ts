@@ -8,7 +8,7 @@ import { Observable } from 'rxjs/Observable';
 import { Epic } from 'modules';
 import { Observer } from 'rxjs';
 import { setBadgeCount } from 'modules/gui/actions';
-import { subscribe, setNotificationsCount, getNotificationsCount } from '../actions';
+import { subscribe, setNotificationsCount } from '../actions';
 
 const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.started)
     .flatMap(action => {
@@ -27,15 +27,15 @@ const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.start
         }
         else {
             return Observable.create((observer: Observer<Action>) => {
-                const sub = state.socket.socket.subscribe<{ role_id: number, ecosystem: number, count: number }[]>('client' + action.payload.id, message => {
+                const sub = state.socket.socket.subscribe<{ role_id: string, ecosystem: string, count: number }[]>('client' + action.payload.id, message => {
                     let count = 0;
 
                     message.data.forEach(n => {
                         const subState = store.getState();
                         if (subState.auth.isAuthenticated &&
                             (
-                                subState.auth.wallet.role && subState.auth.wallet.role.id === String(n.role_id) ||
-                                0 === n.role_id
+                                subState.auth.wallet.role && subState.auth.wallet.role.id === n.role_id ||
+                                '0' === n.role_id
                             ) &&
                             subState.auth.wallet &&
                             subState.auth.wallet.wallet.id === action.payload.id &&
@@ -46,26 +46,13 @@ const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.start
 
                         observer.next(setNotificationsCount({
                             id: action.payload.id,
-                            ecosystem: n.ecosystem.toString(),
+                            ecosystem: n.ecosystem,
                             role: n.role_id,
                             count: n.count
                         }));
                     });
 
                     observer.next(setBadgeCount(count));
-                });
-
-                sub.on('subscribe', () => {
-                    action.payload.access.forEach(access =>
-                        observer.next(
-                            getNotificationsCount({
-                                ids: [{
-                                    id: action.payload.id,
-                                    ecosystem: access.ecosystem
-                                }]
-                            })
-                        )
-                    );
                 });
 
                 observer.next(subscribe.done({

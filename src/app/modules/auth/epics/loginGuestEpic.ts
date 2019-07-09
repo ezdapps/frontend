@@ -49,13 +49,15 @@ const loginGuestEpic: Epic = (action$, store, { api, defaultKey, defaultPassword
                                     access: [{
                                         ecosystem: '1',
                                         name: '',
-                                        roles: []
+                                        roles: [],
+                                        notifications: []
                                     }]
                                 },
                                 access: {
                                     ecosystem: '1',
                                     name: '',
-                                    roles: []
+                                    roles: [],
+                                    notifications: []
                                 }
                             },
                             privateKey: defaultKey,

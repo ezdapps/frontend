@@ -36,7 +36,6 @@ const mapStateToProps = (state: IRootState) => ({
     pending: state.auth.isLoggingIn,
     wallets: state.storage.wallets.sort((a, b) => a.id > b.id ? 1 : -1).map(wallet => ({
         access: [],
-        address: '1488',
         encKey: wallet.encKey,
         publicKey: wallet.publicKey,
         id: wallet.id,
