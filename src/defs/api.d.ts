@@ -27,7 +27,7 @@ declare module 'apla/api' {
         timestamp: string;
         key_id: string;
         ecosystem_id: string;
-        address: string;
+        account: string;
         expiry: number;
         isnode: boolean;
         isowner: boolean;

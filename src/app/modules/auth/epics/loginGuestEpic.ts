@@ -43,7 +43,7 @@ const loginGuestEpic: Epic = (action$, store, { api, defaultKey, defaultPassword
                             wallet: {
                                 wallet: {
                                     id,
-                                    address: session.address,
+                                    address: session.account,
                                     encKey: keyring.encryptAES(defaultKey, defaultPassword),
                                     publicKey,
                                     access: [{
