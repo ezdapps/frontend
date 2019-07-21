@@ -15,6 +15,10 @@ class String implements IField<string> {
     get() {
         return this._value;
     }
+
+    toString() {
+        return this._value.toString();
+    }
 }
 
 export default String;

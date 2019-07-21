@@ -6,4 +6,5 @@
 export default interface IField<I = object, O = I> {
     set(value: I): void;
     get(): O;
+    toString(): string;
 }

@@ -57,7 +57,13 @@ const buttonInteractionEpic: Epic = (action$, store, { api }) => action$.ofActio
 
                     ).take(1).flatMap(result => {
                         if (isType(result, txExec.done)) {
-                            return Observable.of(action);
+                            return Observable.of({
+                                ...action,
+                                meta: {
+                                    ...action.meta,
+                                    txHashes: result.payload.result.map(l => l.hash)
+                                }
+                            });
                         }
                         else {
                             return Observable.empty<never>();
@@ -72,10 +78,15 @@ const buttonInteractionEpic: Epic = (action$, store, { api }) => action$.ofActio
         }).flatMap(action => {
             if (isType(action, buttonInteraction)) {
                 if (action.payload.page) {
+                    const params = action.payload.page.params;
+                    if ('txinfo' === action.payload.page.name) {
+                        params.txhashes = (action.meta.txHashes || []).join(',');
+                    }
+
                     if (action.payload.popup) {
                         return Observable.of(modalPage({
                             name: action.payload.page.name,
-                            params: action.payload.page.params,
+                            params,
                             title: action.payload.popup.title,
                             width: action.payload.popup.width
                         }));
@@ -83,7 +94,7 @@ const buttonInteractionEpic: Epic = (action$, store, { api }) => action$.ofActio
                     else {
                         return Observable.of(navigatePage.started({
                             name: action.payload.page.name,
-                            params: action.payload.page.params,
+                            params,
                             force: true
                         }));
                     }

@@ -17,6 +17,7 @@ export type State = {
     readonly preloading: boolean;
     readonly preloadingError: string;
     readonly stylesheet: string;
+    readonly printStylesheet: string;
     readonly navigationResizing: boolean;
     readonly notifications: TProtypoElement[];
 };
@@ -25,6 +26,7 @@ export const initialState: State = {
     preloading: false,
     preloadingError: null,
     stylesheet: null,
+    printStylesheet: null,
     navigationResizing: false,
     notifications: null
 };
