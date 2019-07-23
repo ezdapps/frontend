@@ -104,7 +104,7 @@ class PageContainer extends React.Component<IPageContainerProps & IPageContainer
 
                     return (
                         <div key={section.name || 'error'} className="flex-col flex-stretch" style={{ display: this.props.section === section.name ? null : 'none', overflowX: 'hidden', overflowY: 'auto' }}>
-                            {isLegacy ? legacyPage.render(section.page.params) : (
+                            {isLegacy ? legacyPage.render({ ...section.page.params, children: section.page && section.page.content }) : (
                                 <Page
                                     key={section.key}
                                     error={section.page && section.page.error}

@@ -26,6 +26,20 @@ export interface IContractParam {
     value: object;
 }
 
+export interface ITransactionBody {
+    Header: {
+        ID: number;
+        Time: number;
+        EcosystemID: number;
+        KeyID: Int64BE;
+        NetworkID: number;
+        PublicKey: ArrayBuffer;
+    };
+    Params: {
+        [key: string]: object;
+    };
+}
+
 export default class Contract {
     private _context: IContractContext;
     private _keyID: Int64BE;
@@ -53,17 +67,19 @@ export default class Contract {
         this._keyID = new Int64BE(publicToID(publicKey));
 
         const data = this.serialize();
-        const txHash = await Sha256(data);
+        const txHash = await Sha256(data.buffer);
         const resultHash = await Sha256(txHash);
         const hexHash = await convert.toHex(resultHash);
         const signature = convert.toArrayBuffer(sign(hexHash, privateKey));
 
         return {
             hash: hexHash,
+            header: this._context.schema.header,
+            body: data.body,
             data: concatBuffer(
                 this._context.schema.header,
                 concatBuffer(
-                    encodeLengthPlusData(data),
+                    encodeLengthPlusData(data.buffer),
                     encodeLengthPlusData(signature)
                 )
             )
@@ -81,23 +97,23 @@ export default class Contract {
             params[name] = this._fields[name].get();
         });
 
-        const txBuffer = msgpack.encode(
-            {
-                Header: {
-                    ID: this._context.id,
-                    Time: this._time,
-                    EcosystemID: this._context.ecosystemID,
-                    KeyID: this._keyID,
-                    NetworkID: this._context.networkID,
-                    PublicKey: this._publicKey
-                },
-                Params: params
+        const body: ITransactionBody = {
+            Header: {
+                ID: this._context.id,
+                Time: this._time,
+                EcosystemID: this._context.ecosystemID,
+                KeyID: this._keyID,
+                NetworkID: this._context.networkID,
+                PublicKey: this._publicKey
             },
-            {
-                codec
-            }
-        );
+            Params: params
+        };
 
-        return txBuffer;
+        const txBuffer = msgpack.encode(body, { codec });
+
+        return {
+            buffer: txBuffer,
+            body
+        };
     }
 }

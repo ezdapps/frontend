@@ -31,6 +31,10 @@ class File implements IField<IFileStruct, IFileData> {
             Body: this._value.value
         } : null;
     }
+
+    toString() {
+        return '[BLOB]';
+    }
 }
 
 export default File;

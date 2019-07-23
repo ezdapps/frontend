@@ -24,6 +24,10 @@ class Float implements IField<string | number, number> {
     get() {
         return this._value;
     }
+
+    toString() {
+        return this._value.toString();
+    }
 }
 
 export default Float;

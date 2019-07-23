@@ -10,7 +10,7 @@ const actionCreator = actionCreatorFactory('content');
 
 // Navigation
 export const setResizing = actionCreator<boolean>('SET_RESIZING');
-export const ecosystemInit = actionCreator.async<{ section?: string }, { stylesheet: string }, string>('ECOSYSTEM_INIT');
+export const ecosystemInit = actionCreator.async<{ section?: string }, { stylesheet: string, printStylesheet: string }, string>('ECOSYSTEM_INIT');
 
 // Interaction
 export const buttonInteraction = actionCreator<IButtonInteraction>('BUTTON_INTERACTION');

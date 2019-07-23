@@ -10,6 +10,7 @@ import { Reducer } from 'modules';
 const ecosystemInitDoneHandler: Reducer<typeof ecosystemInit.done, State> = (state, payload) => ({
     ...state,
     stylesheet: payload.result.stylesheet,
+    printStylesheet: payload.result.printStylesheet
 });
 
 export default ecosystemInitDoneHandler;
