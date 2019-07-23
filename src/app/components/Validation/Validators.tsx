@@ -35,6 +35,10 @@ export const required = new Validator({
             return false;
         }
 
+        if (value && File === value.constructor) {
+            return true;
+        }
+
         switch (type) {
             case 'string': return value && !!value.length;
             case 'undefined': return false;
