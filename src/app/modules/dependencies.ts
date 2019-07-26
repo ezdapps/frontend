@@ -8,6 +8,7 @@ import CodeGenerator, { setIds, convertToTreeData, findTagById, copyObject, idGe
 import Properties from 'lib/constructor/properties';
 import getConstructorTemplate from 'lib/constructor/templates';
 import resolveTagHandler from 'lib/constructor/tags';
+import * as routerService from 'services/router';
 import 'whatwg-fetch';
 
 export interface IStoreDependencies {
@@ -15,6 +16,7 @@ export interface IStoreDependencies {
     defaultKey: string;
     defaultPassword: string;
     constructorModule: IConstructorDependenies;
+    routerService: typeof routerService;
 }
 
 export interface IAPIDependency {
@@ -54,7 +56,8 @@ const storeDependencies: IStoreDependencies = {
         resolveTagHandler,
         CodeGenerator,
         Properties
-    }
+    },
+    routerService
 };
 
 export default storeDependencies;

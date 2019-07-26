@@ -13,6 +13,7 @@ import { generatePageTemplate } from 'modules/editor/actions';
 import { IChangePageCall, TConstructorData, IAddTagCall, IOperateTagCall, IMoveTreeTag, ISetTagCanDropPositionCall } from 'apla/editor';
 
 export interface IConstructorTabbedContainerProps {
+    section: string;
     pageID: string;
     pageName: string;
     menus?: { id: string, name: string, conditions: string, value: string }[];
@@ -153,6 +154,7 @@ class ConstructorTabbedContainer extends React.Component<IConstructorTabbedConta
 
         return (
             <Constructor
+                section={this.props.section}
                 pageTree={jsonData}
                 treeData={treeData}
                 changePage={this.changePage.bind(this)}

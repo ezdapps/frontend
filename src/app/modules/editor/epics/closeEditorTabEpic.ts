@@ -17,7 +17,7 @@ const closeEditorTabEpic: Epic<Action, IRootState> =
 
             return updateSection({
                 ...section,
-                visible: 0 < state.editor.tabs.length
+                // visible: 0 < state.editor.tabs.length
             });
         });
 

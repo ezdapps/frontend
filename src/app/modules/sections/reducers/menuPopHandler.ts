@@ -7,8 +7,8 @@ import { State } from '../reducer';
 import { menuPop } from '../actions';
 import { Reducer } from 'modules';
 
-const menuPopHandler: Reducer<typeof menuPop, State> = (state, payload) => {
-    if (1 >= state.sections[state.section].menus.length) {
+const menuPopHandler: Reducer<typeof menuPop, State> = (state): State => {
+    /*if (1 >= state.sections[state.section].menus.length) {
         return state;
     }
     else {
@@ -22,7 +22,8 @@ const menuPopHandler: Reducer<typeof menuPop, State> = (state, payload) => {
                 }
             }
         };
-    }
+    }*/
+    return state;
 };
 
 export default menuPopHandler;

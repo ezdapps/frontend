@@ -13,6 +13,7 @@ import SystemButton from './SystemButton';
 export interface INotificationsMenuProps {
     offline: boolean;
     count: number;
+    mainSection: string;
     notificationsBody: TProtypoElement[];
 }
 
@@ -40,7 +41,7 @@ const NotificationsMenu: React.SFC<INotificationsMenuProps> = props => (
                                 <FormattedMessage id="general.error.socket.desc" defaultMessage="Failed to establish connection to the WebSocket server. Check your configuration" />
                             </p>
                         ) : (
-                            <Protypo context="menu" content={props.notificationsBody} />
+                            <Protypo section={props.mainSection} context="menu" content={props.notificationsBody} />
                         )
                     }
                 </div>

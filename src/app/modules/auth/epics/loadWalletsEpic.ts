@@ -21,20 +21,34 @@ const loadWalletsEpic: Epic = (action$, store, { api }) => action$.ofAction(load
                 address: keyInfo.account,
                 encKey: wallet.encKey,
                 publicKey: wallet.publicKey,
-                access: keyInfo.ecosystems.map(key => ({
-                    ...key,
-                    roles: key.roles || []
-                }))
+                // access: keyInfo.ecosystems.map(key => ({
+                //     ...key,
+                //     roles: key.roles || []
+                // }))
+                access: (keyInfo as any).length ? [
+                    {
+                        ecosystem: '1',
+                        name: 'FAKE',
+                        roles: [
+                            { id: '3', name: 'FAKE' }
+                        ],
+                        notifications: []
+                    }
+                ] : []
             }))
 
         ).toArray().map(wallets => loadWallets.done({
             params: action.payload,
             result: wallets
 
-        })).catch(e => Observable.of(loadWallets.failed({
-            params: action.payload,
-            error: e
-        })));
+        })).catch(e => {
+            // tslint:disable-next-line: no-console
+            console.error(e);
+            return Observable.of(loadWallets.failed({
+                params: action.payload,
+                error: e
+            }));
+        });
     });
 
 export default loadWalletsEpic;

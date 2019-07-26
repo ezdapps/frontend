@@ -21,6 +21,7 @@ import NotificationsProvider from 'containers/Notifications/NotificationsProvide
 import SecurityWarning from 'containers/SecurityWarning';
 
 interface IAppProps {
+    isSessionAcquired: boolean;
     isAuthenticated: boolean;
     isLoaded: boolean;
     isCollapsed: boolean;
@@ -76,7 +77,10 @@ class App extends React.Component<IAppProps> {
                     {!this.props.isAuthenticated && (
                         <Route path="/" component={Auth} />
                     )}
-                    <Route path="/" component={Main} />
+                    {!this.props.isSessionAcquired && (
+                        <Route path="/" component={Splash} />
+                    )}
+                    <Route path="/:section?/:page?" render={route => <Main section={route.match.params.section} page={route.match.params.page} />} />
                 </AnimatedSwitch>
             </ThemedApp>
         );

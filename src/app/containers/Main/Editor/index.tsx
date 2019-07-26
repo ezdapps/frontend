@@ -22,6 +22,7 @@ interface IEditorContainerProps {
 }
 
 interface IEditorContainerState {
+    mainSection: string;
     tabIndex: number;
     tabs: TEditorTab[];
     modalResult: IModalResult;
@@ -106,6 +107,7 @@ class EditorContainer extends React.Component<IEditorContainerProps & InjectedIn
     render() {
         return (
             <Editor
+                mainSection={this.props.mainSection}
                 tabIndex={this.props.tabIndex}
                 tabs={this.props.tabs}
                 onTabChange={this.props.onTabChange}
@@ -119,6 +121,7 @@ class EditorContainer extends React.Component<IEditorContainerProps & InjectedIn
 }
 
 const mapStateToProps = (state: IRootState) => ({
+    mainSection: state.sections.mainSection,
     tabIndex: state.editor.tabIndex,
     tabs: state.editor.tabs,
     modalResult: state.modal.result

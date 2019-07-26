@@ -3,32 +3,37 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from 'react';
+import React from 'react';
 import Protypo from 'containers/Widgets/Protypo';
-import { TPage } from 'apla/content';
+import { IPage } from 'apla/content';
 
-import DocumentTitle from 'components/DocumentTitle';
 import Error from './Error';
 import Timeout from './Timeout';
 import NotFound from './NotFound';
 
-export interface IPageProps extends TPage {
-
+export interface IPageProps {
+    section: string;
+    value: IPage;
 }
 
 const Page: React.SFC<IPageProps> = (props) => {
-    if (props.error) {
-        switch (props.error) {
+    if (props.value.error) {
+        switch (props.value.error) {
             case 'E_HEAVYPAGE': return (<Timeout />);
             case 'E_NOTFOUND': return (<NotFound />);
-            default: return (<Error error={props.error} />);
+            default: return (<Error error={props.value.error} />);
         }
     }
     else {
         return (
-            <DocumentTitle title={props.name}>
-                <Protypo context="page" {...props} />
-            </DocumentTitle>
+            <div className="fullscreen" style={{ backgroundColor: '#fff' }}>
+                <Protypo
+                    context="page"
+                    section={props.section}
+                    page={props.value.name}
+                    content={props.value.content}
+                />
+            </div>
         );
     }
 };

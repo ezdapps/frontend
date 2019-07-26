@@ -3,15 +3,16 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import { Action } from 'redux';
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { buttonInteraction } from 'modules/content/actions';
 import { isType } from 'typescript-fsa';
 import { txCall, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose, modalPage } from 'modules/modal/actions';
-import { navigatePage } from 'modules/sections/actions';
+import { push } from 'connected-react-router';
 
-const buttonInteractionEpic: Epic = (action$, store, { api }) => action$.ofAction(buttonInteraction)
+const buttonInteractionEpic: Epic = (action$, store, { routerService }) => action$.ofAction(buttonInteraction)
     // Show confirmation window if there is any
     .flatMap(rootAction => {
         return Observable.if(
@@ -81,11 +82,10 @@ const buttonInteractionEpic: Epic = (action$, store, { api }) => action$.ofActio
                         }));
                     }
                     else {
-                        return Observable.of(navigatePage.started({
-                            name: action.payload.page.name,
-                            params: action.payload.page.params,
-                            force: true
-                        }));
+                        const redirectUrl = routerService.generateRoute(`/${action.payload.page.section}/${action.payload.page.name}`, action.payload.page.params);
+                        return Observable.of<Action>(
+                            push(redirectUrl, { from: action.payload.from })
+                        );
                     }
                 }
                 else {

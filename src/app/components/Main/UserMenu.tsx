@@ -10,7 +10,7 @@ import { IAccountContext } from 'apla/auth';
 import { IEcosystemInfo } from 'apla/api';
 
 import { CloseDropdownButton } from 'components/DropdownButton';
-import PageLink from 'containers/Routing/PageLink';
+import PageLink from 'components/Routing/PageLink';
 import SystemButton from './SystemButton';
 import Avatar from 'containers/Avatar';
 

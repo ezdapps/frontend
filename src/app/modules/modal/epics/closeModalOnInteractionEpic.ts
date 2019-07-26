@@ -7,10 +7,10 @@ import { Epic } from 'modules';
 import { isType } from 'typescript-fsa';
 import { Observable } from 'rxjs/Observable';
 import { modalClose } from '../actions';
-import { navigatePage } from 'modules/sections/actions';
 import { logout } from 'modules/auth/actions';
+import { locationChange } from 'modules/router/actions';
 
-const closeModalOnInteractionEpic: Epic = (action$, store, { api }) => action$.filter(action => isType(action, navigatePage.started) || isType(action, logout.started))
+const closeModalOnInteractionEpic: Epic = (action$, store) => action$.filter(action => isType(action, locationChange) || isType(action, logout.started))
     .flatMap(() => {
         const state = store.getState();
 

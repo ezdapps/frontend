@@ -9,6 +9,7 @@ import { ICreateWalletCall, IImportWalletCall } from 'apla/auth';
 import { IAccount } from 'apla/api';
 
 const actionCreator = actionCreatorFactory('auth');
+export const acquireSession = actionCreator.async<ISession, boolean>('ACQUIRE_SESSION');
 export const login = actionCreator.async<ILoginCall, { privateKey: string, publicKey: string, session: ISession }, string>('LOGIN');
 export const loginGuest = actionCreator.async<void, { privateKey: string, publicKey: string, wallet: IAccountContext, session: ISession }, string>('LOGIN_GUEST');
 export const logout = actionCreator.async('LOGOUT');

@@ -12,6 +12,7 @@ import { TProtypoElement } from 'apla/protypo';
 export interface IPageModalProps {
     name: string;
     title: string;
+    section: string;
     width?: number;
     tree: TProtypoElement[];
 }
@@ -28,7 +29,11 @@ class PageModal extends Modal<IPageModalProps, boolean> {
                     {this.props.params.title}
                 </Modal.Header>
                 <Modal.Body>
-                    <Protypo context="page" content={this.props.params.tree} />
+                    <Protypo
+                        section={this.props.params.section}
+                        context="page"
+                        content={this.props.params.tree}
+                    />
                 </Modal.Body>
             </div>
         );

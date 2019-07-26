@@ -22,8 +22,10 @@ import reloadWalletsEpic from './epics/reloadWalletsEpic';
 import loadSavedWalletEpic from './epics/loadSavedWalletEpic';
 import switchWalletEpic from './epics/switchWalletEpic';
 import loginGuestEpic from './epics/loginGuestEpic';
+import acquireSessionEpic from './epics/acquireSessionEpic';
 
 export default combineEpics(
+    acquireSessionEpic,
     authorizeEpic,
     createWalletEpic,
     generateSeedEpic,

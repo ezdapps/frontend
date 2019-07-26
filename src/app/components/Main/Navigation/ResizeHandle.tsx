@@ -14,7 +14,6 @@ interface IResizeHandleProps {
     disabled: boolean;
     setResizing: (resizing: boolean) => void;
     navigationResize: (width: number) => void;
-    navigationToggle: () => void;
 }
 
 export const styles = {
@@ -62,8 +61,6 @@ const StyledResizeHandle = themed.button`
 class ResizeHandle extends React.Component<IResizeHandleProps> {
     private _mouseUpListenerBind: (e: MouseEvent) => void;
     private _mouseMoveListenerBind: (e: MouseEvent) => void;
-    private _clickThresholdValue: number;
-    private _clickThreshold = 1;
 
     componentDidMount() {
         this._mouseMoveListenerBind = this.onMouseMove.bind(this);
@@ -79,27 +76,18 @@ class ResizeHandle extends React.Component<IResizeHandleProps> {
     onMouseMove(e: MouseEvent) {
         if (!this.props.disabled && this.props.resizing && e.clientX !== this.props.width) {
             this.props.navigationResize(e.clientX);
-            this._clickThresholdValue++;
         }
     }
 
     onMouseDown(e: React.MouseEvent<HTMLButtonElement>) {
         if (!this.props.disabled && !this.props.resizing && 0 === e.button) {
             this.props.setResizing(true);
-            this._clickThresholdValue = 0;
         }
     }
 
     onMouseUp(e: MouseEvent) {
         if (!this.props.disabled && this.props.resizing && 0 === e.button) {
             this.props.setResizing(false);
-        }
-    }
-
-    onClick() {
-        // TODO: Temporarily disabled
-        if (!this.props.disabled && this._clickThresholdValue < this._clickThreshold) {
-            // this.props.navigationToggle();
         }
     }
 
@@ -110,7 +98,7 @@ class ResizeHandle extends React.Component<IResizeHandleProps> {
         });
 
         return (
-            <StyledResizeHandle onClick={this.onClick.bind(this)} onMouseDown={e => this.onMouseDown(e)} className={classes}>
+            <StyledResizeHandle onMouseDown={e => this.onMouseDown(e)} className={classes}>
                 <div />
             </StyledResizeHandle>
         );

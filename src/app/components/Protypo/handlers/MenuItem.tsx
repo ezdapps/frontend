@@ -9,7 +9,7 @@ import propTypes from 'prop-types';
 
 import themed from 'components/Theme/themed';
 import Protypo, { IParamsSpec } from '../Protypo';
-import PageLink from 'containers/Routing/PageLink';
+import PageLink from 'components/Routing/PageLink';
 
 export interface IMenuItemProps {
     'title'?: string;
@@ -68,6 +68,7 @@ export const StyledMenuItem = themed.div`
 `;
 
 interface IMenuItemContext {
+    section: string;
     protypo: Protypo;
 }
 
@@ -79,7 +80,16 @@ const MenuItem: React.SFC<IMenuItemProps> = (props, context: IMenuItemContext) =
 
     return (
         <StyledMenuItem className={classes}>
-            <PageLink page={props.page} params={context.protypo.resolveParams(props.params)}>
+            <PageLink
+                page={props.page || ''}
+                section={context.section}
+                params={props.params ? context.protypo.resolveParams(props.params) : {}}
+                from={context.protypo.props.menu ? {
+                    type: 'MENU',
+                    title: props.title,
+                    name: context.protypo.props.menu
+                } : undefined}
+            >
                 <span className="link-active-decorator" />
                 <span className="link-body">
                     {props.icon && (<em className={`icon ${props.icon}`} />)}
@@ -91,6 +101,7 @@ const MenuItem: React.SFC<IMenuItemProps> = (props, context: IMenuItemContext) =
 };
 
 MenuItem.contextTypes = {
+    section: propTypes.string.isRequired,
     protypo: propTypes.object.isRequired,
     navigatePage: propTypes.func.isRequired
 };

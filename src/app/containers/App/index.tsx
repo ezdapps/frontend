@@ -20,6 +20,7 @@ export interface IAppContainerProps {
 
 interface IAppContainerState {
     locale: string;
+    isSessionAcquired: boolean;
     isAuthenticated: boolean;
     isLoaded: boolean;
     isCollapsed: boolean;
@@ -37,6 +38,7 @@ const AppContainer: React.SFC<IAppContainerProps & IAppContainerState & IAppCont
         <ThemeProvider theme={baseTheme}>
             <App
                 isAuthenticated={props.isAuthenticated}
+                isSessionAcquired={props.isSessionAcquired}
                 isLoaded={props.isLoaded}
                 isCollapsed={props.isCollapsed}
                 isFatal={props.isFatal}
@@ -50,6 +52,7 @@ const AppContainer: React.SFC<IAppContainerProps & IAppContainerState & IAppCont
 const mapStateToProps = (state: IRootState) => ({
     locale: state.engine.locale || 'en-US',
     localeMessages: state.engine.localeMessages,
+    isSessionAcquired: state.auth.isAcquired,
     isAuthenticated: state.auth.isAuthenticated,
     isCollapsed: state.engine.isCollapsed,
     isLoaded: state.engine.isLoaded,

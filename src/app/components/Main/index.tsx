@@ -4,24 +4,22 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import _ from 'lodash';
 import { FormattedMessage } from 'react-intl';
 import { INetworkEndpoint } from 'apla/auth';
-import { TSection } from 'apla/content';
+import { ISection } from 'apla/content';
 import { history } from 'store';
 import platform from 'lib/platform';
 
 import themed from 'components/Theme/themed';
 import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
-import Navigation from 'containers/Main/Navigation';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
 import Toolbar from './Toolbar';
-import SectionButton from 'components/Main/SectionButton';
 import ToolButton from 'components/Main/Toolbar/ToolButton';
 import EditorToolbar from 'containers/Main/Toolbar/EditorToolbar';
 import ToolIndicator from 'components/Main/Toolbar/ToolIndicator';
 import LoadingBar from './LoadingBar';
+import Selector from 'containers/Main/Sections/Selector';
 
 const StyledWrapper = themed.div`
     background-color: #f6f8fa;
@@ -30,18 +28,14 @@ const StyledWrapper = themed.div`
 export interface IMainProps {
     network: INetworkEndpoint;
     isAuthorized: boolean;
-    pending: boolean;
+    // pending: boolean;
     section: string;
-    sections: { [name: string]: TSection };
+    page: string;
+    sections: { [name: string]: ISection };
     stylesheet: string;
-    navigationSize: number;
-    navigationVisible: boolean;
+    // navigationVisible: boolean;
     transactionsCount: number;
-    onRefresh: () => void;
-    onNavigateHome: () => void;
-    onNavigationToggle: () => void;
-    onSwitchSection: (section: string) => void;
-    onCloseSection: (section: string) => void;
+    // onNavigationToggle: () => void;
 }
 
 const StyledControls = themed.div`
@@ -92,6 +86,7 @@ const StyledMenu = themed.ul`
 `;
 
 const StyledContent = themed.section`
+    margin-left: 0 !important;
     && { background: ${props => props.theme.contentBackground}; }
     color: ${props => props.theme.contentForeground};
     margin-top: ${props => props.theme.headerHeight + props.theme.menuHeight + props.theme.toolbarHeight}px !important;
@@ -121,22 +116,11 @@ class Main extends React.Component<IMainProps> {
                     </StyledTitlebar>
                     <StyledMenu className="drag">
                         <li>
-                            <SectionButton onClick={this.props.onNavigationToggle}>
+                            {/* <SectionButton onClick={this.props.onNavigationToggle}>
                                 <em className="icon-menu" />
-                            </SectionButton>
+                            </SectionButton> */}
                         </li>
-                        {_.map(this.props.sections, l => l.visible ? (
-                            <li key={l.name}>
-                                <SectionButton
-                                    active={this.props.section === l.name}
-                                    closeable={l.closeable}
-                                    onClick={this.props.onSwitchSection.bind(this, l.name)}
-                                    onClose={this.props.onCloseSection.bind(this, l.name)}
-                                >
-                                    {l.title}
-                                </SectionButton>
-                            </li>
-                        ) : null)}
+                        <Selector section={this.props.section} />
                         <li className="user-menu">
                             <NotificationsMenu />
                             {/*<TransactionsMenu />*/}
@@ -163,20 +147,19 @@ class Main extends React.Component<IMainProps> {
                                     <ToolButton icon="icon-arrow-right" onClick={this.onForward}>
                                         <FormattedMessage id="navigation.forward" defaultMessage="Forward" />
                                     </ToolButton>
-                                    <ToolButton icon="icon-home" onClick={this.props.onNavigateHome}>
+                                    {/* <ToolButton icon="icon-home" onClick={this.props.onNavigateHome}>
                                         <FormattedMessage id="navigation.home" defaultMessage="Home" />
                                     </ToolButton>
                                     <ToolButton icon="icon-refresh" onClick={this.props.onRefresh}>
                                         <FormattedMessage id="navigation.refresh" defaultMessage="Refresh" />
-                                    </ToolButton>
+                                    </ToolButton> */}
                                 </div>
                             )
                         }
                     </Toolbar>
                     <LoadingBar />
                 </StyledControls >
-                <Navigation />
-                <StyledContent style={{ marginLeft: this.props.navigationVisible ? this.props.navigationSize : 0 }}>
+                <StyledContent>
                     {this.props.children}
                 </StyledContent>
             </StyledWrapper >

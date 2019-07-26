@@ -16,6 +16,7 @@ export interface IToolButtonProps {
     icon?: string;
     // Redirect if all previous actions succeeded
     page?: string;
+    section: string;
     pageparams?: {
         [name: string]: string;
     };
@@ -62,6 +63,7 @@ class ToolButtonContainer extends React.Component<IToolButtonProps & IToolButton
             contracts: [],
             page: this.props.page ? {
                 name: this.props.page,
+                section: this.props.section,
                 params: pageParams
             } : null
         });

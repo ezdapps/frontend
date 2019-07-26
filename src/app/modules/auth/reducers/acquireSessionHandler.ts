@@ -4,12 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { State } from '../reducer';
-import { reset } from '../actions';
+import { acquireSession } from '../actions';
 import { Reducer } from 'modules';
 
-const resetHandler: Reducer<typeof reset, State> = (state, payload) => ({
+const acquireSessionHandler: Reducer<typeof acquireSession.started, State> = (state): State => ({
     ...state,
-    inited: false
+    isAcquired: false
 });
 
-export default resetHandler;
+export default acquireSessionHandler;

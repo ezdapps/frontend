@@ -4,13 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { State } from '../reducer';
-import { ecosystemInit } from '../actions';
+import { sectionsInit } from '../actions';
 import { Reducer } from 'modules';
 
-const ecosystemInitFailedHandler: Reducer<typeof ecosystemInit.failed, State> = (state, payload) => ({
+const sectionsInitHandler: Reducer<typeof sectionsInit, State> = (state, payload): State => ({
     ...state,
-    preloading: false,
-    preloadingError: payload.error
+    mainSection: payload.mainSection,
+    sections: payload.sections
 });
 
-export default ecosystemInitFailedHandler;
+export default sectionsInitHandler;

@@ -5,32 +5,47 @@
 
 declare module 'apla/content' {
     import { TProtypoElement } from 'apla/protypo';
+    import { Location } from 'history';
 
-    type TMenu = {
+    interface IMenu {
         readonly name: string;
         readonly content: TProtypoElement[];
-    };
+    }
 
-    type TPage = {
+    type TBreadcrumbType =
+        'MENU' | 'PAGE';
+
+    type TPageParams = {
+        [key: string]: string;
+    }
+
+    interface IBreadcrumb {
+        readonly caller: string;
+        readonly type: TBreadcrumbType;
+        readonly section: string;
+        readonly title: string;
+        readonly page: string;
+        readonly params: TPageParams;
+    }
+
+    type TPageStatus =
+        'PENDING' | 'LOADED' | 'ERROR';
+
+    interface IPage {
         readonly name: string;
-        readonly legacy?: boolean;
+        readonly status: TPageStatus;
         readonly content: TProtypoElement[];
-        readonly params: { [key: string]: any };
+        readonly params: TPageParams;
         readonly error?: string;
-    };
+        readonly location: Location;
+    }
 
-    type TSection = {
-        readonly key: string;
-        readonly visible: boolean;
-        readonly closeable?: boolean;
-        readonly menuDisabled?: boolean;
-        readonly menuVisible: boolean;
-        readonly pending: boolean;
+    interface ISection {
         readonly name: string;
         readonly title: string;
-        readonly force: boolean;
         readonly defaultPage: string;
-        readonly menus: TMenu[];
-        readonly page: TPage;
+        readonly breadcrumbs: IBreadcrumb[];
+        readonly menus: IMenu[];
+        readonly page?: IPage;
     }
 }

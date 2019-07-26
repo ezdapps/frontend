@@ -7,19 +7,20 @@ import { State } from '../reducer';
 import { renderPage } from '../actions';
 import { Reducer } from 'modules';
 
-const renderPageFailedHandler: Reducer<typeof renderPage.failed, State> = (state, payload) => ({
+const renderPageFailedHandler: Reducer<typeof renderPage.failed, State> = (state, payload): State => ({
     ...state,
     sections: {
         ...state.sections,
         [payload.params.section]: {
             ...state.sections[payload.params.section],
             page: {
-                params: payload.params.params,
                 name: payload.params.name,
-                content: null,
-                error: payload.error
-            },
-            pending: false
+                status: 'ERROR',
+                content: [],
+                params: payload.params.params,
+                error: payload.error,
+                location: payload.params.location,
+            }
         }
     }
 });

@@ -8,7 +8,6 @@ import { Epic } from 'redux-observable';
 import { Action } from 'redux';
 import { txExec } from '../actions';
 import { modalShow } from '../../modal/actions';
-import { navigatePage } from '../../sections/actions';
 
 export const txExecFailedEpic: Epic<Action, IRootState> =
     (action$, store) => action$.ofAction(txExec.failed)
@@ -17,11 +16,11 @@ export const txExecFailedEpic: Epic<Action, IRootState> =
             if (action.payload.error.id && action.payload.params.errorRedirects) {
                 const errorRedirect = action.payload.params.errorRedirects[action.payload.error.id];
                 if (errorRedirect) {
-                    return navigatePage.started({
-                        name: errorRedirect.pagename,
-                        params: errorRedirect.pageparams,
-                        force: true
-                    });
+                    // return navigatePage.started({
+                    //     name: errorRedirect.pagename,
+                    //     params: errorRedirect.pageparams,
+                    //     force: true
+                    // });
                 }
             }
             return modalShow({

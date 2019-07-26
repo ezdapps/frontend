@@ -8,10 +8,11 @@ import { TEditorTab } from 'apla/editor';
 
 import CodeEditor from 'components/Editor';
 import EditorTabs from './EditorTabs';
-import Page from 'components/Main/Page';
 import ConstructorTabbed from 'containers/Main/Editor/ConstructorTabbed';
+import Page from '../Page';
 
 export interface IEditorProps {
+    mainSection: string;
     tabIndex: number;
     tabs: TEditorTab[];
     onTabChange: (index: number) => void;
@@ -26,16 +27,27 @@ class Editor extends React.Component<IEditorProps> {
         switch (tab.tool) {
             case 'constructor':
                 return (
-                    <ConstructorTabbed pageID={tab.id} pageName={tab.name} />
+                    <ConstructorTabbed section={this.props.mainSection} pageID={tab.id} pageName={tab.name} />
                 );
 
             case 'preview':
                 return (
                     <div className="flex-col flex-stretch scroll">
                         <Page
-                            name="preview"
-                            content={tab.preview}
-                            params={{}}
+                            section={this.props.mainSection}
+                            value={{
+                                name: 'preview',
+                                status: 'LOADED',
+                                content: tab.preview,
+                                params: {},
+                                location: {
+                                    key: 'preview',
+                                    pathname: 'preview',
+                                    search: '',
+                                    state: '',
+                                    hash: ''
+                                }
+                            }}
                         />
                     </div>
                 );

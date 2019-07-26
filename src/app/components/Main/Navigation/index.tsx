@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
-import { TMenu } from 'apla/content';
+import { IMenu } from 'apla/content';
 import platform from 'lib/platform';
 
 import StackGroup from 'components/Animation/StackGroup';
@@ -82,7 +82,7 @@ const StyledMenu = themed.div`
     bottom: 0px;
     left: 0;
     right: 0;
-    top: ${props => props.theme.headerHeight + props.theme.menuHeight + props.theme.toolbarHeight}px;
+    top: 0;
 `;
 
 const StyledMenuContent = themed.div`
@@ -105,18 +105,16 @@ const StyledMenuContent = themed.div`
 `;
 
 export interface INavigationProps {
-    preloading: boolean;
-    preloadingError: string;
-    visible: boolean;
     width: number;
-    menus: TMenu[];
-    menuPop: () => void;
+    menus: IMenu[];
+    section: string;
+    menuPop?: () => void;
 }
 
 class Navigation extends React.Component<INavigationProps & InjectedIntlProps> {
     render() {
         return (
-            <StyledNavigation className={this.props.visible ? '' : 'navigation-collapsed'} style={{ width: this.props.visible ? this.props.width : 0 }}>
+            <StyledNavigation className={true ? '' : 'navigation-collapsed'} style={{ width: true ? this.props.width : 0 }}>
                 <nav>
                     <StyledMenu>
                         <StackGroup
@@ -135,6 +133,8 @@ class Navigation extends React.Component<INavigationProps & InjectedIntlProps> {
                                         )}
                                         <Protypo
                                             context="menu"
+                                            section={this.props.section}
+                                            menu={menu.name}
                                             content={menu.content}
                                         />
                                     </StyledMenuContent>

@@ -3,13 +3,15 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from 'react';
-import * as classNames from 'classnames';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 import imgClose from 'images/close.svg';
+import { generateRoute } from 'services/router';
 
 import themed from 'components/Theme/themed';
 
-const StyledSectionButton = themed.button`
+const StyledSectionButton = themed(Link)`
     position: relative;
     border-radius: 0;
     padding: 0 20px;
@@ -21,6 +23,8 @@ const StyledSectionButton = themed.button`
     font-size: 16px;
     font-weight: 300;
     transition: background .15s;
+    display: inline-block;
+    text-decoration: none;
 
     &:hover {
         background: rgba(0,0,0,0.1);
@@ -50,9 +54,11 @@ const StyledSectionButton = themed.button`
 `;
 
 export interface ISectionButtonProps {
+    section: string;
+    page: string;
+    params: { [name: string]: string };
     active?: boolean;
     closeable?: boolean;
-    onClick?: () => void;
     onClose?: () => void;
 }
 
@@ -63,7 +69,10 @@ const SectionButton: React.SFC<ISectionButtonProps> = props => {
     } : null;
 
     return (
-        <StyledSectionButton onClick={props.onClick} className={classNames({ active: props.active, closeable: props.closeable })}>
+        <StyledSectionButton
+            className={classNames({ active: props.active, closeable: props.closeable })}
+            to={generateRoute(`/${props.section}/${props.page}`, props.params)}
+        >
             {props.children}
             {props.closeable && (
                 <span className="section-close" onClick={onClose}>

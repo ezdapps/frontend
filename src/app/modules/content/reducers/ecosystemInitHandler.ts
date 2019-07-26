@@ -7,10 +7,9 @@ import { State } from '../reducer';
 import { ecosystemInit } from '../actions';
 import { Reducer } from 'modules';
 
-const ecosystemInitHandler: Reducer<typeof ecosystemInit.started, State> = (state, payload) => ({
+const ecosystemInitDoneHandler: Reducer<typeof ecosystemInit, State> = (state, payload) => ({
     ...state,
-    preloading: true,
-    preloadingError: null
+    stylesheet: payload.stylesheet,
 });
 
-export default ecosystemInitHandler;
+export default ecosystemInitDoneHandler;

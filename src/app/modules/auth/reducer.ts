@@ -30,10 +30,13 @@ import loadWalletHandler from './reducers/loadWalletHandler';
 import loginGuestHandler from './reducers/loginGuestHandler';
 import loginGuestDoneHandler from './reducers/loginGuestDoneHandler';
 import loginGuestFailedHandler from './reducers/loginGuestFailedHandler';
+import acquireSessionHandler from './reducers/acquireSessionHandler';
+import acquireSessionDoneHandler from './reducers/acquireSessionDoneHandler';
 
 export type State = {
     readonly seed: string;
     readonly seedConfirm: string;
+    readonly isAcquired: boolean;
     readonly isAuthenticated: boolean;
     readonly isLoggingIn: boolean;
     readonly isCreatingWallet: boolean;
@@ -52,6 +55,7 @@ export type State = {
 export const initialState: State = {
     seed: '',
     seedConfirm: '',
+    isAcquired: false,
     isAuthenticated: false,
     isLoggingIn: false,
     isCreatingWallet: false,
@@ -90,4 +94,6 @@ export default reducerWithInitialState<State>(initialState)
     .case(actions.changeSeed, changeSeedHandler)
     .case(actions.changeSeedConfirmation, changeSeedConfirmationHandler)
     .case(actions.loadWallets.done, loadWalletsDoneHandler)
-    .case(actions.loadWallet, loadWalletHandler);
+    .case(actions.loadWallet, loadWalletHandler)
+    .case(actions.acquireSession.started, acquireSessionHandler)
+    .case(actions.acquireSession.done, acquireSessionDoneHandler);

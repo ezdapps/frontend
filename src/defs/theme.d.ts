@@ -66,5 +66,7 @@ declare module 'apla/theme' {
 
         securityWarningBackground: string;
         securityWarningForeground: string;
+
+        uiBorderLight: string;
     }
 }

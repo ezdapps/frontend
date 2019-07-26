@@ -8,7 +8,6 @@ import { Epic as NativeEpic } from 'redux-observable';
 import { IStoreDependencies } from './dependencies';
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
-import { RouterState } from 'connected-react-router';
 import { loadingBarReducer } from 'react-redux-loading-bar';
 import * as auth from './auth';
 import * as content from './content';
@@ -22,6 +21,7 @@ import * as io from './io';
 import * as notifications from './notifications';
 import * as storage from './storage';
 import * as socket from './socket';
+import * as router from './router';
 import { ActionCreator, Failure, Success } from 'typescript-fsa';
 
 export type Epic = NativeEpic<Action, IRootState, IStoreDependencies>;
@@ -45,7 +45,7 @@ export interface IRootState {
     storage: storage.State;
     socket: socket.State;
     loadingBar: number;
-    router: RouterState;
+    router: router.State;
 }
 
 export const rootEpic = combineEpics(
@@ -60,7 +60,8 @@ export const rootEpic = combineEpics(
     io.epic,
     notifications.epic,
     storage.epic,
-    socket.epic
+    socket.epic,
+    router.epic
 );
 
 export default combineReducers<IRootState>({
@@ -75,5 +76,6 @@ export default combineReducers<IRootState>({
     notifications: notifications.reducer,
     storage: storage.reducer,
     socket: socket.reducer,
-    loadingBar: loadingBarReducer
+    loadingBar: loadingBarReducer,
+    router: router.reducer
 });

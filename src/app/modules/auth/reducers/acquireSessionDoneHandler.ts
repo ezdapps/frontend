@@ -4,14 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { State } from '../reducer';
-import { renderSection } from '../actions';
+import { acquireSession } from '../actions';
 import { Reducer } from 'modules';
 
-const renderSectionHandler: Reducer<typeof renderSection, State> = (state, payload) => {
-    return state.sections[payload] ? {
-        ...state,
-        section: payload
-    } : state;
-};
+const acquireSessionDoneHandler: Reducer<typeof acquireSession.done, State> = (state, payload): State => ({
+    ...state,
+    isAuthenticated: payload.result,
+    isAcquired: payload.result
+});
 
-export default renderSectionHandler;
+export default acquireSessionDoneHandler;
