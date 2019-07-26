@@ -62,6 +62,7 @@ const StyledUserMenu = styled.div`
 `;
 
 export interface IUserMenuProps {
+    mainSection: string;
     isDefaultWallet: boolean;
     wallet: IAccountContext;
     walletEcosystems: IEcosystemInfo[];
@@ -70,99 +71,95 @@ export interface IUserMenuProps {
     onChangePassword: () => void;
 }
 
-class UserMenu extends React.Component<IUserMenuProps> {
-    render() {
-        return this.props.wallet && this.props.wallet.wallet ? (
-            <SystemButton
-                className="p0"
-                width={225}
-                align="right"
-                rightMost
-                content={
-                    <div>
-                        <ul className="dropdown-group">
-                            {!this.props.isDefaultWallet && (
-                                <>
-                                    <li>
-                                        <CloseDropdownButton onClick={this.props.onChangePassword}>
-                                            <em className="icon icon-key text-muted" />
-                                            <span>
-                                                <FormattedMessage id="general.wallet.changepassword" defaultMessage="Change password" />
-                                            </span>
-                                        </CloseDropdownButton>
-                                    </li>
-                                    <li>
-                                        <PageLink page="backup">
-                                            <CloseDropdownButton>
-                                                <em className="icon icon-shield text-muted" />
-                                                <span>
-                                                    <FormattedMessage id="general.wallet.backup" defaultMessage="Backup account" />
-                                                </span>
-                                            </CloseDropdownButton>
-                                        </PageLink>
-                                    </li>
-                                </>
-                            )}
+const UserMenu: React.SFC<IUserMenuProps> = props => (
+    <SystemButton
+        className="p0"
+        width={225}
+        align="right"
+        rightMost
+        content={
+            <div>
+                <ul className="dropdown-group">
+                    {!props.isDefaultWallet && (
+                        <>
                             <li>
-                                <CloseDropdownButton onClick={this.props.onLogout}>
-                                    <em className="icon icon-logout text-danger" />
+                                <CloseDropdownButton onClick={props.onChangePassword}>
+                                    <em className="icon icon-key text-muted" />
                                     <span>
-                                        <FormattedMessage id="general.wallet.signout" defaultMessage="Sign out" />
+                                        <FormattedMessage id="general.wallet.changepassword" defaultMessage="Change password" />
                                     </span>
                                 </CloseDropdownButton>
                             </li>
-                        </ul>
-                        <div className="dropdown-heading">
-                            <FormattedMessage id="general.ecosystems" defaultMessage="Ecosystems" />
-                        </div>
-                        <ul className="dropdown-group">
-                            {this.props.walletEcosystems.map(value => (
-                                <li key={value.ecosystem}>
-                                    {/*wallet.ecosystem !== this.props.wallet.ecosystem && this.props.switchWallet.bind(this, wallet)*/}
-                                    <CloseDropdownButton style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} onClick={() => this.props.onSwitchEcosystem(value.ecosystem, !value.roles.length)}>
-                                        {value.name ?
-                                            (
-                                                value.name
-                                            ) :
-                                            (
-                                                <FormattedMessage id="general.wallet.ecosystemNo" defaultMessage="Ecosystem #{ecosystem}" values={{ ecosystem: value.ecosystem }} />
-                                            )
-                                        }
+                            <li>
+                                <PageLink page="backup" section={props.mainSection}>
+                                    <CloseDropdownButton>
+                                        <em className="icon icon-shield text-muted" />
+                                        <span>
+                                            <FormattedMessage id="general.wallet.backup" defaultMessage="Backup account" />
+                                        </span>
                                     </CloseDropdownButton>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                }
-            >
-                <StyledUserMenu>
-                    <div className="user-info">
-                        <div className="user-title">
-                            {this.props.isDefaultWallet ?
-                                (
-                                    <FormattedMessage id="auth.login.guest" defaultMessage="Demo" />
-                                ) :
-                                (
-                                    <span>{this.props.wallet.wallet.address}</span>
-                                )
-                            }
-                        </div>
-                        <div className="user-subtitle">
-                            {this.props.wallet.access.name || (
-                                <FormattedMessage id="general.wallet.ecosystemNo" defaultMessage="Ecosystem #{ecosystem}" values={{ ecosystem: this.props.wallet.access.ecosystem }} />
-                            )}
-                        </div>
-                    </div>
-                    <Avatar
-                        className="user-avatar"
-                        size={32}
-                        account={this.props.wallet.wallet.address}
-                        ecosystem={this.props.wallet.access.ecosystem}
-                    />
-                </StyledUserMenu>
-            </SystemButton>
-        ) : null;
-    }
-}
+                                </PageLink>
+                            </li>
+                        </>
+                    )}
+                    <li>
+                        <CloseDropdownButton onClick={props.onLogout}>
+                            <em className="icon icon-logout text-danger" />
+                            <span>
+                                <FormattedMessage id="general.wallet.signout" defaultMessage="Sign out" />
+                            </span>
+                        </CloseDropdownButton>
+                    </li>
+                </ul>
+                <div className="dropdown-heading">
+                    <FormattedMessage id="general.ecosystems" defaultMessage="Ecosystems" />
+                </div>
+                <ul className="dropdown-group">
+                    {props.walletEcosystems.map(value => (
+                        <li key={value.ecosystem}>
+                            {/*wallet.ecosystem !== this.props.wallet.ecosystem && this.props.switchWallet.bind(this, wallet)*/}
+                            <CloseDropdownButton style={{ overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }} onClick={() => props.onSwitchEcosystem(value.ecosystem, !value.roles.length)}>
+                                {value.name ?
+                                    (
+                                        value.name
+                                    ) :
+                                    (
+                                        <FormattedMessage id="general.wallet.ecosystemNo" defaultMessage="Ecosystem #{ecosystem}" values={{ ecosystem: value.ecosystem }} />
+                                    )
+                                }
+                            </CloseDropdownButton>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        }
+    >
+        <StyledUserMenu>
+            <div className="user-info">
+                <div className="user-title">
+                    {props.isDefaultWallet ?
+                        (
+                            <FormattedMessage id="auth.login.guest" defaultMessage="Demo" />
+                        ) :
+                        (
+                            <span>{props.wallet.wallet.address}</span>
+                        )
+                    }
+                </div>
+                <div className="user-subtitle">
+                    {props.wallet.access.name || (
+                        <FormattedMessage id="general.wallet.ecosystemNo" defaultMessage="Ecosystem #{ecosystem}" values={{ ecosystem: props.wallet.access.ecosystem }} />
+                    )}
+                </div>
+            </div>
+            <Avatar
+                className="user-avatar"
+                size={32}
+                account={props.wallet.wallet.address}
+                ecosystem={props.wallet.access.ecosystem}
+            />
+        </StyledUserMenu>
+    </SystemButton>
+);
 
 export default UserMenu;

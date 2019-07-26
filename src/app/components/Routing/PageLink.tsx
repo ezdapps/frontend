@@ -10,7 +10,7 @@ import { TBreadcrumbType } from 'apla/content';
 
 export interface IPageLinkProps {
     className?: string;
-    section?: string;
+    section: string;
     page: string;
     params?: {
         [key: string]: string
