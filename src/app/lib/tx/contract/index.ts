@@ -10,6 +10,7 @@ import { privateToPublic, publicToID, sign, Sha256 } from 'lib/crypto';
 import { encodeLengthPlusData, concatBuffer } from '../convert';
 import { ISchema } from 'lib/tx/schema';
 import IField from 'lib/tx/contract/field';
+import { ITransactionBody } from 'apla/tx';
 
 export interface IContractContext {
     id: number;
@@ -24,20 +25,6 @@ export interface IContractContext {
 export interface IContractParam {
     type: string;
     value: object;
-}
-
-export interface ITransactionBody {
-    Header: {
-        ID: number;
-        Time: number;
-        EcosystemID: number;
-        KeyID: Int64BE;
-        NetworkID: number;
-        PublicKey: ArrayBuffer;
-    };
-    Params: {
-        [key: string]: object;
-    };
 }
 
 export default class Contract {

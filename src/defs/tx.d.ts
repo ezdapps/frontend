@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 declare module 'apla/tx' {
-    import { ITransactionBody } from 'lib/tx/contract';
+    import { Int64BE } from 'int64-buffer';
 
     type TTxError =
         'error' |
@@ -70,5 +70,19 @@ declare module 'apla/tx' {
         errorRedirects?: {
             [key: string]: IErrorRedirect
         }
+    }
+
+    interface ITransactionBody {
+        Header: {
+            ID: number;
+            Time: number;
+            EcosystemID: number;
+            KeyID: Int64BE;
+            NetworkID: number;
+            PublicKey: ArrayBuffer;
+        };
+        Params: {
+            [key: string]: object;
+        };
     }
 }

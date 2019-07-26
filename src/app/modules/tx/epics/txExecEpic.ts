@@ -8,10 +8,11 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs';
 import { txExec } from '../actions';
 import uuid from 'uuid';
-import Contract, { IContractParam, ITransactionBody } from 'lib/tx/contract';
+import Contract, { IContractParam } from 'lib/tx/contract';
 import defaultSchema from 'lib/tx/schema/defaultSchema';
 import fileObservable from 'modules/io/util/fileObservable';
 import { enqueueNotification } from 'modules/notifications/actions';
+import { ITransactionBody } from 'apla/tx';
 
 const TX_STATUS_INTERVAL = 2000;
 
