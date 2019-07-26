@@ -21,6 +21,7 @@ import rootReducer, { rootEpic, IRootState } from './modules';
 import platform from 'lib/platform';
 import dependencies from 'modules/dependencies';
 import rehydrateHandler from 'modules/storage/reducers/rehydrateHandler';
+import { Observable } from 'rxjs';
 
 export const history = platform.select<() => History>({
     desktop: createMemoryHistory,
@@ -110,5 +111,19 @@ const store = platform.select({
         return storeInstance;
     }
 })();
+
+// This is a stub value for observable store. It will be removed in the near future
+const getState$ = (stateStore: typeof store) =>
+    new Observable<IRootState>(observer => {
+        observer.next(stateStore.getState());
+
+        const unsubscribe = store.subscribe(() => {
+            observer.next(stateStore.getState());
+        });
+
+        return unsubscribe;
+    });
+
+export const state$ = getState$(store);
 
 export default store;
