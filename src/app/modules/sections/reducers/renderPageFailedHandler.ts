@@ -17,6 +17,7 @@ const renderPageFailedHandler: Reducer<typeof renderPage.failed, State> = (state
                 name: payload.params.name,
                 status: 'ERROR',
                 content: [],
+                static: false,
                 params: payload.params.params,
                 error: payload.error,
                 location: payload.params.location,

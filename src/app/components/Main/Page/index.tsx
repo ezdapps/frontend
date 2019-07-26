@@ -6,6 +6,7 @@
 import React from 'react';
 import Protypo from 'containers/Widgets/Protypo';
 import { IPage } from 'apla/content';
+import { STATIC_PAGES } from 'lib/staticPages';
 
 import Error from './Error';
 import Timeout from './Timeout';
@@ -16,7 +17,7 @@ export interface IPageProps {
     value: IPage;
 }
 
-const Page: React.SFC<IPageProps> = (props) => {
+const Page: React.SFC<IPageProps> = props => {
     if (props.value.error) {
         switch (props.value.error) {
             case 'E_HEAVYPAGE': return (<Timeout />);
@@ -25,14 +26,20 @@ const Page: React.SFC<IPageProps> = (props) => {
         }
     }
     else {
+        const staticPage = STATIC_PAGES[props.value.name];
         return (
             <div className="fullscreen" style={{ backgroundColor: '#fff', maxHeight: '100%', overflowX: 'hidden', overflowY: 'auto' }}>
-                <Protypo
-                    context="page"
-                    section={props.section}
-                    page={props.value.name}
-                    content={props.value.content}
-                />
+                {props.value.static && (
+                    staticPage.render(props.value.params)
+                )}
+                {!props.value.static && (
+                    <Protypo
+                        context="page"
+                        section={props.section}
+                        page={props.value.name}
+                        content={props.value.content}
+                    />
+                )}
             </div>
         );
     }

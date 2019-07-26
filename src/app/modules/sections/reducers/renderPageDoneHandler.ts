@@ -16,7 +16,8 @@ const renderPageDoneHandler: Reducer<typeof renderPage.done, State> = (state, pa
             page: {
                 name: payload.params.name,
                 status: 'LOADED',
-                content: payload.result,
+                content: payload.result.tree,
+                static: payload.result.static,
                 params: payload.params.params,
                 error: undefined,
                 location: payload.params.location,

@@ -7,17 +7,17 @@ import React from 'react';
 import Backup from 'containers/Main/Backup';
 import Editor from 'containers/Main/Editor';
 
-export interface ILegacyPage {
+export interface IStaticPage {
     menu: string;
     section: string;
     render: (props?: { [key: string]: any }) => React.ReactNode;
 }
 
-const LEGACY_PAGES: { [page: string]: ILegacyPage } = {
+const STATIC_PAGES: { [page: string]: IStaticPage } = {
     'backup': { section: null, menu: null, render: () => <Backup /> },
     'editor': { section: 'editor', menu: null, render: (props: { open?: string, create?: string, name?: string, vde?: string }) => <Editor {...props} /> }
 };
 
 export {
-    LEGACY_PAGES
+    STATIC_PAGES
 };

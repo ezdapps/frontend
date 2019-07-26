@@ -39,6 +39,7 @@ class Editor extends React.Component<IEditorProps> {
                                 name: 'preview',
                                 status: 'LOADED',
                                 content: tab.preview,
+                                static: false,
                                 params: {},
                                 location: {
                                     key: 'preview',

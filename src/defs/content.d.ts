@@ -34,6 +34,7 @@ declare module 'apla/content' {
     interface IPage {
         readonly name: string;
         readonly status: TPageStatus;
+        readonly static: boolean;
         readonly content: TProtypoElement[];
         readonly params: TPageParams;
         readonly error?: string;

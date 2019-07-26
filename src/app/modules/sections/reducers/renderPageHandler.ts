@@ -18,6 +18,7 @@ const renderPageHandler: Reducer<typeof renderPage.started, State> = (state, pay
                 name: payload.name,
                 status: 'PENDING',
                 content: [],
+                static: false,
                 params: payload.params,
                 error: undefined,
                 location: payload.location,

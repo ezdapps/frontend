@@ -7,6 +7,7 @@ import { Action } from 'redux';
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { renderPage, menuPush } from '../actions';
+import { STATIC_PAGES } from 'lib/staticPages';
 
 const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(renderPage.started)
     .switchMap(action => {
@@ -15,6 +16,17 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
             apiHost: state.auth.session.network.apiHost,
             sessionToken: state.auth.session.sessionToken
         });
+
+        const staticPage = STATIC_PAGES[action.payload.name];
+        if (staticPage && (staticPage.section === null || staticPage.section === action.payload.section)) {
+            return Observable.of(renderPage.done({
+                params: action.payload,
+                result: {
+                    tree: [],
+                    static: true
+                }
+            }));
+        }
 
         return Observable.from(client.content({
             type: 'page',
@@ -25,7 +37,10 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
         })).flatMap(content => Observable.of<Action>(
             renderPage.done({
                 params: action.payload,
-                result: content.tree
+                result: {
+                    tree: content.tree,
+                    static: false
+                }
             }),
             menuPush({
                 section: action.payload.section,
