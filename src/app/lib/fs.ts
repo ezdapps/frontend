@@ -3,8 +3,8 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-export const sendAttachment = (filename: string, data: string) => {
-    const blob = new Blob([data], { type: 'text/plain;charset=utf-8;' });
+export const sendAttachment = (filename: string, data: string, mime = 'text/plain') => {
+    const blob = new Blob([data], { type: `${mime};charset=utf-8;` });
     if (navigator.msSaveBlob) {
         navigator.msSaveBlob(blob, filename);
     }

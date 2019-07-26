@@ -22,7 +22,7 @@ class CopyWalletModal extends Modal<ICopyWalletModalParams, void> {
     }
 
     getCopyPayload = () => {
-        return `${this.props.params.wallet.address}\n${this.props.params.wallet.publicKey}`;
+        return this.props.params.wallet.publicKey;
     }
 
     render() {
@@ -34,12 +34,6 @@ class CopyWalletModal extends Modal<ICopyWalletModalParams, void> {
                 <Modal.Body>
                     <table className="table table-striped table-bordered table-hover preline mb0" style={{ maxWidth: 500 }}>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <FormattedMessage id="general.address" defaultMessage="Address" />
-                                </td>
-                                <td>{this.props.params.wallet.address}</td>
-                            </tr>
                             <tr>
                                 <td style={{ minWidth: 100 }}>
                                     <FormattedMessage id="general.key.public" defaultMessage="Public key" />

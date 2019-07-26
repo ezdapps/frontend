@@ -13,6 +13,7 @@ import subscribeDoneHandler from './reducers/subscribeDoneHandler';
 import setNotificationsCountHandler from './reducers/setNotificationsCountHandler';
 import unsubscribeDoneHandler from './reducers/unsubscribeDoneHandler';
 import setConnectedHandler from './reducers/setConnectedHandler';
+import subscribeHandler from './reducers/subscribeHandler';
 
 export type State = {
     readonly session: string;
@@ -38,5 +39,6 @@ export default reducerWithInitialState<State>(initialState)
     .case(actions.disconnect.done, disconnectDoneHandler)
     .case(actions.setNotificationsCount, setNotificationsCountHandler)
     .case(actions.setConnected, setConnectedHandler)
+    .case(actions.subscribe.started, subscribeHandler)
     .case(actions.subscribe.done, subscribeDoneHandler)
     .case(actions.unsubscribe.done, unsubscribeDoneHandler);

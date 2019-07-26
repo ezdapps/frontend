@@ -18,15 +18,21 @@ const ecosystemInitEpic: Epic = (action$, store, { api }) => action$.ofAction(ec
             sessionToken: state.auth.session.sessionToken
         });
 
-        return Observable.from(
-            client.getParam({ name: 'stylesheet' }).then(l => l.value)
-        ).flatMap(payload =>
+        return Observable.zip(
+            Observable.from(client.getParam({ name: 'stylesheet' }))
+                .map(l => l.value)
+                .catch(e => Observable.of('')),
+            Observable.from(client.getParam({ name: 'print_stylesheet' }))
+                .map(l => l.value)
+                .catch(e => Observable.of(''))
+        ).flatMap(([stylesheet, printStylesheet]) =>
             Observable.of<Action>(
                 fetchNotifications.started(null),
                 ecosystemInit.done({
                     params: action.payload,
                     result: {
-                        stylesheet: payload
+                        stylesheet,
+                        printStylesheet
                     }
                 }),
                 sectionsInit.started(action.payload.section)

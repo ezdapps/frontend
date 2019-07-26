@@ -12,7 +12,7 @@ import { FormattedMessage } from 'react-intl';
 import Backup from 'components/Main/Backup';
 
 const mapStateToProps = (state: IRootState) => ({
-    wallet: state.auth.wallet,
+    account: state.auth.wallet && state.auth.wallet.wallet,
     privateKey: state.auth.privateKey
 });
 

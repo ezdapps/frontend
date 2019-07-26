@@ -35,7 +35,7 @@ const PasswordPrompt: React.SFC<IPasswordPromptProps & InjectedIntlProps> = prop
                     <div className="avatar-holder">
                         <Avatar
                             size={100}
-                            keyID={props.wallet.wallet.id}
+                            account={props.wallet.wallet.address}
                             ecosystem={props.wallet.access.ecosystem}
                         />
                     </div>

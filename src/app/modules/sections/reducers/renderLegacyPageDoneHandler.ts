@@ -29,7 +29,7 @@ const renderLegacyPageDoneHandler: Reducer<typeof renderLegacyPage.done, State> 
                     ],
                 page: {
                     name: payload.params.name,
-                    content: [],
+                    content: payload.result.page.content,
                     legacy: true,
                     params: payload.params.params
                 },

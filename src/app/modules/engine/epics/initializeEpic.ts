@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 import { initialize, setLocale } from '../actions';
 import platform from 'lib/platform';
 import { saveWallet, savePreconfiguredNetworks } from 'modules/storage/actions';
-import { address, addressString } from 'lib/crypto';
+import { publicToID } from 'lib/crypto';
 import keyring from 'lib/keyring';
 import { INetwork } from 'apla/auth';
 import webConfig from 'lib/settings/webConfig';
@@ -44,13 +44,12 @@ const initializeEpic: Epic = (action$, store, { defaultPassword }) => action$.of
 
             if (platform.args.privateKey) {
                 const publicKey = keyring.generatePublicKey(platform.args.privateKey);
-                const keyID = address(publicKey);
+                const keyID = publicToID(publicKey);
 
                 var preconfiguredKey = {
                     id: keyID,
                     encKey: keyring.encryptAES(platform.args.privateKey, defaultPassword),
-                    publicKey,
-                    address: addressString(keyID)
+                    publicKey
                 };
             }
 

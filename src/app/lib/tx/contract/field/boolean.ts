@@ -23,6 +23,10 @@ class Boolean implements IField<string | boolean, boolean> {
     get() {
         return this._value;
     }
+
+    toString() {
+        return this._value.toString();
+    }
 }
 
 export default Boolean;

@@ -8,7 +8,7 @@ import { Button, Panel } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 import keyring from 'lib/keyring';
 import { sendAttachment } from 'lib/fs';
-import { IAccountContext } from 'apla/auth';
+import { IAccount } from 'apla/api';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import QRCode from 'qrcode.react';
 
@@ -16,7 +16,7 @@ import Wrapper from 'components/Wrapper';
 import Validation from 'components/Validation';
 
 export interface IBackupProps {
-    wallet: IAccountContext;
+    account: IAccount;
     privateKey: string;
     onError?: () => any;
     onCopy?: () => any;
@@ -37,7 +37,7 @@ class Backup extends React.Component<IBackupProps, IBackupState> {
     }
 
     onSubmit = (values: { [key: string]: string }) => {
-        const privateKey = keyring.decryptAES(this.props.wallet.wallet.encKey, values.password);
+        const privateKey = keyring.decryptAES(this.props.account.encKey, values.password);
 
         if (keyring.validatePrivateKey(privateKey)) {
             const publicKey = keyring.generatePublicKey(privateKey);
@@ -125,7 +125,7 @@ class Backup extends React.Component<IBackupProps, IBackupState> {
                             <td>
                                 <FormattedMessage id="general.address" defaultMessage="Address" />
                             </td>
-                            <td>{this.props.wallet.wallet.address}</td>
+                            <td>{this.props.account && this.props.account.address}</td>
                         </tr>
                         <tr>
                             <td>
@@ -163,7 +163,7 @@ class Backup extends React.Component<IBackupProps, IBackupState> {
                     <FormattedMessage id="general.wallet.backup" defaultMessage="This section is used to backup your account data. You will not be able to restore access to your account if you forget your password or lose the private key" />
                 }
             >
-                {this.props.wallet && (
+                {this.props.account && (
                     <Validation.components.ValidatedForm onSubmitSuccess={this.onSubmit}>
                         {this.state.privateKey ? this.renderSecond() : this.renderFirst()}
                     </Validation.components.ValidatedForm>

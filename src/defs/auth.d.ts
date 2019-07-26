@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 declare module 'apla/auth' {
-    import { IAccount, IKeyInfo, IRoleInfo } from 'apla/api';
+    import { IAccount, IKeyInfo, IRoleInfo, IEcosystemInfo } from 'apla/api';
 
     interface INetworkEndpoint {
         uuid: string;
@@ -26,7 +26,6 @@ declare module 'apla/auth' {
         id: string;
         encKey: string;
         publicKey: string;
-        address: string;
     }
 
     interface ISaveEncKeyCall {
@@ -41,7 +40,7 @@ declare module 'apla/auth' {
 
     interface IAccountContext {
         wallet: IAccount;
-        access: IKeyInfo;
+        access: IEcosystemInfo;
         role?: IRoleInfo;
     }
 

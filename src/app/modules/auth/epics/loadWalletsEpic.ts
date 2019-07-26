@@ -6,7 +6,6 @@
 import { Epic } from 'modules';
 import { loadWallets } from '../actions';
 import { Observable } from 'rxjs';
-import { IKeyInfo } from 'apla/api';
 
 const loadWalletsEpic: Epic = (action$, store, { api }) => action$.ofAction(loadWallets.started)
     .flatMap(action => {
@@ -17,12 +16,12 @@ const loadWalletsEpic: Epic = (action$, store, { api }) => action$.ofAction(load
         return Observable.from(state.storage.wallets).flatMap(wallet =>
             Observable.from(client.keyinfo({
                 id: wallet.id
-            }).catch(e => null as IKeyInfo[])).map(keys => ({
+            })).map(keyInfo => ({
                 id: wallet.id,
-                address: wallet.address,
+                address: keyInfo.account,
                 encKey: wallet.encKey,
                 publicKey: wallet.publicKey,
-                access: keys.map(key => ({
+                access: keyInfo.ecosystems.map(key => ({
                     ...key,
                     roles: key.roles || []
                 }))

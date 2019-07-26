@@ -206,29 +206,6 @@ test('Login', () => {
     });
 });
 
-test('RequestNotifications', () => {
-    const testRequest = [
-        { id: '1', ecosystem: '2' },
-        { id: '1', ecosystem: '1' },
-        { id: '1', ecosystem: '3' },
-        { id: '2', ecosystem: '1' },
-        { id: '2', ecosystem: '2' },
-        { id: '3', ecosystem: '3' },
-        { id: '3', ecosystem: '1' },
-        { id: '3', ecosystem: '2' },
-        { id: '3', ecosystem: '3' },
-    ];
-
-    return paramTestingAPIMock().requestNotifications(testRequest).then((response: any) => {
-        expect(response).toEqual({
-            __requestUrl: `${paramTestingAPIHost}/${paramTestingAPIEndpoint}/updnotificator`,
-            body: mockFormData({
-                ids: JSON.stringify(testRequest)
-            })
-        });
-    });
-});
-
 test('GetConfig', () => {
     const testRequest = 'centrifugo';
 

@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 
 const subscribeReconnectEpic: Epic = (action$, store) => action$.ofAction(connect.done)
     .flatMap(action =>
-        Observable.from(store.getState().auth.wallets).map(account =>
+        Observable.from(store.getState().auth.wallets || []).map(account =>
             subscribe.started(account)
         )
     );

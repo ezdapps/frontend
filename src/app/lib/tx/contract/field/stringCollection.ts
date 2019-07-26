@@ -23,6 +23,10 @@ class StringCollection implements IField<string[]> {
     get(): string[] {
         return this._value;
     }
+
+    toString() {
+        return '[' + this._value.join(', ') + ']';
+    }
 }
 
 export default StringCollection;
