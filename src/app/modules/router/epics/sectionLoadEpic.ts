@@ -7,11 +7,23 @@ import { Epic } from 'modules';
 import { locationChange } from '../actions';
 import { renderPage } from 'modules/sections/actions';
 import { Observable } from 'rxjs';
+import { state$ } from 'store';
+import { initialize } from 'modules/engine/actions';
+import { isType, Action } from 'typescript-fsa';
+import { RouterState } from 'connected-react-router';
 
-const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$.ofAction(locationChange)
-    // .delayWhen(() => action$.filter(() => store.getState().auth.isAcquired))
-    .flatMap(action => {
-        const match = routerService.matchRoute('(/)(:section)(/)(:page)(/)', action.payload.location.pathname + action.payload.location.search);
+const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$
+    .filter(action => isType(action, initialize.started) || isType(action, locationChange))
+    .map((action: Action<any>) => {
+        if (isType(action, initialize.started)) {
+            return store.getState().router;
+        }
+
+        return action.payload;
+    })
+    .delayWhen(() => state$.filter(l => l.auth.isAcquired).take(1))
+    .flatMap((routerState: RouterState) => {
+        const match = routerService.matchRoute('(/)(:section)(/)(:page)(/)', routerState.location.pathname + routerState.location.search);
         const state = store.getState();
 
         if (state.auth.isAuthenticated && match) {
@@ -37,7 +49,7 @@ const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$.ofA
             return Observable.of(renderPage.started({
                 location: {
                     state: {},
-                    ...action.payload.location
+                    ...routerState.location
                 },
                 section: section.name,
                 name: pageName,
