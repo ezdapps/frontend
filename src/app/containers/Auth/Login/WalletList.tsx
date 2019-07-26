@@ -34,9 +34,8 @@ const selectDemoEnabled = (state: IRootState) => {
 const mapStateToProps = (state: IRootState) => ({
     isOffline: !state.engine.guestSession,
     pending: state.auth.isLoggingIn,
-    wallets: state.storage.wallets.sort((a, b) => a.address > b.address ? 1 : -1).map(wallet => ({
+    wallets: state.storage.wallets.sort((a, b) => a.id > b.id ? 1 : -1).map(wallet => ({
         access: [],
-        address: wallet.address,
         encKey: wallet.encKey,
         publicKey: wallet.publicKey,
         id: wallet.id,

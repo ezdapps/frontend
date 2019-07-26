@@ -7,12 +7,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { IAccountContext } from 'apla/auth';
+import { IEcosystemInfo } from 'apla/api';
 
 import { CloseDropdownButton } from 'components/DropdownButton';
 import PageLink from 'containers/Routing/PageLink';
 import SystemButton from './SystemButton';
 import Avatar from 'containers/Avatar';
-import { IKeyInfo } from 'apla/api';
 
 const StyledUserMenu = styled.div`
     -webkit-app-region: no-drag;
@@ -64,7 +64,7 @@ const StyledUserMenu = styled.div`
 export interface IUserMenuProps {
     isDefaultWallet: boolean;
     wallet: IAccountContext;
-    walletEcosystems: IKeyInfo[];
+    walletEcosystems: IEcosystemInfo[];
     onSwitchEcosystem: (ecosystem: string, defaultRole?: boolean) => void;
     onLogout: () => void;
     onChangePassword: () => void;
@@ -156,7 +156,7 @@ class UserMenu extends React.Component<IUserMenuProps> {
                     <Avatar
                         className="user-avatar"
                         size={32}
-                        keyID={this.props.wallet.wallet.id}
+                        account={this.props.wallet.wallet.address}
                         ecosystem={this.props.wallet.access.ecosystem}
                     />
                 </StyledUserMenu>

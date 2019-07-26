@@ -13,6 +13,6 @@ export const connect = actionCreator.async<IConnectCall, { session: string, inst
 export const disconnect = actionCreator.async('DISCONNECT');
 export const subscribe = actionCreator.async<IAccount, any, string>('SUBSCRIBE');
 export const unsubscribe = actionCreator.async<IWallet, void, void>('UNSUBSCRIBE');
+export const setNotifications = actionCreator<INotificationsMessage[]>('SET_NOTIFICATIONS');
 export const setNotificationsCount = actionCreator<INotificationsMessage>('SET_NOTIFICATIONS_COUNT');
-export const getNotificationsCount = actionCreator<{ ids: { id: string, ecosystem: string }[] }>('GET_NOTIFICATIONS_COUNT');
 export const setConnected = actionCreator<boolean>('SET_CONNECTED');

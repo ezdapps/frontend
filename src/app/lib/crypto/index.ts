@@ -63,7 +63,7 @@ export const sign = (data: string, privateKey: string): string => {
     return signature.sign();
 };
 
-export const address = (publicKey: string) => {
+export const publicToID = (publicKey: string) => {
     if (publicKey.startsWith('04')) {
         const keyDigest = SHA256(CryptoJS.enc.Hex.parse(publicKey.slice(2)));
         const hashDigest = SHA512(keyDigest as any as LibWordArray).toString();
@@ -81,18 +81,6 @@ export const address = (publicKey: string) => {
     else {
         throw new Error('Unsupported public key format');
     }
-};
-
-export const addressString = (addr: string) => {
-    const num = Long.fromString(addr, true, 10).toString();
-    let val = '0'.repeat(20 - num.length) + num;
-    let ret = '';
-
-    for (let i = 0; i < 4; i++) {
-        ret += val.slice(i * 4, (i + 1) * 4) + '-';
-    }
-    ret += val.slice(16);
-    return ret;
 };
 
 export const Sha256 = async (data: THashInput) => {

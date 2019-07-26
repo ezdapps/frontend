@@ -9,15 +9,14 @@ import { loginGuest } from '../actions';
 import { Observable } from 'rxjs/Observable';
 import { push } from 'connected-react-router';
 import keyring from 'lib/keyring';
-import { address, addressString } from 'lib/crypto';
+import { publicToID } from 'lib/crypto';
 
 const loginGuestEpic: Epic = (action$, store, { api, defaultKey, defaultPassword }) => action$.ofAction(loginGuest.started)
     .flatMap(action => {
         const publicKey = keyring.generatePublicKey(defaultKey);
         const network = store.getState().engine.guestSession.network;
         const client = api({ apiHost: network.apiHost });
-        const id = address(publicKey);
-        const addr = addressString(id);
+        const id = publicToID(publicKey);
 
         return Observable.from(client.getUid())
             .flatMap(uid =>
@@ -44,19 +43,21 @@ const loginGuestEpic: Epic = (action$, store, { api, defaultKey, defaultPassword
                             wallet: {
                                 wallet: {
                                     id,
-                                    address: addr,
+                                    address: session.account,
                                     encKey: keyring.encryptAES(defaultKey, defaultPassword),
                                     publicKey,
                                     access: [{
                                         ecosystem: '1',
                                         name: '',
-                                        roles: []
+                                        roles: [],
+                                        notifications: []
                                     }]
                                 },
                                 access: {
                                     ecosystem: '1',
                                     name: '',
-                                    roles: []
+                                    roles: [],
+                                    notifications: []
                                 }
                             },
                             privateKey: defaultKey,

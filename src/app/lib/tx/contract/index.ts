@@ -6,7 +6,7 @@
 import msgpack from 'msgpack-lite';
 import * as convert from 'lib/tx/convert';
 import { Int64BE } from 'int64-buffer';
-import { privateToPublic, address, sign, Sha256 } from 'lib/crypto';
+import { privateToPublic, publicToID, sign, Sha256 } from 'lib/crypto';
 import { encodeLengthPlusData, concatBuffer } from '../convert';
 import { ISchema } from 'lib/tx/schema';
 import IField from 'lib/tx/contract/field';
@@ -64,7 +64,7 @@ export default class Contract {
     async sign(privateKey: string) {
         const publicKey = privateToPublic(privateKey);
         this._publicKey = convert.toArrayBuffer(publicKey);
-        this._keyID = new Int64BE(address(publicKey));
+        this._keyID = new Int64BE(publicToID(publicKey));
 
         const data = this.serialize();
         const txHash = await Sha256(data.buffer);

@@ -12,7 +12,7 @@ import Modal, { ModalContainer, IModalProps } from './';
 import Avatar from 'containers/Avatar';
 
 export interface IRolePickerModalParams {
-    walletID: string;
+    account: string;
     ecosystem: string;
     ecosystemName: string;
     roles: IRoleInfo[];
@@ -33,7 +33,7 @@ class RolePickerModal extends ModalContainer<IRolePickerModalProps> {
                     <div className="pull-left">
                         <Avatar
                             size={44}
-                            keyID={this.props.params.walletID}
+                            account={this.props.params.account}
                             ecosystem={this.props.params.ecosystem}
                         />
                     </div>

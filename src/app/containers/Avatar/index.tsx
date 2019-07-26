@@ -11,7 +11,7 @@ import Avatar from 'components/Avatar';
 
 interface IAvatarContainerProps {
     className?: string;
-    keyID: string;
+    account: string;
     ecosystem: string;
     size?: number;
 }
@@ -28,7 +28,7 @@ const AvatarContainer: React.SFC<IAvatarContainerProps & IAvatarContainerState &
     <Avatar
         className={props.className}
         size={props.size}
-        url={`${props.nodeHost}/api/v2/avatar/${props.ecosystem}/${props.keyID}`}
+        url={`${props.nodeHost}/api/v2/avatar/${props.ecosystem}/${props.account}`}
     />
 );
 

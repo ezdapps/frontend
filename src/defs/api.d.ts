@@ -27,7 +27,7 @@ declare module 'apla/api' {
         timestamp: string;
         key_id: string;
         ecosystem_id: string;
-        address: string;
+        account: string;
         expiry: number;
         isnode: boolean;
         isowner: boolean;
@@ -42,7 +42,7 @@ declare module 'apla/api' {
         address: string;
         encKey: string;
         publicKey: string;
-        access: IKeyInfo[];
+        access: IEcosystemInfo[];
     }
 
     interface IRoleInfo {
@@ -50,15 +50,19 @@ declare module 'apla/api' {
         name: string;
     }
 
-    interface IKeyInfo {
+    interface IEcosystemInfo {
         ecosystem: string;
         name: string;
         roles: IRoleInfo[];
+        notifications: {
+            role_id: string;
+            count: string;
+        }[];
     }
 
-    interface INotificationsRequest {
-        id: string;
-        ecosystem: string;
+    interface IKeyInfo {
+        account: string;
+        ecosystems: IEcosystemInfo[];
     }
 
     interface ISystemParamsRequest {

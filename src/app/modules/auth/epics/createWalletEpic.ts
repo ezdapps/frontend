@@ -9,14 +9,14 @@ import { Observable } from 'rxjs/Observable';
 import { createWallet } from '../actions';
 import { navigate } from 'modules/engine/actions';
 import keyring from 'lib/keyring';
-import { address, addressString } from 'lib/crypto';
+import { publicToID } from 'lib/crypto';
 
 const createWalletEpic: Epic = (action$, store, { api }) => action$.ofAction(createWallet.started)
     .flatMap(action => {
         const keys = keyring.generateKeyPair(action.payload.seed);
         const publicKey = keyring.generatePublicKey(keys.private);
         const encKey = keyring.encryptAES(keys.private, action.payload.password);
-        const keyID = address(keys.public);
+        const keyID = publicToID(keys.public);
 
         return Observable.of<Action>(
             createWallet.done({
@@ -24,8 +24,7 @@ const createWalletEpic: Epic = (action$, store, { api }) => action$.ofAction(cre
                 result: {
                     id: keyID,
                     encKey,
-                    publicKey,
-                    address: addressString(keyID)
+                    publicKey
                 }
             }),
             navigate('/')
