@@ -18,7 +18,7 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
         });
 
         const staticPage = STATIC_PAGES[action.payload.name];
-        if (staticPage && (staticPage.section === null || staticPage.section === action.payload.section)) {
+        if (staticPage) {
             return Observable.of(renderPage.done({
                 params: action.payload,
                 result: {

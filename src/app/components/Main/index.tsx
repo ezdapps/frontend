@@ -7,16 +7,12 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { INetworkEndpoint } from 'apla/auth';
 import { ISection } from 'apla/content';
-import { history } from 'store';
 import platform from 'lib/platform';
 
 import themed from 'components/Theme/themed';
 import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
-import Toolbar from './Toolbar';
-import ToolButton from 'components/Main/Toolbar/ToolButton';
-import EditorToolbar from 'containers/Main/Toolbar/EditorToolbar';
 import ToolIndicator from 'components/Main/Toolbar/ToolIndicator';
 import LoadingBar from './LoadingBar';
 import Selector from 'containers/Main/Sections/Selector';
@@ -89,82 +85,48 @@ const StyledContent = themed.section`
     margin-left: 0 !important;
     && { background: ${props => props.theme.contentBackground}; }
     color: ${props => props.theme.contentForeground};
-    margin-top: ${props => props.theme.headerHeight + props.theme.menuHeight + props.theme.toolbarHeight}px !important;
+    margin-top: ${props => props.theme.headerHeight + props.theme.menuHeight}px !important;
     transition: none !important;
 `;
 
-class Main extends React.Component<IMainProps> {
-    onBack() {
-        history.goBack();
-    }
+const Main: React.SFC<IMainProps> = props => {
+    const appTitle = `Apla ${props.network ? '(' + props.network.apiHost + ')' : ''}`;
 
-    onForward() {
-        history.goForward();
-    }
-
-    render() {
-        const appTitle = `Apla ${this.props.network ? '(' + this.props.network.apiHost + ')' : ''}`;
-
-        return (
-            <StyledWrapper className="wrapper component-main">
-                <style type="text/css">
-                    {this.props.stylesheet}
-                </style>
-                <StyledControls>
-                    <StyledTitlebar className="drag">
-                        <Titlebar>{appTitle}</Titlebar>
-                    </StyledTitlebar>
-                    <StyledMenu className="drag">
-                        <li>
-                            {/* <SectionButton onClick={this.props.onNavigationToggle}>
+    return (
+        <StyledWrapper className="wrapper component-main">
+            <style type="text/css">
+                {props.stylesheet}
+            </style>
+            <StyledControls>
+                <StyledTitlebar className="drag">
+                    <Titlebar>{appTitle}</Titlebar>
+                </StyledTitlebar>
+                <StyledMenu className="drag">
+                    <li>
+                        {/* <SectionButton onClick={this.props.onNavigationToggle}>
                                 <em className="icon-menu" />
                             </SectionButton> */}
-                        </li>
-                        <Selector section={this.props.section} />
-                        <li className="user-menu">
-                            <NotificationsMenu />
-                            {/*<TransactionsMenu />*/}
-                            <UserMenu />
-                        </li>
-                    </StyledMenu>
-                    <Toolbar>
-                        {this.props.isAuthorized && (
-                            <ToolIndicator
-                                right
-                                icon="icon-key"
-                                title={<FormattedMessage id="privileged" defaultMessage="Privileged mode" />}
-                                titleDesc={<FormattedMessage id="privileged.desc" defaultMessage="You will not be prompted to enter your password when executing transactions" />}
-                            />
-                        )}
-                        {'editor' === this.props.section ?
-                            (
-                                <EditorToolbar />
-                            ) : (
-                                <div>
-                                    <ToolButton icon="icon-arrow-left" onClick={this.onBack}>
-                                        <FormattedMessage id="navigation.back" defaultMessage="Back" />
-                                    </ToolButton>
-                                    <ToolButton icon="icon-arrow-right" onClick={this.onForward}>
-                                        <FormattedMessage id="navigation.forward" defaultMessage="Forward" />
-                                    </ToolButton>
-                                    {/* <ToolButton icon="icon-home" onClick={this.props.onNavigateHome}>
-                                        <FormattedMessage id="navigation.home" defaultMessage="Home" />
-                                    </ToolButton>
-                                    <ToolButton icon="icon-refresh" onClick={this.props.onRefresh}>
-                                        <FormattedMessage id="navigation.refresh" defaultMessage="Refresh" />
-                                    </ToolButton> */}
-                                </div>
-                            )
-                        }
-                    </Toolbar>
-                    <LoadingBar />
-                </StyledControls >
-                <StyledContent>
-                    {this.props.children}
-                </StyledContent>
-            </StyledWrapper >
-        );
-    }
-}
+                    </li>
+                    <Selector section={props.section} />
+                    <ToolIndicator
+                        right
+                        icon="icon-key"
+                        title={<FormattedMessage id="privileged" defaultMessage="Privileged mode" />}
+                        titleDesc={<FormattedMessage id="privileged.desc" defaultMessage="You will not be prompted to enter your password when executing transactions" />}
+                    />
+                    <li className="user-menu">
+                        <NotificationsMenu />
+                        {/*<TransactionsMenu />*/}
+                        <UserMenu />
+                    </li>
+                </StyledMenu>
+                <LoadingBar />
+            </StyledControls >
+            <StyledContent>
+                {props.children}
+            </StyledContent>
+        </StyledWrapper >
+    );
+};
 
 export default Main;
