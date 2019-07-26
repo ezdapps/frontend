@@ -19,14 +19,16 @@ export interface ISectionsProps {
 }
 
 const Sections: React.SFC<ISectionsProps> = (props) => (
-    <div className="fullscreen" style={{ position: 'relative' }}>
-        <Navigation section={props.section} />
-        <Section
-            navigationSize={props.navigationSize}
-            name={props.section}
-            page={props.values[props.section].page}
-            breadcrumbs={props.values[props.section].breadcrumbs}
-        />
+    <div className="fullscreen">
+        <div className="fullscreen" style={{ position: 'relative' }}>
+            <Navigation section={props.section} />
+            <Section
+                navigationSize={props.navigationSize}
+                name={props.section}
+                page={props.values[props.section].page}
+                breadcrumbs={props.values[props.section].breadcrumbs}
+            />
+        </div>
     </div>
 );
 

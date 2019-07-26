@@ -26,7 +26,7 @@ const Page: React.SFC<IPageProps> = (props) => {
     }
     else {
         return (
-            <div className="fullscreen" style={{ backgroundColor: '#fff' }}>
+            <div className="fullscreen" style={{ backgroundColor: '#fff', maxHeight: '100%', overflowX: 'hidden', overflowY: 'auto' }}>
                 <Protypo
                     context="page"
                     section={props.section}

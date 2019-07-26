@@ -42,20 +42,35 @@ const StyledBreadcrumbs = themed.ul`
     }
 `;
 
+const renderTitle = (breadcrumb: IBreadcrumb, index: number) => {
+    if (0 === index) {
+        return (
+            <span>
+                <i className="icon-home" style={{ fontSize: '13px' }} />
+                <span style={{ marginLeft: '6px' }}>{breadcrumb.title || breadcrumb.page}</span>
+            </span>
+        );
+    }
+
+    return breadcrumb.title || breadcrumb.page;
+};
+
 const Breadcrumbs: React.SFC<IBreadcrumbsProps> = (props) => (
     <StyledBreadcrumbs>
         {props.values.map((breadcrumb, i) => (
             <li key={i}>
                 {i === props.values.length - 1 ?
                     (
-                        <span>{breadcrumb.title || breadcrumb.page}</span>
+                        <span>
+                            {renderTitle(breadcrumb, i)}
+                        </span>
                     ) : (
                         <PageLink
                             section={breadcrumb.section}
                             page={breadcrumb.page}
                             params={breadcrumb.params}
                         >
-                            {breadcrumb.title || breadcrumb.page}
+                            {renderTitle(breadcrumb, i)}
                         </PageLink>
                     )
                 }
