@@ -27,6 +27,7 @@ const modalPageEpic: Epic = (action$, store, { api }) => action$.ofAction(modalP
                 type: 'PAGE_MODAL',
                 params: {
                     name: action.payload.name,
+                    section: action.payload.section,
                     title: action.payload.title || action.payload.name,
                     width: action.payload.width,
                     tree: payload.tree

@@ -77,6 +77,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                         return Observable.of(modalPage({
                             name: action.payload.page.name,
                             params: action.payload.page.params,
+                            section: action.payload.page.section,
                             title: action.payload.popup.title,
                             width: action.payload.popup.width
                         }));

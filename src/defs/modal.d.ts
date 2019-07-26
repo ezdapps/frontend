@@ -37,6 +37,7 @@ declare module 'apla/modal' {
 
     interface IModalPageCall {
         name: string;
+        section: string;
         title?: string;
         width?: number;
         params: {
