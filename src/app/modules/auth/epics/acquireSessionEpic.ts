@@ -27,11 +27,13 @@ const acquireSessionEpic: Epic = (action$, store, { api }) => action$.ofAction(a
 
         return Observable.forkJoin(
             Observable.from(client.sections({ locale: state.storage.locale })).map(s => s.list),
-            Observable.from(client.getParam({ name: 'stylesheet' })).map(p => p.value).catch(e => '')
+            Observable.from(client.getParam({ name: 'stylesheet' })).map(p => p.value).catch(e => ''),
+            Observable.from(client.getParam({ name: 'print_stylesheet' })).map(p => p.value).catch(e => '')
 
-        ).flatMap(([sections, stylesheet]) => {
+        ).flatMap(([sections, stylesheet, printStylesheet]) => {
             const sectionsResult: { [name: string]: ISection } = {};
             const mainSection = sections.find(l => RemoteSectionStatus.Main === l.status);
+
             sections.forEach(section => {
                 sectionsResult[section.urlname] = {
                     name: section.urlname,
@@ -56,7 +58,8 @@ const acquireSessionEpic: Epic = (action$, store, { api }) => action$.ofAction(a
                     sections: sectionsResult
                 }),
                 ecosystemInit({
-                    stylesheet
+                    stylesheet,
+                    printStylesheet
                 }),
                 fetchNotifications.started(undefined),
                 acquireSession.done({
