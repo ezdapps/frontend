@@ -17,7 +17,7 @@ export interface IStaticPage<T = {}, TSubParams = {}> {
     render: (props?: T) => React.ReactNode;
 }
 
-const STATIC_PAGES: { [page: string]: IStaticPage } = {
+const STATIC_PAGES: { [page: string]: IStaticPage<any, any> } = {
     'backup': { section: null, render: () => <Backup /> },
     'editor': { section: 'editor', render: (props: { open?: string, create?: string, name?: string, vde?: string }) => <Editor {...props} /> },
     'txinfo': {
