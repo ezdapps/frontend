@@ -60,8 +60,7 @@ const StyledMenu = themed.ul`
     position: relative;
 
     > li {
-        margin-top: 6px;
-        height: 34px;
+        height: 100%;
         line-height: 34px;
         display: inline-block;
         font-size: 16px;
@@ -102,12 +101,14 @@ const Main: React.SFC<IMainProps> = props => {
                     <Titlebar>{appTitle}</Titlebar>
                 </StyledTitlebar>
                 <StyledMenu className="drag">
-                    <li>
-                        {/* <SectionButton onClick={this.props.onNavigationToggle}>
+                    {/* <li>
+                        <SectionButton onClick={this.props.onNavigationToggle}>
                                 <em className="icon-menu" />
-                            </SectionButton> */}
+                            </SectionButton>
+                    </li> */}
+                    <li>
+                        <Selector section={props.section} />
                     </li>
-                    <Selector section={props.section} />
                     <ToolIndicator
                         right
                         icon="icon-key"

@@ -10,7 +10,7 @@ declare module 'apla/theme' {
         headerBackground: string;
         headerForeground: string;
         headerBackgroundActive: string;
-        headerForegroundActive: string;
+        headerForegroundMuted: string;
         headerHeight: number;
 
         toolbarBackground: string;

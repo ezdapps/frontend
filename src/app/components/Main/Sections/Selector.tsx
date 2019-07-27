@@ -4,10 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
+import themed from 'components/Theme/themed';
 
 import SectionButton from './SectionButton';
 
-export interface ISectionsProps {
+export interface ISelectorProps {
     section: string;
     values: {
         title: string;
@@ -19,8 +20,22 @@ export interface ISectionsProps {
     }[];
 }
 
-const Selector: React.SFC<ISectionsProps> = (props) => (
-    <>
+const StyledSelector = themed.ul`
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    padding: 0 10px;
+
+    > li {
+        list-style-type: none;
+        height: 100%;
+        display: inline-block;
+        padding 0 10px;
+    }
+`;
+
+const Selector: React.SFC<ISelectorProps> = (props) => (
+    <StyledSelector>
         {props.values.map(section => (
             <li key={section.name}>
                 <SectionButton
@@ -34,7 +49,7 @@ const Selector: React.SFC<ISectionsProps> = (props) => (
             </li>
 
         ))}
-    </>
+    </StyledSelector>
 );
 
 export default Selector;

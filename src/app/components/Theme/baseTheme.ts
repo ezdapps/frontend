@@ -11,8 +11,8 @@ const baseTheme: IThemeDefinition = {
 
     headerBackground: '#586180',
     headerForeground: '#fff',
-    headerBackgroundActive: '#f3f3f3',
-    headerForegroundActive: '#194a8a',
+    headerBackgroundActive: 'rgba(255,255,255,0.5)',
+    headerForegroundMuted: '#a3acb5',
     headerHeight: platform.select({ desktop: 28, web: 0 }),
 
     toolbarBackground: '#f3f3f3',
