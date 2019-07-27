@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ipcMain, Event } from 'electron';
-import { spawnWindow } from './windows/index';
 import config from './config';
 import args from './args';
 import * as _ from 'lodash';
@@ -44,11 +43,6 @@ ipcMain.on('setState', (e: Event, updatedState: any) => {
 
 ipcMain.on('getState', (e: Event) => {
     e.returnValue = state;
-});
-
-ipcMain.on('switchWindow', (e: Event, wnd: string) => {
-    e.returnValue = null;
-    spawnWindow(wnd);
 });
 
 ipcMain.on('getArgs', (e: Event) => {

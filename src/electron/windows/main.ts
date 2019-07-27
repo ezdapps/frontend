@@ -21,6 +21,10 @@ export default () => {
 
     const window = new BrowserWindow(options);
 
+    window.once('ready-to-show', () => {
+        window.show();
+    });
+
     window.on('close', () => {
         config.set('dimensions', window.getBounds());
         config.set('maximized', window.isMaximized() || window.isMaximized);
