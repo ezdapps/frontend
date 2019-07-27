@@ -35,6 +35,10 @@ export const required = new Validator({
             return false;
         }
 
+        if (value && File === value.constructor) {
+            return true;
+        }
+
         switch (type) {
             case 'string': return value && !!value.length;
             case 'undefined': return false;
@@ -66,6 +70,62 @@ export const maxlength: IValidatorGenerator = (count: number | string) => {
             }
 
             return parseInt(count.toString(), 10) >= value.length;
+        }
+    });
+};
+
+export const min: IValidatorGenerator = (count: number | string) => {
+    return new Validator({
+        name: 'min',
+        validate: (value: string) => {
+            const num = Number(value);
+            if (num !== num) {
+                return false;
+            }
+
+            return num > Number(count);
+        }
+    });
+};
+
+export const mininclusive: IValidatorGenerator = (count: number | string) => {
+    return new Validator({
+        name: 'mininclusive',
+        validate: (value: string) => {
+            const num = Number(value);
+            if (num !== num) {
+                return false;
+            }
+
+            return num >= Number(count);
+        }
+    });
+};
+
+export const max: IValidatorGenerator = (count: number | string) => {
+    return new Validator({
+        name: 'max',
+        validate: (value: string) => {
+            const num = Number(value);
+            if (num !== num) {
+                return false;
+            }
+
+            return num < Number(count);
+        }
+    });
+};
+
+export const maxinclusive: IValidatorGenerator = (count: number | string) => {
+    return new Validator({
+        name: 'maxinclusive',
+        validate: (value: string) => {
+            const num = Number(value);
+            if (num !== num) {
+                return false;
+            }
+
+            return num <= Number(count);
         }
     });
 };

@@ -4,6 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 declare module 'apla/tx' {
+    import { Int64BE } from 'int64-buffer';
+
     type TTxError =
         'error' |
         'info' |
@@ -53,9 +55,7 @@ declare module 'apla/tx' {
         name: string,
         hash: string,
         status: ITxStatus;
-        params: {
-            [name: string]: ITransactionParam;
-        };
+        body: ITransactionBody;
     }
 
     interface ITransactionCall {
@@ -70,5 +70,19 @@ declare module 'apla/tx' {
         errorRedirects?: {
             [key: string]: IErrorRedirect
         }
+    }
+
+    interface ITransactionBody {
+        Header: {
+            ID: number;
+            Time: number;
+            EcosystemID: number;
+            KeyID: Int64BE;
+            NetworkID: number;
+            PublicKey: ArrayBuffer;
+        };
+        Params: {
+            [key: string]: object;
+        };
     }
 }

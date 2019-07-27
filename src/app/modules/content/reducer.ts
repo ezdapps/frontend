@@ -13,12 +13,14 @@ import reloadStylesheetHandler from './reducers/reloadStylesheetHandler';
 
 export type State = {
     readonly stylesheet: string;
+    readonly printStylesheet: string;
     readonly navigationResizing: boolean;
     readonly notifications: TProtypoElement[];
 };
 
 export const initialState: State = {
     stylesheet: null,
+    printStylesheet: null,
     navigationResizing: false,
     notifications: null
 };
