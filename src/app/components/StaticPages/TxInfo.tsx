@@ -13,6 +13,7 @@ import PrintZone from 'components/PrintZone';
 import { FormattedMessage } from 'react-intl';
 
 export interface ITxInfoProps {
+    section: string;
     txStack: {
         hash: string;
         tx: ITransaction;
@@ -93,6 +94,7 @@ const TxInfo: React.SFC<ITxInfoProps> = props => (
                 ))}
                 <hr />
                 <Protypo
+                    section={props.section}
                     context="page"
                     content={props.children}
                 />

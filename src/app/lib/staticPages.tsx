@@ -14,12 +14,12 @@ export interface IStaticPage<T = {}, TSubParams = {}> {
         name: string;
         params: TSubParams;
     };
-    render: (props?: T) => React.ReactNode;
+    render: (section: string, props?: T) => React.ReactNode;
 }
 
 const STATIC_PAGES: { [page: string]: IStaticPage<any, any> } = {
     'backup': { section: null, render: () => <Backup /> },
-    'editor': { section: 'editor', render: (props: { open?: string, create?: string, name?: string, vde?: string }) => <Editor {...props} /> },
+    'editor': { section: 'editor', render: (_section, props: { open?: string, create?: string, name?: string, vde?: string }) => <Editor {...props} /> },
     'txinfo': {
         section: null,
         renderSubstitute: props => ({
@@ -28,7 +28,7 @@ const STATIC_PAGES: { [page: string]: IStaticPage<any, any> } = {
                 txhashes: props.txhashes
             }
         }),
-        render: props => <TxInfo {...props} />
+        render: (section, props) => <TxInfo section={section} {...props} />
     }
 };
 

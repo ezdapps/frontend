@@ -30,7 +30,7 @@ const Page: React.SFC<IPageProps> = props => {
         return (
             <div className="fullscreen" style={{ backgroundColor: '#fff', maxHeight: '100%', overflowX: 'hidden', overflowY: 'auto' }}>
                 {props.value.static && (
-                    staticPage.render(props.value.params)
+                    staticPage.render(props.section, props.value.params)
                 )}
                 {!props.value.static && (
                     <Protypo
