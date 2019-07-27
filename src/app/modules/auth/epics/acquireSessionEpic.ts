@@ -27,8 +27,8 @@ const acquireSessionEpic: Epic = (action$, store, { api }) => action$.ofAction(a
 
         return Observable.forkJoin(
             Observable.from(client.sections({ locale: state.storage.locale })).map(s => s.list),
-            Observable.from(client.getParam({ name: 'stylesheet' })).map(p => p.value).catch(e => ''),
-            Observable.from(client.getParam({ name: 'print_stylesheet' })).map(p => p.value).catch(e => '')
+            Observable.from(client.getParam({ name: 'stylesheet' })).map(p => p.value).catch(e => Observable.of('')),
+            Observable.from(client.getParam({ name: 'print_stylesheet' })).map(p => p.value).catch(e => Observable.of(''))
 
         ).flatMap(([sections, stylesheet, printStylesheet]) => {
             const sectionsResult: { [name: string]: ISection } = {};
@@ -67,7 +67,7 @@ const acquireSessionEpic: Epic = (action$, store, { api }) => action$.ofAction(a
                     result: true
                 })
             );
-        }).catch(() => Observable.of(acquireSession.done({
+        }).catch(e => Observable.of(acquireSession.done({
             params: action.payload,
             result: false
         })));
