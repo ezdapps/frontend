@@ -27,7 +27,6 @@ interface IAppProps {
     isCollapsed: boolean;
     isFatal: boolean;
     securityWarningClosed: boolean;
-    switchWindow: (wnd: string) => void;
 }
 
 const ThemedApp = themed.div`
@@ -37,12 +36,6 @@ const ThemedApp = themed.div`
 `;
 
 class App extends React.Component<IAppProps> {
-    componentWillReceiveProps(props: IAppProps) {
-        if (this.props.isAuthenticated !== props.isAuthenticated) {
-            props.switchWindow(props.isAuthenticated ? 'main' : 'general');
-        }
-    }
-
     render() {
         const classes = classnames({
             'wrapper': true,

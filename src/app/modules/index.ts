@@ -16,7 +16,6 @@ import * as modal from './modal';
 import * as engine from './engine';
 import * as editor from './editor';
 import * as tx from './tx';
-import * as gui from './gui';
 import * as io from './io';
 import * as notifications from './notifications';
 import * as storage from './storage';
@@ -39,7 +38,6 @@ export interface IRootState {
     engine: engine.State;
     editor: editor.State;
     tx: tx.State;
-    gui: gui.State;
     io: io.State;
     notifications: notifications.State;
     storage: storage.State;
@@ -56,7 +54,6 @@ export const rootEpic = combineEpics(
     engine.epic,
     editor.epic,
     tx.epic,
-    gui.epic,
     io.epic,
     notifications.epic,
     storage.epic,
@@ -72,7 +69,6 @@ export default combineReducers<IRootState>({
     engine: engine.reducer,
     editor: editor.reducer,
     tx: tx.reducer,
-    gui: gui.reducer,
     notifications: notifications.reducer,
     storage: storage.reducer,
     socket: socket.reducer,

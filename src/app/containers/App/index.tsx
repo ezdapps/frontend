@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { IntlProvider } from 'react-intl';
 import { DragDropContext } from 'react-dnd';
-import { switchWindow } from 'modules/gui/actions';
 import HTML5Backend from 'react-dnd-html5-backend';
 
 import App from 'components/App';
@@ -30,7 +29,6 @@ interface IAppContainerState {
 }
 
 interface IAppContainerDispatch {
-    switchWindow: typeof switchWindow.started;
 }
 
 const AppContainer: React.SFC<IAppContainerProps & IAppContainerState & IAppContainerDispatch> = props => (
@@ -42,7 +40,6 @@ const AppContainer: React.SFC<IAppContainerProps & IAppContainerState & IAppCont
                 isLoaded={props.isLoaded}
                 isCollapsed={props.isCollapsed}
                 isFatal={props.isFatal}
-                switchWindow={props.switchWindow}
                 securityWarningClosed={props.securityWarningClosed}
             />
         </ThemeProvider>
@@ -61,7 +58,6 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-    switchWindow: switchWindow.started
 };
 
 export default DragDropContext(HTML5Backend)(

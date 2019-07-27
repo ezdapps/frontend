@@ -7,8 +7,8 @@ import { Action } from 'redux';
 import { Observable } from 'rxjs/Observable';
 import { Epic } from 'modules';
 import { Observer } from 'rxjs';
-import { setBadgeCount } from 'modules/gui/actions';
 import { subscribe, setNotificationsCount } from '../actions';
+import platform from 'lib/platform';
 
 const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.started)
     .flatMap(action => {
@@ -52,7 +52,10 @@ const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.start
                         }));
                     });
 
-                    observer.next(setBadgeCount(count));
+                    platform.on('desktop', () => {
+                        const Electron = require('electron');
+                        Electron.remote.app.setBadgeCount(count);
+                    });
                 });
 
                 observer.next(subscribe.done({
