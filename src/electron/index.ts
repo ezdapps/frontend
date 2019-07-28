@@ -7,6 +7,7 @@ require('module').globalPaths.push(__dirname);
 
 import { app } from 'electron';
 import { spawnWindow, window } from './windows/index';
+import './ipc';
 
 app.on('ready', () => {
     spawnWindow();
