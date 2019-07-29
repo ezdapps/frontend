@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import platform from 'lib/platform';
 
 import themed from 'components/Theme/themed';
 import BackButton from './BackButton';
@@ -43,7 +42,7 @@ const Heading: React.SFC<IHeadingProps> = props => (
 );
 
 export default themed(Heading)`
-    background: ${props => platform.select({ web: props.theme.headerBackground, desktop: 'transparent' })};
+    background: ${props => props.theme.headerBackground};
     margin: -15px -15px 15px;
     padding: 0 15px;
     height: 45px;
@@ -67,7 +66,7 @@ export default themed(Heading)`
         }
 
         .heading-title {
-            color: ${props => platform.select({ web: props.theme.headerForeground, desktop: '#000' })};
+            color: ${props => props.theme.headerForeground};
             font-size: 18px;
         }
     }

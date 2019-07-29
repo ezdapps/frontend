@@ -20,8 +20,11 @@ import ModalProvider from 'containers/Modal/ModalProvider';
 import NotificationsProvider from 'containers/Notifications/NotificationsProvider';
 import SecurityWarning from 'containers/SecurityWarning';
 import ThemeProvider from 'components/Theme/ThemeProvider';
+import Titlebar from './Main/Titlebar';
+import { INetworkEndpoint } from 'apla/auth';
 
 interface AppProps {
+    network: INetworkEndpoint;
     locale: string;
     isSessionAcquired: boolean;
     isAuthenticated: boolean;
@@ -38,12 +41,22 @@ const ThemedApp = themed.div`
     }
 `;
 
+const StyledTitlebar = themed.div`
+    background: ${props => props.theme.headerBackground};
+    height: ${props => props.theme.headerHeight}px;
+    line-height: ${props => props.theme.headerHeight}px;
+    font-size: 15px;
+    color: #fff;
+    text-align: center;
+`;
+
 class App extends React.Component<AppProps> {
     componentDidMount() {
         this.props.initialize();
     }
 
     render() {
+        const appTitle = `Apla ${this.props.network ? '(' + this.props.network.apiHost + ')' : ''}`;
         const classes = classnames({
             'wrapper': true,
             'layout-fixed': true,
@@ -56,6 +69,9 @@ class App extends React.Component<AppProps> {
             <IntlProvider locale={this.props.locale} defaultLocale="en-US" messages={this.props.localeMessages}>
                 <ThemeProvider theme={baseTheme}>
                     <ThemedApp className={classes}>
+                        <StyledTitlebar className="drag">
+                            <Titlebar>{appTitle}</Titlebar>
+                        </StyledTitlebar>
                         <ModalProvider />
                         <NotificationsProvider />
                         {platform.select({

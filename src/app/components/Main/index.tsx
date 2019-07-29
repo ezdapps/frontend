@@ -5,24 +5,20 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { INetworkEndpoint } from 'apla/auth';
 import { ISection } from 'apla/content';
-import platform from 'lib/platform';
 
 import themed from 'components/Theme/themed';
-import Titlebar from './Titlebar';
 import UserMenu from 'containers/Widgets/UserMenu';
 import NotificationsMenu from 'containers/Widgets/NotificationsMenu';
 import ToolIndicator from 'components/Main/Toolbar/ToolIndicator';
-import LoadingBar from './LoadingBar';
 import Selector from 'containers/Main/Sections/Selector';
 
 const StyledWrapper = themed.div`
     background-color: #f6f8fa;
+    position: relative;
 `;
 
 export interface IMainProps {
-    network: INetworkEndpoint;
     isAuthorized: boolean;
     // pending: boolean;
     section: string;
@@ -33,23 +29,6 @@ export interface IMainProps {
     transactionsCount: number;
     // onNavigationToggle: () => void;
 }
-
-const StyledControls = themed.div`
-    position: fixed;
-    top: ${platform.select({ win32: '1px' }) || 0};
-    left: ${platform.select({ win32: '1px' }) || 0};
-    right: ${platform.select({ win32: '1px' }) || 0};
-    z-index: 10000;
-`;
-
-const StyledTitlebar = themed.div`
-    background: ${props => props.theme.headerBackground};
-    height: ${props => props.theme.headerHeight}px;
-    line-height: ${props => props.theme.headerHeight}px;
-    font-size: 15px;
-    color: #fff;
-    text-align: center;
-`;
 
 const StyledMenu = themed.ul`
     background: ${props => props.theme.headerBackground};
@@ -88,46 +67,38 @@ const StyledContent = themed.section`
     transition: none !important;
 `;
 
-const Main: React.SFC<IMainProps> = props => {
-    const appTitle = `Apla ${props.network ? '(' + props.network.apiHost + ')' : ''}`;
-
-    return (
-        <StyledWrapper className="wrapper component-main">
-            <style type="text/css">
-                {props.stylesheet}
-            </style>
-            <StyledControls>
-                <StyledTitlebar className="drag">
-                    <Titlebar>{appTitle}</Titlebar>
-                </StyledTitlebar>
-                <StyledMenu className="drag">
-                    {/* <li>
+const Main: React.SFC<IMainProps> = props => (
+    <StyledWrapper className="wrapper component-main">
+        <style type="text/css">
+            {props.stylesheet}
+        </style>
+        <header>
+            <StyledMenu>
+                {/* <li>
                         <SectionButton onClick={this.props.onNavigationToggle}>
                                 <em className="icon-menu" />
                             </SectionButton>
                     </li> */}
-                    <li>
-                        <Selector section={props.section} />
-                    </li>
-                    <ToolIndicator
-                        right
-                        icon="icon-key"
-                        title={<FormattedMessage id="privileged" defaultMessage="Privileged mode" />}
-                        titleDesc={<FormattedMessage id="privileged.desc" defaultMessage="You will not be prompted to enter your password when executing transactions" />}
-                    />
-                    <li className="user-menu">
-                        <NotificationsMenu />
-                        {/*<TransactionsMenu />*/}
-                        <UserMenu />
-                    </li>
-                </StyledMenu>
-                <LoadingBar />
-            </StyledControls >
-            <StyledContent>
-                {props.children}
-            </StyledContent>
-        </StyledWrapper >
-    );
-};
+                <li>
+                    <Selector section={props.section} />
+                </li>
+                <ToolIndicator
+                    right
+                    icon="icon-key"
+                    title={<FormattedMessage id="privileged" defaultMessage="Privileged mode" />}
+                    titleDesc={<FormattedMessage id="privileged.desc" defaultMessage="You will not be prompted to enter your password when executing transactions" />}
+                />
+                <li className="user-menu">
+                    <NotificationsMenu />
+                    {/*<TransactionsMenu />*/}
+                    <UserMenu />
+                </li>
+            </StyledMenu>
+        </header>
+        <StyledContent>
+            {props.children}
+        </StyledContent>
+    </StyledWrapper >
+);
 
 export default Main;

@@ -18,7 +18,8 @@ const mapStateToProps = (state: IRootState) => ({
     isAuthenticated: state.auth.isAuthenticated,
     isLoaded: state.engine.isLoaded,
     isFatal: !!state.engine.fatalError,
-    securityWarningClosed: state.storage.securityWarningClosed
+    securityWarningClosed: state.storage.securityWarningClosed,
+    network: state.engine.guestSession && state.engine.guestSession.network
 });
 
 const mapDispatchToProps = {

@@ -60,6 +60,7 @@ const SystemMenu: React.SFC<ISystemMenuProps> = props => {
     const elements = [
         (
             <SystemDropdown
+                key="1"
                 width={180}
                 align={props.align}
                 leftMost={'left' === props.align}
@@ -92,7 +93,7 @@ const SystemMenu: React.SFC<ISystemMenuProps> = props => {
             </SystemDropdown>
         ),
         (
-            <SystemButton onClick={props.onChangeLocale}>
+            <SystemButton key="2" onClick={props.onChangeLocale}>
                 <em className="icon-globe" />
             </SystemButton>
         )
