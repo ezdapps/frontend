@@ -8,7 +8,6 @@ import 'lib/external/fsa';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createEpicMiddleware } from 'redux-observable';
-import { loadingBarMiddleware } from 'react-redux-loading-bar';
 import persistState, { mergePersistedState } from 'redux-localstorage';
 import adapter from 'redux-localstorage/lib/adapters/localStorage';
 import filter from 'redux-localstorage-filter';
@@ -59,9 +58,6 @@ const configureStore = (initialState?: IRootState) => {
         routerMiddleware(history),
         createEpicMiddleware(rootEpic, {
             dependencies
-        }),
-        loadingBarMiddleware({
-            promiseTypeSuffixes: ['STARTED', 'DONE', 'FAILED']
         })
     ];
 

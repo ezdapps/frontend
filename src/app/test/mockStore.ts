@@ -766,7 +766,6 @@ const state: IRootState = {
         notifications: [],
         subscriptions: []
     },
-    loadingBar: 0,
     router: {
         location: {
             pathname: '/editor',

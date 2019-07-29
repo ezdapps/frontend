@@ -8,7 +8,6 @@ import { Epic as NativeEpic } from 'redux-observable';
 import { IStoreDependencies } from './dependencies';
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
-import { loadingBarReducer } from 'react-redux-loading-bar';
 import * as auth from './auth';
 import * as content from './content';
 import * as sections from './sections';
@@ -42,7 +41,6 @@ export interface IRootState {
     notifications: notifications.State;
     storage: storage.State;
     socket: socket.State;
-    loadingBar: number;
     router: router.State;
 }
 
@@ -72,6 +70,5 @@ export default combineReducers<IRootState>({
     notifications: notifications.reducer,
     storage: storage.reducer,
     socket: socket.reducer,
-    loadingBar: loadingBarReducer,
     router: router.reducer
 });
