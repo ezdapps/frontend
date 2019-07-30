@@ -16,7 +16,7 @@ import Modal, { IModalProps } from './';
 import Validation from 'components/Validation';
 import MapView from 'components/Map/MapView';
 import Tooltip from 'components/Tooltip';
-import SectionToolButton from 'components/Main/Toolbar/SectionToolButton';
+import SectionToolButton from 'components/Toolbar/SegmentToolButton';
 
 export interface IMapEditorModalProps {
     mapType?: 'streets' | 'satellite' | 'hybrid' | 'topo' | 'gray' | 'dark-gray' | 'oceans' | 'national-geographic' | 'terrain' | 'osm';

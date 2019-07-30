@@ -25,7 +25,7 @@ export interface IPageLinkProps {
 const PageLink: React.SFC<IPageLinkProps> = props => (
     <Link
         to={{
-            pathname: generateRoute(`/${props.section}/${props.page}`, props.params),
+            pathname: generateRoute(`/browse/${props.section}/${props.page}`, props.params),
             state: {
                 from: props.from
             }

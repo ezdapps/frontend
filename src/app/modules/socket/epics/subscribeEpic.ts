@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import { Epic } from 'modules';
 import { Observer } from 'rxjs';
 import { subscribe, setNotificationsCount } from '../actions';
+import { fetchNotifications } from 'modules/content/actions';
+import findNotificationsCount from '../util/findNotificationsCount';
 import platform from 'lib/platform';
 
 const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.started)
@@ -32,6 +34,8 @@ const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.start
 
                     message.data.forEach(n => {
                         const subState = store.getState();
+                        const notifications = findNotificationsCount(subState.socket, subState.auth.wallet);
+
                         if (subState.auth.isAuthenticated &&
                             (
                                 subState.auth.wallet.role && subState.auth.wallet.role.id === n.role_id ||
@@ -50,6 +54,11 @@ const subscribeEpic: Epic = (action$, store) => action$.ofAction(subscribe.start
                             role: n.role_id,
                             count: n.count
                         }));
+
+                        const notificationsNew = findNotificationsCount(subState.socket, subState.auth.wallet);
+                        if (notifications !== notificationsNew) {
+                            observer.next(fetchNotifications.started(undefined));
+                        }
                     });
 
                     platform.on('desktop', () => {

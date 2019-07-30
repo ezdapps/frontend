@@ -94,7 +94,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                         }));
                     }
                     else {
-                        const redirectUrl = routerService.generateRoute(`/${action.payload.page.section}/${action.payload.page.name}`, action.payload.page.params);
+                        const redirectUrl = routerService.generateRoute(`/browse/${action.payload.page.section}/${action.payload.page.name}`, action.payload.page.params);
                         return Observable.of<Action>(
                             push(redirectUrl, { from: action.payload.from })
                         );

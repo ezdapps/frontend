@@ -7,7 +7,7 @@ import * as React from 'react';
 import StyledComponent from 'components/Protypo/handlers/StyledComponent';
 import DnDComponent from './DnDComponent';
 import EditableBlock, { IEditableBlockProps } from './EditableBlock';
-import Switch from 'components/Main/Editor/Designer/Switch';
+import Switch from 'components/Editor/Designer/Switch';
 
 export class If extends EditableBlock {
     protected logic = true;

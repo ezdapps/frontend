@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import { FormattedMessage, IntlProvider } from 'react-intl';
 import platform from 'lib/platform';
 import classnames from 'classnames';
@@ -12,7 +12,7 @@ import baseTheme from 'components/Theme/baseTheme';
 
 import { AnimatedSwitch } from 'components/Animation';
 import themed from 'components/Theme/themed';
-import Main from 'containers/Main';
+import Navigator from 'containers/Navigator';
 import Auth from 'containers/Auth';
 import Error from 'containers/Auth/Error';
 import Splash from 'components/Splash';
@@ -20,7 +20,7 @@ import ModalProvider from 'containers/Modal/ModalProvider';
 import NotificationsProvider from 'containers/Notifications/NotificationsProvider';
 import SecurityWarning from 'containers/SecurityWarning';
 import ThemeProvider from 'components/Theme/ThemeProvider';
-import Titlebar from './Main/Titlebar';
+import Titlebar from 'components/Titlebar';
 import { INetworkEndpoint } from 'apla/auth';
 
 interface AppProps {
@@ -81,7 +81,6 @@ class App extends React.Component<AppProps> {
                                 </SecurityWarning>
                             )
                         })}
-
                         <AnimatedSwitch animation={AnimatedSwitch.animations.fade()}>
                             {this.props.isFatal && (
                                 <Route path="/" component={Error} />
@@ -95,7 +94,8 @@ class App extends React.Component<AppProps> {
                             {!this.props.isSessionAcquired && (
                                 <Route path="/" component={Splash} />
                             )}
-                            <Route path="/:section?/:page?" render={route => <Main section={route.match.params.section} page={route.match.params.page} />} />
+                            <Route path="/browse/:section?/:page?" render={route => <Navigator section={route.match.params.section} page={route.match.params.page} />} />
+                            <Redirect to="/browse" />
                         </AnimatedSwitch>
                     </ThemedApp>
                 </ThemeProvider>

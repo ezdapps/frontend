@@ -4,8 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import Backup from 'containers/Main/Backup';
-import Editor from 'containers/Main/Editor';
 import TxInfo from 'containers/StaticPages/TxInfo';
 
 export interface IStaticPage<T = {}, TSubParams = {}> {
@@ -18,8 +16,6 @@ export interface IStaticPage<T = {}, TSubParams = {}> {
 }
 
 const STATIC_PAGES: { [page: string]: IStaticPage<any, any> } = {
-    'backup': { section: null, render: () => <Backup /> },
-    'editor': { section: 'editor', render: (_section, props: { open?: string, create?: string, name?: string, vde?: string }) => <Editor {...props} /> },
     'txinfo': {
         section: null,
         renderSubstitute: props => ({

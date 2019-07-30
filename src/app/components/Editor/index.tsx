@@ -4,64 +4,86 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import styled from 'styled-components';
-import MonacoEditor from 'react-monaco-editor';
-import registerProtypo from './protypo';
-import registerSimvolio from './simvolio';
+import { TEditorTab } from 'apla/editor';
 
-import { editor } from 'monaco-editor';
-import 'monaco-editor/esm/vs/editor/browser/controller/coreCommands.js';
-import 'monaco-editor/esm/vs/editor/contrib/bracketMatching/bracketMatching.js';
-import 'monaco-editor/esm/vs/editor/contrib/caretOperations/caretOperations.js';
-import 'monaco-editor/esm/vs/editor/contrib/caretOperations/transpose.js';
-import 'monaco-editor/esm/vs/editor/contrib/clipboard/clipboard.js';
-import 'monaco-editor/esm/vs/editor/contrib/find/findController.js';
-import 'monaco-editor/esm/vs/editor/contrib/multicursor/multicursor.js';
-import 'monaco-editor/esm/vs/editor/contrib/suggest/suggestController.js';
-import 'monaco-editor/esm/vs/editor/contrib/suggest/suggest.js';
-import * as monacoEditor from 'monaco-editor/esm/vs/editor/editor.api';
+import CodeEditor from './CodeEditor';
+import EditorTabs from './EditorTabs';
+import ConstructorTabbed from 'containers/Editor/ConstructorTabbed';
+import Page from 'components/Navigator/Page';
 
-registerProtypo(monacoEditor);
-registerSimvolio(monacoEditor);
-
-const StyledEditor = styled.div`
-    &.editor-flex {
-        display: flex;
-        flex-direction: column;
-        flex: 1;
-
-        > .react-monaco-editor-container {
-            flex: 1;
-        }
-    }
-`;
-
-interface IEditorProps {
-    language?: string;
-    value?: string;
-    width?: number;
-    height?: number;
-    options?: editor.IEditorOptions;
-    onChange?: (code: string) => void;
+export interface IEditorProps {
+    mainSection: string;
+    tabIndex: number;
+    tabs: TEditorTab[];
+    onTabChange: (index: number) => void;
+    onTabUpdate: (value: string) => void;
+    onTabClose: (index: number) => void;
+    onTabCloseAll: () => void;
+    onTabCloseSaved: () => void;
 }
 
-export default class Editor extends React.Component<IEditorProps> {
+class Editor extends React.Component<IEditorProps> {
+    renderTool(tab: TEditorTab) {
+        switch (tab.tool) {
+            case 'constructor':
+                return (
+                    <ConstructorTabbed section={this.props.mainSection} pageID={tab.id} pageName={tab.name} />
+                );
+
+            case 'preview':
+                return (
+                    <div className="flex-col flex-stretch scroll">
+                        <Page
+                            section={this.props.mainSection}
+                            value={{
+                                name: 'preview',
+                                status: 'LOADED',
+                                content: tab.preview,
+                                static: false,
+                                params: {},
+                                location: {
+                                    key: 'preview',
+                                    pathname: 'preview',
+                                    search: '',
+                                    state: '',
+                                    hash: ''
+                                }
+                            }}
+                        />
+                    </div>
+                );
+
+            default:
+                return null;
+        }
+    }
+
     render() {
         return (
-            <StyledEditor className={this.props.height ? null : 'editor-flex'}>
-                <MonacoEditor
-                    language={this.props.language}
-                    value={this.props.value}
-                    onChange={this.props.onChange && this.props.onChange.bind(this)}
-                    options={{
-                        automaticLayout: true,
-                        contextmenu: false,
-                        scrollBeyondLastLine: false,
-                        ...this.props.options
-                    }}
-                    height={this.props.height}
+            <div className="fullscreen noscroll">
+                <EditorTabs
+                    tabIndex={this.props.tabIndex}
+                    tabs={this.props.tabs}
+                    onChange={this.props.onTabChange}
+                    onClose={this.props.onTabClose}
+                    onCloseAll={this.props.onTabCloseAll}
+                    onCloseSaved={this.props.onTabCloseSaved}
                 />
-            </StyledEditor>
+                {this.props.tabs.map((tab, index) => (
+                    <div key={index} className="fullscreen" style={{ display: this.props.tabIndex === index ? null : 'none' }}>
+                        <div className="fullscreen" style={{ display: 'editor' === tab.tool ? null : 'none' }}>
+                            <CodeEditor
+                                language={'contract' === tab.type ? 'simvolio' : 'protypo'}
+                                value={tab.value}
+                                onChange={this.props.onTabUpdate}
+                            />
+                        </div>
+                        {index === this.props.tabIndex && 'editor' !== tab.tool ? this.renderTool(tab) : null}
+                    </div>
+                ))}
+            </div>
         );
     }
 }
+
+export default Editor;
