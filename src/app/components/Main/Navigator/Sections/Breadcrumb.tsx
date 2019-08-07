@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import PageLink from 'components/Routing/PageLink';
+import PageLink from 'containers/Routing/PageLink';
 import themed from 'components/Theme/themed';
 
 interface Props {

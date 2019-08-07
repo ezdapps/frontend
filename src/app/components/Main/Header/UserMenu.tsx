@@ -9,7 +9,7 @@ import { IAccountContext } from 'apla/auth';
 import { IEcosystemInfo } from 'apla/api';
 
 import { CloseDropdownButton } from 'components/DropdownButton';
-import PageLink from 'components/Routing/PageLink';
+import PageLink from 'containers/Routing/PageLink';
 import HeaderButton from './HeaderButton';
 import Avatar from 'containers/Avatar';
 import themed from 'components/Theme/themed';
@@ -62,7 +62,6 @@ const StyledUserMenu = themed.div`
 `;
 
 interface Props {
-    mainSection: string;
     isDefaultWallet: boolean;
     wallet?: IAccountContext;
     walletEcosystems: IEcosystemInfo[];
@@ -91,7 +90,7 @@ const UserMenu: React.SFC<Props> = props => props.wallet && props.wallet.wallet 
                                 </CloseDropdownButton>
                             </li>
                             <li>
-                                <PageLink page="backup" section={props.mainSection}>
+                                <PageLink page="backup">
                                     <CloseDropdownButton>
                                         <em className="icon icon-shield text-muted" />
                                         <span>

@@ -8,7 +8,7 @@ import propTypes from 'prop-types';
 
 import { IParamsSpec } from '../Protypo';
 import StyledComponent from './StyledComponent';
-import PageLink from 'components/Routing/PageLink';
+import PageLink from 'containers/Routing/PageLink';
 
 export interface ILinkPageProps {
     'class'?: string;

@@ -9,7 +9,7 @@ import propTypes from 'prop-types';
 
 import themed from 'components/Theme/themed';
 import Protypo, { IParamsSpec } from '../Protypo';
-import PageLink from 'components/Routing/PageLink';
+import PageLink from 'containers/Routing/PageLink';
 
 export interface IMenuItemProps {
     'title'?: string;
