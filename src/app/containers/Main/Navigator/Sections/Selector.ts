@@ -15,6 +15,7 @@ const mapSectionParam = (section: ISection) => {
     const params: TPageParams = section.page ? section.page.params : {};
 
     return {
+        index: section.index,
         title: section.title,
         name: section.name,
         page,
@@ -24,7 +25,7 @@ const mapSectionParam = (section: ISection) => {
 
 const mapStateToProps = (state: IRootState, props: { section?: string }) => ({
     section: props.section || state.sections.mainSection,
-    values: _.map(state.sections.sections, mapSectionParam) as any
+    values: _.map(state.sections.sections, mapSectionParam).sort((a, b) => a.index - b.index)
 });
 
 export default connect(mapStateToProps)(Selector);

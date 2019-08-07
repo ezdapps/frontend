@@ -34,8 +34,9 @@ const acquireSessionEpic: Epic = (action$, store, { api }) => action$.ofAction(a
             const sectionsResult: { [name: string]: ISection } = {};
             const mainSection = sections.find(l => RemoteSectionStatus.Main === l.status);
 
-            sections.forEach(section => {
+            sections.forEach((section, index) => {
                 sectionsResult[section.urlname] = {
+                    index,
                     name: section.urlname,
                     title: section.title,
                     defaultPage: section.page,

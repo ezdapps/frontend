@@ -11,10 +11,11 @@ import SectionButton from './SectionButton';
 export interface ISelectorProps {
     section: string;
     values: {
+        index: number;
         title: string;
         name: string;
         page: string;
-        params?: {
+        params: {
             [name: string]: string;
         }
     }[];

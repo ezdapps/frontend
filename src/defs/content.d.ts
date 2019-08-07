@@ -42,6 +42,7 @@ declare module 'apla/content' {
     }
 
     interface ISection {
+        readonly index: number;
         readonly name: string;
         readonly title: string;
         readonly defaultPage: string;
