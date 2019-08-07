@@ -16,7 +16,8 @@ interface Props extends IDropdownButtonProps {
 const HeaderButton: React.SFC<Props> = props => (
     <DropdownButton
         className={classNames(props.className, {
-            _warning: props.warning
+            _warning: props.warning,
+            _active: !!props.badge
         })}
         content={props.content}
         leftMost={props.leftMost}
@@ -39,11 +40,16 @@ const StyledHeaderButton = themed(HeaderButton)`
     transition: background ease-in-out .17s;
 
     &:hover {
-        background: ${props => props.theme.systemButtonActive};
+        background: ${props => props.theme.menubarBackgroundFocused};
     }
 
     &._warning {
-        background: ${props => props.theme.systemButtonSecondary};
+        background: ${props => props.theme.menubarBackgroundSecondary};
+        color: ${props => props.theme.menubarForegroundActive};
+    }
+
+    &._active {
+        color: ${props => props.theme.menubarForegroundActive};
     }
 `;
 

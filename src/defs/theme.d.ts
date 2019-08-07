@@ -16,6 +16,8 @@ declare module 'apla/theme' {
         menubarSize: number;
         menubarBackground: string;
         menubarBackgroundActive: string;
+        menubarBackgroundFocused: string;
+        menubarBackgroundSecondary: string;
         menubarForeground: string;
         menubarForegroundActive: string;
         menubarHighlight: string;
@@ -61,14 +63,10 @@ declare module 'apla/theme' {
         dropdownMenuBackground: string;
         dropdownMenuForeground: string;
         dropdownMenuDisabled: string;
-        dropdownMenuOutline: string;
         dropdownMenuActive: string;
         dropdownMenuSeparator: string;
         dropdownMenuPrimary: string;
         dropdownMenuSecondary: string;
-
-        systemButtonSecondary: string;
-        systemButtonActive: string;
 
         securityWarningBackground: string;
         securityWarningForeground: string;

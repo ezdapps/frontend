@@ -3,12 +3,13 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from 'react';
+import React from 'react';
 import Transition from 'react-transition-group/Transition';
 
-const animationDuration = 300;
+const animationDuration = 200;
 const containerAnimationDef = {
     defaultStyle: {
+        opacity: 1,
         position: 'absolute',
         overflow: 'hidden',
         zIndex: 600
@@ -42,22 +43,26 @@ const containerAnimationDef = {
 
 const animationDef = {
     defaultStyle: {
-        transition: `transform ${animationDuration}ms cubic-bezier(0,0.5,0,1)`,
-        transform: 'translateY(-100%)',
-        marginTop: '0'
+        transition: `transform ${animationDuration}ms cubic-bezier(0,0.5,0.5,1), opacity ${animationDuration}ms`,
+        transform: 'translateY(-25%)',
+        marginTop: '0',
+        opacity: 0
     },
     entering: {
-        transform: 'translateY(0)'
+        transform: 'translateY(0)',
+        opacity: 1
     },
     entered: {
-        transform: 'translateY(0)'
+        transform: 'translateY(0)',
+        opacity: 1
     },
 
     // We use negative margin to make children unclickable and not to break
     // animation that will be used later
     exited: {
-        transform: 'translateY(-100%)',
-        marginTop: '-100000px'
+        transform: 'translateY(-25%)',
+        marginTop: '-100000px',
+        opacity: 0
     }
 };
 

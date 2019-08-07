@@ -8,7 +8,7 @@ import { Redirect, Switch, Route } from 'react-router-dom';
 
 import themed from 'components/Theme/themed';
 import Navigator from 'containers/Main/Navigator';
-import Header from './Header';
+import Header from 'containers/Main/Header';
 
 interface Props {
 }

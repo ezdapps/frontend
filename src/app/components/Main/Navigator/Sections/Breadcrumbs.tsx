@@ -7,8 +7,8 @@ import React from 'react';
 import { IBreadcrumb } from 'apla/content';
 
 import themed from 'components/Theme/themed';
-import PageLink from 'components/Routing/PageLink';
 import Toolbar from 'components/Main/Toolbar';
+import Breadcrumb from './Breadcrumb';
 
 export interface IBreadcrumbsProps {
     values: IBreadcrumb[];
@@ -43,38 +43,19 @@ const StyledBreadcrumbs = themed.ul`
     }
 `;
 
-const renderTitle = (breadcrumb: IBreadcrumb, index: number) => {
-    if (0 === index) {
-        return (
-            <span>
-                <i className="fa fa-home" style={{ fontSize: '17px' }} />
-            </span>
-        );
-    }
-
-    return breadcrumb.title || breadcrumb.page;
-};
-
 const Breadcrumbs: React.SFC<IBreadcrumbsProps> = (props) => (
     <Toolbar>
         <StyledBreadcrumbs>
             {props.values.map((breadcrumb, i) => (
                 <li key={i}>
-                    {i === props.values.length - 1 ?
-                        (
-                            <span>
-                                {renderTitle(breadcrumb, i)}
-                            </span>
-                        ) : (
-                            <PageLink
-                                section={breadcrumb.section}
-                                page={breadcrumb.page}
-                                params={breadcrumb.params}
-                            >
-                                {renderTitle(breadcrumb, i)}
-                            </PageLink>
-                        )
-                    }
+                    <Breadcrumb
+                        home={i === 0}
+                        active={i !== props.values.length - 1}
+                        section={breadcrumb.section}
+                        page={breadcrumb.page}
+                        params={breadcrumb.params}
+                        title={breadcrumb.title}
+                    />
                 </li>
             ))}
         </StyledBreadcrumbs>

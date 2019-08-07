@@ -16,11 +16,13 @@ import Selector from 'containers/Main/Navigator/Sections/Selector';
 import HeaderSpacer from './HeaderSpacer';
 
 interface Props {
+    isAuthorized: boolean;
 }
 
 const StyledHeader = themed.header`
     background: url(${imgLogo}) 20px center ${props => props.theme.menubarBackground} no-repeat;
     height: ${props => props.theme.menubarSize}px;
+    color: ${props => props.theme.menubarForeground};
     transition: width .32s ease-in-out;
     position: absolute;
     top: 0;
@@ -50,12 +52,14 @@ const Header: React.SFC<Props> = props => (
         </div>
         <div className="header__filler" />
 
-        <ToolIndicator
-            right
-            icon="icon-key"
-            title={<FormattedMessage id="privileged" defaultMessage="Privileged mode" />}
-            titleDesc={<FormattedMessage id="privileged.desc" defaultMessage="You will not be prompted to enter your password when executing transactions" />}
-        />
+        {props.isAuthorized && (
+            <ToolIndicator
+                right
+                icon="icon-key"
+                title={<FormattedMessage id="privileged" defaultMessage="Privileged mode" />}
+                titleDesc={<FormattedMessage id="privileged.desc" defaultMessage="You will not be prompted to enter your password when executing transactions" />}
+            />
+        )}
         <NotificationsMenu />
         {/*<TransactionsMenu />*/}
         <UserMenu />

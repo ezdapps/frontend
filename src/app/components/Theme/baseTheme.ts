@@ -18,6 +18,8 @@ const baseTheme: IThemeDefinition = {
     menubarSize: 40,
     menubarBackground: '#3873A6',
     menubarBackgroundActive: '#9CB9D2',
+    menubarBackgroundFocused: 'rgba(255,255,255,0.09)',
+    menubarBackgroundSecondary: '#ffa500',
     menubarForeground: '#9CB9D3',
     menubarForegroundActive: '#fff',
     menubarHighlight: 'rgba(255,255,255,0.1)',
@@ -26,7 +28,7 @@ const baseTheme: IThemeDefinition = {
     toolbarBackground: '#f1f1f1',
     toolbarForeground: '#787878',
     toolbarForegroundActive: '#5d5d5d',
-    toolbarHeight: 45,
+    toolbarHeight: 40,
     toolbarSpacerForeground: '#C6C6C6',
 
     progressBarForeground: '#b2c5dc',
@@ -61,16 +63,12 @@ const baseTheme: IThemeDefinition = {
     sectionButtonPrimary: '#fff',
 
     dropdownMenuBackground: '#fff',
-    dropdownMenuForeground: '#666',
+    dropdownMenuForeground: '#464646',
     dropdownMenuDisabled: '#ccc',
-    dropdownMenuOutline: '#c5cbe2',
-    dropdownMenuActive: 'rgba(0,0,0,0.1)',
-    dropdownMenuSeparator: '#ddd',
+    dropdownMenuActive: 'rgba(0,0,0,0.06)',
+    dropdownMenuSeparator: '#efefef',
     dropdownMenuPrimary: '#4b7dbd',
     dropdownMenuSecondary: '#999',
-
-    systemButtonSecondary: '#ffa500',
-    systemButtonActive: 'rgba(0,0,0,0.1)',
 
     securityWarningBackground: '#ff5555',
     securityWarningForeground: '#ffffff',

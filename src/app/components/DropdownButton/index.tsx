@@ -6,10 +6,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import propTypes from 'prop-types';
+import onClickOutside, { InjectedOnClickOutProps } from 'react-onclickoutside';
 
 import themed from 'components/Theme/themed';
 import Dropdown from 'components/Animation/Dropdown';
-import onClickOutside, { InjectedOnClickOutProps } from 'react-onclickoutside';
 
 const StyledDropdown = themed.div`
     display: inline-block;
@@ -46,10 +46,11 @@ const StyledDropdown = themed.div`
     .dropdown-content {
         line-height: normal;
         background: ${props => props.theme.dropdownMenuBackground};
-        box-shadow: 0 0 25px rgba(0,0,0,.15);
-        border: solid 1px ${props => props.theme.dropdownMenuOutline};
+        box-shadow: 0 0 15px rgba(0,0,0,.15);
+        border-radius: 4px;
         border-top: none;
         text-align: left;
+        overflow: hidden;
 
         &.dropdown-leftmost {
             border-left: none;
@@ -59,16 +60,11 @@ const StyledDropdown = themed.div`
             border-right: none;
         }
 
-        &.icon-left .dropdown-group > li button > .icon {
-            float: left;
-            margin-right: 12px;
-        }
-
         .dropdown-heading {
             border-top: solid 1px ${props => props.theme.dropdownMenuSeparator};
             height: 30px;
             line-height: 30px;
-            padding: 0 15px;
+            padding: 0 12px;
             font-size: 11px;
             text-transform: uppercase;
             color: ${props => props.theme.dropdownMenuSecondary};
@@ -101,7 +97,7 @@ const StyledDropdown = themed.div`
                     background: 0;
                     transition: background .15s;
                     width: 100%;
-                    padding: 0 15px !important;
+                    padding: 0 12px !important;
                     margin: 0;
                     height: 40px;
                     line-height: 40px;
@@ -114,10 +110,11 @@ const StyledDropdown = themed.div`
                     text-align: left;
 
                     > .icon {
-                        float: right;
+                        float: left;
                         font-weight: 500;
-                        font-size: 14px;
+                        font-size: 15px;
                         line-height: 40px;
+                        margin-right: 12px;
                     }
 
                     &[disabled] {
