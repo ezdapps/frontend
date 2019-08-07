@@ -9,7 +9,7 @@ import platform from 'lib/platform';
 const baseTheme: IThemeDefinition = {
     windowBorder: '#4c7dbd',
 
-    headerBackground: '#4b4e5a',
+    headerBackground: '#354a69',
     headerForeground: '#fff',
     headerBackgroundActive: 'rgba(255,255,255,0.5)',
     headerForegroundMuted: '#a3acb5',
