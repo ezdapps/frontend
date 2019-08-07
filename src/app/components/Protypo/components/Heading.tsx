@@ -13,6 +13,7 @@ const StyledHeading = themed.div`
     height: 46px;
     color: #000;
     font-weight: normal;
+    margin-top: 10px;
     padding: 0 20px;
     border: 0;
 `;
