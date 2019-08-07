@@ -188,6 +188,7 @@
     "modal.imageeditor.desc": "Prepare your image for uploading by selecting which part of the image you want to use",
     "modal.imageeditor.title": "Image editor",
     "modal.network.remove.confirmation": "Do you really want to delete network \"{name}\"?",
+    "navigation.default_page": "Home page",
     "navigation.refresh": "Refresh",
     "notifications": "Notifications",
     "notification.ecosystem_invited": "Joined ecosystem {ecosystem}",

@@ -29,9 +29,11 @@ const StyledBreadcrumbs = themed.ul`
         display: inline-block;
         font-size: 13px;
         font-weight: 400;
-        height: 45px;
+        height: 100%;
+        line-height: inherit;
         color: ${props => props.theme.toolbarForegroundActive};
         margin-right: 10px;
+        vertical-align: top;
 
         &:first-child:before {
             content: none;
@@ -58,10 +60,22 @@ const Breadcrumbs: React.SFC<Props> = (props) => (
                         section={breadcrumb.section}
                         page={breadcrumb.page}
                         params={breadcrumb.params}
-                        title={breadcrumb.title}
-                    />
+                    >
+                        {breadcrumb.title}
+                    </Breadcrumb>
                 </li>
             ))}
+            {1 === props.values.length && (
+                <li>
+                    <Breadcrumb
+                        section=""
+                        page=""
+                        params={{}}
+                    >
+                        <FormattedMessage id="navigation.default_page" defaultMessage="Home page" />
+                    </Breadcrumb>
+                </li>
+            )}
         </StyledBreadcrumbs>
         <ToolButton icon="icon-refresh" onClick={props.onRefresh}>
             <FormattedMessage id="navigation.refresh" defaultMessage="Refresh" />

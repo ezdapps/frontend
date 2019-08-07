@@ -5,43 +5,70 @@
 
 import React from 'react';
 import PageLink from 'components/Routing/PageLink';
+import themed from 'components/Theme/themed';
 
 interface Props {
     home?: boolean;
-    active: boolean;
+    active?: boolean;
     section: string;
-    title: string;
     page: string;
     params: {
         [key: string]: string;
     };
 }
 
+const StyledBreadcrumb = themed.div`
+    vertical-align: top;
+    display: inline-block;
+
+    &.breadcrumb_active {
+        .breadcrumb__label, .breadcrumb__icon {
+            color: ${props => props.theme.toolbarForegroundPrimary};
+        }
+    }
+
+    .breadcrumb__icon {
+        line-height: inherit;
+        font-size: 16px;
+        color: ${props => props.theme.toolbarForeground};
+    }
+
+    .breadcrumb__label {
+        line-height: inherit;
+        font-size: 14px;
+        color: ${props => props.theme.toolbarForeground};
+    }
+`;
+
 const Breadcrumb: React.SFC<Props> = props => {
-    const titleText = props.title || props.page;
+    const titleText = props.children || props.page;
     const title = props.home ?
         (
-            <em className="fa fa-home" style={{ fontSize: 17 }} />
+            <em className="breadcrumb__icon icon-home" />
         )
         :
         (
-            <span>{titleText}</span>
+            <span className="breadcrumb__label">{titleText}</span>
         );
 
     if (!props.active) {
         return (
-            <span>{title}</span>
+            <StyledBreadcrumb>
+                {title}
+            </StyledBreadcrumb>
         );
     }
 
     return (
-        <PageLink
-            section={props.section}
-            page={props.page}
-            params={props.params}
-        >
-            {title}
-        </PageLink>
+        <StyledBreadcrumb className="breadcrumb_active">
+            <PageLink
+                section={props.section}
+                page={props.page}
+                params={props.params}
+            >
+                {title}
+            </PageLink>
+        </StyledBreadcrumb>
     );
 };
 
