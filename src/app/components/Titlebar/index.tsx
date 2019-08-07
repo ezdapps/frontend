@@ -13,6 +13,7 @@ export interface ITitlebarProps {
 
 const StyledControls = styled.div`
     position: relative;
+    z-index: 20000;
 
     .window-title {
         position: absolute;

@@ -25,7 +25,7 @@ const StyledControls = styled.div`
     .window-controls {
         position: absolute;
         left: 6px;
-        top: 5px;
+        top: 2px;
 
         button {
             background: url(${imgControls}) 0 0 no-repeat;
