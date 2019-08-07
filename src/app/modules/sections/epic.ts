@@ -5,7 +5,9 @@
 
 import { combineEpics } from 'redux-observable';
 import renderPageEpic from './epics/renderPageEpic';
+import reloadPageEpic from './epics/reloadPageEpic';
 
 export default combineEpics(
-    renderPageEpic
+    renderPageEpic,
+    reloadPageEpic
 );

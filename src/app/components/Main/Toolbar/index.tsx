@@ -17,4 +17,6 @@ export default themed.div`
     position: relative;
     z-index: 110;
     white-space: nowrap;
+    display: flex;
+    flex-direction: row;
 `;

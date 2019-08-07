@@ -5,6 +5,7 @@
 
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
+import { reloadPage } from 'modules/sections/actions';
 
 import Navigator from 'components/Main/Navigator';
 
@@ -26,4 +27,11 @@ const mapStateToProps = (state: IRootState, props: Props) => {
     };
 };
 
-export default connect(mapStateToProps, {})(Navigator);
+const mapDispatchToProps = {
+    reloadPage
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, (state, dispatch: any, props) => ({
+    ...state,
+    onRefresh: () => dispatch.reloadPage({ section: props.section })
+}))(Navigator);

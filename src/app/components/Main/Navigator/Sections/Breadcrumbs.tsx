@@ -5,13 +5,16 @@
 
 import React from 'react';
 import { IBreadcrumb } from 'apla/content';
+import { FormattedMessage } from 'react-intl';
 
 import themed from 'components/Theme/themed';
 import Toolbar from 'components/Main/Toolbar';
 import Breadcrumb from './Breadcrumb';
+import ToolButton from 'components/Main/Toolbar/ToolButton';
 
-export interface IBreadcrumbsProps {
+interface Props {
     values: IBreadcrumb[];
+    onRefresh: () => void;
 }
 
 const StyledBreadcrumbs = themed.ul`
@@ -20,6 +23,7 @@ const StyledBreadcrumbs = themed.ul`
     margin: 0;
     padding: 0;
     font-size: 0;
+    flex: 1;
     
     > li {
         display: inline-block;
@@ -43,7 +47,7 @@ const StyledBreadcrumbs = themed.ul`
     }
 `;
 
-const Breadcrumbs: React.SFC<IBreadcrumbsProps> = (props) => (
+const Breadcrumbs: React.SFC<Props> = (props) => (
     <Toolbar>
         <StyledBreadcrumbs>
             {props.values.map((breadcrumb, i) => (
@@ -59,6 +63,9 @@ const Breadcrumbs: React.SFC<IBreadcrumbsProps> = (props) => (
                 </li>
             ))}
         </StyledBreadcrumbs>
+        <ToolButton icon="icon-refresh" onClick={props.onRefresh}>
+            <FormattedMessage id="navigation.refresh" defaultMessage="Refresh" />
+        </ToolButton>
     </Toolbar>
 );
 

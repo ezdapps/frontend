@@ -26,8 +26,11 @@ const baseTheme: IThemeDefinition = {
     menubarFocus: '#aac6da',
 
     toolbarBackground: '#f1f1f1',
-    toolbarForeground: '#787878',
+    toolbarBackgroundActive: 'rgba(0,0,0,0.1)',
+    toolbarBackgroundFocused: 'rgba(0,0,0,0.05)',
+    toolbarForeground: '#333',
     toolbarForegroundActive: '#5d5d5d',
+    toolbarForegroundPrimary: '#4688ff',
     toolbarHeight: 40,
     toolbarSpacerForeground: '#C6C6C6',
 

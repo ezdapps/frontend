@@ -24,7 +24,10 @@ declare module 'apla/theme' {
         menubarFocus: string;
 
         toolbarBackground: string;
+        toolbarBackgroundActive: string;
+        toolbarBackgroundFocused: string;
         toolbarForegroundActive: string;
+        toolbarForegroundPrimary: string;
         toolbarForeground: string;
         toolbarHeight: number;
         toolbarSpacerForeground: string;

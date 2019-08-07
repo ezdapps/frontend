@@ -15,11 +15,12 @@ const StyledWrapper = themed.div`
     position: relative;
 `;
 
-export interface IMainProps {
+interface Props {
     section: string;
     sections: { [key: string]: ISection };
     page: string;
     stylesheet: string;
+    onRefresh?: () => void;
 }
 
 const StyledContent = themed.section`
@@ -30,13 +31,13 @@ const StyledContent = themed.section`
     overflow: hidden;
 `;
 
-const Navigator: React.SFC<IMainProps> = props => (
+const Navigator: React.SFC<Props> = props => (
     <StyledWrapper className="wrapper">
         <style type="text/css">
             {props.stylesheet}
         </style>
         <StyledContent>
-            <Breadcrumbs values={props.sections[props.section].breadcrumbs} />
+            <Breadcrumbs values={props.sections[props.section].breadcrumbs} onRefresh={props.onRefresh} />
             <Sections section={props.section} values={props.sections} page={props.page} />
         </StyledContent>
     </StyledWrapper>
