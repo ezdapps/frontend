@@ -3,10 +3,10 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import themed from 'components/Theme/themed';
 
-const StyledHeading = styled.div`
+const StyledHeading = themed.div`
     z-index: 1000;
     font-size: 20px;
     line-height: 45px;

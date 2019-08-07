@@ -9,7 +9,7 @@ import propTypes from 'prop-types';
 import contextDefinitions from './contexts';
 import { TProtypoElement, ISource } from 'apla/protypo';
 import { IValidationResult } from 'components/Validation/ValidatedForm';
-import Heading from 'components/Heading';
+import Heading from './components/Heading';
 import ToolButton, { IToolButtonProps } from 'containers/ToolButton/ToolButton';
 import { IConstructorElementProps } from 'apla/editor';
 import { TBreadcrumbType } from 'apla/content';
