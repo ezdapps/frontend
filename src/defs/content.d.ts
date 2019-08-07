@@ -13,7 +13,7 @@ declare module 'apla/content' {
     }
 
     type TBreadcrumbType =
-        'MENU' | 'PAGE';
+        'MENU' | 'PAGE' | 'ERROR';
 
     type TPageParams = {
         [key: string]: string;

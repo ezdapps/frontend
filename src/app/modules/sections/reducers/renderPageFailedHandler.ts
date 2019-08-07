@@ -6,6 +6,7 @@
 import { State } from '../reducer';
 import { renderPage } from '../actions';
 import { Reducer } from 'modules';
+import changeBreadcrumbType from '../util/changeBreadcrumbType';
 
 const renderPageFailedHandler: Reducer<typeof renderPage.failed, State> = (state, payload): State => ({
     ...state,
@@ -21,7 +22,8 @@ const renderPageFailedHandler: Reducer<typeof renderPage.failed, State> = (state
                 params: payload.params.params,
                 error: payload.error,
                 location: payload.params.location,
-            }
+            },
+            breadcrumbs: changeBreadcrumbType(state.sections[payload.params.section], payload.params.name, 'ERROR')
         }
     }
 });
