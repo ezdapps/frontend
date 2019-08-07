@@ -8,7 +8,7 @@ import { FormattedMessage } from 'react-intl';
 import { Switch, Route } from 'react-router-dom';
 
 import themed from 'components/Theme/themed';
-import ToolIndicator from 'components/Toolbar/ToolIndicator';
+import HeaderIndicator from './HeaderIndicator';
 import NotificationsMenu from 'containers/Main/Header/NotificationsMenu';
 import UserMenu from 'containers/Main/Header/UserMenu';
 import imgLogo from 'images/logoHeader.svg';
@@ -53,7 +53,7 @@ const Header: React.SFC<Props> = props => (
         <div className="header__filler" />
 
         {props.isAuthorized && (
-            <ToolIndicator
+            <HeaderIndicator
                 right
                 icon="icon-key"
                 title={<FormattedMessage id="privileged" defaultMessage="Privileged mode" />}

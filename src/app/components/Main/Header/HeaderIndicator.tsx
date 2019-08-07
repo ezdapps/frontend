@@ -8,7 +8,7 @@ import themed from 'components/Theme/themed';
 
 import Tooltip from 'components/Tooltip';
 
-export interface IToolIndicatorProps {
+interface Props {
     icon: string;
     className?: string;
     right?: boolean;
@@ -16,7 +16,7 @@ export interface IToolIndicatorProps {
     titleDesc: JSX.Element | string;
 }
 
-const ToolIndicator: React.SFC<IToolIndicatorProps> = props => (
+const HeaderIndicator: React.SFC<Props> = props => (
     <li className={props.className} style={{ float: props.right ? 'right' : null }}>
         <Tooltip title={props.title} body={props.titleDesc}>
             <div className="tool-body">
@@ -27,7 +27,7 @@ const ToolIndicator: React.SFC<IToolIndicatorProps> = props => (
     </li>
 );
 
-const StyledToolButton = themed(ToolIndicator)`
+const StyledHeaderIndicator = themed(HeaderIndicator)`
     display: inline-block;
     vertical-align: top;
     text-align: center;
@@ -42,7 +42,7 @@ const StyledToolButton = themed(ToolIndicator)`
         font-weight: 300;
 
         em.tool-icon {
-            color: #00ff00;
+            color: ${props => props.theme.menubarForeground};
             transition: color .15s;
             vertical-align: middle;
             height: 18px;
@@ -51,15 +51,15 @@ const StyledToolButton = themed(ToolIndicator)`
 
         > span.button-label {
             margin-left: 8px;
-            color: ${props => props.theme.toolbarForeground};
+            color: ${props => props.theme.menubarForeground};
         }
 
         &:hover {
             em.tool-icon {
-                color: #ff0000;
+                color: ${props => props.theme.menubarForegroundActive};
             }
         }
     }
 `;
 
-export default StyledToolButton;
+export default StyledHeaderIndicator;

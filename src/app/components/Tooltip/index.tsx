@@ -22,6 +22,7 @@ interface ITooltipState {
 const StyledTooltip = themed.div`
     position: absolute;
     padding: 10px;
+    z-index: 700;
 
     > div {
         line-height: 16px;
