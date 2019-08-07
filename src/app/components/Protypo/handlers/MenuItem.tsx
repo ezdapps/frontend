@@ -19,6 +19,8 @@ export interface IMenuItemProps {
 }
 
 export const StyledMenuItem = themed.div`
+    border-bottom: solid 1px ${props => props.theme.menuOutline};
+
     > a, > a:hover {
         text-decoration: none !important;
     }
@@ -47,10 +49,10 @@ export const StyledMenuItem = themed.div`
         display: block;
         height: 50px;
         line-height: 50px;
-        padding: 0 25px;
+        padding: 0 20px;
         color: ${props => props.theme.menuForeground};
         font-size: 14px;
-        font-weight: 200;
+        font-weight: 400;
         text-align: left;
         text-decoration: none;
         overflow: hidden;
@@ -60,7 +62,7 @@ export const StyledMenuItem = themed.div`
         .icon {
             margin-right: 14px;
             color: ${props => props.theme.menuIconColor};
-            font-size: 17px;
+            font-size: 21px;
             position: relative;
             top: 3px;
         }

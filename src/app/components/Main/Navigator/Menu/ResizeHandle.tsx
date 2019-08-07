@@ -37,7 +37,6 @@ const StyledResizeHandle = themed.button`
     margin: 0;
     margin-right: ${-styles.hoverWidth}px;
     z-index: 105;
-    opacity: 0.5;
 
     &.disabled {
         cursor: default;
@@ -54,7 +53,7 @@ const StyledResizeHandle = themed.button`
     }
 
     &:hover > div, &.active > div {
-        background: ${props => props.theme.menuOutline};
+        background: ${props => props.theme.menuBorder};
     }
 `;
 
