@@ -40,6 +40,7 @@ const StyledToolButton = themed.button`
         vertical-align: top;
         line-height: inherit;
         font-size: 14px;
+        font-weight: 600;
         color: ${props => props.theme.toolbarForeground};
 
         > * {
