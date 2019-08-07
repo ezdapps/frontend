@@ -4,9 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
+import { ISection } from 'apla/content';
 
 import themed from 'components/Theme/themed';
 import Sections from 'containers/Main/Navigator/Sections';
+import Breadcrumbs from './Sections/Breadcrumbs';
 
 const StyledWrapper = themed.div`
     background-color: #f6f8fa;
@@ -15,6 +17,7 @@ const StyledWrapper = themed.div`
 
 export interface IMainProps {
     section: string;
+    sections: { [key: string]: ISection };
     page: string;
     stylesheet: string;
 }
@@ -24,6 +27,7 @@ const StyledContent = themed.section`
     && { background: ${props => props.theme.contentBackground}; }
     color: ${props => props.theme.contentForeground};
     transition: none !important;
+    overflow: hidden;
 `;
 
 const Navigator: React.SFC<IMainProps> = props => (
@@ -32,7 +36,8 @@ const Navigator: React.SFC<IMainProps> = props => (
             {props.stylesheet}
         </style>
         <StyledContent>
-            <Sections section={props.section} page={props.page} />
+            <Breadcrumbs values={props.sections[props.section].breadcrumbs} />
+            <Sections section={props.section} values={props.sections} page={props.page} />
         </StyledContent>
     </StyledWrapper>
 );

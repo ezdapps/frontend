@@ -43,7 +43,7 @@ const baseTheme: IThemeDefinition = {
     menuPrimaryActive: '#7bb0f5',
 
     contentForeground: '#515253',
-    contentBackground: '#f6f7fa',
+    contentBackground: '#fff',
 
     editorBackground: '#c3c7ce',
 

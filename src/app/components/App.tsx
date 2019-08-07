@@ -50,13 +50,6 @@ const StyledTitlebar = themed.div`
     text-align: center;
 `;
 
-const StyledLayout = themed.main`
-    position: relative;
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-`;
-
 class App extends React.Component<AppProps> {
     componentDidMount() {
         this.props.initialize();
@@ -91,23 +84,21 @@ class App extends React.Component<AppProps> {
                             )
                         })}
 
-                        <StyledLayout>
-                            <AnimatedSwitch animation={AnimatedSwitch.animations.fade()}>
-                                {this.props.isFatal && (
-                                    <Route path="/" component={Error} />
-                                )}
-                                {!this.props.isLoaded && (
-                                    <Route path="/" component={Splash} />
-                                )}
-                                {!this.props.isAuthenticated && (
-                                    <Route path="/" component={Auth} />
-                                )}
-                                {!this.props.isSessionAcquired && (
-                                    <Route path="/" component={Splash} />
-                                )}
-                                <Route path="/" component={Main} />
-                            </AnimatedSwitch>
-                        </StyledLayout>
+                        <AnimatedSwitch animation={AnimatedSwitch.animations.fade()}>
+                            {this.props.isFatal && (
+                                <Route path="/" component={Error} />
+                            )}
+                            {!this.props.isLoaded && (
+                                <Route path="/" component={Splash} />
+                            )}
+                            {!this.props.isAuthenticated && (
+                                <Route path="/" component={Auth} />
+                            )}
+                            {!this.props.isSessionAcquired && (
+                                <Route path="/" component={Splash} />
+                            )}
+                            <Route path="/" component={Main} />
+                        </AnimatedSwitch>
                     </ThemedApp>
                 </ThemeProvider>
             </IntlProvider>

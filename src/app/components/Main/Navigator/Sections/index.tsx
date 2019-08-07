@@ -8,7 +8,6 @@ import { ISection } from 'apla/content';
 
 import Section from './Section';
 import Navigation from 'containers/Main/Navigator/Menu';
-import Breadcrumbs from './Breadcrumbs';
 
 export interface ISectionsProps {
     section: string;
@@ -20,17 +19,14 @@ export interface ISectionsProps {
 }
 
 const Sections: React.SFC<ISectionsProps> = (props) => (
-    <div className="fullscreen">
-        <Breadcrumbs values={props.values[props.section].breadcrumbs} />
-        <div className="fullscreen" style={{ position: 'relative' }}>
-            <Navigation section={props.section} />
-            <Section
-                navigationSize={props.navigationSize}
-                name={props.section}
-                page={props.values[props.section].page}
-                breadcrumbs={props.values[props.section].breadcrumbs}
-            />
-        </div>
+    <div className="fullscreen" style={{ position: 'relative' }}>
+        <Navigation section={props.section} />
+        <Section
+            navigationSize={props.navigationSize}
+            name={props.section}
+            page={props.values[props.section].page}
+            breadcrumbs={props.values[props.section].breadcrumbs}
+        />
     </div>
 );
 

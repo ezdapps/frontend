@@ -21,6 +21,7 @@ const mapStateToProps = (state: IRootState, props: Props) => {
     return {
         stylesheet: state.content.stylesheet,
         section: sectionName,
+        sections: state.sections.sections,
         page
     };
 };

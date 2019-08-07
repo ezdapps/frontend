@@ -8,6 +8,7 @@ import Protypo from 'containers/Widgets/Protypo';
 import { IPage } from 'apla/content';
 import { STATIC_PAGES } from 'lib/staticPages';
 
+import themed from 'components/Theme/themed';
 import Error from './Error';
 import Timeout from './Timeout';
 import NotFound from './NotFound';
@@ -16,6 +17,16 @@ export interface IPageProps {
     section: string;
     value: IPage;
 }
+
+const StyledPage = themed.article`
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    background-color: ${props => props.theme.contentBackground};
+    overflow-x: hidden;
+    overflow-y: auto;
+`;
 
 const Page: React.SFC<IPageProps> = props => {
     if (props.value.error) {
@@ -28,7 +39,7 @@ const Page: React.SFC<IPageProps> = props => {
     else {
         const staticPage = STATIC_PAGES[props.value.name];
         return (
-            <div className="fullscreen" style={{ backgroundColor: '#fff', maxHeight: '100%', overflowX: 'hidden', overflowY: 'auto' }}>
+            <StyledPage>
                 {props.value.static && (
                     staticPage.render(props.section, props.value.params)
                 )}
@@ -40,7 +51,7 @@ const Page: React.SFC<IPageProps> = props => {
                         content={props.value.content}
                     />
                 )}
-            </div>
+            </StyledPage>
         );
     }
 };
