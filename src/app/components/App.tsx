@@ -4,7 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { INetworkEndpoint } from 'apla/auth';
+import { Route } from 'react-router-dom';
 import { FormattedMessage, IntlProvider } from 'react-intl';
 import platform from 'lib/platform';
 import classnames from 'classnames';
@@ -12,8 +13,7 @@ import baseTheme from 'components/Theme/baseTheme';
 
 import { AnimatedSwitch } from 'components/Animation';
 import themed from 'components/Theme/themed';
-import Navigator from 'containers/Navigator';
-import Auth from 'containers/Auth';
+import Auth from 'components/Auth';
 import Error from 'containers/Auth/Error';
 import Splash from 'components/Splash';
 import ModalProvider from 'containers/Modal/ModalProvider';
@@ -21,7 +21,7 @@ import NotificationsProvider from 'containers/Notifications/NotificationsProvide
 import SecurityWarning from 'containers/SecurityWarning';
 import ThemeProvider from 'components/Theme/ThemeProvider';
 import Titlebar from 'components/Titlebar';
-import { INetworkEndpoint } from 'apla/auth';
+import Main from './Main';
 
 interface AppProps {
     network: INetworkEndpoint;
@@ -50,6 +50,13 @@ const StyledTitlebar = themed.div`
     text-align: center;
 `;
 
+const StyledLayout = themed.main`
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+`;
+
 class App extends React.Component<AppProps> {
     componentDidMount() {
         this.props.initialize();
@@ -72,8 +79,10 @@ class App extends React.Component<AppProps> {
                         <StyledTitlebar className="drag">
                             <Titlebar>{appTitle}</Titlebar>
                         </StyledTitlebar>
+
                         <ModalProvider />
                         <NotificationsProvider />
+
                         {platform.select({
                             web: !this.props.securityWarningClosed && (
                                 <SecurityWarning>
@@ -81,22 +90,24 @@ class App extends React.Component<AppProps> {
                                 </SecurityWarning>
                             )
                         })}
-                        <AnimatedSwitch animation={AnimatedSwitch.animations.fade()}>
-                            {this.props.isFatal && (
-                                <Route path="/" component={Error} />
-                            )}
-                            {!this.props.isLoaded && (
-                                <Route path="/" component={Splash} />
-                            )}
-                            {!this.props.isAuthenticated && (
-                                <Route path="/" component={Auth} />
-                            )}
-                            {!this.props.isSessionAcquired && (
-                                <Route path="/" component={Splash} />
-                            )}
-                            <Route path="/browse/:section?/:page?" render={route => <Navigator section={route.match.params.section} page={route.match.params.page} />} />
-                            <Redirect to="/browse" />
-                        </AnimatedSwitch>
+
+                        <StyledLayout>
+                            <AnimatedSwitch animation={AnimatedSwitch.animations.fade()}>
+                                {this.props.isFatal && (
+                                    <Route path="/" component={Error} />
+                                )}
+                                {!this.props.isLoaded && (
+                                    <Route path="/" component={Splash} />
+                                )}
+                                {!this.props.isAuthenticated && (
+                                    <Route path="/" component={Auth} />
+                                )}
+                                {!this.props.isSessionAcquired && (
+                                    <Route path="/" component={Splash} />
+                                )}
+                                <Route path="/" component={Main} />
+                            </AnimatedSwitch>
+                        </StyledLayout>
                     </ThemedApp>
                 </ThemeProvider>
             </IntlProvider>

@@ -3,24 +3,19 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { IRootState } from 'modules';
 import { connect } from 'react-redux';
-import { modalShow } from 'modules/modal/actions';
+import { IRootState } from 'modules';
+import { menuPop } from 'modules/sections/actions';
 
-import SystemMenu from 'components/Titlebar/SystemMenu';
+import Sections from 'components/Main/Navigator/Sections';
 
 const mapStateToProps = (state: IRootState) => ({
+    values: state.sections.sections,
+    navigationSize: state.storage.navigationSize
 });
 
 const mapDispatchToProps = {
-    modalShow: modalShow
+    menuPop: menuPop
 };
 
-export default connect(mapStateToProps, mapDispatchToProps, (state, dispatch: any, props) => ({
-    ...props,
-    onAbout: () => dispatch.modalShow({
-        id: 'ABOUT',
-        type: 'ABOUT',
-        params: {}
-    })
-}))(SystemMenu);
+export default connect(mapStateToProps, mapDispatchToProps)(Sections);

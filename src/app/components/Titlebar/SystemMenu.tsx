@@ -30,30 +30,9 @@ const SystemDropdown = themed(DropdownButton)`
     }
 `;
 
-const SystemButton = themed.button`
-    background: 0;
-    border: 0;
-    outline: 0;
-    color: #bad8ff;
-    width: ${props => props.theme.headerHeight}px !important;
-    height: ${props => props.theme.headerHeight}px !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    outline: 0 !important;
-    min-width: 0 !important;
-    line-height: ${props => props.theme.headerHeight + 2}px !important;
-    transition: color ease-in-out .16s;
-    cursor: pointer !important;
-
-    &:hover {
-        color: #fff;
-    }
-`;
-
 export interface ISystemMenuProps {
     align: 'left' | 'right';
     onAbout: () => void;
-    onChangeLocale: () => void;
 }
 
 const SystemMenu: React.SFC<ISystemMenuProps> = props => {
@@ -91,11 +70,6 @@ const SystemMenu: React.SFC<ISystemMenuProps> = props => {
             >
                 <em className="icon-list" />
             </SystemDropdown>
-        ),
-        (
-            <SystemButton key="2" onClick={props.onChangeLocale}>
-                <em className="icon-globe" />
-            </SystemButton>
         )
     ];
     return (

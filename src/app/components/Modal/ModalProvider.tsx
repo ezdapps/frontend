@@ -34,7 +34,6 @@ import RegisterModal from './Auth/RegisterModal';
 import RolePickerModal from 'containers/Modal/RolePickerModal';
 import RemoveNetworkModal from './Network/RemoveNetworkModal';
 import NetworkErrorModal from './Auth/NetworkErrorModal';
-import ChangeLocaleModal from 'containers/Modal/ChangeLocaleModal';
 
 const MODAL_COMPONENTS = {
     'AUTHORIZE': AuthorizeModal,
@@ -60,7 +59,6 @@ const MODAL_COMPONENTS = {
     'INFO': InfoModal,
     'ERROR': ErrorModal,
     'ABOUT': AboutModal,
-    'CHANGE_LOCALE': ChangeLocaleModal,
     'ROLE_PICKER': RolePickerModal
 };
 

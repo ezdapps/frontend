@@ -9,7 +9,7 @@ import { TEditorTab } from 'apla/editor';
 import CodeEditor from './CodeEditor';
 import EditorTabs from './EditorTabs';
 import ConstructorTabbed from 'containers/Editor/ConstructorTabbed';
-import Page from 'components/Navigator/Page';
+import Page from 'components/Main/Navigator/Page';
 
 export interface IEditorProps {
     mainSection: string;

@@ -9,19 +9,25 @@ import platform from 'lib/platform';
 const baseTheme: IThemeDefinition = {
     windowBorder: '#4c7dbd',
 
-    headerBackground: '#586180',
+    headerBackground: '#4b4e5a',
     headerForeground: '#fff',
     headerBackgroundActive: 'rgba(255,255,255,0.5)',
     headerForegroundMuted: '#a3acb5',
     headerHeight: platform.select({ desktop: 28, web: 0 }),
 
-    toolbarBackground: '#f3f3f3',
-    toolbarForeground: '#194a8a',
-    toolbarOutline: '#e5e5e5',
-    toolbarIconColor: '#5b97e4',
-    toolbarIconHighlight: '#a9ccf9',
-    toolbarDisabled: '#93a7bf',
-    toolbarHeight: 40,
+    menubarSize: 40,
+    menubarBackground: '#3873A6',
+    menubarBackgroundActive: '#9CB9D2',
+    menubarForeground: '#9CB9D3',
+    menubarForegroundActive: '#fff',
+    menubarHighlight: 'rgba(255,255,255,0.1)',
+    menubarFocus: '#aac6da',
+
+    toolbarBackground: '#f1f1f1',
+    toolbarForeground: '#787878',
+    toolbarForegroundActive: '#5d5d5d',
+    toolbarHeight: 45,
+    toolbarSpacerForeground: '#C6C6C6',
 
     progressBarForeground: '#b2c5dc',
 
@@ -29,7 +35,7 @@ const baseTheme: IThemeDefinition = {
     menuBackground: '#fff',
     menuForeground: '#0a1d33',
     menuBackgroundActive: '#ececec',
-    menuOutline: '#e5e4e5',
+    menuOutline: '#0066ff',
     menuIconColor: '#3577cc',
     menuPrimaryForeground: '#2886ff',
     menuPrimaryActive: '#7bb0f5',

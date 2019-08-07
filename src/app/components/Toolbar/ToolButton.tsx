@@ -32,7 +32,7 @@ const StyledToolButton = themed(ToolButton) `
     &.disabled {
         button {
             > em.icon, > span.button-label {
-                color: ${props => props.theme.toolbarDisabled};
+                color: #ff0000;
             }
         }
     }
@@ -52,7 +52,7 @@ const StyledToolButton = themed(ToolButton) `
         transition: background .15s;
 
         > em.icon {
-            color: ${props => props.theme.toolbarIconColor};
+            color: #00ff00;
             vertical-align: middle;
             height: 18px;
             display: inline-block;

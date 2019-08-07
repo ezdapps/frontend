@@ -24,7 +24,7 @@ const Toolbar: React.SFC<IToolbarProps> = props => (
 
 const StyledToolbar = themed(Toolbar) `
     background: ${props => props.theme.toolbarBackground};
-    border-bottom: solid 2px ${props => props.theme.toolbarOutline};
+    border-bottom: solid 2px #000;
     height: 40px;
     list-style-type: none;
     margin: 0;

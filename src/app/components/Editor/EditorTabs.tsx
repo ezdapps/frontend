@@ -9,10 +9,10 @@ import { TEditorTab } from 'apla/editor';
 import imgSim from './simvolio/icon.svg';
 import imgTpl from './protypo/icon.svg';
 
+import { CloseDropdownButton } from 'components/DropdownButton';
 import themed from 'components/Theme/themed';
 import EditorTab from './EditorTab';
-import SystemButton from 'components/Navigator/SystemButton';
-import { CloseDropdownButton } from 'components/DropdownButton';
+import HeaderButton from 'components/Main/Header/HeaderButton';
 import ScrollView from 'components/ScrollView';
 
 export const TYPE_ICONS: { [type: string]: string } = {
@@ -64,7 +64,7 @@ const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
             </ScrollView>
         </div>
         <StyledTabsMenu>
-            <SystemButton
+            <HeaderButton
                 className="p0"
                 width={225}
                 align="right"
@@ -93,7 +93,7 @@ const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
                 }
             >
                 <em className="icon-options" />
-            </SystemButton>
+            </HeaderButton>
         </StyledTabsMenu>
     </div>
 );

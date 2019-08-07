@@ -42,7 +42,7 @@ const StyledToolButton = themed(ToolIndicator)`
         font-weight: 300;
 
         em.tool-icon {
-            color: ${props => props.theme.toolbarIconColor};
+            color: #00ff00;
             transition: color .15s;
             vertical-align: middle;
             height: 18px;
@@ -56,7 +56,7 @@ const StyledToolButton = themed(ToolIndicator)`
 
         &:hover {
             em.tool-icon {
-                color: ${props => props.theme.toolbarIconHighlight};
+                color: #ff0000;
             }
         }
     }

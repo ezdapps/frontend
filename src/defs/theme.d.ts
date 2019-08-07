@@ -6,20 +6,26 @@
 declare module 'apla/theme' {
     interface IThemeDefinition {
         windowBorder: string;
-        
+
         headerBackground: string;
         headerForeground: string;
         headerBackgroundActive: string;
         headerForegroundMuted: string;
         headerHeight: number;
 
+        menubarSize: number;
+        menubarBackground: string;
+        menubarBackgroundActive: string;
+        menubarForeground: string;
+        menubarForegroundActive: string;
+        menubarHighlight: string;
+        menubarFocus: string;
+
         toolbarBackground: string;
+        toolbarForegroundActive: string;
         toolbarForeground: string;
-        toolbarOutline: string;
-        toolbarDisabled: string;
-        toolbarIconColor: string;
-        toolbarIconHighlight: string;
         toolbarHeight: number;
+        toolbarSpacerForeground: string;
 
         progressBarForeground: string;
 

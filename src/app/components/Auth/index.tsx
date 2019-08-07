@@ -16,8 +16,6 @@ import AddNetwork from 'containers/Auth/Login/NetworkList/AddNetwork';
 
 export interface IAuthProps {
     className?: string;
-    locale: string;
-    changeLocale: () => void;
 }
 
 const Auth: React.SFC<IAuthProps & InjectedIntlProps> = props => (
@@ -48,11 +46,6 @@ const Auth: React.SFC<IAuthProps & InjectedIntlProps> = props => (
                                 <FormattedMessage id="legal.homepage" defaultMessage="https://apla.io" />
                             </a>
                         </div>
-                    </div>
-                    <div className="pull-right">
-                        <a href="#" onClick={props.changeLocale}>
-                            <FormattedMessage id="LANG_NAME" defaultMessage={props.locale} />
-                        </a>
                     </div>
                 </div>
             </div>

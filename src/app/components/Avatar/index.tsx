@@ -51,7 +51,7 @@ export default styled(Avatar) `
     height: ${props => props.size ? props.size + 'px' : 'auto'};
 
     .avatar__image {
-        max-width: ${props => props.size ? props.size + 'px' : 'none'};
-        max-height: ${props => props.size ? props.size + 'px' : 'none'};
+        max-width: ${props => props.size ? props.size + 'px' : '100%'};
+        max-height: ${props => props.size ? props.size + 'px' : '100%'};
     }
 `;
