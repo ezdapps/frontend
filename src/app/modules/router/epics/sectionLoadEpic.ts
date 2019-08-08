@@ -23,7 +23,7 @@ const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$
     })
     .delayWhen(() => state$.filter(l => l.auth.isAcquired).take(1))
     .flatMap((routerState: RouterState) => {
-        const match = routerService.matchRoute('(/browse)(/)(:section)(/)(:page)(/)', routerState.location.pathname + routerState.location.search);
+        const match = routerService.matchRoute('/browse(/)(:section)(/)(:page)(/)', routerState.location.pathname + routerState.location.search);
         const state = store.getState();
 
         if (state.auth.isAuthenticated && match) {
