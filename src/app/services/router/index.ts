@@ -5,7 +5,6 @@
 
 import Route from 'route-parser';
 import querystring from 'query-string';
-import { history } from 'store';
 
 export interface IRouteMatch {
     parts: {
@@ -31,11 +30,4 @@ export const matchRoute = (path: string, match: string): IRouteMatch | undefined
 export const generateRoute = (path: string, params?: { [name: string]: string }) => {
     const query = params ? querystring.stringify(params) : '';
     return `${path}${query && '?' + query}`;
-};
-
-export const navigate = (path: string, params?: { [key: string]: any }) => {
-    history.push({
-        pathname: path,
-        search: params ? querystring.stringify(params) : ''
-    });
 };
