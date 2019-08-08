@@ -28,6 +28,7 @@ declare module 'apla/theme' {
         toolbarBackgroundFocused: string;
         toolbarForegroundActive: string;
         toolbarForegroundPrimary: string;
+        toolbarForegroundDisabled: string;
         toolbarForeground: string;
         toolbarHeight: number;
         toolbarSpacerForeground: string;

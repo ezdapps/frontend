@@ -34,6 +34,9 @@ import RegisterModal from './Auth/RegisterModal';
 import RolePickerModal from 'containers/Modal/RolePickerModal';
 import RemoveNetworkModal from './Network/RemoveNetworkModal';
 import NetworkErrorModal from './Auth/NetworkErrorModal';
+import EditorCloseModal from 'containers/Modal/EditorCloseModal';
+import EditorRevertModal from 'containers/Modal/EditorRevertModal';
+import EditorCloseAllModal from 'containers/Modal/EditorCloseAllModal';
 
 const MODAL_COMPONENTS = {
     'AUTHORIZE': AuthorizeModal,
@@ -59,7 +62,10 @@ const MODAL_COMPONENTS = {
     'INFO': InfoModal,
     'ERROR': ErrorModal,
     'ABOUT': AboutModal,
-    'ROLE_PICKER': RolePickerModal
+    'ROLE_PICKER': RolePickerModal,
+    'EDITOR_CLOSE_UNSAVED': EditorCloseModal,
+    'EDITOR_REVERT_UNSAVED': EditorRevertModal,
+    'EDITOR_CLOSE_ALL': EditorCloseAllModal
 };
 
 export interface IModalProviderProps {

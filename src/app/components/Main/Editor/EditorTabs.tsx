@@ -6,8 +6,8 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { TEditorTab } from 'apla/editor';
-import imgSim from './simvolio/icon.svg';
-import imgTpl from './protypo/icon.svg';
+import imgSim from 'components/Editor/simvolio/icon.svg';
+import imgTpl from 'components/Editor/protypo/icon.svg';
 
 import { CloseDropdownButton } from 'components/DropdownButton';
 import themed from 'components/Theme/themed';
@@ -23,18 +23,6 @@ export const TYPE_ICONS: { [type: string]: string } = {
     default: null
 };
 
-const StyledTabsMenu = themed.div`
-    background: ${props => props.theme.editorBackground};
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 40px;
-    
-    & button.dropdown-toggle {
-        height: 36px;
-    }    
-`;
-
 export interface IEditorTabsProps {
     className?: string;
     tabIndex: number;
@@ -46,9 +34,9 @@ export interface IEditorTabsProps {
 }
 
 const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
-    <div>
-        <div className={props.className}>
-            <ScrollView className="editor-scroll-area" disableVertical hideHorizontal horizontalWheel>
+    <div className={props.className}>
+        <div className="editortabs__selector">
+            <ScrollView className="editortabs__scrollarea" disableVertical hideHorizontal horizontalWheel>
                 <ul>
                     {props.tabs.map((tab, index) => (
                         <EditorTab
@@ -63,7 +51,7 @@ const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
                 </ul>
             </ScrollView>
         </div>
-        <StyledTabsMenu>
+        <div className="editortabs__menu">
             <HeaderButton
                 className="p0"
                 width={225}
@@ -94,16 +82,16 @@ const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
             >
                 <em className="icon-options" />
             </HeaderButton>
-        </StyledTabsMenu>
+        </div>
     </div>
 );
 
 const StyledEditorTabs = themed(EditorTabs)`
     background: ${props => props.theme.editorBackground};
     height: 36px;
-    margin-right: 40px;
-    
-    .editor-scroll-area {
+    position: relative;
+
+    .editortabs__scrollarea {
         ul {
             height: 36px;
             list-style-type: none;
@@ -111,6 +99,23 @@ const StyledEditorTabs = themed(EditorTabs)`
             margin: 0;
             white-space: nowrap;
         }
+    }
+    
+    .editortabs__selector {
+        height: 100%;
+        margin-right: 40px;
+    }
+
+    .editortabs__menu {
+        background: ${props => props.theme.editorBackground};
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        width: 40px;
+        
+        & button.dropdown-toggle {
+            height: 36px;
+        }    
     }
 `;
 

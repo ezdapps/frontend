@@ -7,7 +7,6 @@ import { Action } from 'redux';
 import { Epic } from 'redux-observable';
 import { IRootState } from 'modules';
 import { createEditorTab } from '../actions';
-import { updateSection } from 'modules/sections/actions';
 import { Observable } from 'rxjs/Observable';
 import { replace } from 'connected-react-router';
 
@@ -53,21 +52,9 @@ const createEditorTabEpic: Epic<Action, IRootState> =
                 });
             }
         })
-        .flatMap(action => {
-            const editor = store.getState().sections.sections.editor;
-
-            return Observable.of<Action>(
-                replace('/editor'),
-                updateSection({
-                    ...editor,
-                    // visible: true,
-                    page: {
-                        ...editor.page,
-                        params: {}
-                    }
-                }),
-                action
-            );
-        });
+        .flatMap(action => Observable.of<Action>(
+            replace('/editor'),
+            action
+        ));
 
 export default createEditorTabEpic;

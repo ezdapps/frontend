@@ -9,12 +9,11 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers/dist';
 import changeEditorToolDoneHandler from './reducers/changeEditorToolDoneHandler';
 import changeEditorTabHandler from './reducers/changeEditorTabHandler';
 import changeEditorToolStartedHandler from './reducers/changeEditorToolStartedHandler';
-import closeEditorTabHandler from './reducers/closeEditorTabHandler';
 import closeAllEditorTabHandler from './reducers/closeAllEditorTabHandler';
 import closeSavedEditorTabHandler from './reducers/closeSavedEditorTabHandler';
 import createEditorTabDoneHandler from './reducers/createEditorTabDoneHandler';
 import reloadEditorTabHandler from './reducers/reloadEditorTabHandler';
-import revertEditorTabHandler from './reducers/revertEditorTabHandler';
+import resetEditorTabHandler from './reducers/resetEditorTabHandler';
 import updateEditorTabHandler from './reducers/updateEditorTabHandler';
 import loadEditorTabDoneHandler from './reducers/loadEditorTabDoneHandler';
 import getPageTreeDoneHandler from './reducers/getPageTreeDoneHandler';
@@ -30,6 +29,7 @@ import setTagCanDropPositionDoneHandler from './reducers/setTagCanDropPositionDo
 import constructorUndoDoneHandler from './reducers/constructorUndoDoneHandler';
 import constructorRedoDoneHandler from './reducers/constructorRedoDoneHandler';
 import setPageTemplateHandler from './reducers/setPageTemplateHandler';
+import destroyEditorTabHandler from './reducers/destroyEditorTabHandler';
 
 export type State = {
     readonly pending: boolean;
@@ -47,13 +47,13 @@ export default reducerWithInitialState<State>(initialState)
     .case(actions.changeEditorTab, changeEditorTabHandler)
     .case(actions.changeEditorTool.done, changeEditorToolDoneHandler)
     .case(actions.changeEditorTool.started, changeEditorToolStartedHandler)
-    .case(actions.closeEditorTab, closeEditorTabHandler)
-    .case(actions.closeAllEditorTab, closeAllEditorTabHandler)
+    .case(actions.destroyEditorTab, destroyEditorTabHandler)
+    .case(actions.closeAllEditorTabs, closeAllEditorTabHandler)
     .case(actions.closeSavedEditorTab, closeSavedEditorTabHandler)
     .case(actions.createEditorTab.done, createEditorTabDoneHandler)
     .case(actions.loadEditorTab.done, loadEditorTabDoneHandler)
     .case(actions.reloadEditorTab, reloadEditorTabHandler)
-    .case(actions.revertEditorTab, revertEditorTabHandler)
+    .case(actions.resetEditorTab, resetEditorTabHandler)
     .case(actions.updateEditorTab, updateEditorTabHandler)
     .case(actions.getPageTree.done, getPageTreeDoneHandler)
     .case(actions.getPageTree.failed, getPageTreeFailedHandler)

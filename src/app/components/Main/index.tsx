@@ -9,11 +9,13 @@ import { Redirect, Switch, Route } from 'react-router-dom';
 import themed from 'components/Theme/themed';
 import Navigator from 'containers/Main/Navigator';
 import Header from 'containers/Main/Header';
+import Editor from 'containers/Main/Editor';
 
 interface Props {
 }
 
 const StyledLayout = themed.main`
+    background: ${props => props.theme.contentBackground};
     position: relative;
     padding-top: ${props => props.theme.menubarSize}px;
     display: flex;
@@ -29,6 +31,10 @@ const Main: React.SFC<Props> = props => (
             <Route
                 path="/browse/:section?/:page?"
                 render={route => <Navigator section={route.match.params.section} page={route.match.params.page} />}
+            />
+            <Route
+                path="/editor"
+                component={Editor}
             />
             <Redirect to="/browse" />
         </Switch>

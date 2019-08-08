@@ -4,20 +4,16 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { State } from '../reducer';
-import { revertEditorTab } from '../actions';
+import { destroyEditorTab } from '../actions';
 import { Reducer } from 'modules';
 
-const revertEditorTabHandler: Reducer<typeof revertEditorTab, State> = (state, payload) => ({
+const destroyEditorTabHandler: Reducer<typeof destroyEditorTab, State> = (state, payload) => ({
     ...state,
+    tabIndex: state.tabIndex >= state.tabs.length - 1 ? state.tabs.length - 2 : state.tabIndex,
     tabs: [
         ...state.tabs.slice(0, payload),
-        {
-            ...state.tabs[payload],
-            value: state.tabs[payload].initialValue,
-            dirty: false
-        },
         ...state.tabs.slice(payload + 1),
     ]
 });
 
-export default revertEditorTabHandler;
+export default destroyEditorTabHandler;

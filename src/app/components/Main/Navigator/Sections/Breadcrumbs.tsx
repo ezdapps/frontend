@@ -21,7 +21,7 @@ const StyledBreadcrumbs = themed.ul`
     height: 100%;
     line-height: inherit;
     margin: 0;
-    padding: 0;
+    padding: 0 10px;
     font-size: 0;
     flex: 1;
     

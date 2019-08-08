@@ -7,7 +7,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { getPageTree, selectTag, changePage, saveConstructorHistory, constructorUndo, constructorRedo, setTagCanDropPosition, addTag, copyTag, moveTag, removeTag, moveTreeTag } from 'modules/editor/actions';
-import Constructor from 'components/Editor/Designer';
+import Constructor from 'components/Main/Editor/Designer';
 import { TProtypoElement } from 'apla/protypo';
 import { generatePageTemplate } from 'modules/editor/actions';
 import { IChangePageCall, TConstructorData, IAddTagCall, IOperateTagCall, IMoveTreeTag, ISetTagCanDropPositionCall } from 'apla/editor';

@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { IModalProps } from 'components/Modal';
 import { switchWallet } from 'modules/auth/actions';
+import { modalClose } from 'modules/modal/actions';
 
 import RolePickerModal from 'components/Modal/RolePickerModal';
-import { modalClose } from 'modules/modal/actions';
 
 export interface IRolePickerModalProps {
     account: string;

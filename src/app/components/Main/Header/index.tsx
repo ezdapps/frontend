@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Link } from 'react-router-dom';
 
 import themed from 'components/Theme/themed';
 import HeaderIndicator from './HeaderIndicator';
@@ -50,6 +50,8 @@ const Header: React.SFC<Props> = props => (
                 />
             </Switch>
         </div>
+        <HeaderSpacer />
+        <Link to="/editor">DND_Editor</Link>
         <div className="header__filler" />
 
         {props.isAuthorized && (

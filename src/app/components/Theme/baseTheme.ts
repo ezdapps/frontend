@@ -31,6 +31,7 @@ const baseTheme: IThemeDefinition = {
     toolbarForeground: '#333',
     toolbarForegroundActive: '#5d5d5d',
     toolbarForegroundPrimary: '#4688ff',
+    toolbarForegroundDisabled: '#ccc',
     toolbarHeight: 40,
     toolbarSpacerForeground: '#C6C6C6',
 

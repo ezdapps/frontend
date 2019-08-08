@@ -4,16 +4,20 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { State } from '../reducer';
-import { closeEditorTab } from '../actions';
+import { resetEditorTab } from '../actions';
 import { Reducer } from 'modules';
 
-const closeEditorTabHandler: Reducer<typeof closeEditorTab, State> = (state, payload) => ({
+const resetEditorTabHandler: Reducer<typeof resetEditorTab, State> = (state, payload) => ({
     ...state,
-    tabIndex: state.tabIndex >= state.tabs.length - 1 ? state.tabs.length - 2 : state.tabIndex,
     tabs: [
         ...state.tabs.slice(0, payload),
+        {
+            ...state.tabs[payload],
+            value: state.tabs[payload].initialValue,
+            dirty: false
+        },
         ...state.tabs.slice(payload + 1),
     ]
 });
 
-export default closeEditorTabHandler;
+export default resetEditorTabHandler;

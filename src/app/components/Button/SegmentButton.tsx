@@ -16,7 +16,7 @@ interface Props {
     onChange?: (index: number) => void;
 }
 
-const SegmentToolButton: React.SFC<Props> = props => (
+const SegmentButton: React.SFC<Props> = props => (
     <ul className={classNames('button-sections', props.className)}>
         {props.items.map((l, i) => (
             <li key={i} className={props.activeIndex === i ? 'active' : null}>
@@ -28,7 +28,7 @@ const SegmentToolButton: React.SFC<Props> = props => (
     </ul>
 );
 
-const StyledSegmentToolButton = themed(SegmentToolButton)`
+const StyledSegmentButton = themed(SegmentButton)`
     border: solid 1px ${props => props.theme.sectionButtonOutline};
     border-radius: 2px;
     list-style-type: none;
@@ -36,6 +36,8 @@ const StyledSegmentToolButton = themed(SegmentToolButton)`
     margin: 0;
     font-size: 0;
     display: inline-block;
+    line-height: 20px;
+    height: 22px;
 
     li {
         display: inline-block;
@@ -66,4 +68,4 @@ const StyledSegmentToolButton = themed(SegmentToolButton)`
     }
 `;
 
-export default StyledSegmentToolButton;
+export default StyledSegmentButton;

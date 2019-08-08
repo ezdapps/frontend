@@ -9,6 +9,7 @@ import classNames from 'classnames';
 import themed from 'components/Theme/themed';
 
 interface Props {
+    disabled?: boolean;
     icon?: string;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
@@ -27,6 +28,16 @@ const StyledToolButton = themed.button`
 
     &:active {
         background: ${props => props.theme.toolbarBackgroundActive};
+    }
+
+    &:disabled {
+        &:hover, &:active {
+            background: 0;
+        }
+
+        .toolbutton__icon, .toolbutton__label {
+            color: ${props => props.theme.toolbarForegroundDisabled};
+        }
     }
 
     .toolbutton__icon {
@@ -50,7 +61,7 @@ const StyledToolButton = themed.button`
 `;
 
 const ToolButton: React.SFC<Props> = props => (
-    <StyledToolButton onClick={props.onClick}>
+    <StyledToolButton disabled={props.disabled} onClick={props.onClick}>
         {props.icon && (
             <em className={classNames('toolbutton__icon', props.icon)} />
         )}

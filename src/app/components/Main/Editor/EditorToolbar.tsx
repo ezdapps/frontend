@@ -7,10 +7,11 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { TEditorTab } from 'apla/editor';
 
-import ToolButton from './ToolButton';
-import SegmentToolButton from './SegmentToolButton';
+import Toolbar, { Filler } from '../Toolbar';
+import ToolButton from 'components/Main/Toolbar/ToolButton';
+import SegmentButton from 'components/Button/SegmentButton';
 
-export interface IEditorToolbarProps {
+interface Props {
     currentTab: TEditorTab;
     canSave: boolean;
     canRevert: boolean;
@@ -45,7 +46,7 @@ const resolveToolIndex = (tool: string) => {
     return editorTools.findIndex(l => l.type === tool);
 };
 
-const EditorToolbar: React.SFC<IEditorToolbarProps> = props => {
+const EditorToolbar: React.SFC<Props> = props => {
     const onToolChange = (toolIndex: number) => {
         const toolDef = editorTools[toolIndex];
         if (toolDef) {
@@ -54,28 +55,27 @@ const EditorToolbar: React.SFC<IEditorToolbarProps> = props => {
     };
 
     return (
-        <div>
+        <Toolbar>
             <ToolButton icon="icon-note" disabled={!props.canSave} onClick={props.onSave}>
                 <FormattedMessage id="editor.save" defaultMessage="Save" />
             </ToolButton>
             <ToolButton icon="icon-action-undo" disabled={!props.canRevert} onClick={props.onRevert}>
                 <FormattedMessage id="editor.revert" defaultMessage="Revert" />
             </ToolButton>
-            {props.currentTab && 'contract' !== props.currentTab.type && (
-                <li style={{ margin: '8px', float: 'right' }}>
-                    <SegmentToolButton
-                        activeIndex={resolveToolIndex(props.currentTab.tool)}
-                        onChange={onToolChange}
-                        items={editorTools.map(l => l.content)}
-                    />
-                </li>
-            )}
             {props.currentTab && 'contract' === props.currentTab.type && (
                 <ToolButton icon="icon-paper-plane" disabled={props.currentTab.new || props.canSave} onClick={props.onExec}>
                     <FormattedMessage id="editor.execute" defaultMessage="Execute" />
                 </ToolButton>
             )}
-        </div>
+            <Filler />
+            {props.currentTab && 'contract' !== props.currentTab.type && (
+                <SegmentButton
+                    activeIndex={resolveToolIndex(props.currentTab.tool)}
+                    onChange={onToolChange}
+                    items={editorTools.map(l => l.content)}
+                />
+            )}
+        </Toolbar>
     );
 };
 
