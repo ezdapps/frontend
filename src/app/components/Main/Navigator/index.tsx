@@ -9,6 +9,7 @@ import { ISection } from 'apla/content';
 import themed from 'components/Theme/themed';
 import Sections from 'containers/Main/Navigator/Sections';
 import Breadcrumbs from './Sections/Breadcrumbs';
+import NotFound from './Page/NotFound';
 
 const StyledWrapper = themed.div`
     background-color: #f6f8fa;
@@ -31,16 +32,30 @@ const StyledContent = themed.section`
     overflow: hidden;
 `;
 
-const Navigator: React.SFC<Props> = props => (
-    <StyledWrapper className="wrapper">
-        <style type="text/css">
-            {props.stylesheet}
-        </style>
-        <StyledContent>
-            <Breadcrumbs values={props.sections[props.section].breadcrumbs} onRefresh={props.onRefresh} />
-            <Sections section={props.section} values={props.sections} page={props.page} />
-        </StyledContent>
-    </StyledWrapper>
-);
+const Navigator: React.SFC<Props> = props => {
+    const section = props.sections[props.section];
+
+    return (
+        <StyledWrapper className="wrapper">
+            <style type="text/css">
+                {props.stylesheet}
+            </style>
+            <StyledContent>
+                {section ?
+                    (
+                        <>
+                            <Breadcrumbs values={section.breadcrumbs} onRefresh={props.onRefresh} />
+                            <Sections section={props.section} values={props.sections} page={props.page} />
+                        </>
+                    )
+                    :
+                    (
+                        <NotFound />
+                    )
+                }
+            </StyledContent>
+        </StyledWrapper>
+    );
+};
 
 export default Navigator;

@@ -24,7 +24,7 @@ const NotFound: React.SFC<INotFoundProps> = (props) => (
                         <FormattedMessage id="general.notfound.page" defaultMessage="We couldn't find this page" />
                     </p>
                     <p>
-                        <FormattedMessage id="general.notfound.page.notexists" defaultMessage="The page you are looking for does not exists" />
+                        <FormattedMessage id="general.notfound.page.notexists" defaultMessage="The page you are looking for does not exist" />
                     </p>
                 </div>
                 {!props.main && (
