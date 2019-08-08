@@ -104,8 +104,7 @@ const MenuItem: React.SFC<IMenuItemProps> = (props, context: IMenuItemContext) =
 
 MenuItem.contextTypes = {
     section: propTypes.string.isRequired,
-    protypo: propTypes.object.isRequired,
-    navigatePage: propTypes.func.isRequired
+    protypo: propTypes.object.isRequired
 };
 
 export default MenuItem;
