@@ -20,6 +20,7 @@ interface Props {
 }
 
 const StyledSection = themed.div`
+    background: ${props => props.theme.contentBackground};
     box-shadow: rgba(0,0,0,0.06) -5px 0 10px;
     position: relative;
     z-index: 100;
