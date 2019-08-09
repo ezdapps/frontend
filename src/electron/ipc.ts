@@ -33,7 +33,7 @@ const truncateState = (value: any) => {
 
 if (!args.dry) {
     try {
-        state = JSON.parse(config.get('persistentData'));
+        state = config.get('persistentData');
     }
     catch {
         // Suppress errors
