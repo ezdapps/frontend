@@ -15,6 +15,10 @@ const findNotifications = (state: State, session: IAccountContext) => {
         return [];
     }
 
+    if (!session.wallet) {
+        return [];
+    }
+
     return state.notifications.filter(notification =>
         notification.id === session.wallet.id &&
         notification.ecosystem === session.access.ecosystem &&
