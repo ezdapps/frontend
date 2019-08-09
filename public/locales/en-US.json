@@ -190,6 +190,7 @@
     "modal.imageeditor.title": "Image editor",
     "modal.network.remove.confirmation": "Do you really want to delete network \"{name}\"?",
     "navigation.default_page": "Main page",
+    "navigation.loaded_page": "Loaded page",
     "navigation.refresh": "Refresh",
     "notifications": "Notifications",
     "notification.ecosystem_invited": "Joined ecosystem {ecosystem}",

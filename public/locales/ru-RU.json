@@ -190,6 +190,7 @@
     "modal.imageeditor.title": "Редактирование изображения",
     "modal.network.remove.confirmation": "Вы действительно хотите удалить сеть \"{name}\"?",
     "navigation.default_page": "Главная страница",
+    "navigation.loaded_page": "Загруженная страница",
     "navigation.refresh": "Обновить",
     "notifications": "Уведомления",
     "notification.ecosystem_invited": "Добавлена экосистема {ecosystem}",

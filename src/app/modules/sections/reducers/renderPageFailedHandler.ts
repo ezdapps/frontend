@@ -23,7 +23,7 @@ const renderPageFailedHandler: Reducer<typeof renderPage.failed, State> = (state
                 error: payload.error,
                 location: payload.params.location,
             },
-            breadcrumbs: changeBreadcrumbType(state.sections[payload.params.section], payload.params.name, 'ERROR')
+            breadcrumbs: changeBreadcrumbType(state.sections[payload.params.section], payload.params.name, 'IGNORE')
         }
     }
 });

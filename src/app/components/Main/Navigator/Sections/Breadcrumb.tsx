@@ -6,6 +6,7 @@
 import React from 'react';
 import PageLink from 'containers/Routing/PageLink';
 import themed from 'components/Theme/themed';
+import { FormattedMessage } from 'react-intl';
 
 interface Props {
     home?: boolean;
@@ -40,8 +41,12 @@ const StyledBreadcrumb = themed.div`
     }
 `;
 
+const placeholder = (
+    <FormattedMessage id="navigation.loaded_page" defaultMessage="Loaded page" />
+);
+
 const Breadcrumb: React.SFC<Props> = props => {
-    const titleText = props.children || props.page;
+    const titleText = props.children || placeholder;
     const title = props.home ?
         (
             <em className="breadcrumb__icon icon-home" />

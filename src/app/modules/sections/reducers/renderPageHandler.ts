@@ -27,7 +27,7 @@ const renderPageHandler: Reducer<typeof renderPage.started, State> = (state, pay
                 state.sections[payload.section],
                 {
                     caller: payload.location.state && payload.location.state.from && payload.location.state.from.name,
-                    type: payload.location.state && payload.location.state.from && payload.location.state.from.type,
+                    type: (payload.location.state && payload.location.state.from) ? payload.location.state.from.type : 'IGNORE',
                     title: payload.location.state && payload.location.state.from && payload.location.state.from.title,
                     section: payload.section,
                     page: payload.name,

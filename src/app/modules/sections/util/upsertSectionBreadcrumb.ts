@@ -14,7 +14,7 @@ const upsertSectionBreadcrumb = (section: ISection, crumb: IBreadcrumb) => {
         const oldValue = section.breadcrumbs[crumbIndex];
 
         breadcrumbs = [
-            ...section.breadcrumbs.slice(0, crumbIndex).filter(l => 'ERROR' !== l.type),
+            ...section.breadcrumbs.slice(0, crumbIndex).filter(l => 'IGNORE' !== l.type),
             {
                 ...section.breadcrumbs[crumbIndex],
                 page: crumb.page,
@@ -25,7 +25,7 @@ const upsertSectionBreadcrumb = (section: ISection, crumb: IBreadcrumb) => {
     }
     else {
         breadcrumbs = [
-            ...section.breadcrumbs.filter(l => 'ERROR' !== l.type),
+            ...section.breadcrumbs.filter(l => 'IGNORE' !== l.type),
             crumb
         ];
     }
