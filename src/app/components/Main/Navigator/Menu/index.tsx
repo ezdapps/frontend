@@ -4,7 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import { injectIntl } from 'react-intl';
 import { IMenu } from 'apla/content';
 
 import StackGroup from 'components/Animation/StackGroup';
@@ -96,14 +95,14 @@ const StyledMenuContent = themed.div`
     }
 `;
 
-export interface INavigationProps {
+interface Props {
     width: number;
     menus: IMenu[];
     section: string;
-    menuPop?: () => void;
+    menuPop: () => void;
 }
 
-const Menu: React.SFC<INavigationProps> = props => (
+const Menu: React.SFC<Props> = props => (
     <StyledNavigation className={true ? '' : 'navigation-collapsed'} style={{ width: props.width }}>
         <nav>
             <StyledMenu>
@@ -137,4 +136,4 @@ const Menu: React.SFC<INavigationProps> = props => (
     </StyledNavigation>
 );
 
-export default injectIntl(Menu);
+export default Menu;

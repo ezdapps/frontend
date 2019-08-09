@@ -11,7 +11,7 @@ import { Location } from 'history';
 const actionCreator = actionCreatorFactory('sections');
 
 export const updateSection = actionCreator<ISection>('UPDATE_SECTION');
-export const menuPop = actionCreator('MENU_POP');
+export const menuPop = actionCreator<string>('MENU_POP');
 export const menuPush = actionCreator<{ section: string, menu: IMenu }>('MENU_PUSH');
 export const renderPage = actionCreator.async<{ section: string, name: string, params: { [key: string]: string }, location: Location }, { tree: TProtypoElement[], static: boolean }, string>('RENDER_PAGE');
 export const reloadPage = actionCreator<{ section: string }>('RELOAD_PAGE');

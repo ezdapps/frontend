@@ -21,6 +21,12 @@ const mapStateToProps = (state: IRootState, props: INavigationProps) => {
     };
 };
 
-export default connect(mapStateToProps, {
+const mapDispatchToProps = {
     menuPop
-})(Menu);
+};
+
+export default connect(mapStateToProps, mapDispatchToProps, (state, dispatch: any, props) => ({
+    ...state,
+    ...props,
+    menuPop: () => dispatch.menuPop(props.section)
+}))(Menu);
