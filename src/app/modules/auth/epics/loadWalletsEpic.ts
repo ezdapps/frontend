@@ -21,20 +21,10 @@ const loadWalletsEpic: Epic = (action$, store, { api }) => action$.ofAction(load
                 address: keyInfo.account,
                 encKey: wallet.encKey,
                 publicKey: wallet.publicKey,
-                // access: keyInfo.ecosystems.map(key => ({
-                //     ...key,
-                //     roles: key.roles || []
-                // }))
-                access: (keyInfo as any).length ? [
-                    {
-                        ecosystem: '1',
-                        name: 'FAKE',
-                        roles: [
-                            { id: '3', name: 'FAKE' }
-                        ],
-                        notifications: []
-                    }
-                ] : []
+                access: keyInfo.ecosystems.map(key => ({
+                    ...key,
+                    roles: key.roles || []
+                }))
             }))
 
         ).toArray().map(wallets => loadWallets.done({
