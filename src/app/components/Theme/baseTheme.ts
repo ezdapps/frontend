@@ -11,8 +11,6 @@ const baseTheme: IThemeDefinition = {
 
     headerBackground: '#354a69',
     headerForeground: '#fff',
-    headerBackgroundActive: 'rgba(255,255,255,0.5)',
-    headerForegroundMuted: '#a3acb5',
     headerHeight: platform.select({ desktop: 28, web: 0 }),
 
     menubarSize: 40,
@@ -22,8 +20,6 @@ const baseTheme: IThemeDefinition = {
     menubarBackgroundSecondary: '#ffa500',
     menubarForeground: '#9CB9D3',
     menubarForegroundActive: '#fff',
-    menubarHighlight: 'rgba(255,255,255,0.1)',
-    menubarFocus: '#aac6da',
 
     toolbarBackground: '#f1f1f1',
     toolbarBackgroundActive: 'rgba(0,0,0,0.1)',
@@ -35,9 +31,6 @@ const baseTheme: IThemeDefinition = {
     toolbarHeight: 40,
     toolbarSpacerForeground: '#C6C6C6',
 
-    progressBarForeground: '#b2c5dc',
-
-    menuHeight: 40,
     menuBackground: '#fff',
     menuForeground: '#0a1d33',
     menuBackgroundActive: '#f6f7f9',

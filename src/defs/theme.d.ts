@@ -9,8 +9,6 @@ declare module 'apla/theme' {
 
         headerBackground: string;
         headerForeground: string;
-        headerBackgroundActive: string;
-        headerForegroundMuted: string;
         headerHeight: number;
 
         menubarSize: number;
@@ -20,8 +18,6 @@ declare module 'apla/theme' {
         menubarBackgroundSecondary: string;
         menubarForeground: string;
         menubarForegroundActive: string;
-        menubarHighlight: string;
-        menubarFocus: string;
 
         toolbarBackground: string;
         toolbarBackgroundActive: string;
@@ -33,9 +29,6 @@ declare module 'apla/theme' {
         toolbarHeight: number;
         toolbarSpacerForeground: string;
 
-        progressBarForeground: string;
-
-        menuHeight: number;
         menuBackground: string;
         menuForeground: string;
         menuBackgroundActive: string;
