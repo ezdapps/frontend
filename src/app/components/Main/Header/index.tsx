@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 
 import themed from 'components/Theme/themed';
 import HeaderIndicator from './HeaderIndicator';
@@ -43,12 +43,10 @@ const Header: React.SFC<Props> = props => (
     <StyledHeader>
         <HeaderSpacer />
         <div>
-            <Switch>
-                <Route
-                    path="/browse/:section?/:page?"
-                    render={route => <Selector section={route.match.params.section} />}
-                />
-            </Switch>
+            <Route
+                path="/:app?/:section?/:page?"
+                render={route => <Selector section={route.match.params.section} />}
+            />
         </div>
         <HeaderSpacer />
         <Link to="/editor">DND_Editor</Link>
