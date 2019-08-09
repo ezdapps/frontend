@@ -55,12 +55,13 @@ class Protypo extends React.Component<IProtypoProps> {
         };
     }
 
-    getFromContext: (computeTitle?: React.ReactNode) => { type: TBreadcrumbType, name: string } | undefined = computeTitle => {
+    getFromContext: (computeTitle?: React.ReactNode) => { type: TBreadcrumbType, section: string, name: string } | undefined = computeTitle => {
         const title = computeTitle ? this.resolveText(computeTitle) : '';
 
         if (this.props.page) {
             return {
                 type: 'PAGE',
+                section: this.props.section,
                 title: title || this.props.page,
                 name: this.props.page
             };
@@ -68,6 +69,7 @@ class Protypo extends React.Component<IProtypoProps> {
         else if (this.props.menu) {
             return {
                 type: 'MENU',
+                section: this.props.section,
                 title: title || this.props.menu,
                 name: this.props.menu
             };

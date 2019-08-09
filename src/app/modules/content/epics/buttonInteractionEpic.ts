@@ -47,6 +47,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                     Observable.of(txCall({
                         uuid: action.payload.uuid,
                         silent: action.payload.silent,
+                        section: action.payload.from.section,
                         contracts: action.payload.contracts,
                         errorRedirects: action.payload.errorRedirects
                     })),

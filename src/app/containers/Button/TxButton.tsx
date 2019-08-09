@@ -22,6 +22,7 @@ export interface ITxButtonProps {
 
     from?: {
         type: TBreadcrumbType;
+        section: string;
         name: string;
     };
 

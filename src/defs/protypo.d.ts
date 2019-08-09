@@ -56,8 +56,9 @@ declare module 'apla/protypo' {
     interface IButtonInteraction {
         uuid: string;
         silent?: boolean;
-        from?: {
+        from: {
             name: string;
+            section: string;
             type: TBreadcrumbType;
         };
         confirm?: IButtonConfirm;

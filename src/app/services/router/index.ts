@@ -31,3 +31,6 @@ export const generateRoute = (path: string, params?: { [name: string]: string })
     const query = params ? querystring.stringify(params) : '';
     return `${path}${query && '?' + query}`;
 };
+
+export const routeToBrowser = (section: string, page: string, params?: { [name: string]: string }) =>
+    generateRoute(`/browse/${section}/${page}`, params);
