@@ -11,7 +11,7 @@ import { FormattedMessage } from 'react-intl';
 import Modal from './';
 
 class AboutModal extends Modal<void, void> {
-    openWebsite() {
+    openWebsite = () => {
         const electron = require('electron');
         electron.shell.openExternal(this.props.intl.formatMessage({
             id: 'legal.homepage',
