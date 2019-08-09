@@ -35,16 +35,6 @@ declare module 'apla/modal' {
         data: any;
     }
 
-    interface IModalPageCall {
-        name: string;
-        section: string;
-        title?: string;
-        width?: number;
-        params: {
-            [key: string]: any;
-        };
-    }
-
     interface IModal {
         id: string;
         type: string;

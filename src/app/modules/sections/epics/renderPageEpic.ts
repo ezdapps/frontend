@@ -3,11 +3,12 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { Action } from 'redux';
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { renderPage, menuPush } from '../actions';
 import { STATIC_PAGES } from 'lib/staticPages';
+import { IContentResponse } from 'apla/api';
+import { modalShow } from 'modules/modal/actions';
 
 const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(renderPage.started)
     .switchMap(action => {
@@ -18,38 +19,60 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
         });
 
         const staticPage = STATIC_PAGES[action.payload.name];
-        if (staticPage) {
-            return Observable.of(renderPage.done({
-                params: action.payload,
-                result: {
-                    tree: [],
-                    static: true
-                }
-            }));
-        }
-
-        return Observable.from(client.content({
-            type: 'page',
+        const substitute = staticPage && staticPage.renderSubstitute && staticPage.renderSubstitute(action.payload.params);
+        const requestPage = staticPage ? substitute : {
             name: action.payload.name,
-            params: action.payload.params,
-            locale: state.storage.locale
+            params: action.payload.params
+        };
 
-        })).flatMap(content => Observable.of<Action>(
-            renderPage.done({
-                params: action.payload,
-                result: {
-                    tree: content.tree,
-                    static: false
-                }
-            }),
-            menuPush({
-                section: action.payload.section,
-                menu: {
-                    name: content.menu,
-                    content: content.menutree
-                }
-            })
-        )).catch(e => Observable.of(renderPage.failed({
+        return Observable.if(
+            () => !!renderPage,
+            Observable.from(client.content({
+                type: 'page',
+                locale: state.storage.locale,
+                ...requestPage
+            })),
+            Observable.of<IContentResponse>(null)
+
+        ).flatMap(content => {
+            return Observable.concat(
+                Observable.of(renderPage.done({
+                    params: action.payload,
+                    result: {
+                        tree: content ? content.tree : [],
+                        static: !!staticPage
+                    }
+                })),
+                Observable.if(
+                    () => !!action.payload.popup,
+                    Observable.defer(() => Observable.of(modalShow({
+                        id: 'PAGE_MODAL' + action.payload.name,
+                        type: 'PAGE_MODAL',
+                        params: {
+                            name: action.payload.name,
+                            section: action.payload.section,
+                            title: action.payload.popup.title || action.payload.name,
+                            width: action.payload.popup.width,
+                            tree: content.tree,
+                            params: action.payload.params,
+                            static: !!staticPage
+                        }
+                    }))),
+                    Observable.if(
+                        () => !!(content.menu && content.menutree),
+                        Observable.defer(() => Observable.of(menuPush({
+                            section: action.payload.section,
+                            menu: {
+                                name: content.menu,
+                                content: content.menutree
+                            }
+                        }))),
+                        Observable.empty<never>()
+                    )
+                ),
+            );
+
+        }).catch(e => Observable.of(renderPage.failed({
             params: action.payload,
             error: e.error
         })));

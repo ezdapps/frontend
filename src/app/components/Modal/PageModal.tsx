@@ -4,17 +4,22 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
+import { TProtypoElement } from 'apla/protypo';
 
 import Modal from './';
 import Protypo from 'containers/Widgets/Protypo';
-import { TProtypoElement } from 'apla/protypo';
+import Page from 'components/Main/Navigator/Page';
 
 export interface IPageModalProps {
     name: string;
-    title: string;
     section: string;
+    title: string;
     width?: number;
     tree: TProtypoElement[];
+    params: {
+        [key: string]: string;
+    };
+    static?: boolean;
 }
 
 class PageModal extends Modal<IPageModalProps, boolean> {
@@ -29,6 +34,17 @@ class PageModal extends Modal<IPageModalProps, boolean> {
                     {this.props.params.title}
                 </Modal.Header>
                 <Modal.Body>
+                    <Page
+                        section={this.props.params.section}
+                        value={{
+                            name: this.props.params.name,
+                            status: 'LOADED',
+                            static: this.props.params.static,
+                            content: this.props.params.tree,
+                            params: this.props.params.params,
+                            location: null
+                        }}
+                    />
                     <Protypo
                         section={this.props.params.section}
                         context="page"

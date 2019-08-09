@@ -9,8 +9,9 @@ import { Observable } from 'rxjs/Observable';
 import { buttonInteraction } from 'modules/content/actions';
 import { isType } from 'typescript-fsa';
 import { txCall, txExec } from 'modules/tx/actions';
-import { modalShow, modalClose, modalPage } from 'modules/modal/actions';
+import { modalShow, modalClose } from 'modules/modal/actions';
 import { push } from 'connected-react-router';
+import { renderPage } from 'modules/sections/actions';
 
 const buttonInteractionEpic: Epic = (action$, store, { routerService }) => action$.ofAction(buttonInteraction)
     // Show confirmation window if there is any
@@ -82,16 +83,16 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                 if (action.payload.page) {
                     const params = action.payload.page.params;
                     if ('txinfo' === action.payload.page.name) {
-                        params.txhashes = (action.meta.txHashes || []).join(',');
+                        params.txhashes = ((action.meta || {}).txHashes || []).join(',');
                     }
 
                     if (action.payload.popup) {
-                        return Observable.of(modalPage({
-                            name: action.payload.page.name,
+                        return Observable.of(renderPage.started({
+                            location: null,
                             section: action.payload.page.section,
-                            params,
-                            title: action.payload.popup.title,
-                            width: action.payload.popup.width
+                            name: action.payload.page.name,
+                            params: action.payload.page.params,
+                            popup: action.payload.popup
                         }));
                     }
                     else {

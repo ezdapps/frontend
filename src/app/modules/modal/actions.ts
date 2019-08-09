@@ -4,10 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import actionCreatorFactory from 'typescript-fsa';
-import { IModalCall, IModalCloseCall, IModalPageCall } from 'apla/modal';
+import { IModalCall, IModalCloseCall } from 'apla/modal';
 
 const actionCreator = actionCreatorFactory('modal');
 
 export const modalShow = actionCreator<IModalCall>('MODAL_SHOW');
 export const modalClose = actionCreator<IModalCloseCall>('MODAL_CLOSE');
-export const modalPage = actionCreator<IModalPageCall>('MODAL_PAGE');
