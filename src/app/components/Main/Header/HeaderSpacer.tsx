@@ -9,7 +9,7 @@ export default themed.em`
     &:after {
         content: '|';
         display: inline-block;
-        margin: 0 15px;
+        margin: -1px 15px 0;
         color: ${props => props.theme.menubarForeground};
         line-height: ${props => props.theme.menubarSize}px;
     }

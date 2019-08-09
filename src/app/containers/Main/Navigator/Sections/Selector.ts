@@ -24,7 +24,7 @@ const mapSectionParam = (section: ISection) => {
 };
 
 const mapStateToProps = (state: IRootState, props: { section?: string }) => ({
-    section: props.section || state.sections.mainSection,
+    section: null === props.section ? null : (props.section || state.sections.mainSection),
     values: _.map(state.sections.sections, mapSectionParam).sort((a, b) => a.index - b.index)
 });
 

@@ -7,6 +7,7 @@ import React from 'react';
 import { INetworkEndpoint } from 'apla/auth';
 import { Route } from 'react-router-dom';
 import { FormattedMessage, IntlProvider } from 'react-intl';
+import { mainRoute } from 'lib/routing';
 import platform from 'lib/platform';
 import classnames from 'classnames';
 import baseTheme from 'components/Theme/baseTheme';
@@ -97,7 +98,7 @@ class App extends React.Component<AppProps> {
                             {!this.props.isSessionAcquired && (
                                 <Route path="/" component={Splash} />
                             )}
-                            <Route path="/" component={Main} />
+                            <Route path={mainRoute} render={route => <Main {...route.match.params} />} />
                         </AnimatedSwitch>
                     </ThemedApp>
                 </ThemeProvider>

@@ -4,14 +4,15 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import { Redirect, Switch, Route } from 'react-router-dom';
+import { Redirect } from 'react-router';
+import { routes } from 'lib/routing';
 
 import themed from 'components/Theme/themed';
-import Navigator from 'containers/Main/Navigator';
-import Header from 'containers/Main/Header';
-import Editor from 'containers/Main/Editor';
 
 interface Props {
+    app?: string;
+    page?: string;
+    action?: string;
 }
 
 const StyledLayout = themed.main`
@@ -24,21 +25,28 @@ const StyledLayout = themed.main`
     overflow: hidden;
 `;
 
-const Main: React.SFC<Props> = props => (
-    <StyledLayout>
-        <Header />
-        <Switch>
-            <Route
-                path="/browse/:section?/:page?"
-                render={route => <Navigator section={route.match.params.section} page={route.match.params.page} />}
-            />
-            <Route
-                path="/editor"
-                component={Editor}
-            />
-            <Redirect to="/browse" />
-        </Switch>
-    </StyledLayout>
-);
+const Main: React.SFC<Props> = props => {
+    const Route = routes[props.app];
+    const headerProps = (Route && Route.mapHeaderParams) ? Route.mapHeaderParams(props) : props;
+    const contentProps = (Route && Route.mapContentParams) ? Route.mapContentParams(props) : props;
+
+    return (
+        <StyledLayout>
+            {Route ?
+                (
+
+                    <>
+                        <Route.Header {...headerProps} />
+                        <Route.Content {...contentProps} />
+                    </>
+                )
+                :
+                (
+                    <Redirect to="/browse" />
+                )
+            }
+        </StyledLayout>
+    );
+};
 
 export default Main;

@@ -5,7 +5,6 @@
 
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Route, Link } from 'react-router-dom';
 
 import themed from 'components/Theme/themed';
 import HeaderIndicator from './HeaderIndicator';
@@ -14,8 +13,11 @@ import UserMenu from 'containers/Main/Header/UserMenu';
 import imgLogo from 'images/logoHeader.svg';
 import Selector from 'containers/Main/Navigator/Sections/Selector';
 import HeaderSpacer from './HeaderSpacer';
+import HeaderLink from './HeaderLink';
 
 interface Props {
+    app?: string;
+    page?: string;
     isAuthorized: boolean;
 }
 
@@ -42,14 +44,11 @@ const StyledHeader = themed.header`
 const Header: React.SFC<Props> = props => (
     <StyledHeader>
         <HeaderSpacer />
-        <div>
-            <Route
-                path="/:app?/:section?/:page?"
-                render={route => <Selector section={route.match.params.section} />}
-            />
-        </div>
+        <Selector section={props.app === 'browse' ? props.page : null} />
         <HeaderSpacer />
-        <Link to="/editor">DND_Editor</Link>
+        <HeaderLink to="/editor" active={'editor' === props.app}>
+            <FormattedMessage id="editor" defaultMessage="Editor" />
+        </HeaderLink>
         <div className="header__filler" />
 
         {props.isAuthorized && (

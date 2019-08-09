@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { state$ } from 'store';
 import { initialize } from 'modules/engine/actions';
 import { isType, Action } from 'typescript-fsa';
-import { RouterState } from 'connected-react-router';
+import { RouterState, replace } from 'connected-react-router';
 
 const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$
     .filter(action => isType(action, initialize.started) || isType(action, locationChange))
@@ -23,11 +23,18 @@ const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$
     })
     .delayWhen(() => state$.filter(l => l.auth.isAcquired).take(1))
     .flatMap((routerState: RouterState) => {
-        const match = routerService.matchRoute('/browse(/)(:section)(/)(:page)(/)', routerState.location.pathname + routerState.location.search);
+        const match = routerService.matchRoute('/browse(/:section)(/:page)', routerState.location.pathname + routerState.location.search);
         const state = store.getState();
 
         if (state.auth.isAuthenticated && match) {
             const section = state.sections.sections[match.parts.section || state.sections.mainSection];
+
+            if (!section) {
+                return Observable.of(replace(
+                    routerService.routeToBrowser(state.sections.mainSection, state.sections.sections[state.sections.mainSection].defaultPage)
+                ));
+            }
+
             const pageName = match.parts.page || section.defaultPage;
 
             // TODO: refactoring
@@ -60,6 +67,10 @@ const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$
             return Observable.empty();
         }
 
+    }).catch(e => {
+        // tslint:disable-next-line: no-console
+        console.log(e);
+        return Observable.of(e);
     });
 
 export default sectionLoadEpic;

@@ -79,6 +79,7 @@
     "confirm": "Подтвердить",
     "contract": "Смарт-контракт",
     "contract.exec": "Вызвать контракт",
+    "editor": "Редактор",
     "editor.block.create": "Создать блок",
     "editor.close.confirm": "Вы действительно хотите закрыть '{name}' без сохранения изменений?",
     "editor.close.all": "Закрыть все вкладки",

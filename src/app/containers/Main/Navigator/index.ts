@@ -17,7 +17,8 @@ interface Props {
 const mapStateToProps = (state: IRootState, props: Props) => {
     const sectionName = props.section || state.sections.mainSection;
     const section = state.sections.sections[sectionName];
-    const page = props.page || section.defaultPage;
+    const defaultPage = section ? section.defaultPage : '';
+    const page = props.page || defaultPage;
 
     return {
         stylesheet: state.content.stylesheet,

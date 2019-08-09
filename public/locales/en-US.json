@@ -79,6 +79,7 @@
     "confirm": "Confirm",
     "contract": "Smart contract",
     "contract.exec": "Execute contract",
+    "editor": "Editor",
     "editor.block.create": "Create block",
     "editor.close.confirm": "Do you really want to close '{name}' without saving changes?",
     "editor.close.all": "Close all tabs",
