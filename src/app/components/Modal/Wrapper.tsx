@@ -73,7 +73,6 @@ const StyledModalWrapper = themed.div`
     overflow-y: auto;
     padding: 50px;
     margin-top: ${props => props.theme.headerHeight + (platform.select({ win32: 1 }) || 0)}px;
-    padding-top: ${props => 50 + props.theme.toolbarHeight}px;
 
     &::before {
         content: ' ';

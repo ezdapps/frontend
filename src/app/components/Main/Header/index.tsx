@@ -29,7 +29,7 @@ const StyledHeader = themed.header`
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 10000;
+    z-index: 8000;
     display: flex;
     flex-direction: row;
     padding-left: 80px;
