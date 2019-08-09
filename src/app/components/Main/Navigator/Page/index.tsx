@@ -41,7 +41,10 @@ const Page: React.SFC<IPageProps> = props => {
         return (
             <StyledPage>
                 {props.value.static && (
-                    staticPage.render(props.section, props.value.params)
+                    staticPage.render(props.section, {
+                        ...props.value.params,
+                        children: props.value && props.value.content
+                    })
                 )}
                 {!props.value.static && (
                     <Protypo
