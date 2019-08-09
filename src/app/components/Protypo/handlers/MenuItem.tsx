@@ -49,7 +49,7 @@ export const StyledMenuItem = themed.div`
         display: block;
         height: 50px;
         line-height: 50px;
-        padding: 0 20px;
+        padding: 0 18px;
         color: ${props => props.theme.menuForeground};
         font-size: 14px;
         font-weight: 400;
@@ -60,11 +60,10 @@ export const StyledMenuItem = themed.div`
         white-space: nowrap;
 
         .icon {
-            margin-right: 14px;
+            margin-right: 16px;
             color: ${props => props.theme.menuIconColor};
             font-size: 21px;
-            position: relative;
-            top: 3px;
+            vertical-align: middle;
         }
     }
 `;

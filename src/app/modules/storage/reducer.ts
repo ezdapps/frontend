@@ -9,38 +9,38 @@ import { IWallet, INetwork } from 'apla/auth';
 import saveLocaleHandler from './reducers/saveLocaleHandler';
 import saveWalletHandler from './reducers/saveWalletHandler';
 import removeWalletHandler from './reducers/removeWalletHandler';
-import saveNavigationSizeHandler from './reducers/saveNavigationSizeHandler';
 import mergeFullNodesHandler from './reducers/mergeFullNodesHandler';
 import closeSecurityWarningHandler from './reducers/closeSecurityWarningHandler';
 import saveNetworkHandler from './reducers/saveNetworkHandler';
 import removeNetworkHandler from './reducers/removeNetworkHandler';
 import savePreconfiguredNetworksHandler from './reducers/savePreconfiguredNetworksHandler';
 import rehydrateHandler from './reducers/rehydrateHandler';
+import setMenuFoldedHandler from './reducers/setMenuFoldedHandler';
 
 export type State = {
     readonly locale: string;
     readonly wallets: IWallet[];
     readonly networks: INetwork[];
-    readonly navigationSize: number;
     readonly securityWarningClosed: boolean;
+    readonly menuFolded: boolean;
 };
 
 export const initialState: State = {
     locale: null,
     wallets: [],
     networks: [],
-    navigationSize: 230,
-    securityWarningClosed: false
+    securityWarningClosed: false,
+    menuFolded: false
 };
 
 export default reducerWithInitialState<State>(initialState)
     .case(actions.saveLocale, saveLocaleHandler)
     .case(actions.saveWallet, saveWalletHandler)
     .case(actions.removeWallet, removeWalletHandler)
-    .case(actions.saveNavigationSize, saveNavigationSizeHandler)
     .case(actions.mergeFullNodes, mergeFullNodesHandler)
     .case(actions.closeSecurityWarning, closeSecurityWarningHandler)
     .case(actions.saveNetwork, saveNetworkHandler)
     .case(actions.removeNetwork, removeNetworkHandler)
     .case(actions.savePreconfiguredNetworks, savePreconfiguredNetworksHandler)
-    .case(actions.localstorageInit, rehydrateHandler);
+    .case(actions.localstorageInit, rehydrateHandler)
+    .case(actions.setMenuFolded, setMenuFoldedHandler);

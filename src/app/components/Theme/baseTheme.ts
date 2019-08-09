@@ -39,6 +39,8 @@ const baseTheme: IThemeDefinition = {
     menuIconColor: '#3577cc',
     menuPrimaryForeground: '#2886ff',
     menuPrimaryActive: '#7bb0f5',
+    menuSize: 230,
+    menuSizeFolded: 55,
 
     contentForeground: '#515253',
     contentBackground: '#fff',

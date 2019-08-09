@@ -26,27 +26,6 @@ export const initialState: State = {
     sections: {}
 };
 
-// export const initialState: State = {
-//     mainSection: null,
-//     section: null,
-//     sections: {},
-//     systemSections: [{
-//         key: 'editor',
-//         name: 'editor',
-//         title: 'Editor',
-//         visible: false,
-//         closeable: true,
-//         defaultPage: 'editor',
-//         pending: false,
-//         force: false,
-//         menus: [],
-//         menuDisabled: true,
-//         menuVisible: true,
-//         page: null
-//     }],
-//     inited: false
-// };
-
 export default reducerWithInitialState(initialState)
     .case(actions.updateSection, updateSectionHandler)
     .case(actions.menuPop, menuPopHandler)

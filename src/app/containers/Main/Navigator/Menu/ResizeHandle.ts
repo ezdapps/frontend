@@ -5,19 +5,18 @@
 
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { setResizing } from 'modules/content/actions';
-import { saveNavigationSize } from 'modules/storage/actions';
+import { setMenuFolded } from 'modules/storage/actions';
 
 import ResizeHandle from 'components/Main/Navigator/Menu/ResizeHandle';
 
 const mapStateToProps = (state: IRootState) => ({
-    width: state.storage.navigationSize,
-    resizing: state.content.navigationResizing,
+    folded: state.storage.menuFolded
 });
 
 const mapDispatchToProps = {
-    setResizing,
-    navigationResize: saveNavigationSize,
+    setMenuFolded
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ResizeHandle);
+export default connect(mapStateToProps, mapDispatchToProps, (state, dispatch: any) => ({
+    onFoldToggle: () => dispatch.setMenuFolded(!state.folded)
+}))(ResizeHandle);

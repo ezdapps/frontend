@@ -7,23 +7,25 @@ import React from 'react';
 import { ISection } from 'apla/content';
 
 import Section from './Section';
-import Navigation from 'containers/Main/Navigator/Menu';
+import Menu from 'containers/Main/Navigator/Menu';
 
-export interface ISectionsProps {
+interface Props {
     section: string;
     page: string;
+    folded: boolean;
+    menuActive: boolean;
     values: {
         [key: string]: ISection;
     };
-    navigationSize: number;
 }
 
-const Sections: React.SFC<ISectionsProps> = (props) => (
+const Sections: React.SFC<Props> = (props) => (
     <div className="fullscreen" style={{ position: 'relative' }}>
-        <Navigation section={props.section} />
+        <Menu section={props.section} />
         <Section
-            navigationSize={props.navigationSize}
             name={props.section}
+            folded={props.folded}
+            menuActive={props.menuActive}
             page={props.values[props.section].page}
             breadcrumbs={props.values[props.section].breadcrumbs}
         />

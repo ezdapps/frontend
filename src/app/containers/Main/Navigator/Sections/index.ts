@@ -10,7 +10,8 @@ import { menuPop } from 'modules/sections/actions';
 import Sections from 'components/Main/Navigator/Sections';
 
 const mapStateToProps = (state: IRootState) => ({
-    navigationSize: state.storage.navigationSize
+    folded: state.storage.menuFolded,
+    menuActive: state.content.menuActive
 });
 
 const mapDispatchToProps = {

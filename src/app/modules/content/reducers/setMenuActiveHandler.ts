@@ -4,12 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { State } from '../reducer';
-import { setResizing } from '../actions';
+import { setMenuActive } from '../actions';
 import { Reducer } from 'modules';
 
-const setResizingHandler: Reducer<typeof setResizing, State> = (state, payload) => ({
+const setMenuActiveHandler: Reducer<typeof setMenuActive, State> = (state, payload) => ({
     ...state,
-    navigationResizing: payload
+    menuActive: payload
 });
 
-export default setResizingHandler;
+export default setMenuActiveHandler;

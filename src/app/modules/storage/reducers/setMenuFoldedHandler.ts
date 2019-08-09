@@ -4,15 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { State } from '../reducer';
-import { saveNavigationSize } from '../actions';
+import { setMenuFolded } from '../actions';
 import { Reducer } from 'modules';
 
-const saveNavigationSizeHandler: Reducer<typeof saveNavigationSize, State> = (state, payload) => ({
+const setMenuFoldedHandler: Reducer<typeof setMenuFolded, State> = (state, payload) => ({
     ...state,
-    navigationSize: Math.max(
-        payload,
-        200
-    )
+    menuFolded: payload
 });
 
-export default saveNavigationSizeHandler;
+export default setMenuFoldedHandler;

@@ -9,11 +9,13 @@ import { IMenu } from 'apla/content';
 import StackGroup from 'components/Animation/StackGroup';
 import themed from 'components/Theme/themed';
 import Protypo from 'containers/Widgets/Protypo';
-import ResizeHandle from 'containers/Main/Navigator/Menu/ResizeHandle';
 import ScrollView from 'components/ScrollView';
+import classNames from 'classnames';
 
 const StyledNavigation = themed.aside`
     background: ${props => props.theme.menuBackground};
+    width: ${props => props.theme.menuSize}px;
+    transition: width ease-in-out .12s;
 
     .scrollarea {
         background: ${props => props.theme.menuBackground};
@@ -96,14 +98,17 @@ const StyledMenuContent = themed.div`
 `;
 
 interface Props {
-    width: number;
     menus: IMenu[];
     section: string;
+    active: boolean;
+    folded: boolean;
     menuPop: () => void;
+    onMouseOver?: () => void;
+    onMouseLeave?: () => void;
 }
 
 const Menu: React.SFC<Props> = props => (
-    <StyledNavigation className={true ? '' : 'navigation-collapsed'} style={{ width: props.width }}>
+    <StyledNavigation className={classNames({ menu_folded: props.folded, menu_active: props.active })} onMouseOver={props.onMouseOver} onMouseLeave={props.onMouseLeave}>
         <nav>
             <StyledMenu>
                 <StackGroup
@@ -132,7 +137,6 @@ const Menu: React.SFC<Props> = props => (
                 />
             </StyledMenu>
         </nav>
-        <ResizeHandle />
     </StyledNavigation>
 );
 

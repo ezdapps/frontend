@@ -37,6 +37,8 @@ declare module 'apla/theme' {
         menuIconColor: string;
         menuPrimaryForeground: string;
         menuPrimaryActive: string;
+        menuSize: number;
+        menuSizeFolded: number;
 
         contentForeground: string;
         contentBackground: string;
