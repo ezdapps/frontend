@@ -39,7 +39,7 @@ const Page: React.SFC<IPageProps> = props => {
     }
     else {
         const staticPage = STATIC_PAGES[props.value.name];
-        const title = props.value.location.state && props.value.location.state.from && props.value.location.state.from.title;
+        const title = props.value.location && props.value.location.state && props.value.location.state.from && props.value.location.state.from.title;
 
         return (
             <DocumentTitle title={title}>
