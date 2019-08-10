@@ -7,7 +7,6 @@ import React from 'react';
 import { TProtypoElement } from 'apla/protypo';
 
 import Modal from './';
-import Protypo from 'containers/Widgets/Protypo';
 import Page from 'components/Main/Navigator/Page';
 
 export interface IPageModalProps {
@@ -44,11 +43,6 @@ class PageModal extends Modal<IPageModalProps, boolean> {
                             params: this.props.params.params,
                             location: null
                         }}
-                    />
-                    <Protypo
-                        section={this.props.params.section}
-                        context="page"
-                        content={this.props.params.tree}
                     />
                 </Modal.Body>
             </div>
