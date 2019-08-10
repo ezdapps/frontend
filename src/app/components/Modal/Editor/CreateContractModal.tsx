@@ -10,18 +10,16 @@ import Modal from '../';
 import { FormattedMessage } from 'react-intl';
 import Validation from 'components/Validation';
 
-export interface ICreatePageModalProps {
+interface Props {
     apps: {
         id: string;
         name: string;
     }[];
-    type: 'block' | 'menu';
 }
 
-class CreateInterfaceModal extends Modal<ICreatePageModalProps, { name: string, app: string, conditions: string }> {
+class CreateContractModal extends Modal<Props, { app: string, conditions: string }> {
     onSubmit = (values: { [key: string]: any }) => {
         this.props.onResult({
-            name: values.name,
             app: values.app,
             conditions: values.conditions
         });
@@ -31,20 +29,9 @@ class CreateInterfaceModal extends Modal<ICreatePageModalProps, { name: string, 
         return (
             <Validation.components.ValidatedForm onSubmitSuccess={this.onSubmit}>
                 <Modal.Header>
-                    {'block' === this.props.params.type && (
-                        <FormattedMessage id="editor.block.create" defaultMessage="Create block" />
-                    )}
-                    {'menu' === this.props.params.type && (
-                        <FormattedMessage id="editor.menu.create" defaultMessage="Create menu" />
-                    )}
+                    <FormattedMessage id="editor.contract.create" defaultMessage="Create smart contract" />
                 </Modal.Header>
                 <Modal.Body>
-                    <Validation.components.ValidatedFormGroup for="name">
-                        <label htmlFor="name">
-                            <FormattedMessage id="editor.page.name" defaultMessage="Name" />
-                        </label>
-                        <Validation.components.ValidatedControl key="name" name="name" validators={[Validation.validators.required]} />
-                    </Validation.components.ValidatedFormGroup>
                     <Validation.components.ValidatedFormGroup for="app">
                         <label htmlFor="app">
                             <FormattedMessage id="editor.app" defaultMessage="Application" />
@@ -61,7 +48,7 @@ class CreateInterfaceModal extends Modal<ICreatePageModalProps, { name: string, 
                         </label>
                         <Validation.components.ValidatedTextarea name="conditions" validators={[Validation.validators.required]} />
                     </Validation.components.ValidatedFormGroup>
-                </Modal.Body>
+                </Modal.Body >
                 <Modal.Footer className="text-right">
                     <Button type="button" bsStyle="link" onClick={this.props.onCancel.bind(this)}>
                         <FormattedMessage id="cancel" defaultMessage="Cancel" />
@@ -75,4 +62,4 @@ class CreateInterfaceModal extends Modal<ICreatePageModalProps, { name: string, 
     }
 }
 
-export default CreateInterfaceModal;
+export default CreateContractModal;

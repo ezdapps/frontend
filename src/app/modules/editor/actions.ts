@@ -7,7 +7,7 @@ import actionCreatorFactory from 'typescript-fsa';
 import { TProtypoElement } from 'apla/protypo';
 
 import {
-    IEditorTabCreateCall, ILoadEditorTabCall, ICreateEditorTabCall, IReloadEditorTabCall, TEditorTab, IChangePageCall, IChangePageResult, ISaveConstructorHistoryResult,
+    IEditorTabCreateCall, ILoadEditorTabCall, IReloadEditorTabCall, TEditorTab, IChangePageCall, IChangePageResult, ISaveConstructorHistoryResult,
     IConstructorUndoRedoResult, ISetTagCanDropPositionCall, ISetTagCanDropPositionResult, IAddTagCall, IOperateTagCall, IOperateTagResult, IMoveTreeTag, ISelectTagResult,
     IGetPageTreeResult
 } from 'apla/editor';
@@ -15,7 +15,7 @@ import {
 const actionCreator = actionCreatorFactory('editor');
 
 export const editorSave = actionCreator<TEditorTab>('EDITOR_SAVE');
-export const createEditorTab = actionCreator.async<ICreateEditorTabCall, IEditorTabCreateCall>('CREATE_EDITOR_TAB');
+export const createEditorTab = actionCreator.async<string, IEditorTabCreateCall>('CREATE_EDITOR_TAB');
 export const loadEditorTab = actionCreator.async<ILoadEditorTabCall, TEditorTab>('LOAD_EDITOR_TAB');
 export const changeEditorTab = actionCreator<number>('CHANGE_EDITOR_TAB');
 export const closeEditorTab = actionCreator<number>('CLOSE_EDITOR_TAB');

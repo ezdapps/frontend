@@ -15,7 +15,7 @@ const StyledItem = themed.button`
     background: 0;
     transition: background .15s;
     width: 100%;
-    padding: 0 12px !important;
+    padding: 0 12px;
     margin: 0;
     height: 40px;
     line-height: 40px;
@@ -27,13 +27,24 @@ const StyledItem = themed.button`
     display: block;
     text-align: left;
     border: dashed 1px transparent;
+    position: relative;
+
+    &.item_hasicon {
+        padding-left: 40px;
+    }
 
     > .item__icon {
-        float: left;
-        font-weight: 500;
-        font-size: 15px;
-        line-height: 40px;
-        margin-right: 12px;
+        position: absolute;
+        left: 12px;
+        top: 0;
+        bottom: 0;
+
+        > em {
+            font-weight: 500;
+            font-size: 15px;
+            line-height: 40px;
+            margin-right: 12px;
+        }
     }
 
     &[disabled] {
@@ -64,9 +75,15 @@ const Item: React.SFC<Props> = (props, context) => {
     };
 
     return (
-        <StyledItem disabled={props.disabled} onClick={handleClick}>
-            {props.icon && <em className={classNames('item__icon', props.icon)} />}
-            {props.children}
+        <StyledItem disabled={props.disabled} onClick={handleClick} className={classNames({ item_hasicon: !!props.icon })}>
+            {props.icon && (
+                <div className="item__icon">
+                    <em className={props.icon} />
+                </div>
+            )}
+            <div>
+                {props.children}
+            </div>
         </StyledItem>
     );
 };

@@ -8,8 +8,13 @@ import propTypes from 'prop-types';
 import onClickOutside, { InjectedOnClickOutProps } from 'react-onclickoutside';
 
 import Dropdown from 'components/Dropdown';
+import Button from './';
+
+type ButtonComponent =
+    React.ComponentType<{ onClick: (e: React.MouseEvent<any>) => void, disabled?: boolean, className?: string }>;
 
 interface Props {
+    buttonComponent?: ButtonComponent;
     disabled?: boolean;
     className?: string;
     active?: boolean;
@@ -52,11 +57,12 @@ class DropdownButton extends React.Component<Props & InjectedOnClickOutProps, St
     }
 
     render() {
+        const Component = this.props.buttonComponent || Button;
         return (
             <div style={{ display: 'inline-block', position: 'relative' }}>
-                <button disabled={this.props.disabled} className={this.props.className} onClick={this.handleClick}>
+                <Component disabled={this.props.disabled} className={this.props.className} onClick={this.handleClick}>
                     {this.props.children}
-                </button>
+                </Component>
                 <Dropdown active={this.state.active} align={this.props.align} width={this.props.menuWidth}>
                     {this.props.content}
                 </Dropdown>

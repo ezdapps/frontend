@@ -53,11 +53,6 @@ declare module 'apla/editor' {
         value: string
     }
 
-    interface ICreateEditorTabCall{
-        type: string;
-        appId: number;
-    }
-
     interface ILoadEditorTabCall {
         type: string;
         name: string;

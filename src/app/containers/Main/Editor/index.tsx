@@ -5,7 +5,7 @@
 
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { changeEditorTab, closeEditorTab, closeSavedEditorTab, updateEditorTab, loadEditorTab, createEditorTab } from 'modules/editor/actions';
+import { changeEditorTab, closeEditorTab, closeSavedEditorTab, updateEditorTab, loadEditorTab } from 'modules/editor/actions';
 
 import Editor from 'components/Main/Editor';
 import { modalShow } from 'modules/modal/actions';
@@ -17,7 +17,6 @@ const mapStateToProps = (state: IRootState) => ({
 });
 
 const mapDispatchToProps = {
-    onTabCreate: createEditorTab.started,
     onTabLoad: loadEditorTab.started,
     onTabChange: (index: number) => changeEditorTab(index),
     onTabClose: (index: number) => closeEditorTab(index),

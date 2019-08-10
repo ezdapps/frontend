@@ -27,7 +27,7 @@ export default themed.div`
     white-space: nowrap;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
 
     .toolbar__filler {
         flex: 1;

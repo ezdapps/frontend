@@ -20,16 +20,22 @@ const newPageEpic: Epic = (action$, store, { api }) => action$.ofAction(editorSa
         });
         const id = uuid.v4();
 
-        return Observable.fromPromise(client.getData({
-            name: 'menu',
-            columns: ['name']
-
-        })).flatMap(menus => ModalObservable<{ name: string, menu: string, conditions: string }>(action$, {
+        return Observable.zip(
+            Observable.from(client.getData({
+                name: 'menu',
+                columns: ['name']
+            })),
+            Observable.from(client.getData({
+                name: 'applications',
+                columns: ['id', 'deleted', 'name']
+            }))
+        ).flatMap(([menus, apps]) => ModalObservable<{ name: string, app: string, menu: string, conditions: string }>(action$, {
             modal: {
                 id,
                 type: 'CREATE_PAGE',
                 params: {
-                    menus: menus.list.map(l => l.name)
+                    menus: menus.list.map(l => l.name),
+                    apps: apps.list.filter(l => '0' === l.deleted)
                 }
             },
             success: result => TxObservable(action$, {
@@ -42,7 +48,7 @@ const newPageEpic: Epic = (action$, store, { api }) => action$.ofAction(editorSa
                             Value: action.payload.value,
                             Menu: result.menu,
                             Conditions: result.conditions,
-                            ApplicationId: action.payload.appId || 0
+                            ApplicationId: result.app || 0
                         }]
                     }]
                 },

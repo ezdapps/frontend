@@ -37,6 +37,7 @@ import NetworkErrorModal from './Auth/NetworkErrorModal';
 import EditorCloseModal from 'containers/Modal/EditorCloseModal';
 import EditorRevertModal from 'containers/Modal/EditorRevertModal';
 import EditorCloseAllModal from 'containers/Modal/EditorCloseAllModal';
+import CreateContractModal from './Editor/CreateContractModal';
 
 const MODAL_COMPONENTS = {
     'AUTHORIZE': AuthorizeModal,
@@ -49,6 +50,7 @@ const MODAL_COMPONENTS = {
     'TX_CONFIRM': TxConfirmModal,
     'TX_ERROR': TxErrorModal,
     'TX_SIGNATURE': SignatureModal,
+    'CREATE_CONTRACT': CreateContractModal,
     'CREATE_PAGE': CreatePageModal,
     'CREATE_INTERFACE': CreateInterfaceModal,
     'DEBUG_CONTRACT': DebugContractModal,

@@ -5,7 +5,7 @@
 
 import { IRootState } from 'modules';
 import { connect } from 'react-redux';
-import { editorSave, revertEditorTab, changeEditorTool, debugContract } from 'modules/editor/actions';
+import { editorSave, revertEditorTab, changeEditorTool, debugContract, createEditorTab } from 'modules/editor/actions';
 
 import EditorToolbar from 'components/Main/Editor/EditorToolbar';
 
@@ -26,6 +26,7 @@ const mapDispatchToProps = {
     debugContract,
     revertEditorTab,
     editorSave,
+    createEditorTab: createEditorTab.started,
     changeEditorTool: changeEditorTool.started
 };
 
@@ -34,6 +35,7 @@ export default connect(mapStateToProps, mapDispatchToProps, (state, dispatch: an
     onExec: () => { dispatch.debugContract(state.currentTab.name); },
     onRevert: () => { dispatch.revertEditorTab(state.currentTabIndex); },
     onToolChange: (tool: string) => { dispatch.changeEditorTool(tool); },
-    onSave: () => { dispatch.editorSave(state.currentTab); }
+    onSave: () => { dispatch.editorSave(state.currentTab); },
+    onCreateTab: (type: string) => { dispatch.createEditorTab(type); }
 
 }))(EditorToolbar);

@@ -10,10 +10,9 @@ import { TEditorTab } from 'apla/editor';
 import Toolbar, { Filler } from '../Toolbar';
 import ToolButton from 'components/Main/Toolbar/ToolButton';
 import SegmentButton from 'components/Button/SegmentButton';
-import DropdownButton from 'components/Button/DropdownButton';
+import DropdownToolButton from '../Toolbar/DropdownToolButton';
 import Heading from 'components/Dropdown/Heading';
 import Item from 'components/Dropdown/Item';
-import Info from 'components/Dropdown/Info';
 
 interface Props {
     currentTab: TEditorTab;
@@ -23,6 +22,7 @@ interface Props {
     onToolChange: (tool: string) => void;
     onExec: () => void;
     onSave: () => void;
+    onCreateTab: (type: string) => void;
 }
 
 const editorTools = [
@@ -60,20 +60,30 @@ const EditorToolbar: React.SFC<Props> = props => {
 
     return (
         <Toolbar>
-            <DropdownButton
+            <DropdownToolButton
+                icon="icon-doc"
                 content={
                     <div>
-                        <Heading>First group</Heading>
-                        <Item icon="icon-action-undo">First item</Item>
-                        <Item icon="icon-note">Second item</Item>
-                        <Item disabled>Third item</Item>
-                        <Heading>Second group</Heading>
-                        <Info>Nothing to see here. Move along</Info>
+                        <Item icon="icon-vector text-danger" onClick={() => props.onCreateTab('contract')}>
+                            <FormattedMessage id="contract" defaultMessage="Smart contract" />
+                        </Item>
+                        <Heading>
+                            <FormattedMessage id="interface" defaultMessage="Interface" />
+                        </Heading>
+                        <Item icon="icon-note text-primary" onClick={() => props.onCreateTab('page')}>
+                            <FormattedMessage id="interface.page" defaultMessage="Page" />
+                        </Item>
+                        <Item icon="icon-list text-primary" onClick={() => props.onCreateTab('menu')}>
+                            <FormattedMessage id="interface.menu" defaultMessage="Menu" />
+                        </Item>
+                        <Item icon="icon-layers text-primary" onClick={() => props.onCreateTab('block')}>
+                            <FormattedMessage id="interface.block" defaultMessage="Block" />
+                        </Item>
                     </div>
                 }
             >
-                Hello?
-            </DropdownButton>
+                <FormattedMessage id="editor.create" defaultMessage="Create" />
+            </DropdownToolButton>
             <ToolButton icon="icon-note" disabled={!props.canSave} onClick={props.onSave}>
                 <FormattedMessage id="editor.save" defaultMessage="Save" />
             </ToolButton>
@@ -87,11 +97,13 @@ const EditorToolbar: React.SFC<Props> = props => {
             )}
             <Filler />
             {props.currentTab && 'contract' !== props.currentTab.type && (
-                <SegmentButton
-                    activeIndex={resolveToolIndex(props.currentTab.tool)}
-                    onChange={onToolChange}
-                    items={editorTools.map(l => l.content)}
-                />
+                <div style={{ alignSelf: 'center' }}>
+                    <SegmentButton
+                        activeIndex={resolveToolIndex(props.currentTab.tool)}
+                        onChange={onToolChange}
+                        items={editorTools.map(l => l.content)}
+                    />
+                </div>
             )}
         </Toolbar>
     );
