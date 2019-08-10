@@ -5,10 +5,10 @@
 
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { renderPage, menuPush } from '../actions';
+import { renderPage } from '../actions';
 import { STATIC_PAGES } from 'lib/staticPages';
-import { IContentResponse } from 'apla/api';
 import { modalShow } from 'modules/modal/actions';
+import { Action } from 'redux';
 
 const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(renderPage.started)
     .switchMap(action => {
@@ -25,21 +25,19 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
             params: action.payload.params
         };
 
-        return Observable.if(
-            () => !!renderPage,
-            Observable.from(client.content({
-                type: 'page',
-                locale: state.storage.locale,
-                ...requestPage
-            })),
-            Observable.of<IContentResponse>(null)
+        return Observable.from(client.content({
+            type: 'page',
+            locale: state.storage.locale,
+            ...requestPage
 
-        ).flatMap(content => {
-            return Observable.concat(
+        })).flatMap(content => {
+            return Observable.concat<Action>(
                 Observable.of(renderPage.done({
                     params: action.payload,
                     result: {
-                        tree: content ? content.tree : [],
+                        tree: content.tree,
+                        menu: content.menu,
+                        menuTree: content ? content.menutree : [],
                         static: !!staticPage
                     }
                 })),
@@ -57,18 +55,7 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
                             params: action.payload.params,
                             static: !!staticPage
                         }
-                    }))),
-                    Observable.if(
-                        () => !!(content.menu && content.menutree),
-                        Observable.defer(() => Observable.of(menuPush({
-                            section: action.payload.section,
-                            menu: {
-                                name: content.menu,
-                                content: content.menutree
-                            }
-                        }))),
-                        Observable.empty<never>()
-                    )
+                    })))
                 ),
             );
 

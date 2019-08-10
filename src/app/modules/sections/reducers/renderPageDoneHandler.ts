@@ -26,7 +26,11 @@ const renderPageDoneHandler: Reducer<typeof renderPage.done, State> = (state, pa
                     params: payload.params.params,
                     error: undefined,
                     location: payload.params.location,
-                }
+                },
+                menus: [{
+                    name: payload.result.menu,
+                    content: payload.result.menuTree
+                }]
             }
         }
     };
