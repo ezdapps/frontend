@@ -8,7 +8,9 @@ import { remote } from 'electron';
 import { FormattedMessage } from 'react-intl';
 
 import themed from 'components/Theme/themed';
-import DropdownButton, { CloseDropdownButton } from 'components/DropdownButton';
+import DropdownButton from 'components/Button/DropdownButton';
+import Heading from 'components/Dropdown/Heading';
+import Item from 'components/Dropdown/Item';
 
 const SystemDropdown = themed(DropdownButton)`
     background: 0;
@@ -40,31 +42,19 @@ const SystemMenu: React.SFC<ISystemMenuProps> = props => {
         (
             <SystemDropdown
                 key="1"
-                width={180}
+                menuWidth={180}
                 align={props.align}
-                leftMost={'left' === props.align}
-                rightMost={'right' === props.align}
                 content={
                     <div>
-                        <div className="dropdown-heading">Apla</div>
-                        <ul className="dropdown-group">
-                            <li>
-                                <CloseDropdownButton onClick={props.onAbout}>
-                                    <em className="icon icon-question text-primary" />
-                                    <span>
-                                        <FormattedMessage id="general.about" defaultMessage="About" />
-                                    </span>
-                                </CloseDropdownButton>
-                            </li>
-                            <li>
-                                <CloseDropdownButton onClick={() => remote.getCurrentWindow().webContents.openDevTools({ mode: 'detach' })}>
-                                    <em className="icon icon-calculator text-danger" />
-                                    <span>
-                                        <FormattedMessage id="general.developer.tools" defaultMessage="Developer tools" />
-                                    </span>
-                                </CloseDropdownButton>
-                            </li>
-                        </ul>
+                        <Heading>
+                            <FormattedMessage id="general.title" defaultMessage="Apla" />
+                        </Heading>
+                        <Item onClick={props.onAbout} icon="icon-question text-primary">
+                            <FormattedMessage id="general.about" defaultMessage="About" />
+                        </Item>
+                        <Item onClick={() => remote.getCurrentWindow().webContents.openDevTools({ mode: 'detach' })} icon="icon-calculator text-danger">
+                            <FormattedMessage id="general.developer.tools" defaultMessage="Developer tools" />
+                        </Item>
                     </div>
                 }
             >

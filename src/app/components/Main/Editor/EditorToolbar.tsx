@@ -10,6 +10,10 @@ import { TEditorTab } from 'apla/editor';
 import Toolbar, { Filler } from '../Toolbar';
 import ToolButton from 'components/Main/Toolbar/ToolButton';
 import SegmentButton from 'components/Button/SegmentButton';
+import DropdownButton from 'components/Button/DropdownButton';
+import Heading from 'components/Dropdown/Heading';
+import Item from 'components/Dropdown/Item';
+import Info from 'components/Dropdown/Info';
 
 interface Props {
     currentTab: TEditorTab;
@@ -56,6 +60,20 @@ const EditorToolbar: React.SFC<Props> = props => {
 
     return (
         <Toolbar>
+            <DropdownButton
+                content={
+                    <div>
+                        <Heading>First group</Heading>
+                        <Item icon="icon-action-undo">First item</Item>
+                        <Item icon="icon-note">Second item</Item>
+                        <Item disabled>Third item</Item>
+                        <Heading>Second group</Heading>
+                        <Info>Nothing to see here. Move along</Info>
+                    </div>
+                }
+            >
+                Hello?
+            </DropdownButton>
             <ToolButton icon="icon-note" disabled={!props.canSave} onClick={props.onSave}>
                 <FormattedMessage id="editor.save" defaultMessage="Save" />
             </ToolButton>

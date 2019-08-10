@@ -7,50 +7,55 @@ import React from 'react';
 import classNames from 'classnames';
 
 import themed from 'components/Theme/themed';
-import DropdownButton, { IDropdownButtonProps } from 'components/DropdownButton';
+import DropdownButton from 'components/Button/DropdownButton';
 
-interface Props extends IDropdownButtonProps {
+interface Props {
+    className?: string;
+    disabled?: boolean;
     warning?: boolean;
+    badge?: number;
+    align?: 'left' | 'right';
+    menuWidth?: number;
+    content: React.ReactNode;
 }
 
-const HeaderButton: React.SFC<Props> = props => (
-    <DropdownButton
-        className={classNames(props.className, {
-            _warning: props.warning,
-            _active: !!props.badge
-        })}
-        content={props.content}
-        leftMost={props.leftMost}
-        rightMost={props.rightMost}
-        align={props.align}
-        width={props.width}
-        badge={props.badge}
-        disabled={props.disabled}
-        onClick={props.onClick}
-    >
-        {props.children}
-    </DropdownButton>
-);
-
-const StyledHeaderButton = themed(HeaderButton)`
+const StyledHeaderButton = themed(DropdownButton)`
     background: 0;
     padding: 0;
     border: 0;
     outline: 0;
     transition: background ease-in-out .17s;
-
+    min-width: ${props => props.theme.menubarSize}px;
+    height: ${props => props.theme.menubarSize}px;
+    line-height: ${props => props.theme.menubarSize}px;
+    
     &:hover {
         background: ${props => props.theme.menubarBackgroundFocused};
     }
-
+    
     &._warning {
         background: ${props => props.theme.menubarBackgroundSecondary};
         color: ${props => props.theme.menubarForegroundActive};
     }
-
+    
     &._active {
         color: ${props => props.theme.menubarForegroundActive};
     }
 `;
 
-export default StyledHeaderButton;
+const HeaderButton: React.SFC<Props> = props => (
+    <StyledHeaderButton
+        className={classNames(props.className, {
+            _warning: props.warning,
+            _active: !!props.badge
+        })}
+        content={props.content}
+        disabled={props.disabled}
+        align={props.align}
+        menuWidth={props.menuWidth}
+    >
+        {props.children}
+    </StyledHeaderButton>
+);
+
+export default HeaderButton;

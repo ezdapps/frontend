@@ -9,11 +9,11 @@ import { TEditorTab } from 'apla/editor';
 import imgSim from 'components/Editor/simvolio/icon.svg';
 import imgTpl from 'components/Editor/protypo/icon.svg';
 
-import { CloseDropdownButton } from 'components/DropdownButton';
 import themed from 'components/Theme/themed';
 import EditorTab from './EditorTab';
-import HeaderButton from 'components/Main/Header/HeaderButton';
+import HeaderButton from '../Header/HeaderButton';
 import ScrollView from 'components/ScrollView';
+import Item from 'components/Dropdown/Item';
 
 export const TYPE_ICONS: { [type: string]: string } = {
     contract: imgSim,
@@ -23,7 +23,7 @@ export const TYPE_ICONS: { [type: string]: string } = {
     default: null
 };
 
-export interface IEditorTabsProps {
+interface Props {
     className?: string;
     tabIndex: number;
     tabs: TEditorTab[];
@@ -33,7 +33,7 @@ export interface IEditorTabsProps {
     onCloseSaved: () => void;
 }
 
-const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
+const EditorTabs: React.SFC<Props> = (props) => (
     <div className={props.className}>
         <div className="editortabs__selector">
             <ScrollView className="editortabs__scrollarea" disableVertical hideHorizontal horizontalWheel>
@@ -53,30 +53,17 @@ const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
         </div>
         <div className="editortabs__menu">
             <HeaderButton
-                className="p0"
-                width={225}
+                className="editortabs__menubutton"
+                menuWidth={225}
                 align="right"
-                rightMost
                 content={
                     <div>
-                        <ul className="dropdown-group">
-                            <li>
-                                <CloseDropdownButton onClick={props.tabs.length && props.onCloseSaved} disabled={!props.tabs.length}>
-                                    <em className="icon icon-docs" />
-                                    <span>
-                                        <FormattedMessage id="editor.close.saved" defaultMessage="Close saved tabs" />
-                                    </span>
-                                </CloseDropdownButton>
-                            </li>
-                            <li>
-                                <CloseDropdownButton onClick={props.tabs.length && props.onCloseAll} disabled={!props.tabs.length}>
-                                    <em className="icon icon-docs text-danger" />
-                                    <span>
-                                        <FormattedMessage id="editor.close.all" defaultMessage="Close all tabs" />
-                                    </span>
-                                </CloseDropdownButton>
-                            </li>
-                        </ul>
+                        <Item onClick={props.onCloseSaved} icon="icon-docs" disabled={!props.tabs.length}>
+                            <FormattedMessage id="editor.close.saved" defaultMessage="Close saved tabs" />
+                        </Item>
+                        <Item onClick={props.onCloseAll} icon="icon-docs text-danger" disabled={!props.tabs.length}>
+                            <FormattedMessage id="editor.close.all" defaultMessage="Close all tabs" />
+                        </Item>
                     </div>
                 }
             >
@@ -109,13 +96,15 @@ const StyledEditorTabs = themed(EditorTabs)`
     .editortabs__menu {
         background: ${props => props.theme.editorBackground};
         position: absolute;
-        top: 0px;
-        right: 0px;
-        width: 40px;
-        
-        & button.dropdown-toggle {
-            height: 36px;
-        }    
+        top: 0;
+        right: 0;
+
+    }
+
+    .editortabs__menubutton {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
     }
 `;
 

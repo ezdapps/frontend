@@ -5,7 +5,7 @@
 
 import React from 'react';
 
-import DropdownButton from 'components/DropdownButton';
+import DropdownButton from 'components/Button/DropdownButton';
 
 interface Props {
 
@@ -14,7 +14,7 @@ interface Props {
 const TransactionsMenu: React.SFC<Props> = props => (
     <DropdownButton
         align="right"
-        width={300}
+        menuWidth={300}
         content={(
             <div style={{ color: '#000' }}>
                 <div>Content goes here</div>

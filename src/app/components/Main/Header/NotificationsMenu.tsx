@@ -9,23 +9,25 @@ import { TProtypoElement } from 'apla/protypo';
 
 import HeaderButton from './HeaderButton';
 import Protypo from 'containers/Widgets/Protypo';
+import Heading from 'components/Dropdown/Heading';
+import Info from 'components/Dropdown/Info';
 
-export interface INotificationsMenuProps {
+interface Props {
     offline: boolean;
     count: number;
     mainSection: string;
     notificationsBody: TProtypoElement[];
 }
 
-const NotificationsMenu: React.SFC<INotificationsMenuProps> = props => (
+const NotificationsMenu: React.SFC<Props> = props => (
     <HeaderButton
-        align="right"
-        width={250}
         badge={props.count}
         warning={props.offline}
+        align="right"
+        menuWidth={250}
         content={(
             <div style={{ overflow: 'hidden' }}>
-                <div className="dropdown-heading">
+                <Heading>
                     {props.offline ?
                         (
                             <FormattedMessage id="general.error.socket" defaultMessage="Notifications are unavailable" />
@@ -33,13 +35,13 @@ const NotificationsMenu: React.SFC<INotificationsMenuProps> = props => (
                             <FormattedMessage id="notifications" defaultMessage="Notifications" />
                         )
                     }
-                </div>
+                </Heading>
                 <div>
                     {props.offline ?
                         (
-                            <p className="dropdown-info">
+                            <Info>
                                 <FormattedMessage id="general.error.socket.desc" defaultMessage="Failed to establish connection to the WebSocket server. Check your configuration" />
-                            </p>
+                            </Info>
                         ) : (
                             <Protypo section={props.mainSection} context="menu" content={props.notificationsBody} />
                         )
