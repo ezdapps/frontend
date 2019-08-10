@@ -14,15 +14,9 @@ export interface ILocalizedDocumentTitleProps extends IDocumentTitleProps {
 const LocalizedDocumentTitle: React.SFC<ILocalizedDocumentTitleProps & InjectedIntlProps> = props => (
     <DocumentTitle
         title={props.intl.formatMessage({
-            id: 'general.title.format',
-            defaultMessage: '{title} | Apla'
-        }, {
-                title: props.intl.formatMessage({
-                    id: props.title,
-                    defaultMessage: props.defaultTitle || props.title
-                })
-            }
-        )}
+            id: props.title,
+            defaultMessage: props.defaultTitle || props.title
+        })}
     >
         {props.children}
     </DocumentTitle>
