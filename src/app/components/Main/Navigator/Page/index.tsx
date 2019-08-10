@@ -12,6 +12,7 @@ import themed from 'components/Theme/themed';
 import Error from './Error';
 import Timeout from './Timeout';
 import NotFound from './NotFound';
+import DocumentTitle from 'components/DocumentTitle';
 
 export interface IPageProps {
     section: string;
@@ -38,23 +39,27 @@ const Page: React.SFC<IPageProps> = props => {
     }
     else {
         const staticPage = STATIC_PAGES[props.value.name];
+        const title = props.value.location.state && props.value.location.state.from && props.value.location.state.from.title;
+
         return (
-            <StyledPage>
-                {props.value.static && (
-                    staticPage.render(props.section, {
-                        ...props.value.params,
-                        children: props.value && props.value.content
-                    })
-                )}
-                {!props.value.static && (
-                    <Protypo
-                        context="page"
-                        section={props.section}
-                        page={props.value.name}
-                        content={props.value.content}
-                    />
-                )}
-            </StyledPage>
+            <DocumentTitle title={title}>
+                <StyledPage>
+                    {props.value.static && (
+                        staticPage.render(props.section, {
+                            ...props.value.params,
+                            children: props.value && props.value.content
+                        })
+                    )}
+                    {!props.value.static && (
+                        <Protypo
+                            context="page"
+                            section={props.section}
+                            page={props.value.name}
+                            content={props.value.content}
+                        />
+                    )}
+                </StyledPage>
+            </DocumentTitle>
         );
     }
 };
