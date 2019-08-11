@@ -185,7 +185,7 @@
     "map.editor": "Map editor",
     "map.meter.short": "m",
     "modal.authorization.title": "Authorization",
-    "modal.authorization.password": "Enter your password to execute transaction {contract}",
+    "modal.authorization.password": "Please enter your password to perform this action",
     "modal.confirm.title": "Confirmation",
     "modal.imageeditor.cancel": "Cancel",
     "modal.imageeditor.confirm": "Confirm",

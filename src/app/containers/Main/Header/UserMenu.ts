@@ -5,7 +5,7 @@
 
 import { IRootState } from 'modules';
 import { connect } from 'react-redux';
-import { logout, changePassword, switchWallet } from 'modules/auth/actions';
+import { logout, changePassword, switchWallet, backupAccount } from 'modules/auth/actions';
 import { modalShow } from 'modules/modal/actions';
 
 import UserMenu from 'components/Main/Header/UserMenu';
@@ -30,6 +30,7 @@ export default connect<any, any, any>(mapStateToProps, {
                 ecosystem
             }
         }),
+    onBackup: () => backupAccount(),
     onChangePassword: () => changePassword.started(null)
 
 })(UserMenu);

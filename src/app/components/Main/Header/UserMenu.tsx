@@ -68,6 +68,7 @@ interface Props {
     onSwitchEcosystem: (ecosystem: string, defaultRole?: boolean) => void;
     onLogout: () => void;
     onChangePassword: () => void;
+    onBackup: () => void;
 }
 
 const UserMenu: React.SFC<Props> = props => props.wallet && props.wallet.wallet && (
@@ -81,7 +82,7 @@ const UserMenu: React.SFC<Props> = props => props.wallet && props.wallet.wallet 
                         <Item onClick={props.onChangePassword} icon="icon-key text-muted">
                             <FormattedMessage id="general.wallet.changepassword" defaultMessage="Change password" />
                         </Item>
-                        <Item icon="icon-shield text-muted">
+                        <Item onClick={props.onBackup} icon="icon-shield text-muted">
                             <FormattedMessage id="general.wallet.backup" defaultMessage="Backup account" />
                         </Item>
                     </>

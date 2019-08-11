@@ -185,7 +185,7 @@
     "map.editor": "Редактирование карты",
     "map.meter.short": "м",
     "modal.authorization.title": "Авторизация",
-    "modal.authorization.password": "Введите пароль для вызова транзакции {contract}",
+    "modal.authorization.password": "Пожалуйста, введите пароль для выполнения данного действия",
     "modal.confirm.title": "Подтверждение",
     "modal.imageeditor.cancel": "Отмена",
     "modal.imageeditor.confirm": "Подтверждение",

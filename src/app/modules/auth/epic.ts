@@ -23,6 +23,7 @@ import loadSavedWalletEpic from './epics/loadSavedWalletEpic';
 import switchWalletEpic from './epics/switchWalletEpic';
 import loginGuestEpic from './epics/loginGuestEpic';
 import acquireSessionEpic from './epics/acquireSessionEpic';
+import backupAccountEpic from './epics/backupAccountEpic';
 
 export default combineEpics(
     acquireSessionEpic,
@@ -43,5 +44,6 @@ export default combineEpics(
     changePasswordEpic,
     changePasswordDoneEpic,
     switchWalletEpic,
-    loginGuestEpic
+    loginGuestEpic,
+    backupAccountEpic
 );

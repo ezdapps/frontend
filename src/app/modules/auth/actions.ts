@@ -29,3 +29,4 @@ export const deauthorize = actionCreator('DEAUTHORIZE');
 export const changePassword = actionCreator.async<void, { oldPassword: string, newPassword: string }, string>('CHANGE_PASSWORD');
 export const loadWallets = actionCreator.async<void, IAccount[]>('LOAD_WALLETS');
 export const loadWallet = actionCreator<IAccount>('LOAD_WALLET');
+export const backupAccount = actionCreator('BACKUP_ACCOUNT');
