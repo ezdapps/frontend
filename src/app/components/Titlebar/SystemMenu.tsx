@@ -42,7 +42,6 @@ const SystemMenu: React.SFC<ISystemMenuProps> = props => {
         (
             <SystemDropdown
                 key="1"
-                menuWidth={180}
                 align={props.align}
                 content={
                     <div>

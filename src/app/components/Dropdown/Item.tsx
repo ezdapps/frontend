@@ -28,6 +28,7 @@ const StyledItem = themed.button`
     text-align: left;
     border: dashed 1px transparent;
     position: relative;
+    white-space: nowrap;
 
     &.item_hasicon {
         padding-left: 40px;
