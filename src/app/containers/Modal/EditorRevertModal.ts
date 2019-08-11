@@ -12,11 +12,11 @@ import { IModalProps } from 'components/Modal';
 import EditorRevertModal from 'components/Modal/EditorRevertModal';
 
 interface Props {
-    index: number;
+    uuid: string;
 }
 
 const mapStateToProps = (state: IRootState, props: IModalProps<Props, void>) => {
-    const tab = state.editor.tabs[props.params.index];
+    const tab = state.editor.tabs.find(t => t.uuid === props.params.uuid);
     return {
         name: tab ? tab.name : ''
     };
@@ -37,6 +37,6 @@ export default connect(mapStateToProps, {
             data: null
         });
 
-        dispatch.resetEditorTab(props.params.index);
+        dispatch.resetEditorTab(props.params.uuid);
     }
 }))(EditorRevertModal);

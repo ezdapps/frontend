@@ -14,7 +14,6 @@ const mapStateToProps = (state: IRootState) => {
 
     return {
         currentTab,
-        currentTabIndex: state.editor.tabIndex,
         canSave: !state.editor.pending &&
             currentTab && currentTab.dirty,
         canRevert: !state.editor.pending &&
@@ -33,7 +32,7 @@ const mapDispatchToProps = {
 export default connect(mapStateToProps, mapDispatchToProps, (state, dispatch: any) => ({
     ...state,
     onExec: () => { dispatch.debugContract(state.currentTab.name); },
-    onRevert: () => { dispatch.revertEditorTab(state.currentTabIndex); },
+    onRevert: () => { dispatch.revertEditorTab(state.currentTab.uuid); },
     onToolChange: (tool: string) => { dispatch.changeEditorTool(tool); },
     onSave: () => { dispatch.editorSave(state.currentTab); },
     onCreateTab: (type: string) => { dispatch.createEditorTab(type); }

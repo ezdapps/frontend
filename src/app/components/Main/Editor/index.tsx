@@ -16,9 +16,9 @@ interface Props {
     mainSection: string;
     tabIndex: number;
     tabs: TEditorTab[];
-    onTabChange?: (index: number) => void;
+    onTabChange?: (uuid: string) => void;
     onTabUpdate?: (value: string) => void;
-    onTabClose?: (index: number) => void;
+    onTabClose?: (uuid: string) => void;
     onTabCloseAll?: () => void;
     onTabCloseSaved?: () => void;
 }

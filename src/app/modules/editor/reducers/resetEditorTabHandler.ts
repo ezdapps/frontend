@@ -7,17 +7,25 @@ import { State } from '../reducer';
 import { resetEditorTab } from '../actions';
 import { Reducer } from 'modules';
 
-const resetEditorTabHandler: Reducer<typeof resetEditorTab, State> = (state, payload) => ({
-    ...state,
-    tabs: [
-        ...state.tabs.slice(0, payload),
-        {
-            ...state.tabs[payload],
-            value: state.tabs[payload].initialValue,
-            dirty: false
-        },
-        ...state.tabs.slice(payload + 1),
-    ]
-});
+const resetEditorTabHandler: Reducer<typeof resetEditorTab, State> = (state, payload) => {
+    const tabIndex = state.tabs.findIndex(t => t.uuid === payload);
+
+    if (-1 === tabIndex) {
+        return state;
+    }
+
+    return {
+        ...state,
+        tabs: [
+            ...state.tabs.slice(0, tabIndex),
+            {
+                ...state.tabs[tabIndex],
+                value: state.tabs[tabIndex].initialValue,
+                dirty: false
+            },
+            ...state.tabs.slice(tabIndex + 1),
+        ]
+    };
+};
 
 export default resetEditorTabHandler;

@@ -6,9 +6,9 @@
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
 import { changeEditorTab, closeEditorTab, closeSavedEditorTab, updateEditorTab, loadEditorTab } from 'modules/editor/actions';
+import { modalShow } from 'modules/modal/actions';
 
 import Editor from 'components/Main/Editor';
-import { modalShow } from 'modules/modal/actions';
 
 const mapStateToProps = (state: IRootState) => ({
     mainSection: state.sections.mainSection,
@@ -18,8 +18,8 @@ const mapStateToProps = (state: IRootState) => ({
 
 const mapDispatchToProps = {
     onTabLoad: loadEditorTab.started,
-    onTabChange: (index: number) => changeEditorTab(index),
-    onTabClose: (index: number) => closeEditorTab(index),
+    onTabChange: (uuid: string) => changeEditorTab(uuid),
+    onTabClose: (uuid: string) => closeEditorTab(uuid),
     onTabCloseAll: () => modalShow({
         id: 'EDITOR_CLOSE_ALL',
         type: 'EDITOR_CLOSE_ALL',

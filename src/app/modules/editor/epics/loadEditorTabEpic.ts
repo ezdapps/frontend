@@ -3,6 +3,7 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import uuid from 'uuid';
 import { Action } from 'redux';
 import { Epic } from 'modules';
 import { loadEditorTab } from '../actions';
@@ -39,6 +40,7 @@ const loadEditorTabEpic: Epic = (action$, store, { api }) => action$.ofAction(lo
                     loadEditorTab.done({
                         params: action.payload,
                         result: {
+                            uuid: uuid.v4(),
                             type: 'contract',
                             id: data.id,
                             new: false,
@@ -59,6 +61,7 @@ const loadEditorTabEpic: Epic = (action$, store, { api }) => action$.ofAction(lo
                     loadEditorTab.done({
                         params: action.payload,
                         result: {
+                            uuid: uuid.v4(),
                             type: 'page',
                             id: data.id.toString(),
                             new: false,
@@ -79,6 +82,7 @@ const loadEditorTabEpic: Epic = (action$, store, { api }) => action$.ofAction(lo
                     loadEditorTab.done({
                         params: action.payload,
                         result: {
+                            uuid: uuid.v4(),
                             type: 'menu',
                             id: data.id.toString(),
                             new: false,
@@ -99,6 +103,7 @@ const loadEditorTabEpic: Epic = (action$, store, { api }) => action$.ofAction(lo
                     loadEditorTab.done({
                         params: action.payload,
                         result: {
+                            uuid: uuid.v4(),
                             type: 'block',
                             id: data.id.toString(),
                             new: false,

@@ -12,6 +12,7 @@ const createEditorTabDoneHandler: Reducer<typeof createEditorTab.done, State> = 
     tabs: [
         ...state.tabs,
         {
+            uuid: payload.result.uuid,
             type: payload.params,
             id: payload.result.id,
             new: true,

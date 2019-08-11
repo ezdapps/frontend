@@ -12,11 +12,11 @@ import { IModalProps } from 'components/Modal';
 import EditorCloseModal from 'components/Modal/EditorCloseModal';
 
 interface Props {
-    index: number;
+    uuid: string;
 }
 
 const mapStateToProps = (state: IRootState, props: IModalProps<Props, void>) => {
-    const tab = state.editor.tabs[props.params.index];
+    const tab = state.editor.tabs.find(t => t.uuid === props.params.uuid);
     return {
         name: tab ? tab.name : ''
     };
@@ -37,6 +37,6 @@ export default connect(mapStateToProps, {
             data: null
         });
 
-        dispatch.destroyEditorTab(props.params.index);
+        dispatch.destroyEditorTab(props.params.uuid);
     }
 }))(EditorCloseModal);

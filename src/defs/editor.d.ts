@@ -27,6 +27,7 @@ declare module 'apla/editor' {
 
     type TEditorTab = {
         readonly type: string;
+        readonly uuid: string;
         readonly id: string;
         readonly new: boolean;
         readonly name: string;
@@ -48,6 +49,7 @@ declare module 'apla/editor' {
     };
 
     interface IEditorTabCreateCall {
+        uuid: string;
         id: string;
         name: string;
         value: string

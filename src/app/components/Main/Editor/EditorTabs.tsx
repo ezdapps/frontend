@@ -27,8 +27,8 @@ interface Props {
     className?: string;
     tabIndex: number;
     tabs: TEditorTab[];
-    onChange: (index: number) => void;
-    onClose: (index: number) => void;
+    onChange: (uuid: string) => void;
+    onClose: (uuid: string) => void;
     onCloseAll: () => void;
     onCloseSaved: () => void;
 }
@@ -44,8 +44,8 @@ const EditorTabs: React.SFC<Props> = (props) => (
                             key={index}
                             active={props.tabIndex === index}
                             icon={TYPE_ICONS[tab.type] || TYPE_ICONS.default}
-                            onClick={props.onChange.bind(null, index)}
-                            onClose={props.onClose.bind(null, index)}
+                            onClick={props.onChange.bind(null, tab.uuid)}
+                            onClose={props.onClose.bind(null, tab.uuid)}
                         />
                     ))}
                 </ul>

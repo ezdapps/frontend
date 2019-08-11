@@ -13,7 +13,7 @@ import { modalShow } from 'modules/modal/actions';
 const revertEditorTabEpic: Epic<Action, IRootState> = (action$, store) => action$.ofAction(revertEditorTab)
     .flatMap(action => {
         const state = store.getState();
-        const tab = state.editor.tabs[action.payload];
+        const tab = state.editor.tabs.find(t => t.uuid === action.payload);
 
         if (!tab) {
             return Observable.empty();
@@ -24,12 +24,12 @@ const revertEditorTabEpic: Epic<Action, IRootState> = (action$, store) => action
                 id: 'EDITOR_REVERT',
                 type: 'EDITOR_REVERT_UNSAVED',
                 params: {
-                    index: action.payload
+                    uuid: tab.uuid
                 }
             }));
         }
 
-        return Observable.of(resetEditorTab(action.payload));
+        return Observable.of(resetEditorTab(tab.uuid));
     });
 
 export default revertEditorTabEpic;

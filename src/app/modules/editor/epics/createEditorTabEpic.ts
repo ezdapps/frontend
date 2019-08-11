@@ -3,6 +3,7 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import uuid from 'uuid';
 import { Epic } from 'modules';
 import { createEditorTab } from '../actions';
 
@@ -22,6 +23,7 @@ const createEditorTabEpic: Epic = (action$, store) => action$.ofAction(createEdi
                 return createEditorTab.done({
                     params: action.payload,
                     result: {
+                        uuid: uuid.v4(),
                         id,
                         name: null,
                         value: 'contract ... {\n    data {\n\n    }\n    conditions {\n\n    }\n    action {\n\n    }\n}'
@@ -34,6 +36,7 @@ const createEditorTabEpic: Epic = (action$, store) => action$.ofAction(createEdi
                 return createEditorTab.done({
                     params: action.payload,
                     result: {
+                        uuid: uuid.v4(),
                         id,
                         name,
                         value: ''
