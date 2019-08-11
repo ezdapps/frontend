@@ -14,6 +14,7 @@ import imgLogo from 'images/logoHeader.svg';
 import Selector from 'containers/Main/Navigator/Sections/Selector';
 import HeaderSpacer from './HeaderSpacer';
 import HeaderLink from './HeaderLink';
+import LangMenu from 'containers/Main/Header/LangMenu';
 
 interface Props {
     app?: string;
@@ -59,6 +60,7 @@ const Header: React.SFC<Props> = props => (
                 titleDesc={<FormattedMessage id="privileged.desc" defaultMessage="You will not be prompted to enter your password when executing transactions" />}
             />
         )}
+        <LangMenu />
         <NotificationsMenu />
         {/*<TransactionsMenu />*/}
         <UserMenu />

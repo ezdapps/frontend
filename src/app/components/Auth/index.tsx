@@ -13,9 +13,12 @@ import Wallet from 'components/Auth/Wallet';
 import Login from 'containers/Auth/Login';
 import NetworkList from 'containers/Auth/Login/NetworkList';
 import AddNetwork from 'containers/Auth/Login/NetworkList/AddNetwork';
+import { Button } from 'react-bootstrap';
 
 export interface IAuthProps {
     className?: string;
+    locale: string;
+    changeLocale: () => void;
 }
 
 const Auth: React.SFC<IAuthProps & InjectedIntlProps> = props => (
@@ -46,6 +49,11 @@ const Auth: React.SFC<IAuthProps & InjectedIntlProps> = props => (
                                 <FormattedMessage id="legal.homepage" defaultMessage="https://apla.io" />
                             </a>
                         </div>
+                    </div>
+                    <div className="pull-right">
+                        <Button bsStyle="link" className="p0 m0" onClick={props.changeLocale}>
+                            <FormattedMessage id="LANG_NAME" defaultMessage={props.locale} />
+                        </Button>
                     </div>
                 </div>
             </div>

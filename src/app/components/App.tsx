@@ -14,7 +14,7 @@ import baseTheme from 'components/Theme/baseTheme';
 
 import { AnimatedSwitch } from 'components/Animation';
 import themed from 'components/Theme/themed';
-import Auth from 'components/Auth';
+import Auth from 'containers/Auth';
 import Error from 'containers/Auth/Error';
 import Splash from 'components/Splash';
 import ModalProvider from 'containers/Modal/ModalProvider';
@@ -67,7 +67,7 @@ class App extends React.Component<AppProps> {
         });
 
         return (
-            <IntlProvider locale={this.props.locale} defaultLocale="en-US" messages={this.props.localeMessages}>
+            <IntlProvider key={this.props.locale} locale={this.props.locale} defaultLocale="en-US" messages={this.props.localeMessages}>
                 <ThemeProvider theme={baseTheme}>
                     <ThemedApp className={classes}>
                         <StyledTitlebar className="drag">

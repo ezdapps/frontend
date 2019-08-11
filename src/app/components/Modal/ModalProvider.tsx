@@ -38,6 +38,7 @@ import EditorCloseModal from 'containers/Modal/EditorCloseModal';
 import EditorRevertModal from 'containers/Modal/EditorRevertModal';
 import EditorCloseAllModal from 'containers/Modal/EditorCloseAllModal';
 import CreateContractModal from './Editor/CreateContractModal';
+import ChangeLocaleModal from 'containers/Modal/ChangeLocaleModal';
 
 const MODAL_COMPONENTS = {
     'AUTHORIZE': AuthorizeModal,
@@ -67,7 +68,8 @@ const MODAL_COMPONENTS = {
     'ROLE_PICKER': RolePickerModal,
     'EDITOR_CLOSE_UNSAVED': EditorCloseModal,
     'EDITOR_REVERT_UNSAVED': EditorRevertModal,
-    'EDITOR_CLOSE_ALL': EditorCloseAllModal
+    'EDITOR_CLOSE_ALL': EditorCloseAllModal,
+    'CHANGE_LOCALE': ChangeLocaleModal
 };
 
 export interface IModalProviderProps {
