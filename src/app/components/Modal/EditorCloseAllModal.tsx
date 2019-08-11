@@ -18,7 +18,7 @@ class EditorCloseAllModal extends Modal<void, void> {
                 </Modal.Header>
                 <Modal.Body>
                     <FormattedMessage
-                        id="editor.close_all.confirm"
+                        id="editor.close.all.confirm"
                         defaultMessage="Do you really want to close all tabs without saving?"
                     />
                 </Modal.Body>
