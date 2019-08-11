@@ -11,6 +11,7 @@ import themed from 'components/Theme/themed';
 import Protypo from 'containers/Widgets/Protypo';
 import ScrollView from 'components/ScrollView';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 
 const StyledNavigation = themed.aside`
     background: ${props => props.theme.menuBackground};
@@ -37,7 +38,7 @@ const StyledBackButton = themed.button`
     display: block;
     width: 100%;
     height: 58px;
-    padding: 10px 25px;
+    padding: 10px 20px;
     color: ${props => props.theme.menuPrimaryForeground};
     font-weight: 300;
     text-decoration: none;
@@ -59,7 +60,7 @@ const StyledBackButton = themed.button`
     .icon {
         vertical-align: top;
         display: inline-block;
-        width: 30px;
+        width: 35px;
     }
 
     em {
@@ -116,12 +117,14 @@ const Menu: React.SFC<Props> = props => (
                         <ScrollView disableHorizontal>
                             <StyledMenuContent>
                                 {index > 0 && (
-                                    <StyledBackButton onClick={() => props.menuPop()} disabled={1 >= props.menus.length}>
+                                    <StyledBackButton onClick={() => props.menuPop()}>
                                         <div className="title-wrap">
                                             <span className="icon">
                                                 <em className="icon-arrow-left" />
                                             </span>
-                                            <span>{menu.name}</span>
+                                            <span>
+                                                <FormattedMessage id="navigation.return" defaultMessage="Return" />
+                                            </span>
                                         </div>
                                     </StyledBackButton>
                                 )}

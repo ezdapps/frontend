@@ -195,6 +195,7 @@
     "navigation.default_page": "Main page",
     "navigation.loaded_page": "Loaded page",
     "navigation.refresh": "Refresh",
+    "navigation.return": "Return",
     "notifications": "Notifications",
     "notification.ecosystem_invited": "Joined ecosystem {ecosystem}",
     "notification.tx_batch": "Batch processing completed",

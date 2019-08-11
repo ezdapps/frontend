@@ -195,6 +195,7 @@
     "navigation.default_page": "Главная страница",
     "navigation.loaded_page": "Загруженная страница",
     "navigation.refresh": "Обновить",
+    "navigation.return": "Назад",
     "notifications": "Уведомления",
     "notification.ecosystem_invited": "Добавлена экосистема {ecosystem}",
     "notification.tx_batch": "Пакетная обработка завершена",
