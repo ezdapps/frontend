@@ -16,17 +16,21 @@ const truncateState = (value: any) => {
         return value;
     }
 
+    const storage = value.storage || {};
+    const engine = value.engine || {};
+    const auth = value.auth || {};
+
     return {
-        storage: value.storage,
+        storage,
         engine: {
-            guestSession: value.engine.guestSession,
+            guestSession: engine.guestSession,
         },
         auth: {
-            isAuthenticated: value.auth.isAuthenticated,
-            isDefaultWallet: value.auth.isDefaultWallet,
-            session: value.auth.session,
-            id: value.auth.id,
-            wallet: value.auth.wallet
+            isAuthenticated: auth.isAuthenticated,
+            isDefaultWallet: auth.isDefaultWallet,
+            session: auth.session,
+            id: auth.id,
+            wallet: auth.wallet
         }
     };
 };
