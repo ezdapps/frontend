@@ -31,14 +31,10 @@ const loadWalletsEpic: Epic = (action$, store, { api }) => action$.ofAction(load
             params: action.payload,
             result: wallets
 
-        })).catch(e => {
-            // tslint:disable-next-line: no-console
-            console.error(e);
-            return Observable.of(loadWallets.failed({
-                params: action.payload,
-                error: e
-            }));
-        });
+        })).catch(e => Observable.of(loadWallets.failed({
+            params: action.payload,
+            error: e
+        })));
     });
 
 export default loadWalletsEpic;
