@@ -12,7 +12,7 @@ import { txCall, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
 import { push } from 'connected-react-router';
 import { renderPage } from 'modules/sections/actions';
-import { createEditorTab } from 'modules/editor/actions';
+import { createEditorTab, loadEditorTab } from 'modules/editor/actions';
 
 const buttonInteractionEpic: Epic = (action$, store, { routerService }) => action$.ofAction(buttonInteraction)
     // Show confirmation window if there is any
@@ -109,13 +109,9 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
         }).flatMap(action => {
             if (isType(action, buttonInteraction)) {
                 return Observable.from(action.payload.actions).flatMap(buttonAction => {
-                    // tslint:disable-next-line: no-console
-                    console.log('ACt::', buttonAction);
                     switch (buttonAction.name) {
-                        case 'CREATE_PAGE': return Observable.of(createEditorTab.started('page'));
-                        case 'CREATE_BLOCK': return Observable.of(createEditorTab.started('block'));
-                        case 'CREATE_MENU': return Observable.of(createEditorTab.started('menu'));
-                        case 'CREATE_CONTRACT': return Observable.of(createEditorTab.started('contract'));
+                        case 'CREATE': return Observable.of(createEditorTab.started(buttonAction.params.Type));
+                        case 'EDIT': return Observable.of(loadEditorTab.started({ type: buttonAction.params.Type, name: buttonAction.params.Name }));
                         default: return Observable.empty<never>();
                     }
                 });
