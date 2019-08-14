@@ -3,7 +3,7 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, shell } from 'electron';
 import config from '../config';
 import calcScreenOffset from '../util/calcScreenOffset';
 
@@ -28,6 +28,11 @@ export default () => {
     window.on('close', () => {
         config.set('dimensions', window.getBounds());
         config.set('maximized', window.isMaximized() || window.isMaximized);
+    });
+
+    window.webContents.on('new-window', (event, url) => {
+        event.preventDefault();
+        shell.openExternal(url);
     });
 
     return window;

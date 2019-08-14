@@ -5,6 +5,8 @@
 
 import React from 'react';
 import { injectIntl, FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { readTextFile } from 'lib/fs';
+import keyring from 'lib/keyring';
 
 import LocalizedDocumentTitle from 'components/DocumentTitle/LocalizedDocumentTitle';
 import Generator from './Generator';
@@ -12,18 +14,13 @@ import Validation from 'components/Validation';
 import HeadingNetwork from 'containers/Auth/HeadingNetwork';
 
 export interface ICreateProps {
-    seed: string;
-    seedConfirm: string;
     onCreate: (params: { seed: string, password: string }) => void;
-    onGenerateSeed: () => void;
-    onChangeSeed: (seed: string) => void;
-    onChangeSeedConfirmation: (value: string) => void;
-    onImportSeed: (file: File) => void;
-    onImportSeedConfirmation: (file: File) => void;
     onDownloadSeed: (seed: string) => void;
 }
 
 interface ICreateState {
+    seed: string;
+    seedConfirmation: string;
     isConfirming: boolean;
     password: string;
     passwordConfirm: string;
@@ -36,13 +33,11 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
         super(props);
         this.state = {
             isConfirming: false,
+            seed: '',
+            seedConfirmation: '',
             password: '',
             passwordConfirm: ''
         };
-    }
-
-    componentWillReceiveProps(props: ICreateProps) {
-        this._inputFile.setAttribute('value', null);
     }
 
     onReturn = () => {
@@ -54,12 +49,11 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
     onSubmit = (values: { [key: string]: any }) => {
         if (this.state.isConfirming) {
             this.props.onCreate({
-                seed: this.props.seedConfirm,
+                seed: this.state.seedConfirmation,
                 password: this.state.passwordConfirm
             });
         }
         else {
-            this.props.onChangeSeedConfirmation('');
             this.setState({
                 isConfirming: true,
                 password: values.password
@@ -68,11 +62,21 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
     }
 
     onGenerate = () => {
-        this.props.onGenerateSeed();
+        this.setState({
+            seed: keyring.generateSeed()
+        });
     }
 
-    onSeedConfirmationChange = (seedConfirm: string) => {
-        this.props.onChangeSeedConfirmation(seedConfirm);
+    onSeedChange = (seed: string) => {
+        this.setState({
+            seed
+        });
+    }
+
+    onSeedConfirmationChange = (seedConfirmation: string) => {
+        this.setState({
+            seedConfirmation
+        });
     }
 
     onPasswordChange = (password: string) => {
@@ -88,19 +92,27 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
     }
 
     onSave = () => {
-        this.props.onDownloadSeed(this.props.seed);
+        this.props.onDownloadSeed(this.state.seed);
     }
 
     onLoad = () => {
         this._inputFile.click();
     }
 
-    onLoadSuccess = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if (this.state.isConfirming) {
-            this.props.onImportSeedConfirmation(e.target.files[0]);
+    onLoadSuccess = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const content = await readTextFile(e.target.files[0]);
+            this._inputFile.setAttribute('value', '');
+
+            if (this.state.isConfirming) {
+                this.onSeedConfirmationChange(content);
+            }
+            else {
+                this.onSeedChange(content);
+            }
         }
-        else {
-            this.props.onImportSeed(e.target.files[0]);
+        catch (e) {
+            // Fall back silently
         }
     }
 
@@ -116,11 +128,11 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                         <Validation.components.ValidatedForm onSubmitSuccess={this.onSubmit}>
                             {!this.state.isConfirming && (
                                 <Generator
-                                    seed={this.props.seed}
+                                    seed={this.state.seed}
                                     onGenerate={this.onGenerate}
                                     onLoad={this.onLoad}
                                     onSave={this.onSave}
-                                    onSeedChange={this.props.onChangeSeed}
+                                    onSeedChange={this.onSeedChange}
                                     onPasswordChange={this.onPasswordChange}
                                     password={this.state.password}
                                     action="create"
@@ -134,12 +146,12 @@ class Create extends React.Component<ICreateProps & InjectedIntlProps, ICreateSt
                             )}
                             {this.state.isConfirming && (
                                 <Generator
-                                    seed={this.props.seedConfirm}
+                                    seed={this.state.seedConfirmation}
                                     onLoad={this.onLoad}
                                     onSeedChange={this.onSeedConfirmationChange}
                                     onPasswordChange={this.onPasswordConfirmationChange}
                                     password={this.state.passwordConfirm}
-                                    compareSeed={this.props.seed}
+                                    compareSeed={this.state.seed}
                                     comparePassword={this.state.password}
                                     action="create"
                                     descriptionValue={
