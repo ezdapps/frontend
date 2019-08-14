@@ -12,6 +12,7 @@ import { txCall, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
 import { push } from 'connected-react-router';
 import { renderPage } from 'modules/sections/actions';
+import { createEditorTab } from 'modules/editor/actions';
 
 const buttonInteractionEpic: Epic = (action$, store, { routerService }) => action$.ofAction(buttonInteraction)
     // Show confirmation window if there is any
@@ -79,32 +80,45 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
             }
 
         }).flatMap(action => {
-            if (isType(action, buttonInteraction)) {
-                if (action.payload.page) {
-                    const params = action.payload.page.params;
-                    if ('txinfo' === action.payload.page.name) {
-                        params.txhashes = ((action.meta || {}).txHashes || []).join(',');
-                    }
+            if (isType(action, buttonInteraction) && action.payload.page) {
+                const params = action.payload.page.params;
+                if ('txinfo' === action.payload.page.name) {
+                    params.txhashes = ((action.meta || {}).txHashes || []).join(',');
+                }
 
-                    if (action.payload.popup) {
-                        return Observable.of(renderPage.started({
-                            location: null,
-                            section: action.payload.page.section,
-                            name: action.payload.page.name,
-                            params: action.payload.page.params,
-                            popup: action.payload.popup
-                        }));
-                    }
-                    else {
-                        const redirectUrl = routerService.generateRoute(`/browse/${action.payload.page.section}/${action.payload.page.name}`, action.payload.page.params);
-                        return Observable.of<Action>(
-                            push(redirectUrl, { from: action.payload.from })
-                        );
-                    }
+                if (action.payload.popup) {
+                    return Observable.of(renderPage.started({
+                        location: null,
+                        section: action.payload.page.section,
+                        name: action.payload.page.name,
+                        params: action.payload.page.params,
+                        popup: action.payload.popup
+                    }));
                 }
                 else {
-                    return Observable.empty<never>();
+                    const redirectUrl = routerService.generateRoute(`/browse/${action.payload.page.section}/${action.payload.page.name}`, action.payload.page.params);
+                    return Observable.of<Action>(
+                        push(redirectUrl, { from: action.payload.from })
+                    );
                 }
+            }
+            else {
+                return Observable.of(action);
+            }
+
+        }).flatMap(action => {
+            if (isType(action, buttonInteraction)) {
+                return Observable.from(action.payload.actions).flatMap(buttonAction => {
+                    // tslint:disable-next-line: no-console
+                    console.log('ACt::', buttonAction);
+                    switch (buttonAction.name) {
+                        case 'CREATE_PAGE': return Observable.of(createEditorTab.started('page'));
+                        case 'CREATE_BLOCK': return Observable.of(createEditorTab.started('block'));
+                        case 'CREATE_MENU': return Observable.of(createEditorTab.started('menu'));
+                        case 'CREATE_CONTRACT': return Observable.of(createEditorTab.started('contract'));
+                        default: return Observable.empty<never>();
+                    }
+                });
             }
             else {
                 return Observable.of(action);
