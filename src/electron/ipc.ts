@@ -37,14 +37,14 @@ const truncateState = (value: any) => {
 
 if (!args.dry) {
     try {
-        state = config.get('persistentData');
+        state = JSON.parse(config.get('persistentData'));
     }
     catch {
         // Suppress errors
     }
 
     saveState = _.throttle(() => {
-        config.set('persistentData', truncateState(state));
+        config.set('persistentData', JSON.stringify(truncateState(state)));
     }, 1000, { leading: true });
 }
 
