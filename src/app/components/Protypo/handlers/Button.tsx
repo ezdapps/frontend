@@ -16,6 +16,10 @@ import { IErrorRedirect } from 'apla/protypo';
 export interface IButtonProps {
     'class'?: string;
     'className'?: string;
+    'action'?: {
+        name: string;
+        params?: { [key: string]: string };
+    }[];
     'alert'?: {
         icon: string;
         text: string;
@@ -132,6 +136,7 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
     return (
         <TxButton
             className={[props.class, props.className].join(' ')}
+            actions={props.action || []}
             confirm={props.alert && {
                 icon: props.alert.icon,
                 title: props.intl.formatMessage({ id: 'alert.confirmation', defaultMessage: 'Confirmation' }),

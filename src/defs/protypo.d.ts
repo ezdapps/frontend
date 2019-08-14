@@ -53,6 +53,13 @@ declare module 'apla/protypo' {
         };
     }
 
+    interface IAction {
+        name: string;
+        params?: {
+            [key: string]: string;
+        };
+    }
+
     interface IButtonInteraction {
         uuid: string;
         silent?: boolean;
@@ -72,6 +79,7 @@ declare module 'apla/protypo' {
         popup?: IButtonPopup;
         errorRedirects?: {
             [key: string]: IErrorRedirect
-        }
+        },
+        actions: IAction[];
     }
 }
