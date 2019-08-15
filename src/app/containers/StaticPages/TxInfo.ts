@@ -12,6 +12,10 @@ export interface ITxInfoProps {
     txhashes: string;
 }
 
+const txFilter = (hashes: string) => hashes
+    .split(',')
+    .filter(hash => /^[a-f0-9]{64}$/i.test(hash));
+
 const findTx = (state: IRootState, hash: string) => {
     const keys = state.tx.transactions.keys();
 
@@ -30,15 +34,20 @@ const findTx = (state: IRootState, hash: string) => {
     return undefined;
 };
 
-const mapStateToProps = (state: IRootState, props: ITxInfoProps) => ({
-    stylesheet: state.content.printStylesheet,
-    txStack: props.txhashes
-        .split(',')
-        .filter(hash => /^[a-f0-9]{64}$/i.test(hash))
-        .map(hash => ({
-            hash,
-            tx: findTx(state, hash)
-        }))
-});
+const mapStateToProps = (state: IRootState, props: ITxInfoProps) => {
+    const network = state.auth.session && state.auth.session.network.uuid;
+    const networkData = state.storage.networks.find(l => l.uuid === network);
+    const txViewerUrl = networkData && networkData.txViewerUrl;
+
+    return {
+        stylesheet: state.content.printStylesheet,
+        txStack: txFilter(props.txhashes)
+            .map(hash => ({
+                hash,
+                tx: findTx(state, hash)
+            })),
+        externalLink: txViewerUrl && txViewerUrl.replace(/{txhashes}/g, txFilter(props.txhashes).join(','))
+    };
+};
 
 export default connect(mapStateToProps)(TxInfo);

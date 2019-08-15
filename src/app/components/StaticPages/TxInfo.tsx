@@ -21,11 +21,12 @@ export interface ITxInfoProps {
     stylesheet: string;
     page: string;
     children: TProtypoElement[];
+    externalLink: string;
 }
 
 const TxInfo: React.SFC<ITxInfoProps> = props => (
     <div className="content-wrapper">
-        <PrintZone stylesheet={props.stylesheet}>
+        <PrintZone stylesheet={props.stylesheet} externalLink={props.externalLink}>
             <div style={{ padding: 20, wordBreak: 'break-all' }}>
                 <div>
                     <svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="840 -55 2390 900" height={50}>

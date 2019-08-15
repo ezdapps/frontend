@@ -10,6 +10,7 @@ import { FormattedMessage } from 'react-intl';
 
 export interface IPrintZoneProps {
     stylesheet: string;
+    externalLink?: string;
 }
 
 class PrintZone extends React.Component<IPrintZoneProps> {
@@ -78,7 +79,13 @@ class PrintZone extends React.Component<IPrintZoneProps> {
                         <FormattedMessage id="general.print" defaultMessage="Print" />
                     </Button>
                 </span>
-
+                {this.props.externalLink && (
+                    <span>
+                        <a className="btn btn-primary ml" href={`https://${this.props.externalLink}`} target="_blank">
+                            <FormattedMessage id="general.explorerview" defaultMessage="View in Explorer" />
+                        </a>
+                    </span>
+                )}
             </div>
         );
     }

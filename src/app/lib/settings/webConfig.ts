@@ -14,6 +14,7 @@ const webConfig = yup.object().shape({
         networkID: yup.number().required(),
         fullNodes: yup.array().of(yup.string()).required().min(1),
         socketUrl: yup.string().notRequired(),
+        txViewerUrl: yup.string().notRequired(),
         activationEmail: yup.string().email().notRequired(),
         enableDemoMode: yup.bool(),
         disableSync: yup.bool(),
