@@ -3,7 +3,7 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from 'react';
+import React from 'react';
 import { injectIntl, InjectedIntlProps } from 'react-intl';
 import NativeDocumentTitle from 'react-document-title';
 
@@ -12,13 +12,19 @@ export interface IDocumentTitleProps {
 }
 
 const DocumentTitle: React.SFC<IDocumentTitleProps & InjectedIntlProps> = props => {
-    const staticTitle = props.intl.formatMessage({
-        id: 'general.title',
-        defaultMessage: 'Apla'
-    });
+    const title = props.title ?
+        props.intl.formatMessage({
+            id: 'general.title.format',
+            defaultMessage: '{title} | Apla'
+        }, { title: props.title }) :
+
+        props.intl.formatMessage({
+            id: 'general.title',
+            defaultMessage: 'Apla'
+        });
 
     return (
-        <NativeDocumentTitle title={props.title || staticTitle}>
+        <NativeDocumentTitle title={title}>
             {props.children}
         </NativeDocumentTitle>
     );

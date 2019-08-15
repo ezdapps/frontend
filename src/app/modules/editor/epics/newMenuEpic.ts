@@ -20,12 +20,17 @@ const newMenuEpic: Epic = (action$, store, { api }) => action$.ofAction(editorSa
             sessionToken: state.auth.session.sessionToken
         });
 
-        return ModalObservable<{ name: string, conditions: string }>(action$, {
+        return Observable.from(client.getData({
+            name: 'applications',
+            columns: ['id', 'deleted', 'name']
+
+        })).flatMap(apps => ModalObservable<{ name: string, app: string, conditions: string }>(action$, {
             modal: {
                 id,
                 type: 'CREATE_INTERFACE',
                 params: {
-                    type: 'menu'
+                    type: 'menu',
+                    apps: apps.list.filter(l => '0' === l.deleted)
                 }
             },
             success: result => TxObservable(action$, {
@@ -37,7 +42,7 @@ const newMenuEpic: Epic = (action$, store, { api }) => action$.ofAction(editorSa
                             Name: result.name,
                             Value: action.payload.value,
                             Conditions: result.conditions,
-                            ApplicationId: action.payload.appId ? action.payload.appId : 0
+                            ApplicationId: result.app || 0
                         }]
                     }]
                 },
@@ -55,7 +60,7 @@ const newMenuEpic: Epic = (action$, store, { api }) => action$.ofAction(editorSa
                     }
                 }))
             })
-        });
+        }));
     });
 
 export default newMenuEpic;

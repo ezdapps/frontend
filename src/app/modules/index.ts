@@ -8,8 +8,6 @@ import { Epic as NativeEpic } from 'redux-observable';
 import { IStoreDependencies } from './dependencies';
 import { combineReducers } from 'redux';
 import { combineEpics } from 'redux-observable';
-import { RouterState } from 'connected-react-router';
-import { loadingBarReducer } from 'react-redux-loading-bar';
 import * as auth from './auth';
 import * as content from './content';
 import * as sections from './sections';
@@ -17,11 +15,11 @@ import * as modal from './modal';
 import * as engine from './engine';
 import * as editor from './editor';
 import * as tx from './tx';
-import * as gui from './gui';
 import * as io from './io';
 import * as notifications from './notifications';
 import * as storage from './storage';
 import * as socket from './socket';
+import * as router from './router';
 import { ActionCreator, Failure, Success } from 'typescript-fsa';
 
 export type Epic = NativeEpic<Action, IRootState, IStoreDependencies>;
@@ -39,13 +37,11 @@ export interface IRootState {
     engine: engine.State;
     editor: editor.State;
     tx: tx.State;
-    gui: gui.State;
     io: io.State;
     notifications: notifications.State;
     storage: storage.State;
     socket: socket.State;
-    loadingBar: number;
-    router: RouterState;
+    router: router.State;
 }
 
 export const rootEpic = combineEpics(
@@ -56,11 +52,11 @@ export const rootEpic = combineEpics(
     engine.epic,
     editor.epic,
     tx.epic,
-    gui.epic,
     io.epic,
     notifications.epic,
     storage.epic,
-    socket.epic
+    socket.epic,
+    router.epic
 );
 
 export default combineReducers<IRootState>({
@@ -71,9 +67,8 @@ export default combineReducers<IRootState>({
     engine: engine.reducer,
     editor: editor.reducer,
     tx: tx.reducer,
-    gui: gui.reducer,
     notifications: notifications.reducer,
     storage: storage.reducer,
     socket: socket.reducer,
-    loadingBar: loadingBarReducer
+    router: router.reducer
 });

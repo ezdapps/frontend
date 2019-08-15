@@ -20,6 +20,7 @@ import TreeTheme from './Tree/Theme';
 import imgGrid from 'images/constructor/grid.png';
 
 interface IConstructorProps {
+    section: string;
     pageTree: any;
     treeData: any;
     page?: any;
@@ -42,7 +43,6 @@ interface IConstructorProps {
     canUndo: boolean;
     canRedo: boolean;
 
-    navigatePage?: (params: { name: string, params?: any }) => void;
     menus?: { id: string, name: string, conditions: string, value: string }[];
     onSave?: (block: string, error?: { type: string, error: string }) => void;
     canSave?: boolean;
@@ -348,6 +348,7 @@ class Constructor extends React.Component<IConstructorProps, IConstructorState> 
 
                     <Layout grid={this.props.grid} addTag={this.props.addTag} moveTag={this.props.moveTag} copyTag={this.props.copyTag}>
                         <ProtypoConstructor
+                            section={this.props.section}
                             context="page"
                             content={this.props.pageTree}
                             editable={true}

@@ -4,13 +4,36 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { ipcMain, Event } from 'electron';
-import { spawnWindow } from './windows/index';
 import config from './config';
 import args from './args';
 import * as _ from 'lodash';
 
 export let state: any = null;
 let saveState = () => null as any;
+
+const truncateState = (value: any) => {
+    if (!value) {
+        return value;
+    }
+
+    const storage = value.storage || {};
+    const engine = value.engine || {};
+    const auth = value.auth || {};
+
+    return {
+        storage,
+        engine: {
+            guestSession: engine.guestSession,
+        },
+        auth: {
+            isAuthenticated: auth.isAuthenticated,
+            isDefaultWallet: auth.isDefaultWallet,
+            session: auth.session,
+            id: auth.id,
+            wallet: auth.wallet
+        }
+    };
+};
 
 if (!args.dry) {
     try {
@@ -21,19 +44,7 @@ if (!args.dry) {
     }
 
     saveState = _.throttle(() => {
-        config.set('persistentData', JSON.stringify({
-            storage: state.storage,
-            engine: {
-                guestSession: state.engine.guestSession,
-            },
-            auth: {
-                isAuthenticated: state.auth.isAuthenticated,
-                isDefaultWallet: state.auth.isDefaultWallet,
-                session: state.auth.session,
-                id: state.auth.id,
-                wallet: state.auth.wallet
-            }
-        }));
+        config.set('persistentData', JSON.stringify(truncateState(state)));
     }, 1000, { leading: true });
 }
 
@@ -43,12 +54,7 @@ ipcMain.on('setState', (e: Event, updatedState: any) => {
 });
 
 ipcMain.on('getState', (e: Event) => {
-    e.returnValue = state;
-});
-
-ipcMain.on('switchWindow', (e: Event, wnd: string) => {
-    e.returnValue = null;
-    spawnWindow(wnd);
+    e.returnValue = truncateState(state);
 });
 
 ipcMain.on('getArgs', (e: Event) => {

@@ -4,32 +4,32 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-
 import themed from 'components/Theme/themed';
 
-export interface IToolbarButton {
-    icon: string;
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-}
-
-export interface IToolbarProps {
-    className?: string;
-}
-
-const Toolbar: React.SFC<IToolbarProps> = props => (
-    <ul className={props.className}>
+export const Filler: React.SFC = props => (
+    <div className="toolbar__filler">
         {props.children}
-    </ul>
+    </div>
 );
 
-const StyledToolbar = themed(Toolbar) `
+export default themed.div`
+    box-shadow: rgba(0,0,0,0.07) 0 2px 5px;
     background: ${props => props.theme.toolbarBackground};
-    border-bottom: solid 2px ${props => props.theme.toolbarOutline};
-    height: 40px;
-    list-style-type: none;
+    border-bottom: solid 1px ${props => props.theme.uiBorderLight};
+    min-height: ${props => props.theme.toolbarHeight}px;
+    height: ${props => props.theme.toolbarHeight}px;
+    line-height: ${props => props.theme.toolbarHeight}px;
+    color: ${props => props.theme.toolbarForeground};
+    padding: 0 10px;
     margin: 0;
-    padding: 0;
-    font-size: 0;
-`;
+    position: relative;
+    z-index: 110;
+    white-space: nowrap;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
 
-export default StyledToolbar;
+    .toolbar__filler {
+        flex: 1;
+    }
+`;

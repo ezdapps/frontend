@@ -12,15 +12,15 @@ const createEditorTabDoneHandler: Reducer<typeof createEditorTab.done, State> = 
     tabs: [
         ...state.tabs,
         {
-            type: payload.params.type,
+            uuid: payload.result.uuid,
+            type: payload.params,
             id: payload.result.id,
             new: true,
             name: payload.result.name,
             tool: 'editor',
             value: payload.result.value,
             initialValue: payload.result.value,
-            dirty: false,
-            appId: payload.params.appId
+            dirty: false
         }
     ],
     tabIndex: state.tabs.length

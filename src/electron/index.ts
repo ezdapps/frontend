@@ -7,15 +7,10 @@ require('module').globalPaths.push(__dirname);
 
 import { app } from 'electron';
 import { spawnWindow, window } from './windows/index';
-import { state } from './ipc';
+import './ipc';
 
 app.on('ready', () => {
-    if (state && state.auth.isAuthenticated) {
-        spawnWindow('main');
-    }
-    else {
-        spawnWindow('general');
-    }
+    spawnWindow();
 });
 
 app.on('window-all-closed', () => {
@@ -26,11 +21,6 @@ app.on('window-all-closed', () => {
 
 app.on('activate', () => {
     if (null === window) {
-        if (state && state.auth.isAuthenticated) {
-            spawnWindow('main');
-        }
-        else {
-            spawnWindow('general');
-        }
+        spawnWindow();
     }
 });

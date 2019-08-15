@@ -6,60 +6,63 @@
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { renderPage } from '../actions';
+import { STATIC_PAGES } from 'lib/staticPages';
+import { modalShow } from 'modules/modal/actions';
+import { Action } from 'redux';
 
 const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(renderPage.started)
-    .flatMap(action => {
+    .switchMap(action => {
         const state = store.getState();
         const client = api({
             apiHost: state.auth.session.network.apiHost,
             sessionToken: state.auth.session.sessionToken
         });
-        const section = state.sections.sections[action.payload.section || state.sections.section];
 
-        return Observable.from(Promise.all([
-            client.content({
-                type: 'page',
-                name: action.payload.name,
-                params: action.payload.params,
-                locale: state.storage.locale
+        const staticPage = STATIC_PAGES[action.payload.name];
+        const substitute = staticPage && staticPage.renderSubstitute && staticPage.renderSubstitute(action.payload.params);
+        const requestPage = staticPage ? substitute : {
+            name: action.payload.name,
+            params: action.payload.params
+        };
 
-            }),
-            (!section.menus.length && section.defaultPage !== action.payload.name) ? client.content({
-                type: 'page',
-                name: section.defaultPage,
-                params: {},
-                locale: state.storage.locale
-            }) : Promise.resolve(null)
+        return Observable.from(client.content({
+            type: 'page',
+            locale: state.storage.locale,
+            ...requestPage
 
-        ])).map(payload => {
-            const page = payload[0];
-            const defaultPage = payload[1];
-
-            return renderPage.done({
-                params: action.payload,
-                result: {
-                    defaultMenu: defaultPage && defaultPage.menu !== page.menu && {
-                        name: defaultPage.menu,
-                        content: defaultPage.menutree
-                    },
-                    menu: {
-                        name: page.menu,
-                        content: page.menutree
-                    },
-                    page: {
-                        params: action.payload.params,
-                        name: action.payload.name,
-                        content: page.tree
+        })).flatMap(content => {
+            return Observable.concat<Action>(
+                Observable.of(renderPage.done({
+                    params: action.payload,
+                    result: {
+                        tree: content.tree,
+                        menu: content.menu,
+                        menuTree: content ? content.menutree : [],
+                        static: !!staticPage
                     }
-                }
-            });
+                })),
+                Observable.if(
+                    () => !!action.payload.popup,
+                    Observable.defer(() => Observable.of(modalShow({
+                        id: 'PAGE_MODAL' + action.payload.name,
+                        type: 'PAGE_MODAL',
+                        params: {
+                            name: action.payload.name,
+                            section: action.payload.section,
+                            title: action.payload.popup.title || action.payload.name,
+                            width: action.payload.popup.width,
+                            tree: content.tree,
+                            params: action.payload.params,
+                            static: !!staticPage
+                        }
+                    })))
+                ),
+            );
 
-        }).catch(e =>
-            Observable.of(renderPage.failed({
-                params: action.payload,
-                error: e.error
-            }))
-        );
+        }).catch(e => Observable.of(renderPage.failed({
+            params: action.payload,
+            error: e.error
+        })));
     });
 
 export default renderPageEpic;

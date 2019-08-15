@@ -14,6 +14,8 @@ import { INetwork } from 'apla/auth';
 import webConfig from 'lib/settings/webConfig';
 import localeConfig from 'lib/settings/localeConfig';
 import ConfigObservable from '../util/ConfigObservable';
+import { acquireSession } from 'modules/auth/actions';
+import { Action } from 'redux';
 
 const DEFAULT_NETWORK = '__DEFAULT';
 
@@ -64,7 +66,7 @@ const initializeEpic: Epic = (action$, store, { defaultPassword }) => action$.of
                 demoEnabled: network.enableDemoMode
             }));
 
-            return Observable.concat(
+            return Observable.concat<Action>(
                 Observable.if(
                     () => !!preconfiguredKey,
                     Observable.of(saveWallet(preconfiguredKey)),
@@ -79,7 +81,12 @@ const initializeEpic: Epic = (action$, store, { defaultPassword }) => action$.of
                         locales: locales.locales
                     }
                 })),
-                Observable.of(setLocale.started(state.storage.locale || config.defaultLocale))
+                Observable.of(setLocale.started(state.storage.locale || config.defaultLocale)),
+                Observable.if(
+                    () => store.getState().auth.isAuthenticated && !!store.getState().auth.session,
+                    Observable.of(acquireSession.started(store.getState().auth.session)),
+                    Observable.empty()
+                )
             );
         }).catch(e => Observable.of(initialize.failed({
             params: action.payload,

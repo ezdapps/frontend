@@ -26,7 +26,7 @@ export const HintWrapper = themed.div`
         font-weight: 300;
 
         em.tool-icon {
-            color: ${props => props.theme.toolbarIconColor};
+            color: #5b97e4,
             transition: color .15s;
             vertical-align: middle;
             height: 18px;
@@ -35,12 +35,12 @@ export const HintWrapper = themed.div`
 
         > span.button-label {
             margin-left: 8px;
-            color: ${props => props.theme.toolbarForeground};
+            color: #fff;
         }
 
         &:hover {
             em.tool-icon {
-                color: ${props => props.theme.toolbarIconHighlight};
+                color: #a9ccf9;
             }
         }
     }

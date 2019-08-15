@@ -4,47 +4,23 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { Epic } from 'modules';
-import { Observable } from 'rxjs/Observable';
-import { reloadPage } from '../actions';
+import { reloadPage, renderPage } from '../actions';
+import { Observable } from 'rxjs';
 
-const reloadPageEpic: Epic = (action$, store, { api }) => action$.ofAction(reloadPage.started)
-    .flatMap(action => {
-        const state = store.getState();
-        const section = state.sections.sections[state.sections.section];
-        const client = api({
-            apiHost: state.auth.session.network.apiHost,
-            sessionToken: state.auth.session.sessionToken
-        });
+const reloadPageEpic: Epic = (action$, store) => action$.ofAction(reloadPage)
+    .switchMap(action => {
+        const section = store.getState().sections.sections[action.payload.section];
 
-        return Observable.fromPromise(client.content({
-            type: 'page',
+        if (!section || !section.page) {
+            return Observable.empty();
+        }
+
+        return Observable.of(renderPage.started({
+            section: section.name,
             name: section.page.name,
             params: section.page.params,
-            locale: state.storage.locale,
-
-        })).map(payload =>
-            reloadPage.done({
-                params: action.payload,
-                result: {
-                    params: section.page.params,
-                    menu: {
-                        name: payload.menu,
-                        content: payload.menutree
-                    },
-                    page: {
-                        params: section.page.params,
-                        name: section.page.name,
-                        content: payload.tree
-                    }
-                }
-            })
-
-        ).catch(e =>
-            Observable.of(reloadPage.failed({
-                params: action.payload,
-                error: e.error
-            }))
-        );
+            location: section.page.location
+        }));
     });
 
 export default reloadPageEpic;

@@ -10,14 +10,21 @@ import { OrderedMap } from 'immutable';
 import { IRootState } from 'modules';
 import { connect } from 'react-redux';
 import { buttonInteraction } from 'modules/content/actions';
+import { TBreadcrumbType } from 'apla/content';
+import { IErrorRedirect } from 'apla/protypo';
 
 import Button from 'components/Button';
-import { IErrorRedirect } from 'apla/protypo';
 
 export interface ITxButtonProps {
     disabled?: boolean;
     silent?: boolean;
     className?: string;
+
+    from?: {
+        type: TBreadcrumbType;
+        section: string;
+        name: string;
+    };
 
     // Called first
     confirm?: {
@@ -42,6 +49,7 @@ export interface ITxButtonProps {
 
     // Redirect if all previous actions succeeded
     page?: string;
+    section: string;
     pageParams?: { [key: string]: any } | (() => { [key: string]: any });
 
     // Page must be rendered within a modal dialog
@@ -100,8 +108,10 @@ class TxButton extends React.Component<ITxButtonProps & ITxButtonState & ITxButt
             confirm: this.props.confirm,
             popup: this.props.popup,
             contracts: contracts,
+            from: this.props.from,
             page: this.props.page ? {
                 name: this.props.page,
+                section: this.props.section,
                 params: pageParams
             } : null,
             errorRedirects: errorRedirects

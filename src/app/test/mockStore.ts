@@ -42,7 +42,6 @@ const state: IRootState = {
         preloading: true,
         preloadingError: null,
         stylesheet: 'body {\n\t\t  /* You can define your custom styles here or create custom CSS rules */\n\t\t}',
-        navigationResizing: false,
         notifications: []
     },
     sections: {
@@ -754,7 +753,6 @@ const state: IRootState = {
     storage: {
         locale: 'en-US',
         wallets: [],
-        navigationSize: 230,
         fullNodes: [
             'http://127.0.0.1:7079'
         ]
@@ -766,7 +764,6 @@ const state: IRootState = {
         notifications: [],
         subscriptions: []
     },
-    loadingBar: 0,
     router: {
         location: {
             pathname: '/editor',

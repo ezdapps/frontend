@@ -7,7 +7,7 @@ import actionCreatorFactory from 'typescript-fsa';
 import { TProtypoElement } from 'apla/protypo';
 
 import {
-    IEditorTabCreateCall, ILoadEditorTabCall, ICreateEditorTabCall, IReloadEditorTabCall, TEditorTab, IChangePageCall, IChangePageResult, ISaveConstructorHistoryResult,
+    IEditorTabCreateCall, ILoadEditorTabCall, IReloadEditorTabCall, TEditorTab, IChangePageCall, IChangePageResult, ISaveConstructorHistoryResult,
     IConstructorUndoRedoResult, ISetTagCanDropPositionCall, ISetTagCanDropPositionResult, IAddTagCall, IOperateTagCall, IOperateTagResult, IMoveTreeTag, ISelectTagResult,
     IGetPageTreeResult
 } from 'apla/editor';
@@ -15,14 +15,16 @@ import {
 const actionCreator = actionCreatorFactory('editor');
 
 export const editorSave = actionCreator<TEditorTab>('EDITOR_SAVE');
-export const createEditorTab = actionCreator.async<ICreateEditorTabCall, IEditorTabCreateCall>('CREATE_EDITOR_TAB');
+export const createEditorTab = actionCreator.async<string, IEditorTabCreateCall>('CREATE_EDITOR_TAB');
 export const loadEditorTab = actionCreator.async<ILoadEditorTabCall, TEditorTab>('LOAD_EDITOR_TAB');
-export const changeEditorTab = actionCreator<number>('CHANGE_EDITOR_TAB');
-export const closeEditorTab = actionCreator<number>('CLOSE_EDITOR_TAB');
-export const closeAllEditorTab = actionCreator('CLOSE_ALL_EDITOR_TAB');
+export const changeEditorTab = actionCreator<string>('CHANGE_EDITOR_TAB');
+export const closeEditorTab = actionCreator<string>('CLOSE_EDITOR_TAB');
+export const closeAllEditorTabs = actionCreator('CLOSE_ALL_EDITOR_TABS');
 export const closeSavedEditorTab = actionCreator('CLOSE_SAVED_EDITOR_TAB');
+export const destroyEditorTab = actionCreator<string>('DESTROY_EDITOR_TAB');
 export const updateEditorTab = actionCreator<string>('UPDATE_EDITOR_TAB');
-export const revertEditorTab = actionCreator<number>('REVERT_EDITOR_TAB');
+export const revertEditorTab = actionCreator<string>('REVERT_EDITOR_TAB');
+export const resetEditorTab = actionCreator<string>('RESET_EDITOR_TAB');
 export const reloadEditorTab = actionCreator<IReloadEditorTabCall>('RELOAD_EDITOR_TAB');
 export const changeEditorTool = actionCreator.async<string, TProtypoElement[]>('CHANGE_EDITOR_TOOL');
 export const setPageTemplate = actionCreator<string>('SET_PAGE_TEMPLATE');

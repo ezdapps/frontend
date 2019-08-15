@@ -210,7 +210,11 @@ class AplaAPI {
         })
     });
     public keyinfo = this.setEndpoint<{ id: string }, IKeyInfo>('get', 'keyinfo/{id}', {
-        requestTransformer: request => null
+        requestTransformer: request => null,
+        responseTransformer: response => ({
+            ...response,
+            ecosystems: response.ecosystems || []
+        })
     });
 
     // Data getters

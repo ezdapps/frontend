@@ -10,7 +10,6 @@ import { IFatalError, ILocale } from 'apla';
 import { reducerWithInitialState } from 'typescript-fsa-reducers/dist';
 import initializeDoneHandler from './reducers/initializeDoneHandler';
 import setLocaleDoneHandler from './reducers/setLocaleDoneHandler';
-import setCollapsedHandler from './reducers/setCollapsedHandler';
 import discoverNetworkHandler from './reducers/discoverNetworkHandler';
 import discoverNetworkDoneHandler from './reducers/discoverNetworkDoneHandler';
 import discoverNetworkFailedHandler from './reducers/discoverNetworkFailedHandler';
@@ -24,12 +23,12 @@ export type State = {
     readonly fatalError?: IFatalError;
     readonly guestSession: ISession;
     readonly localeMessages: { [key: string]: string };
-    readonly isCollapsed: boolean;
     readonly isLoaded: boolean;
     readonly isConnecting: boolean;
     readonly preconfiguredNetworks: INetwork[];
     readonly locales: ILocale[];
     readonly locale: string;
+    readonly panel?: string;
 };
 
 export const initialState: State = {
@@ -37,18 +36,17 @@ export const initialState: State = {
     fatalError: null,
     guestSession: null,
     localeMessages: {},
-    isCollapsed: true,
     isLoaded: false,
     isConnecting: false,
     preconfiguredNetworks: [],
     locales: [],
-    locale: null
+    locale: null,
+    panel: null
 };
 
 export default reducerWithInitialState<State>(initialState)
     .case(actions.initialize.done, initializeDoneHandler)
     .case(actions.initialize.failed, initializeFailedHandler)
-    .case(actions.setCollapsed, setCollapsedHandler)
     .case(actions.setLocale.done, setLocaleDoneHandler)
     .case(actions.discoverNetwork.started, discoverNetworkHandler)
     .case(actions.discoverNetwork.done, discoverNetworkDoneHandler)

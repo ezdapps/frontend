@@ -4,9 +4,9 @@
  *--------------------------------------------------------------------------------------------*/
 
 import React from 'react';
-import propTypes from 'prop-types';
+import classNames from 'classnames';
 
-import Protypo from '../Protypo';
+import themed from 'components/Theme/themed';
 
 export interface IToolButtonProps {
     title?: string;
@@ -18,23 +18,44 @@ export interface IToolButtonProps {
     onClick: (e: any) => void;
 }
 
-interface IToolButtonContext {
-    protypo: Protypo;
-}
+const StyledToolButton = themed.button`
+    border: 0;
+    background: 0;
+    outline: 0;
+    border: 0;
+    height: 35px;
+    line-height: 35px;
+    white-space: nowrap;
+    padding: 0 10px;
+    transition: background ease-in-out .12s;
 
-const ToolButton: React.SFC<IToolButtonProps> = (props, context: IToolButtonContext) => {
+    &:hover {
+        background: rgba(0,0,0,0.05);
+    }
+    
+    .toolbutton__icon {
+        font-size: 16px;
+        color: #4688ff;
+        margin-right: 8px;
+    }
+    
+    .toolbutton__label {
+        vertical-align: top;
+        white-space: nowrap;
+        font-size: 15px;
+        color: #333;
+    }
+`;
+
+const ToolButton: React.SFC<IToolButtonProps> = props => {
     return (
-        <a href="#" className="ml btn-tool" onClick={props.onClick}>
-            <em className={`icon ${props.icon}`} />
-            <span>
-                <span>{props.title}</span>
+        <StyledToolButton onClick={props.onClick}>
+            <em className={classNames('toolbutton__icon', props.icon)} />
+            <span className="toolbutton__label">
+                {props.title}
             </span>
-        </a>
+        </StyledToolButton>
     );
-};
-
-ToolButton.contextTypes = {
-    protypo: propTypes.object.isRequired
 };
 
 export default ToolButton;

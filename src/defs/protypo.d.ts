@@ -1,9 +1,11 @@
 /*---------------------------------------------------------------------------------------------
- *  Copyright (c) EGAAS S.A. All rights reserved.
- *  See LICENSE in the project root for license information.
- *--------------------------------------------------------------------------------------------*/
+*  Copyright (c) EGAAS S.A. All rights reserved.
+*  See LICENSE in the project root for license information.
+*--------------------------------------------------------------------------------------------*/
 
 declare module 'apla/protypo' {
+    import { TBreadcrumbType } from 'apla/content';
+
     type TProtypoElement = {
         readonly tag: string;
         readonly id?: string;
@@ -38,6 +40,7 @@ declare module 'apla/protypo' {
 
     interface IButtonPage {
         name: string;
+        section: string;
         params: {
             [key: string]: any;
         };
@@ -53,6 +56,11 @@ declare module 'apla/protypo' {
     interface IButtonInteraction {
         uuid: string;
         silent?: boolean;
+        from: {
+            name: string;
+            section: string;
+            type: TBreadcrumbType;
+        };
         confirm?: IButtonConfirm;
         contracts: {
             name: string;

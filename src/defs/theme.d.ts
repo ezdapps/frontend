@@ -6,31 +6,39 @@
 declare module 'apla/theme' {
     interface IThemeDefinition {
         windowBorder: string;
-        
+
         headerBackground: string;
         headerForeground: string;
-        headerBackgroundActive: string;
-        headerForegroundActive: string;
         headerHeight: number;
 
+        menubarSize: number;
+        menubarBackground: string;
+        menubarBackgroundActive: string;
+        menubarBackgroundFocused: string;
+        menubarBackgroundSecondary: string;
+        menubarForeground: string;
+        menubarForegroundActive: string;
+
         toolbarBackground: string;
+        toolbarBackgroundActive: string;
+        toolbarBackgroundFocused: string;
+        toolbarForegroundActive: string;
+        toolbarForegroundPrimary: string;
+        toolbarForegroundDisabled: string;
         toolbarForeground: string;
-        toolbarOutline: string;
-        toolbarDisabled: string;
-        toolbarIconColor: string;
-        toolbarIconHighlight: string;
         toolbarHeight: number;
+        toolbarSpacerForeground: string;
 
-        progressBarForeground: string;
-
-        menuHeight: number;
         menuBackground: string;
         menuForeground: string;
         menuBackgroundActive: string;
+        menuBorder: string;
         menuOutline: string;
         menuIconColor: string;
         menuPrimaryForeground: string;
         menuPrimaryActive: string;
+        menuSize: number;
+        menuSizeFolded: number;
 
         contentForeground: string;
         contentBackground: string;
@@ -55,16 +63,14 @@ declare module 'apla/theme' {
         dropdownMenuBackground: string;
         dropdownMenuForeground: string;
         dropdownMenuDisabled: string;
-        dropdownMenuOutline: string;
         dropdownMenuActive: string;
         dropdownMenuSeparator: string;
         dropdownMenuPrimary: string;
         dropdownMenuSecondary: string;
 
-        systemButtonSecondary: string;
-        systemButtonActive: string;
-
         securityWarningBackground: string;
         securityWarningForeground: string;
+
+        uiBorderLight: string;
     }
 }

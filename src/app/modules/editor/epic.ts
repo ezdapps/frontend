@@ -29,6 +29,7 @@ import constructorUndoEpic from './epics/constructorUndoEpic';
 import constructorRedoEpic from './epics/constructorRedoEpic';
 import setTagCanDropPositionEpic from './epics/setTagCanDropPositionEpic';
 import debugContractEpic from './epics/debugContractEpic';
+import revertEditorTabEpic from './epics/revertEditorTabEpic';
 
 export default combineEpics(
     changeEditorToolEpic,
@@ -55,5 +56,6 @@ export default combineEpics(
     constructorUndoEpic,
     constructorRedoEpic,
     setTagCanDropPositionEpic,
-    debugContractEpic
+    debugContractEpic,
+    revertEditorTabEpic
 );

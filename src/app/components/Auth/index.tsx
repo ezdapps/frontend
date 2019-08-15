@@ -7,14 +7,13 @@ import React from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { FormattedMessage, InjectedIntlProps, injectIntl } from 'react-intl';
 import imgLogo from 'images/logo.svg';
-import platform from 'lib/platform';
 
 import themed from 'components/Theme/themed';
-import Titlebar from 'components/Main/Titlebar';
 import Wallet from 'components/Auth/Wallet';
 import Login from 'containers/Auth/Login';
 import NetworkList from 'containers/Auth/Login/NetworkList';
 import AddNetwork from 'containers/Auth/Login/NetworkList/AddNetwork';
+import { Button } from 'react-bootstrap';
 
 export interface IAuthProps {
     className?: string;
@@ -27,13 +26,6 @@ const Auth: React.SFC<IAuthProps & InjectedIntlProps> = props => (
         <div className="auth-window-container">
             <div className="auth-window">
                 <div className="panel panel-default m0">
-                    {platform.select({
-                        desktop: (
-                            <div className="panel-heading" style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
-                                <Titlebar maximizable={false} />
-                            </div>
-                        )
-                    })}
                     <div className="panel-body">
                         <Switch>
                             <Route path="/account" component={Wallet} />
@@ -44,58 +36,54 @@ const Auth: React.SFC<IAuthProps & InjectedIntlProps> = props => (
                         </Switch>
                     </div>
                 </div>
-                {platform.select({
-                    web: (
-                        <div className="clearfix p-lg text-center text-white">
-                            <div className="pull-left">
-                                <div>
-                                    <FormattedMessage id="legal.copy" defaultMessage="Apla © 2017-2019 - " />
-                                    <a
-                                        href={props.intl.formatMessage({
-                                            id: 'legal.homepage',
-                                            defaultMessage: 'https://apla.io'
-                                        })}
-                                    >
-                                        <FormattedMessage id="legal.homepage" defaultMessage="https://apla.io" />
-                                    </a>
-                                </div>
-                            </div>
-                            <div className="pull-right">
-                                <a href="#" onClick={props.changeLocale}>
-                                    <FormattedMessage id="LANG_NAME" defaultMessage={props.locale} />
-                                </a>
-                            </div>
+                <div className="clearfix p-lg text-center text-white">
+                    <div className="pull-left">
+                        <div>
+                            <FormattedMessage id="legal.copy" defaultMessage="Apla © 2017-2019 - " />
+                            <a
+                                href={props.intl.formatMessage({
+                                    id: 'legal.homepage',
+                                    defaultMessage: 'https://apla.io'
+                                })}
+                            >
+                                <FormattedMessage id="legal.homepage" defaultMessage="https://apla.io" />
+                            </a>
                         </div>
-                    )
-                })}
+                    </div>
+                    <div className="pull-right">
+                        <Button bsStyle="link" className="p0 m0" onClick={props.changeLocale}>
+                            <FormattedMessage id="LANG_NAME" defaultMessage={props.locale} />
+                        </Button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 );
 
 export default themed(injectIntl(Auth))`
-    display: ${platform.select({ web: 'table', desktop: 'block' })};
+    display: table; 
     width: 100%;
     height: 100%;
     max-height: 100%;
     overflow: hidden;
 
     .auth-window-container {
-        display: ${platform.select({ web: 'table-cell', desktop: 'block' })};
+        display: table-cell;
         vertical-align: middle;
         overflow: hidden;
         height: 100%;
 
         .auth-window {
             text-align: center;
-            max-width: ${platform.select({ web: '600px', desktop: 'none' })};
-            height: ${platform.select({ web: 'auto', desktop: '100%' })};
-            padding: ${platform.select({ web: '10px', desktop: '0' })};
-            padding-top: ${props => platform.select({ web: '0', desktop: props.theme.headerHeight + 'px' })};
+            max-width: 600px;
+            height: auto;
+            padding: 10px;
+            padding-top: 0;
             margin: 0 auto;
             
             .panel {
-                height: ${platform.select({ web: 'auto', desktop: '100%' })};
+                height: auto;
                 overflow: hidden;
                 background: #fff;
                 border: 0;

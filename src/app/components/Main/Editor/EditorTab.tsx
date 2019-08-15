@@ -11,7 +11,7 @@ import { TEditorTab } from 'apla/editor';
 
 import themed from 'components/Theme/themed';
 
-export interface IEditorTabProps extends TEditorTab {
+interface Props extends TEditorTab {
     icon: string;
     active?: boolean;
     className?: string;
@@ -19,7 +19,7 @@ export interface IEditorTabProps extends TEditorTab {
     onClose?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
-const EditorTab: React.SFC<IEditorTabProps> = props => {
+const EditorTab: React.SFC<Props> = props => {
     const onClose = (e: React.MouseEvent<HTMLDivElement>) => {
         e.stopPropagation();
         if (props.onClose) {
@@ -58,7 +58,7 @@ const EditorTab: React.SFC<IEditorTabProps> = props => {
     );
 };
 
-const StyledEditorTab = themed(EditorTab) `
+const StyledEditorTab = themed(EditorTab)`
     position: relative;
     background: #ddd;
     color: #7a899c;

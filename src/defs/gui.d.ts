@@ -4,9 +4,6 @@
  *--------------------------------------------------------------------------------------------*/
 
 declare module 'apla/gui' {
-    type TWindowType =
-        'general' | 'main';
-
     interface IInferredArguments {
         readonly privateKey?: string;
         readonly fullNode?: string[];

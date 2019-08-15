@@ -9,8 +9,8 @@ import { TProtypoElement, IButtonInteraction } from 'apla/protypo';
 const actionCreator = actionCreatorFactory('content');
 
 // Navigation
-export const setResizing = actionCreator<boolean>('SET_RESIZING');
-export const ecosystemInit = actionCreator.async<{ section?: string }, { stylesheet: string, printStylesheet: string }, string>('ECOSYSTEM_INIT');
+export const ecosystemInit = actionCreator<{ stylesheet: string, printStylesheet: string }>('ECOSYSTEM_INIT');
+export const setMenuActive = actionCreator<boolean>('SET_MENU_ACTIVE');
 
 // Interaction
 export const buttonInteraction = actionCreator<IButtonInteraction>('BUTTON_INTERACTION');

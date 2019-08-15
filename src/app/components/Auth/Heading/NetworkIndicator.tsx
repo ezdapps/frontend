@@ -5,7 +5,6 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import platform from 'lib/platform';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
@@ -31,7 +30,7 @@ export default styled(NetworkIndicator)`
     border: 0;
     background: 0;
     padding: 0;
-    color: ${platform.select({ desktop: '#4085dc', web: '#fff' })};
+    color: #fff;
     font-size: 14px;
 
     &:hover {

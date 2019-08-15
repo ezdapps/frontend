@@ -18,37 +18,39 @@ const setNetworkEpic: Epic = (action$, store, { api, defaultKey }) => action$.of
         return NodeObservable({
             nodes: network.fullNodes,
             count: 1,
-            timeout: 5000,
+            timeout: 10000,
             concurrency: 10,
             api
 
-        }).flatMap(node =>
-            Observable.from(discover({ uuid: network.uuid, apiHost: node }, defaultKey, network.id))
-                .flatMap(result => Observable.concat(
-                    Observable.of(discoverNetwork.done({
-                        params: action.payload,
-                        result: {
-                            session: {
-                                network: {
-                                    uuid: network.uuid,
-                                    apiHost: node
-                                },
-                                sessionToken: result.loginResult.token
+        }).defaultIfEmpty(null).flatMap(node =>
+            Observable.if(
+                () => null !== node,
+                Observable.defer(() => Observable.from(discover({ uuid: network.uuid, apiHost: node }, defaultKey, network.id))
+                    .flatMap(result => Observable.concat(
+                        Observable.of(discoverNetwork.done({
+                            params: action.payload,
+                            result: {
+                                session: {
+                                    network: {
+                                        uuid: network.uuid,
+                                        apiHost: node
+                                    },
+                                    sessionToken: result.loginResult.token
+                                }
                             }
-                        }
-                    })),
-                    Observable.of(mergeFullNodes({
-                        uuid: network.uuid,
-                        fullNodes: result.fullNodes
-                    }))
-                ))
+                        })),
+                        Observable.of(mergeFullNodes({
+                            uuid: network.uuid,
+                            fullNodes: result.fullNodes
+                        }))
+                    ))),
+                Observable.defer(() => Observable.throw(NetworkError.Offline))
+            )
 
         ).catch((error: NetworkError) => Observable.of(discoverNetwork.failed({
             params: action.payload,
             error
-        }))).timeout(10000).catch(timeout => Observable.of(discoverNetwork.failed({
-            params: action.payload,
-            error: NetworkError.Offline
+
         })));
     });
 

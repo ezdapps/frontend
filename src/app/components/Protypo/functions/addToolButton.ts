@@ -3,7 +3,6 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import Protypo from '../';
 import { IParamsSpec } from 'components/Protypo/Protypo';
 
 export interface IAddToolButtonProps {
@@ -13,9 +12,10 @@ export interface IAddToolButtonProps {
     pageparams?: IParamsSpec;
 }
 
-const addToolButton = (context: Protypo, props: IAddToolButtonProps) => {
+const addToolButton = (context: any, props: IAddToolButtonProps) => {
     context.addToolButton({
         ...props,
+        section: context.section,
         pageparams: context.resolveParams(props.pageparams)
     });
 };

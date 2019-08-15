@@ -5,7 +5,7 @@
 
 import { Action } from 'redux';
 import { Epic } from 'modules';
-import { login } from '../actions';
+import { login, acquireSession } from '../actions';
 import { Observable } from 'rxjs/Observable';
 import keyring from 'lib/keyring';
 import { push } from 'connected-react-router';
@@ -39,20 +39,23 @@ const loginEpic: Epic = (action$, store, { api }) => action$.ofAction(login.star
             })
 
             // Successful authentication. Yield the result
-            .flatMap(session => {
+            .flatMap(response => {
+                const sessionResult = {
+                    sessionToken: response.token,
+                    network: networkEndpoint
+                };
+
                 return Observable.of<Action>(
                     push('/'),
                     login.done({
                         params: action.payload,
                         result: {
-                            session: {
-                                sessionToken: session.token,
-                                network: networkEndpoint
-                            },
+                            session: sessionResult,
                             privateKey,
                             publicKey
                         }
-                    })
+                    }),
+                    acquireSession.started(sessionResult)
                 );
             })
 

@@ -45,6 +45,7 @@ export interface IButtonProps {
 
 interface IButtonContext {
     form: ValidatedForm;
+    section: string;
     protypo: Protypo;
 }
 
@@ -142,9 +143,11 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
                 name: tx.name,
                 params: tx.data
             }))}
+            from={context.protypo.getFromContext(props.children)}
             contract={props.contract}
             contractParams={getParams}
             page={props.page}
+            section={context.section}
             pageParams={getPageParams}
             popup={popup}
             errorRedirects={getErrorRedirectParams}
@@ -156,6 +159,7 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
 
 Button.contextTypes = {
     form: propTypes.object,
+    section: propTypes.string,
     protypo: propTypes.object.isRequired
 };
 
