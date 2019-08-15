@@ -65,6 +65,7 @@ class ToolButtonContainer extends React.Component<IToolButtonProps & IToolButton
         this.props.buttonInteraction({
             uuid: this._uuid,
             popup,
+            actions: [],
             contracts: [],
             from: this.context.protypo.getFromContext(this.props.title),
             page: this.props.page ? {

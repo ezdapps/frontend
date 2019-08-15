@@ -38,7 +38,7 @@ const createEditorTabEpic: Epic = (action$, store) => action$.ofAction(createEdi
                     result: {
                         uuid: uuid.v4(),
                         id,
-                        name,
+                        name: null,
                         value: ''
                     }
                 });

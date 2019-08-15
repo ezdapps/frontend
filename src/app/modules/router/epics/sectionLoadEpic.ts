@@ -11,6 +11,7 @@ import { state$ } from 'store';
 import { initialize } from 'modules/engine/actions';
 import { isType, Action } from 'typescript-fsa';
 import { RouterState, replace } from 'connected-react-router';
+import { createEditorTab, loadEditorTab } from 'modules/editor/actions';
 
 const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$
     .filter(action => isType(action, initialize.started) || isType(action, locationChange))
@@ -36,6 +37,22 @@ const sectionLoadEpic: Epic = (action$, store, { routerService }) => action$
             }
 
             const pageName = match.parts.page || section.defaultPage;
+
+            // TODO: OLD EDITOR API COMPAT
+            if ('editor' === pageName) {
+                if (match.query.create) {
+                    return Observable.of(
+                        createEditorTab.started(match.query.create),
+                        replace('/editor')
+                    );
+                }
+                else if (match.query.open) {
+                    return Observable.of(
+                        loadEditorTab.started({ type: match.query.open, name: match.query.name }),
+                        replace('/editor')
+                    );
+                }
+            }
 
             // TODO: refactoring
             // must ignore navigation when page and params are equal

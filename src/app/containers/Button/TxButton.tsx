@@ -11,7 +11,7 @@ import { IRootState } from 'modules';
 import { connect } from 'react-redux';
 import { buttonInteraction } from 'modules/content/actions';
 import { TBreadcrumbType } from 'apla/content';
-import { IErrorRedirect } from 'apla/protypo';
+import { IErrorRedirect, IAction } from 'apla/protypo';
 
 import Button from 'components/Button';
 
@@ -20,6 +20,7 @@ export interface ITxButtonProps {
     silent?: boolean;
     className?: string;
 
+    actions: IAction[];
     from?: {
         type: TBreadcrumbType;
         section: string;
@@ -114,7 +115,8 @@ class TxButton extends React.Component<ITxButtonProps & ITxButtonState & ITxButt
                 section: this.props.section,
                 params: pageParams
             } : null,
-            errorRedirects: errorRedirects
+            errorRedirects: errorRedirects,
+            actions: this.props.actions
         });
     }
 
