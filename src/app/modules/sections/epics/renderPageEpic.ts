@@ -25,12 +25,23 @@ const renderPageEpic: Epic = (action$, store, { api }) => action$.ofAction(rende
             params: action.payload.params
         };
 
-        return Observable.from(client.content({
-            type: 'page',
-            locale: state.storage.locale,
-            ...requestPage
+        return Observable.if(
+            () => !!(requestPage && requestPage.name),
+            Observable.defer(() =>
+                Observable.from(client.content({
+                    type: 'page',
+                    locale: state.storage.locale,
+                    ...requestPage
 
-        })).flatMap(content => {
+                }))
+            ),
+            Observable.of({
+                tree: [],
+                menu: '',
+                menutree: []
+            })
+
+        ).flatMap(content => {
             return Observable.concat<Action>(
                 Observable.of(renderPage.done({
                     params: action.payload,
