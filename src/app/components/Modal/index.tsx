@@ -7,6 +7,7 @@ import React from 'react';
 import { InjectedIntl } from 'react-intl';
 
 import themed from 'components/Theme/themed';
+import Header from 'containers/Modal/Header';
 
 export interface IModalProps<P, R> {
     intl: InjectedIntl;
@@ -21,15 +22,6 @@ export type TModalComponentClass<P, R> =
     React.ComponentType<IModalProps<P, R>> |
     React.SFC<IModalProps<P, R>>;
 
-const StyledHeader = themed.div`
-    background: ${props => props.theme.modalHeaderBackground};
-    color: ${props => props.theme.modalHeaderForeground};
-    margin: -1px -1px 0 -1px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0 15px;
-`;
-
 const StyledBody = themed.div`
     padding: 15px;
     min-width: 300px;
@@ -42,13 +34,13 @@ const StyledFooter = themed.div`
 `;
 
 export abstract class ModalContainer<P, S = {}> extends React.Component<P, S> {
-    public static Header = StyledHeader;
+    public static Header = Header;
     public static Body = StyledBody;
     public static Footer = StyledFooter;
 }
 
 export default abstract class Modal<P, R, S = {}> extends React.Component<IModalProps<P, R>, S> {
-    public static Header = StyledHeader;
+    public static Header = Header;
     public static Body = StyledBody;
     public static Footer = StyledFooter;
 }

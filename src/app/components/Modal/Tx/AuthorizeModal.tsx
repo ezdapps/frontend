@@ -3,18 +3,14 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import Modal from '../';
 import Validation from 'components/Validation';
 
-export interface IAuthorizeModalProps {
-    contract: string;
-}
-
-class AuthorizeModal extends Modal<IAuthorizeModalProps, string> {
+class AuthorizeModal extends Modal<void, string> {
     onSuccess = (values: { [key: string]: any }) => {
         this.props.onResult(values.password);
     }
@@ -27,7 +23,7 @@ class AuthorizeModal extends Modal<IAuthorizeModalProps, string> {
                 </Modal.Header>
                 <Modal.Body>
                     <div className="pb">
-                        <FormattedMessage id="modal.authorization.password" defaultMessage="Enter your password to sign contract {contract}" values={{ contract: this.props.params.contract }} />
+                        <FormattedMessage id="modal.authorization.password" defaultMessage="Please enter your password to perform this action" />
                     </div>
                     <Validation.components.ValidatedFormGroup for="password">
                         <Validation.components.ValidatedControl

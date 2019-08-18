@@ -9,27 +9,24 @@ import logoutEpic from './epics/logoutEpic';
 import authorizeEpic from './epics/authorizeEpic';
 import createWalletEpic from './epics/createWalletEpic';
 import importWalletEpic from './epics/importWalletEpic';
-import importSeedEpic from './epics/importSeedEpic';
-import generateSeedEpic from './epics/generateSeedEpic';
 import authErrorEpic from './epics/authErrorEpic';
 import removeWalletEpic from './epics/removeWalletEpic';
 import logoutEmptySessionEpic from './epics/logoutEmptySessionEpic';
 import changePasswordEpic from './epics/changePasswordEpic';
 import changePasswordDoneEpic from './epics/changePasswordDoneEpic';
-import importSeedConfirmationEpic from './epics/importSeedConfirmationEpic';
 import loadWalletsEpic from './epics/loadWalletsEpic';
 import reloadWalletsEpic from './epics/reloadWalletsEpic';
 import loadSavedWalletEpic from './epics/loadSavedWalletEpic';
 import switchWalletEpic from './epics/switchWalletEpic';
 import loginGuestEpic from './epics/loginGuestEpic';
+import acquireSessionEpic from './epics/acquireSessionEpic';
+import backupAccountEpic from './epics/backupAccountEpic';
 
 export default combineEpics(
+    acquireSessionEpic,
     authorizeEpic,
     createWalletEpic,
-    generateSeedEpic,
     importWalletEpic,
-    importSeedEpic,
-    importSeedConfirmationEpic,
     loginEpic,
     authErrorEpic,
     logoutEmptySessionEpic,
@@ -41,5 +38,6 @@ export default combineEpics(
     changePasswordEpic,
     changePasswordDoneEpic,
     switchWalletEpic,
-    loginGuestEpic
+    loginGuestEpic,
+    backupAccountEpic
 );

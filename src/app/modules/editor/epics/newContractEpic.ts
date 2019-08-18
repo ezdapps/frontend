@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import { Epic } from 'modules';
 import { editorSave, reloadEditorTab } from '../actions';
 import TxObservable from 'modules/tx/util/TxObservable';
+import ModalObservable from 'modules/modal/util/ModalObservable';
 
 const newContractEpic: Epic = (action$, store, { api }) => action$.ofAction(editorSave)
     .filter(l => l.payload.new && 'contract' === l.payload.type)
@@ -19,33 +20,46 @@ const newContractEpic: Epic = (action$, store, { api }) => action$.ofAction(edit
             sessionToken: state.auth.session.sessionToken
         });
 
-        return TxObservable(action$, {
-            tx: {
-                uuid: id,
-                contracts: [{
-                    name: '@1NewContract',
-                    params: [{
-                        Value: action.payload.value,
-                        Conditions: 'true',
-                        ApplicationId: action.payload.appId ? action.payload.appId : 0
-                    }]
-                }]
-            },
-            success: results => Observable.from(results).flatMap(result => Observable.fromPromise(client.getRow({
-                table: 'contracts',
-                id: result.status.result
+        return Observable.from(client.getData({
+            name: 'applications',
+            columns: ['id', 'deleted', 'name']
 
-            })).map(response => reloadEditorTab({
-                type: action.payload.type,
-                id: action.payload.id,
-                data: {
-                    new: false,
-                    id: String(result.status.result),
-                    name: response.value.name,
-                    initialValue: action.payload.value
+        })).flatMap(apps => ModalObservable<{ app: string, conditions: string }>(action$, {
+            modal: {
+                id,
+                type: 'CREATE_CONTRACT',
+                params: {
+                    apps: apps.list.filter(l => '0' === l.deleted)
                 }
-            })))
-        });
+            },
+            success: result => TxObservable(action$, {
+                tx: {
+                    uuid: id,
+                    contracts: [{
+                        name: '@1NewContract',
+                        params: [{
+                            Value: action.payload.value,
+                            Conditions: result.conditions,
+                            ApplicationId: result.app || 0
+                        }]
+                    }]
+                },
+                success: results => Observable.from(results).flatMap(tx => Observable.fromPromise(client.getRow({
+                    table: 'contracts',
+                    id: tx.status.result
+
+                })).map(response => reloadEditorTab({
+                    type: action.payload.type,
+                    id: action.payload.id,
+                    data: {
+                        new: false,
+                        id: String(tx.status.result),
+                        name: response.value.name,
+                        initialValue: action.payload.value
+                    }
+                })))
+            })
+        }));
     });
 
 export default newContractEpic;

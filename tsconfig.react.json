@@ -8,6 +8,7 @@
         "webpack",
         "jest",
         "src/app/setupTests.ts",
+        "**/*.test.ts",
         "src/electron"
     ]
 }

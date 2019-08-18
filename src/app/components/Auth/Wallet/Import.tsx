@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { injectIntl, FormattedMessage, InjectedIntlProps } from 'react-intl';
+import { readTextFile } from 'lib/fs';
 
 import LocalizedDocumentTitle from 'components/DocumentTitle/LocalizedDocumentTitle';
 import Generator from './Generator';
@@ -12,9 +13,6 @@ import Validation from 'components/Validation';
 import HeadingNetwork from 'containers/Auth/HeadingNetwork';
 
 export interface IImportProps {
-    backup: string;
-    pending: boolean;
-    onImportBackup: (file: File) => void;
     onConfirm: (params: { backup: string, password: string }) => void;
 }
 
@@ -34,17 +32,7 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
         };
     }
 
-    componentWillReceiveProps(props: IImportProps) {
-        this._inputFile.setAttribute('value', null);
-
-        if (this.props.backup !== props.backup) {
-            this.setState({
-                backup: props.backup
-            });
-        }
-    }
-
-    onSubmit = (values: { [key: string]: any }) => {
+    onSubmit = () => {
         this.props.onConfirm({
             backup: this.state.backup,
             password: this.state.password
@@ -67,8 +55,18 @@ class Import extends React.Component<IImportProps & InjectedIntlProps, IImportSt
         this._inputFile.click();
     }
 
-    onLoadSuccess = (e: React.ChangeEvent<HTMLInputElement>) => {
-        this.props.onImportBackup(e.target.files[0]);
+    onLoadSuccess = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        try {
+            const backup = await readTextFile(e.target.files[0]);
+            this._inputFile.setAttribute('value', '');
+
+            this.setState({
+                backup
+            });
+        }
+        catch (e) {
+            // Fall back silently
+        }
     }
 
     render() {

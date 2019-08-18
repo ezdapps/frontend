@@ -3,11 +3,12 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import * as React from 'react';
-import * as propTypes from 'prop-types';
+import React from 'react';
+import propTypes from 'prop-types';
 
-import Protypo, { IParamsSpec } from '../Protypo';
+import { IParamsSpec } from '../Protypo';
 import StyledComponent from './StyledComponent';
+import PageLink from 'containers/Routing/PageLink';
 
 export interface ILinkPageProps {
     'class'?: string;
@@ -17,31 +18,26 @@ export interface ILinkPageProps {
 }
 
 interface ILinkPageContext {
-    protypo: Protypo;
-    navigatePage: (params: { name: string, params: any, force?: boolean }) => void;
+    section: string;
+    getFromContext: () => any;
+    protypo: any;
 }
 
-const LinkPage: React.SFC<ILinkPageProps> = (props, context: ILinkPageContext) => {
-    const onNavigate = (e: React.MouseEvent<HTMLAnchorElement>) => {
-        e.preventDefault();
-        context.navigatePage({
-            name: props.page,
-            params: context.protypo.resolveParams(props.pageparams),
-            force: true
-        });
-        return false;
-    };
-
-    return (
-        <a href="#" className={[props.class, props.className].join(' ')} onClick={onNavigate}>
-            {props.children}
-        </a>
-    );
-};
+const LinkPage: React.SFC<ILinkPageProps> = (props, context: ILinkPageContext) => (
+    <PageLink
+        className={[props.class, props.className].join(' ')}
+        section={context.section}
+        page={props.page || ''}
+        params={props.pageparams ? context.protypo.resolveParams(props.pageparams) : {}}
+        from={context.protypo.getFromContext(props.children)}
+    >
+        {props.children}
+    </PageLink>
+);
 
 LinkPage.contextTypes = {
     protypo: propTypes.object.isRequired,
-    navigatePage: propTypes.func.isRequired
+    section: propTypes.string.isRequired
 };
 
 export default StyledComponent(LinkPage);

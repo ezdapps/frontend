@@ -7,11 +7,9 @@ import { BrowserWindow, Menu } from 'electron';
 import * as path from 'path';
 import * as url from 'url';
 import menu from '../menu';
-import generalWindow from './general';
 import mainWindow from './main';
 
 export let window: BrowserWindow;
-export let windowName: string;
 
 const ENV = process.env.NODE_ENV || 'production';
 const PROTOCOL = process.env.HTTPS === 'true' ? 'https' : 'http';
@@ -27,24 +25,8 @@ export const appUrl =
             slashes: true,
         });
 
-export const spawnWindow = (name: string) => {
-    if (window && windowName === name) {
-        return;
-    }
-
-    let wnd: BrowserWindow;
-    switch (name) {
-        case 'general':
-            wnd = generalWindow();
-            break;
-
-        case 'main':
-            wnd = mainWindow();
-            break;
-
-        default:
-            return;
-    }
+export const spawnWindow = () => {
+    let wnd: BrowserWindow = mainWindow();
 
     if (window) {
         window.close();
@@ -57,15 +39,10 @@ export const spawnWindow = (name: string) => {
     }
 
     wnd.loadURL(appUrl);
-    wnd.once('ready-to-show', () => {
-        wnd.show();
-    });
 
     wnd.on('closed', () => {
         window = null;
-        windowName = null;
     });
 
     window = wnd;
-    windowName = name;
 };

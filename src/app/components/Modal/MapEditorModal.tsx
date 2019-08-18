@@ -16,7 +16,7 @@ import Modal, { IModalProps } from './';
 import Validation from 'components/Validation';
 import MapView from 'components/Map/MapView';
 import Tooltip from 'components/Tooltip';
-import SectionToolButton from 'components/Main/Toolbar/SectionToolButton';
+import SegmentButton from 'components/Button/SegmentButton';
 
 export interface IMapEditorModalProps {
     mapType?: 'streets' | 'satellite' | 'hybrid' | 'topo' | 'gray' | 'dark-gray' | 'oceans' | 'national-geographic' | 'terrain' | 'osm';
@@ -338,7 +338,7 @@ class MapEditorModal extends Modal<IMapEditorModalProps, IMapEditorEvent, IMapEd
                                 </div>
                             </div>
                             <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, textAlign: 'center', zIndex: 0 }}>
-                                <SectionToolButton
+                                <SegmentButton
                                     activeIndex={mapTools.indexOf(this.state.tool)}
                                     onChange={this.onToolChange}
                                     items={[

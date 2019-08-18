@@ -11,6 +11,7 @@ import { TProtypoElement } from 'apla/protypo';
 import ProtypoConstructor from 'components/ProtypoConstructor';
 
 export interface IProtypoConstructorContainerProps {
+    section: string;
     editable?: boolean;
     wrapper?: JSX.Element;
     context: string;
@@ -38,12 +39,11 @@ const ProtypoConstructorContainer: React.SFC<IProtypoConstructorContainerState &
     <ProtypoConstructor {...props} />
 );
 
-const mapStateToProps = (state: IRootState) => {
-    const section = state.sections.sections[state.sections.section];
+const mapStateToProps = (state: IRootState, props: IProtypoConstructorContainerProps) => {
+    const section = state.sections.sections[props.section];
 
     return {
         apiHost: state.auth.session && (state.auth.session.network.apiHost + '/api/v2'),
-        section: state.sections.section,
         page: section.page && section.page.name
     };
 };

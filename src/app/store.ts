@@ -8,7 +8,6 @@ import 'lib/external/fsa';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import { createEpicMiddleware } from 'redux-observable';
-import { loadingBarMiddleware } from 'react-redux-loading-bar';
 import persistState, { mergePersistedState } from 'redux-localstorage';
 import adapter from 'redux-localstorage/lib/adapters/localStorage';
 import filter from 'redux-localstorage-filter';
@@ -21,6 +20,7 @@ import rootReducer, { rootEpic, IRootState } from './modules';
 import platform from 'lib/platform';
 import dependencies from 'modules/dependencies';
 import rehydrateHandler from 'modules/storage/reducers/rehydrateHandler';
+import { Observable } from 'rxjs';
 
 export const history = platform.select<() => History>({
     desktop: createMemoryHistory,
@@ -58,9 +58,6 @@ const configureStore = (initialState?: IRootState) => {
         routerMiddleware(history),
         createEpicMiddleware(rootEpic, {
             dependencies
-        }),
-        loadingBarMiddleware({
-            promiseTypeSuffixes: ['STARTED', 'DONE', 'FAILED']
         })
     ];
 
@@ -110,5 +107,19 @@ const store = platform.select({
         return storeInstance;
     }
 })();
+
+// This is a stub value for observable store. It will be removed in the near future
+const getState$ = (stateStore: typeof store) =>
+    new Observable<IRootState>(observer => {
+        observer.next(stateStore.getState());
+
+        const unsubscribe = store.subscribe(() => {
+            observer.next(stateStore.getState());
+        });
+
+        return unsubscribe;
+    });
+
+export const state$ = getState$(store);
 
 export default store;

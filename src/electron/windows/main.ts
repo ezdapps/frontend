@@ -3,7 +3,7 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-import { BrowserWindow } from 'electron';
+import { BrowserWindow, shell } from 'electron';
 import config from '../config';
 import calcScreenOffset from '../util/calcScreenOffset';
 
@@ -12,7 +12,7 @@ export default () => {
         minWidth: 800,
         minHeight: 600,
         frame: false,
-        backgroundColor: '#3d2c77',
+        backgroundColor: '#272D44',
         resizable: true,
         show: false,
         maximized: config.get('maximized') || false,
@@ -21,9 +21,18 @@ export default () => {
 
     const window = new BrowserWindow(options);
 
+    window.once('ready-to-show', () => {
+        window.show();
+    });
+
     window.on('close', () => {
         config.set('dimensions', window.getBounds());
         config.set('maximized', window.isMaximized() || window.isMaximized);
+    });
+
+    window.webContents.on('new-window', (event, url) => {
+        event.preventDefault();
+        shell.openExternal(url);
     });
 
     return window;

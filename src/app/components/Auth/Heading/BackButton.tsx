@@ -7,7 +7,6 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
-import platform from 'lib/platform';
 
 export interface IBackButtonProps {
     className?: string;
@@ -32,12 +31,12 @@ const BackButton: React.SFC<IBackButtonProps> = props => props.returnUrl ?
         </button>
     );
 
-export default styled(BackButton) `
+export default styled(BackButton)`
     text-decoration: none !important;
     border: 0;
     background: 0;
     padding: 0;
-    color: ${platform.select({ desktop: '#4085dc', web: '#fff' })};
+    color: #fff;
     font-size: 14px;
 
     &:hover {

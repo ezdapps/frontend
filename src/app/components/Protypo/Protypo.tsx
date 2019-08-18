@@ -9,19 +9,20 @@ import propTypes from 'prop-types';
 import contextDefinitions from './contexts';
 import { TProtypoElement, ISource } from 'apla/protypo';
 import { IValidationResult } from 'components/Validation/ValidatedForm';
-import Heading from 'components/Heading';
+import Heading from './components/Heading';
 import ToolButton, { IToolButtonProps } from 'containers/ToolButton/ToolButton';
 import { IConstructorElementProps } from 'apla/editor';
+import { TBreadcrumbType } from 'apla/content';
 
 export interface IProtypoProps extends IConstructorElementProps {
     apiHost: string;
     wrapper?: JSX.Element;
     context: string;
-    page: string;
+    page?: string;
+    menu?: string;
+    section: string;
     content: TProtypoElement[];
     menuPush: (params: { name: string, content: TProtypoElement[] }) => void;
-    navigatePage: (params: { name: string, params: any, force?: boolean }) => void;
-    navigate: (url: string) => void;
     displayData: (link: string) => void;
 }
 
@@ -37,65 +38,76 @@ export interface IParamSpec {
 
 class Protypo extends React.Component<IProtypoProps> {
     private _lastID: number;
-    private _menuPushBind: Function;
-    private _navigatePageBind: Function;
-    private _navigateBind: Function;
-    private _resolveSourceBind: Function;
-    private _renderElementsBind: Function;
     private _title: string;
     private _toolButtons: IToolButtonProps[];
     private _sources: { [key: string]: ISource };
     private _errors: { name: string, description: string }[];
 
-    constructor(props: IProtypoProps) {
-        super(props);
-        this._menuPushBind = props.menuPush.bind(this);
-        this._navigatePageBind = props.navigatePage.bind(this);
-        this._navigateBind = props.navigate.bind(this);
-        this._resolveSourceBind = this.resolveSource.bind(this);
-        this._renderElementsBind = this.renderElements.bind(this);
-    }
-
     getChildContext() {
         return {
             protypo: this,
-            menuPush: this._menuPushBind,
-            navigatePage: this._navigatePageBind,
-            navigate: this._navigateBind,
-            resolveSource: this._resolveSourceBind,
-            renderElements: this._renderElementsBind
+            section: this.props.section,
+            menuPush: this.props.menuPush,
+            resolveSource: this.resolveSource,
+            resolveText: this.resolveText,
+            getFromContext: this.getFromContext,
+            renderElements: this.renderElements
         };
     }
 
-    getCurrentPage() {
+    getFromContext: (computeTitle?: React.ReactNode) => { type: TBreadcrumbType, section: string, name: string } | undefined = computeTitle => {
+        const title = computeTitle ? this.resolveText(computeTitle) : '';
+
+        if (this.props.page) {
+            return {
+                type: 'PAGE',
+                section: this.props.section,
+                title: title || this.props.page,
+                name: this.props.page
+            };
+        }
+        else if (this.props.menu) {
+            return {
+                type: 'MENU',
+                section: this.props.section,
+                title: title || this.props.menu,
+                name: this.props.menu
+            };
+        }
+        else {
+            return undefined;
+        }
+    }
+
+    getCurrentPage = () => {
         return this.props.page;
     }
 
-    setTitle(title: string) {
+    setTitle = (title: string) => {
         this._title = title;
     }
 
-    addToolButton(props: IToolButtonProps) {
+    addToolButton = (props: IToolButtonProps) => {
         this._toolButtons.push(props);
     }
 
-    displayData(link: string) {
+    displayData = (link: string) => {
         this.props.displayData(link);
     }
 
-    registerSource(name: string, payload: ISource) {
+    registerSource = (name: string, payload: ISource) => {
         this._sources[name] = payload;
     }
 
-    resolveSource(name: string) {
+    resolveSource = (name: string) => {
         return this._sources[name];
     }
 
-    resolveData(name: string) {
+    resolveData = (name: string) => {
         return `${this.props.apiHost}${name}`;
     }
 
-    resolveParams(values: IParamsSpec, formValues?: { [key: string]: IValidationResult }) {
+    resolveParams = (values: IParamsSpec, formValues?: { [key: string]: IValidationResult }) => {
         const result: { [key: string]: string } = {};
         for (let itr in values) {
             if (values.hasOwnProperty(itr)) {
@@ -114,7 +126,35 @@ class Protypo extends React.Component<IProtypoProps> {
         return result;
     }
 
-    renderElement(element: TProtypoElement, optionalKey?: string): React.ReactNode {
+    resolveText = (value: React.ReactNode) => {
+        let result = '';
+        if (value) {
+            if ('string' === typeof value || 'number' === typeof value) {
+                result += value;
+            }
+            else if ('object' === typeof value) {
+                let children = null;
+                if (Array.isArray(value)) {
+                    children = value;
+                }
+                else if ('props' in value) {
+                    children = value.props.children;
+                }
+                if (children) {
+                    if (Array.isArray(children)) {
+                        children.forEach(o => {
+                            result += this.resolveText(o);
+                        });
+                    } else {
+                        result += this.resolveText(children);
+                    }
+                }
+            }
+        }
+        return result;
+    }
+
+    renderElement = (element: TProtypoElement, optionalKey?: string): React.ReactNode => {
         switch (element.tag) {
             case 'text':
                 return element.text;
@@ -160,7 +200,7 @@ class Protypo extends React.Component<IProtypoProps> {
         }
     }
 
-    renderElements(elements: TProtypoElement[], keyPrefix?: string): React.ReactNode[] {
+    renderElements = (elements: TProtypoElement[], keyPrefix?: string): React.ReactNode[] => {
         if (!elements) {
             return null;
         }
@@ -170,7 +210,7 @@ class Protypo extends React.Component<IProtypoProps> {
         ));
     }
 
-    renderHeading() {
+    renderHeading = () => {
         return (this.props.context === 'page' && this._title) ? (
             <Heading key="func_heading">
                 <span>{this._title}</span>
@@ -222,12 +262,13 @@ class Protypo extends React.Component<IProtypoProps> {
 }
 
 (Protypo as any).childContextTypes = {
+    section: propTypes.string.isRequired,
     protypo: propTypes.object.isRequired,
-    navigatePage: propTypes.func.isRequired,
-    navigate: propTypes.func.isRequired,
     menuPush: propTypes.func.isRequired,
     resolveSource: propTypes.func.isRequired,
-    renderElements: propTypes.func.isRequired
+    resolveText: propTypes.func.isRequired,
+    renderElements: propTypes.func.isRequired,
+    getFromContext: propTypes.func.isRequired
 };
 
 export default Protypo;

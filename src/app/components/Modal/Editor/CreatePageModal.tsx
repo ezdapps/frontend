@@ -11,14 +11,19 @@ import { FormattedMessage } from 'react-intl';
 import Validation from 'components/Validation';
 
 export interface ICreatePageModalProps {
+    apps: {
+        id: string;
+        name: string;
+    }[];
     menus: string[];
 }
 
-class CreatePageModal extends Modal<ICreatePageModalProps, { name: string, menu: string, conditions: string }> {
+class CreatePageModal extends Modal<ICreatePageModalProps, { name: string, app: string, menu: string, conditions: string }> {
     onSubmit = (values: { [key: string]: any }) => {
         this.props.onResult({
             name: values.name,
             menu: values.menu,
+            app: values.app,
             conditions: values.conditions
         });
     }
@@ -35,6 +40,16 @@ class CreatePageModal extends Modal<ICreatePageModalProps, { name: string, menu:
                             <FormattedMessage id="editor.page.name" defaultMessage="Name" />
                         </label>
                         <Validation.components.ValidatedControl key="name" name="name" validators={[Validation.validators.required]} />
+                    </Validation.components.ValidatedFormGroup>
+                    <Validation.components.ValidatedFormGroup for="app">
+                        <label htmlFor="app">
+                            <FormattedMessage id="editor.app" defaultMessage="Application" />
+                        </label>
+                        <Validation.components.ValidatedSelect name="app" defaultValue={this.props.params.apps[0].id} validators={[Validation.validators.required]}>
+                            {this.props.params.apps.map(app => (
+                                <option key={app.id} value={app.id}>{app.name}</option>
+                            ))}
+                        </Validation.components.ValidatedSelect>
                     </Validation.components.ValidatedFormGroup>
                     <Validation.components.ValidatedFormGroup for="menu">
                         <label htmlFor="menu">

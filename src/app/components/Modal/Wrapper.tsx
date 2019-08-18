@@ -6,6 +6,7 @@
 import React from 'react';
 import Transition from 'react-transition-group/Transition';
 import themed from 'components/Theme/themed';
+import platform from 'lib/platform';
 
 const containerAnimationDuration = 210;
 const containerAnimationDef = {
@@ -71,8 +72,7 @@ const StyledModalWrapper = themed.div`
     overflow-x: hidden;
     overflow-y: auto;
     padding: 50px;
-    margin-top: ${props => props.theme.headerHeight - 1}px;
-    padding-top: ${props => 50 + props.theme.toolbarHeight}px;
+    margin-top: ${props => props.theme.headerHeight + (platform.select({ win32: 1 }) || 0)}px;
 
     &::before {
         content: ' ';

@@ -6,71 +6,51 @@
 import React from 'react';
 import { TEditorTab } from 'apla/editor';
 
-import CodeEditor from 'components/Editor';
+import CodeEditor from 'components/Editor/CodeEditor';
 import EditorTabs from './EditorTabs';
-import Page from 'components/Main/Page';
-import ConstructorTabbed from 'containers/Main/Editor/ConstructorTabbed';
+import EditorTool from './EditorTool';
+import EditorToolbar from 'containers/Toolbar/EditorToolbar';
+import LocalizedDocumentTitle from 'components/DocumentTitle/LocalizedDocumentTitle';
 
-export interface IEditorProps {
+interface Props {
+    mainSection: string;
     tabIndex: number;
     tabs: TEditorTab[];
-    onTabChange: (index: number) => void;
-    onTabUpdate: (value: string) => void;
-    onTabClose: (index: number) => void;
-    onTabCloseAll: () => void;
-    onTabCloseSaved: () => void;
+    onTabChange?: (uuid: string) => void;
+    onTabUpdate?: (value: string) => void;
+    onTabClose?: (uuid: string) => void;
+    onTabCloseAll?: () => void;
+    onTabCloseSaved?: () => void;
 }
 
-class Editor extends React.Component<IEditorProps> {
-    renderTool(tab: TEditorTab) {
-        switch (tab.tool) {
-            case 'constructor':
-                return (
-                    <ConstructorTabbed pageID={tab.id} pageName={tab.name} />
-                );
-
-            case 'preview':
-                return (
-                    <div className="flex-col flex-stretch scroll">
-                        <Page
-                            name="preview"
-                            content={tab.preview}
-                            params={{}}
+const Editor: React.SFC<Props> = props => (
+    <LocalizedDocumentTitle title="editor">
+        <div className="fullscreen noscroll">
+            <EditorToolbar />
+            <EditorTabs
+                tabIndex={props.tabIndex}
+                tabs={props.tabs}
+                onChange={props.onTabChange}
+                onClose={props.onTabClose}
+                onCloseAll={props.onTabCloseAll}
+                onCloseSaved={props.onTabCloseSaved}
+            />
+            {props.tabs.map((tab, index) => (
+                <div key={index} className="fullscreen" style={{ display: props.tabIndex === index ? null : 'none' }}>
+                    <div className="fullscreen" style={{ display: 'editor' === tab.tool ? null : 'none' }}>
+                        <CodeEditor
+                            language={'contract' === tab.type ? 'simvolio' : 'protypo'}
+                            value={tab.value}
+                            onChange={props.onTabUpdate}
                         />
                     </div>
-                );
-
-            default:
-                return null;
-        }
-    }
-
-    render() {
-        return (
-            <div className="fullscreen noscroll">
-                <EditorTabs
-                    tabIndex={this.props.tabIndex}
-                    tabs={this.props.tabs}
-                    onChange={this.props.onTabChange}
-                    onClose={this.props.onTabClose}
-                    onCloseAll={this.props.onTabCloseAll}
-                    onCloseSaved={this.props.onTabCloseSaved}
-                />
-                {this.props.tabs.map((tab, index) => (
-                    <div key={index} className="fullscreen" style={{ display: this.props.tabIndex === index ? null : 'none' }}>
-                        <div className="fullscreen" style={{ display: 'editor' === tab.tool ? null : 'none' }}>
-                            <CodeEditor
-                                language={'contract' === tab.type ? 'simvolio' : 'protypo'}
-                                value={tab.value}
-                                onChange={this.props.onTabUpdate}
-                            />
-                        </div>
-                        {index === this.props.tabIndex && 'editor' !== tab.tool ? this.renderTool(tab) : null}
-                    </div>
-                ))}
-            </div>
-        );
-    }
-}
+                    {index === props.tabIndex && 'editor' !== tab.tool ? (
+                        <EditorTool mainSection={props.mainSection} value={tab} />
+                    ) : null}
+                </div>
+            ))}
+        </div>
+    </LocalizedDocumentTitle>
+);
 
 export default Editor;

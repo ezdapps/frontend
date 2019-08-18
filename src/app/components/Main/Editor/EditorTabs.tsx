@@ -6,14 +6,14 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { TEditorTab } from 'apla/editor';
-import imgSim from './sim.svg';
-import imgTpl from './tpl.svg';
+import imgSim from 'components/Editor/simvolio/icon.svg';
+import imgTpl from 'components/Editor/protypo/icon.svg';
 
 import themed from 'components/Theme/themed';
 import EditorTab from './EditorTab';
-import SystemButton from 'components/Main/SystemButton';
-import { CloseDropdownButton } from 'components/DropdownButton';
+import HeaderButton from '../Header/HeaderButton';
 import ScrollView from 'components/ScrollView';
+import Item from 'components/Dropdown/Item';
 
 export const TYPE_ICONS: { [type: string]: string } = {
     contract: imgSim,
@@ -23,32 +23,20 @@ export const TYPE_ICONS: { [type: string]: string } = {
     default: null
 };
 
-const StyledTabsMenu = themed.div`
-    background: ${props => props.theme.editorBackground};
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    width: 40px;
-    
-    & button.dropdown-toggle {
-        height: 36px;
-    }    
-`;
-
-export interface IEditorTabsProps {
+interface Props {
     className?: string;
     tabIndex: number;
     tabs: TEditorTab[];
-    onChange: (index: number) => void;
-    onClose: (index: number) => void;
+    onChange: (uuid: string) => void;
+    onClose: (uuid: string) => void;
     onCloseAll: () => void;
     onCloseSaved: () => void;
 }
 
-const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
-    <div>
-        <div className={props.className}>
-            <ScrollView className="editor-scroll-area" disableVertical hideHorizontal horizontalWheel>
+const EditorTabs: React.SFC<Props> = (props) => (
+    <div className={props.className}>
+        <div className="editortabs__selector">
+            <ScrollView className="editortabs__scrollarea" disableVertical hideHorizontal horizontalWheel>
                 <ul>
                     {props.tabs.map((tab, index) => (
                         <EditorTab
@@ -56,54 +44,41 @@ const EditorTabs: React.SFC<IEditorTabsProps> = (props) => (
                             key={index}
                             active={props.tabIndex === index}
                             icon={TYPE_ICONS[tab.type] || TYPE_ICONS.default}
-                            onClick={props.onChange.bind(null, index)}
-                            onClose={props.onClose.bind(null, index)}
+                            onClick={props.onChange.bind(null, tab.uuid)}
+                            onClose={props.onClose.bind(null, tab.uuid)}
                         />
                     ))}
                 </ul>
             </ScrollView>
         </div>
-        <StyledTabsMenu>
-            <SystemButton
-                className="p0"
-                width={225}
+        <div className="editortabs__menu">
+            <HeaderButton
+                className="editortabs__menubutton"
+                menuWidth={225}
                 align="right"
-                rightMost
                 content={
                     <div>
-                        <ul className="dropdown-group">
-                            <li>
-                                <CloseDropdownButton onClick={props.tabs.length && props.onCloseSaved} disabled={!props.tabs.length}>
-                                    <em className="icon icon-docs" />
-                                    <span>
-                                        <FormattedMessage id="editor.close.saved" defaultMessage="Close saved tabs" />
-                                    </span>
-                                </CloseDropdownButton>
-                            </li>
-                            <li>
-                                <CloseDropdownButton onClick={props.tabs.length && props.onCloseAll} disabled={!props.tabs.length}>
-                                    <em className="icon icon-docs text-danger" />
-                                    <span>
-                                        <FormattedMessage id="editor.close.all" defaultMessage="Close all tabs" />
-                                    </span>
-                                </CloseDropdownButton>
-                            </li>
-                        </ul>
+                        <Item onClick={props.onCloseSaved} icon="icon-docs" disabled={!props.tabs.length}>
+                            <FormattedMessage id="editor.close.saved" defaultMessage="Close saved tabs" />
+                        </Item>
+                        <Item onClick={props.onCloseAll} icon="icon-docs text-danger" disabled={!props.tabs.length}>
+                            <FormattedMessage id="editor.close.all" defaultMessage="Close all tabs" />
+                        </Item>
                     </div>
                 }
             >
                 <em className="icon-options" />
-            </SystemButton>
-        </StyledTabsMenu>
+            </HeaderButton>
+        </div>
     </div>
 );
 
 const StyledEditorTabs = themed(EditorTabs)`
     background: ${props => props.theme.editorBackground};
     height: 36px;
-    margin-right: 40px;
-    
-    .editor-scroll-area {
+    position: relative;
+
+    .editortabs__scrollarea {
         ul {
             height: 36px;
             list-style-type: none;
@@ -111,6 +86,25 @@ const StyledEditorTabs = themed(EditorTabs)`
             margin: 0;
             white-space: nowrap;
         }
+    }
+    
+    .editortabs__selector {
+        height: 100%;
+        margin-right: 40px;
+    }
+
+    .editortabs__menu {
+        background: ${props => props.theme.editorBackground};
+        position: absolute;
+        top: 0;
+        right: 0;
+
+    }
+
+    .editortabs__menubutton {
+        width: 36px;
+        height: 36px;
+        line-height: 36px;
     }
 `;
 

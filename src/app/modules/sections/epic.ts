@@ -4,22 +4,10 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { combineEpics } from 'redux-observable';
-import closeSectionEpic from './epics/closeSectionEpic';
-import renderSectionEpic from './epics/renderSectionEpic';
-import resetOnLoginEpic from './epics/resetOnLoginEpic';
-import navigatePageEpic from './epics/navigatePageEpic';
-import reloadPageEpic from './epics/reloadPageEpic';
-import renderLegacyPageEpic from './epics/renderLegacyPageEpic';
 import renderPageEpic from './epics/renderPageEpic';
-import sectionsInitEpic from './epics/sectionsInitEpic';
+import reloadPageEpic from './epics/reloadPageEpic';
 
 export default combineEpics(
-    closeSectionEpic,
-    renderSectionEpic,
-    resetOnLoginEpic,
-    navigatePageEpic,
-    reloadPageEpic,
-    renderLegacyPageEpic,
     renderPageEpic,
-    sectionsInitEpic
+    reloadPageEpic
 );

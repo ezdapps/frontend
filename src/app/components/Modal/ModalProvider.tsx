@@ -34,7 +34,12 @@ import RegisterModal from './Auth/RegisterModal';
 import RolePickerModal from 'containers/Modal/RolePickerModal';
 import RemoveNetworkModal from './Network/RemoveNetworkModal';
 import NetworkErrorModal from './Auth/NetworkErrorModal';
+import EditorCloseModal from 'containers/Modal/EditorCloseModal';
+import EditorRevertModal from 'containers/Modal/EditorRevertModal';
+import EditorCloseAllModal from 'containers/Modal/EditorCloseAllModal';
+import CreateContractModal from './Editor/CreateContractModal';
 import ChangeLocaleModal from 'containers/Modal/ChangeLocaleModal';
+import BackupModal from 'containers/Modal/BackupModal';
 
 const MODAL_COMPONENTS = {
     'AUTHORIZE': AuthorizeModal,
@@ -47,6 +52,7 @@ const MODAL_COMPONENTS = {
     'TX_CONFIRM': TxConfirmModal,
     'TX_ERROR': TxErrorModal,
     'TX_SIGNATURE': SignatureModal,
+    'CREATE_CONTRACT': CreateContractModal,
     'CREATE_PAGE': CreatePageModal,
     'CREATE_INTERFACE': CreateInterfaceModal,
     'DEBUG_CONTRACT': DebugContractModal,
@@ -60,8 +66,12 @@ const MODAL_COMPONENTS = {
     'INFO': InfoModal,
     'ERROR': ErrorModal,
     'ABOUT': AboutModal,
+    'ROLE_PICKER': RolePickerModal,
+    'EDITOR_CLOSE_UNSAVED': EditorCloseModal,
+    'EDITOR_REVERT_UNSAVED': EditorRevertModal,
+    'EDITOR_CLOSE_ALL': EditorCloseAllModal,
     'CHANGE_LOCALE': ChangeLocaleModal,
-    'ROLE_PICKER': RolePickerModal
+    'BACKUP': BackupModal
 };
 
 export interface IModalProviderProps {

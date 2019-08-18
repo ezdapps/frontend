@@ -5,6 +5,7 @@
 
 import React from 'react';
 import uuid from 'uuid';
+import propTypes from 'prop-types';
 import { IRootState } from 'modules';
 import { connect } from 'react-redux';
 import { buttonInteraction } from 'modules/content/actions';
@@ -37,6 +38,11 @@ interface IToolButtonDispatch {
 class ToolButtonContainer extends React.Component<IToolButtonProps & IToolButtonState & IToolButtonDispatch> {
     private _uuid: string = null;
 
+    static contextTypes = {
+        protypo: propTypes.object.isRequired,
+        section: propTypes.string.isRequired
+    };
+
     onClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
         e.preventDefault();
         this._uuid = uuid.v4();
@@ -59,9 +65,12 @@ class ToolButtonContainer extends React.Component<IToolButtonProps & IToolButton
         this.props.buttonInteraction({
             uuid: this._uuid,
             popup,
+            actions: [],
             contracts: [],
+            from: this.context.protypo.getFromContext(this.props.title),
             page: this.props.page ? {
                 name: this.props.page,
+                section: this.context.section,
                 params: pageParams
             } : null
         });

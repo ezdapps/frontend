@@ -17,23 +17,19 @@ import createWalletFailedHandler from './reducers/createWalletFailedHandler';
 import importWalletHandler from './reducers/importWalletHandler';
 import importWalletDoneHandler from './reducers/importWalletDoneHandler';
 import importWalletFailedHandler from './reducers/importWalletFailedHandler';
-import importSeedDoneHandler from './reducers/importSeedDoneHandler';
 import selectWalletHandler from './reducers/selectWalletHandler';
 import authorizeHandler from './reducers/authorizeHandler';
 import deauthorizeHandler from './reducers/deauthorizeHandler';
-import generateSeedDoneHandler from './reducers/generateSeedDoneHandler';
-import changeSeedHandler from './reducers/changeSeedHandler';
-import changeSeedConfirmationHandler from './reducers/changeSeedConfirmation';
-import importSeedConfirmationDoneHandler from './reducers/importSeedConfirmationDoneHandler';
 import loadWalletsDoneHandler from './reducers/loadWalletsDoneHandler';
 import loadWalletHandler from './reducers/loadWalletHandler';
 import loginGuestHandler from './reducers/loginGuestHandler';
 import loginGuestDoneHandler from './reducers/loginGuestDoneHandler';
 import loginGuestFailedHandler from './reducers/loginGuestFailedHandler';
+import acquireSessionHandler from './reducers/acquireSessionHandler';
+import acquireSessionDoneHandler from './reducers/acquireSessionDoneHandler';
 
 export type State = {
-    readonly seed: string;
-    readonly seedConfirm: string;
+    readonly isAcquired: boolean;
     readonly isAuthenticated: boolean;
     readonly isLoggingIn: boolean;
     readonly isCreatingWallet: boolean;
@@ -50,8 +46,7 @@ export type State = {
 };
 
 export const initialState: State = {
-    seed: '',
-    seedConfirm: '',
+    isAcquired: false,
     isAuthenticated: false,
     isLoggingIn: false,
     isCreatingWallet: false,
@@ -81,13 +76,10 @@ export default reducerWithInitialState<State>(initialState)
     .case(actions.importWallet.started, importWalletHandler)
     .case(actions.importWallet.done, importWalletDoneHandler)
     .case(actions.importWallet.failed, importWalletFailedHandler)
-    .case(actions.importSeed.done, importSeedDoneHandler)
-    .case(actions.importSeedConfirmation.done, importSeedConfirmationDoneHandler)
     .case(actions.selectWallet, selectWalletHandler)
     .case(actions.authorize, authorizeHandler)
     .case(actions.deauthorize, deauthorizeHandler)
-    .case(actions.generateSeed.done, generateSeedDoneHandler)
-    .case(actions.changeSeed, changeSeedHandler)
-    .case(actions.changeSeedConfirmation, changeSeedConfirmationHandler)
     .case(actions.loadWallets.done, loadWalletsDoneHandler)
-    .case(actions.loadWallet, loadWalletHandler);
+    .case(actions.loadWallet, loadWalletHandler)
+    .case(actions.acquireSession.started, acquireSessionHandler)
+    .case(actions.acquireSession.done, acquireSessionDoneHandler);

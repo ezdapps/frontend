@@ -16,6 +16,10 @@ import { IErrorRedirect } from 'apla/protypo';
 export interface IButtonProps {
     'class'?: string;
     'className'?: string;
+    'action'?: {
+        name: string;
+        params?: { [key: string]: string };
+    }[];
     'alert'?: {
         icon: string;
         text: string;
@@ -45,6 +49,7 @@ export interface IButtonProps {
 
 interface IButtonContext {
     form: ValidatedForm;
+    section: string;
     protypo: Protypo;
 }
 
@@ -131,6 +136,7 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
     return (
         <TxButton
             className={[props.class, props.className].join(' ')}
+            actions={props.action || []}
             confirm={props.alert && {
                 icon: props.alert.icon,
                 title: props.intl.formatMessage({ id: 'alert.confirmation', defaultMessage: 'Confirmation' }),
@@ -142,9 +148,11 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
                 name: tx.name,
                 params: tx.data
             }))}
+            from={context.protypo.getFromContext(props.children)}
             contract={props.contract}
             contractParams={getParams}
             page={props.page}
+            section={context.section}
             pageParams={getPageParams}
             popup={popup}
             errorRedirects={getErrorRedirectParams}
@@ -156,6 +164,7 @@ const Button: React.SFC<IButtonProps & InjectedIntlProps> = (props, context: IBu
 
 Button.contextTypes = {
     form: propTypes.object,
+    section: propTypes.string,
     protypo: propTypes.object.isRequired
 };
 

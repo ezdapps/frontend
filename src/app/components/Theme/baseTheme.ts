@@ -9,33 +9,41 @@ import platform from 'lib/platform';
 const baseTheme: IThemeDefinition = {
     windowBorder: '#4c7dbd',
 
-    headerBackground: '#586180',
+    headerBackground: '#354a69',
     headerForeground: '#fff',
-    headerBackgroundActive: '#f3f3f3',
-    headerForegroundActive: '#194a8a',
     headerHeight: platform.select({ desktop: 28, web: 0 }),
 
-    toolbarBackground: '#f3f3f3',
-    toolbarForeground: '#194a8a',
-    toolbarOutline: '#e5e5e5',
-    toolbarIconColor: '#5b97e4',
-    toolbarIconHighlight: '#a9ccf9',
-    toolbarDisabled: '#93a7bf',
+    menubarSize: 40,
+    menubarBackground: '#3873A6',
+    menubarBackgroundActive: '#9CB9D2',
+    menubarBackgroundFocused: 'rgba(255,255,255,0.09)',
+    menubarBackgroundSecondary: '#ffa500',
+    menubarForeground: '#9CB9D3',
+    menubarForegroundActive: '#fff',
+
+    toolbarBackground: '#f1f1f1',
+    toolbarBackgroundActive: 'rgba(0,0,0,0.1)',
+    toolbarBackgroundFocused: 'rgba(0,0,0,0.05)',
+    toolbarForeground: '#333',
+    toolbarForegroundActive: '#5d5d5d',
+    toolbarForegroundPrimary: '#4688ff',
+    toolbarForegroundDisabled: '#ccc',
     toolbarHeight: 40,
+    toolbarSpacerForeground: '#C6C6C6',
 
-    progressBarForeground: '#b2c5dc',
-
-    menuHeight: 40,
     menuBackground: '#fff',
     menuForeground: '#0a1d33',
-    menuBackgroundActive: '#ececec',
-    menuOutline: '#e5e4e5',
+    menuBackgroundActive: '#f6f7f9',
+    menuBorder: '#35abff',
+    menuOutline: '#eff2f5',
     menuIconColor: '#3577cc',
     menuPrimaryForeground: '#2886ff',
     menuPrimaryActive: '#7bb0f5',
+    menuSize: 230,
+    menuSizeFolded: 55,
 
     contentForeground: '#515253',
-    contentBackground: '#f6f7fa',
+    contentBackground: '#fff',
 
     editorBackground: '#c3c7ce',
 
@@ -55,19 +63,17 @@ const baseTheme: IThemeDefinition = {
     sectionButtonPrimary: '#fff',
 
     dropdownMenuBackground: '#fff',
-    dropdownMenuForeground: '#666',
+    dropdownMenuForeground: '#464646',
     dropdownMenuDisabled: '#ccc',
-    dropdownMenuOutline: '#c5cbe2',
-    dropdownMenuActive: 'rgba(0,0,0,0.1)',
-    dropdownMenuSeparator: '#ddd',
+    dropdownMenuActive: 'rgba(0,0,0,0.06)',
+    dropdownMenuSeparator: '#efefef',
     dropdownMenuPrimary: '#4b7dbd',
     dropdownMenuSecondary: '#999',
 
-    systemButtonSecondary: '#ffa500',
-    systemButtonActive: 'rgba(0,0,0,0.1)',
-
     securityWarningBackground: '#ff5555',
-    securityWarningForeground: '#ffffff'
+    securityWarningForeground: '#ffffff',
+
+    uiBorderLight: '#e8eaf1'
 };
 
 export default baseTheme;

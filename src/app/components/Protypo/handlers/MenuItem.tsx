@@ -19,6 +19,8 @@ export interface IMenuItemProps {
 }
 
 export const StyledMenuItem = themed.div`
+    border-bottom: solid 1px ${props => props.theme.menuOutline};
+
     > a, > a:hover {
         text-decoration: none !important;
     }
@@ -47,10 +49,10 @@ export const StyledMenuItem = themed.div`
         display: block;
         height: 50px;
         line-height: 50px;
-        padding: 0 25px;
+        padding: 0 18px;
         color: ${props => props.theme.menuForeground};
         font-size: 14px;
-        font-weight: 200;
+        font-weight: 400;
         text-align: left;
         text-decoration: none;
         overflow: hidden;
@@ -58,16 +60,16 @@ export const StyledMenuItem = themed.div`
         white-space: nowrap;
 
         .icon {
-            margin-right: 14px;
+            margin-right: 16px;
             color: ${props => props.theme.menuIconColor};
-            font-size: 17px;
-            position: relative;
-            top: 3px;
+            font-size: 21px;
+            vertical-align: middle;
         }
     }
 `;
 
 interface IMenuItemContext {
+    section: string;
     protypo: Protypo;
 }
 
@@ -79,7 +81,16 @@ const MenuItem: React.SFC<IMenuItemProps> = (props, context: IMenuItemContext) =
 
     return (
         <StyledMenuItem className={classes}>
-            <PageLink page={props.page} params={context.protypo.resolveParams(props.params)}>
+            <PageLink
+                page={props.page || ''}
+                section={context.section}
+                params={props.params ? context.protypo.resolveParams(props.params) : {}}
+                from={context.protypo.props.menu ? {
+                    type: 'MENU',
+                    title: props.title,
+                    name: context.protypo.props.menu
+                } : undefined}
+            >
                 <span className="link-active-decorator" />
                 <span className="link-body">
                     {props.icon && (<em className={`icon ${props.icon}`} />)}
@@ -91,8 +102,8 @@ const MenuItem: React.SFC<IMenuItemProps> = (props, context: IMenuItemContext) =
 };
 
 MenuItem.contextTypes = {
-    protypo: propTypes.object.isRequired,
-    navigatePage: propTypes.func.isRequired
+    section: propTypes.string.isRequired,
+    protypo: propTypes.object.isRequired
 };
 
 export default MenuItem;

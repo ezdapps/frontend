@@ -6,19 +6,30 @@
 import { Action } from 'redux';
 import { Epic } from 'redux-observable';
 import { IRootState } from 'modules';
-import { closeEditorTab } from '../actions';
-import { updateSection } from 'modules/sections/actions';
+import { closeEditorTab, destroyEditorTab } from '../actions';
+import { Observable } from 'rxjs';
+import { modalShow } from 'modules/modal/actions';
 
-const closeEditorTabEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(closeEditorTab)
-        .map(action => {
-            const state = store.getState();
-            const section = state.sections.sections.editor;
+const closeEditorTabEpic: Epic<Action, IRootState> = (action$, store) => action$.ofAction(closeEditorTab)
+    .flatMap(action => {
+        const state = store.getState();
+        const tab = state.editor.tabs.find(t => t.uuid === action.payload);
 
-            return updateSection({
-                ...section,
-                visible: 0 < state.editor.tabs.length
-            });
-        });
+        if (!tab) {
+            return Observable.empty();
+        }
+
+        if (tab.dirty) {
+            return Observable.of(modalShow({
+                id: 'EDITOR_CLOSE',
+                type: 'EDITOR_CLOSE_UNSAVED',
+                params: {
+                    uuid: tab.uuid
+                }
+            }));
+        }
+
+        return Observable.of(destroyEditorTab(tab.uuid));
+    });
 
 export default closeEditorTabEpic;
