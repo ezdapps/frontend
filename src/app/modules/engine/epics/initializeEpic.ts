@@ -63,7 +63,8 @@ const initializeEpic: Epic = (action$, store, { defaultPassword }) => action$.of
                 socketUrl: network.socketUrl,
                 activationEmail: network.activationEmail,
                 disableSync: network.disableSync,
-                demoEnabled: network.enableDemoMode
+                demoEnabled: network.enableDemoMode,
+                txViewerUrl: network.txViewerUrl
             }));
 
             return Observable.concat<Action>(

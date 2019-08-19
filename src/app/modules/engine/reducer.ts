@@ -28,7 +28,6 @@ export type State = {
     readonly preconfiguredNetworks: INetwork[];
     readonly locales: ILocale[];
     readonly locale: string;
-    readonly panel?: string;
 };
 
 export const initialState: State = {
@@ -40,8 +39,7 @@ export const initialState: State = {
     isConnecting: false,
     preconfiguredNetworks: [],
     locales: [],
-    locale: null,
-    panel: null
+    locale: null
 };
 
 export default reducerWithInitialState<State>(initialState)
