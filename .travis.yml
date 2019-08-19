@@ -9,6 +9,7 @@ matrix:
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
       addons:
         homebrew:
+          update: true
           packages:
             - wine
             - snapcraft
@@ -18,6 +19,7 @@ cache:
     - node_modules
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
+    - $HOME/Library/Caches/Homebrew
 
 script:
   - yarn install
@@ -33,6 +35,7 @@ script:
 
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
+  - brew cleanup
 
 before_deploy:
   - echo '<!DOCTYPE html><html><head><meta charset=utf-8><title>Apla</title><script type="text/javascript">var segmentCount=0;var l=window.location;l.replace(l.protocol+"//"+l.hostname+(l.port?":"+l.port:"")+l.pathname.split("/").slice(0,1+segmentCount).join("/")+"/?p=/"+l.pathname.slice(1).split("/").slice(segmentCount).join("/").replace(/&/g,"~and~")+(l.search?"&q="+l.search.slice(1).replace(/&/g,"~and~"):"")+l.hash);</script></head><body></body></html>' > ./build/404.html
