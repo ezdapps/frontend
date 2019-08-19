@@ -55,6 +55,7 @@ API binding can be customized to the value of your choice. Simply create a setti
 - **networks[x].networkID** - Unique identificator that is imprinted in all transactions. Refer to the configuration of your go-apla instance
 - **networks[x].fullNodes** - Prebuilt list of URLs that will be used for synchronization
 - **networks[x].socketUrl** - Optional parameter that overrides Centrifugo connection endpoint. Default: provided by go-apla configuration
+- **networks[x].txViewerUrl** - Optional parameter that is used to generate a link to transaction viewer. Receives {txhashes} template parameter and must not include a protocol scheme
 - **networks[x].activationEmail** - Optional parameter that will be shown to a user when there are no active endpoints to log in. Used for KYC
 - **networks[x].enableDemoMode** - When set to true, will enable authorization using the guest key
 - **networks[x].disableSync** - Optional parameter that disables synchronization of the full nodes. Unsafe, use with caution

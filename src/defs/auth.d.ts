@@ -20,6 +20,7 @@ declare module 'apla/auth' {
         socketUrl?: string;
         activationEmail?: string;
         demoEnabled?: boolean;
+        txViewerUrl?: string;
     }
 
     interface IWallet {
