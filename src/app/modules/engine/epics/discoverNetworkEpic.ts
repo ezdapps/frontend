@@ -11,7 +11,7 @@ import { discover } from 'services/network';
 import { mergeFullNodes } from 'modules/storage/actions';
 import NetworkError from 'services/network/errors';
 
-const setNetworkEpic: Epic = (action$, store, { api, defaultKey }) => action$.ofAction(discoverNetwork.started)
+const discoverNetworkEpic: Epic = (action$, store, { api, defaultKey }) => action$.ofAction(discoverNetwork.started)
     .flatMap(action => {
         const network = store.getState().storage.networks.find(l => l.uuid === action.payload.uuid);
 
@@ -54,4 +54,4 @@ const setNetworkEpic: Epic = (action$, store, { api, defaultKey }) => action$.of
         })));
     });
 
-export default setNetworkEpic;
+export default discoverNetworkEpic;
