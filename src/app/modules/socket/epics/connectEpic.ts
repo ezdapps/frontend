@@ -31,8 +31,6 @@ const connectEpic: Epic<Action, IRootState> =
                     centrifuge.setToken(action.payload.socketToken);
 
                     centrifuge.on('connect', context => {
-                        // tslint:disable-next-line: no-console
-                        console.log('Connect::', context);
                         observer.next(connect.done({
                             params: action.payload,
                             result: {
@@ -43,14 +41,10 @@ const connectEpic: Epic<Action, IRootState> =
                     });
 
                     centrifuge.on('disconnect', context => {
-                        // tslint:disable-next-line: no-console
-                        console.log('Disonnect::', context);
                         observer.next(setConnected(false));
                     });
 
                     centrifuge.on('error', error => {
-                        // tslint:disable-next-line: no-console
-                        console.log('Error::', error);
                         observer.next(connect.failed({
                             params: action.payload,
                             error: error.message.error
