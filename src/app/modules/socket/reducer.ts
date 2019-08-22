@@ -12,6 +12,7 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
+import Centrifuge from 'centrifuge';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import * as actions from './actions';
 import { INotificationsMessage } from 'apla/socket';
@@ -26,12 +27,12 @@ import subscribeHandler from './reducers/subscribeHandler';
 
 export type State = {
     readonly session: string;
-    readonly socket: ICentrifuge;
+    readonly socket: Centrifuge;
     readonly connected: boolean;
     readonly notifications: INotificationsMessage[];
     readonly subscriptions: {
         wallet: IWallet;
-        instance: ISubscription;
+        instance: Centrifuge.Subscription;
     }[];
 };
 
