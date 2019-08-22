@@ -10,9 +10,11 @@ import { Observable } from 'rxjs';
 
 const subscribeWalletsEpic: Epic = (action$, store) => action$.ofAction(loadWallets.done)
     .flatMap(action =>
-        Observable.from(action.payload.result).map(account =>
-            subscribe.started(account)
-        )
+        Observable.from(action.payload.result)
+    )
+    .filter(account => !!account.address)
+    .map(account =>
+        subscribe.started(account)
     );
 
 export default subscribeWalletsEpic;

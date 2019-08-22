@@ -3,6 +3,7 @@
  *  See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+import Centrifuge from 'centrifuge';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import * as actions from './actions';
 import { INotificationsMessage } from 'apla/socket';
@@ -17,12 +18,12 @@ import subscribeHandler from './reducers/subscribeHandler';
 
 export type State = {
     readonly session: string;
-    readonly socket: ICentrifuge;
+    readonly socket: Centrifuge;
     readonly connected: boolean;
     readonly notifications: INotificationsMessage[];
     readonly subscriptions: {
         wallet: IWallet;
-        instance: ISubscription;
+        instance: Centrifuge.Subscription;
     }[];
 };
 

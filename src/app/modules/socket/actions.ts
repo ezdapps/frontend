@@ -7,9 +7,10 @@ import actionCreatorFactory from 'typescript-fsa';
 import { IWallet } from 'apla/auth';
 import { INotificationsMessage, IConnectCall } from 'apla/socket';
 import { IAccount } from 'apla/api';
+import Centrifuge from 'centrifuge';
 
 const actionCreator = actionCreatorFactory('socket');
-export const connect = actionCreator.async<IConnectCall, { session: string, instance: ICentrifuge }, string>('CONNECT');
+export const connect = actionCreator.async<IConnectCall, { session: string, instance: Centrifuge }, string>('CONNECT');
 export const disconnect = actionCreator.async('DISCONNECT');
 export const subscribe = actionCreator.async<IAccount, any, string>('SUBSCRIBE');
 export const unsubscribe = actionCreator.async<IWallet, void, void>('UNSUBSCRIBE');
