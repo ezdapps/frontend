@@ -8,20 +8,25 @@ import config from '../config';
 import calcScreenOffset from '../util/calcScreenOffset';
 
 export default () => {
-    const options = {
+    const options: Electron.BrowserWindowConstructorOptions = {
         minWidth: 800,
         minHeight: 600,
         frame: false,
         backgroundColor: '#272D44',
         resizable: true,
         show: false,
-        maximized: config.get('maximized') || false,
+        webPreferences: {
+            nodeIntegration: true
+        },
         ...calcScreenOffset(config.get('dimensions') || { width: 800, height: 600 })
     };
-
+    
     const window = new BrowserWindow(options);
-
+    
     window.once('ready-to-show', () => {
+        if (config.get('maximized')) {
+            window.maximize();
+        }
         window.show();
     });
 
