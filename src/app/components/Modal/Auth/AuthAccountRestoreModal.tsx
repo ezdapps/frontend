@@ -39,13 +39,13 @@ class AuthAccountRestoreModal extends ModalContainer<
                 password: this.state.password
             });
         }
-    };
+    }
 
     handleChange: ChangeEventHandler<any> = e => {
         this.setState({
             password: e.target.value
         });
-    };
+    }
 
     render() {
         return (
