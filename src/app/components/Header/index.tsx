@@ -30,6 +30,7 @@ const Header: React.SFC<Props> = props => (
 export default themed(Header)`
     background: #3873a6;
     height: 40px;
+    min-height: 40px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -65,6 +66,9 @@ export default themed(Header)`
         font-size: 15px;
         font-weight: bold;
         flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-items: flex-start;
     }
 
     .header__tools {
