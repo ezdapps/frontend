@@ -41,7 +41,7 @@ export default themed(Layout)`
         justify-self: center;
     }
 
-    @media (${media.lg}) {
+    @media (${media.md}) {
         justify-content: stretch;
         align-content: stretch;
         grid-template-rows: minmax(auto, 100%) 0;

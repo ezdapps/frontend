@@ -14,7 +14,7 @@ export default themed.div`
     display: flex;
     flex-direction: column;
 
-    @media (${media.lg}) {
+    @media (${media.md}) {
         height: 100%;
         border-radius: 0;
     }

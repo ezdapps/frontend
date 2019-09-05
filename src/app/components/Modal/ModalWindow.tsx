@@ -65,7 +65,7 @@ export default themed(ModalWindow)`
 
     &.modalWindow_side {
         .modalWindow__content {
-            padding: 20px;
+            padding: 20px 20px 20px 30px;
         }
     }
 
@@ -88,7 +88,7 @@ export default themed(ModalWindow)`
         background: #fff;
         color: #808080;
         font-size: 14px;
-        padding: 20px 20px 20px 30px;
+        padding: 20px;
         max-width: 100%;
     }
 
