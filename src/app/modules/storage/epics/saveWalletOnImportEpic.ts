@@ -13,12 +13,14 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import { Epic } from 'modules';
-import { importWallet } from 'modules/auth/actions';
+import { importWallet, restoreAccount } from 'modules/auth/actions';
 import { saveWallet } from '../actions';
+import { isType } from 'typescript-fsa';
 
-const saveWalletOnImportEpic: Epic = (action$, store) => action$.ofAction(importWallet.done)
-    .map(action =>
-        saveWallet(action.payload.result)
-    );
+const saveWalletOnImportEpic: Epic = 
+    (action$, store) => action$.filter(action => isType(action, importWallet.done) || isType(action, restoreAccount.done))
+        .map((action: any) =>
+            saveWallet(action.payload.result)
+        );
 
 export default saveWalletOnImportEpic;

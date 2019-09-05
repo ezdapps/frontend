@@ -31,6 +31,7 @@ import loginGuestEpic from './epics/loginGuestEpic';
 import acquireSessionEpic from './epics/acquireSessionEpic';
 import backupAccountEpic from './epics/backupAccountEpic';
 import createAccountEpic from './epics/createAccountEpic';
+import restoreAccountEpic from './epics/restoreAccountEpic';
 
 export default combineEpics(
     acquireSessionEpic,
@@ -50,5 +51,6 @@ export default combineEpics(
     switchWalletEpic,
     loginGuestEpic,
     backupAccountEpic,
-    createAccountEpic
+    createAccountEpic,
+    restoreAccountEpic
 );
