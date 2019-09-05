@@ -63,7 +63,7 @@ export default themed(ModalWindow)`
     max-width: 50vw;
 
     .modalWindow_side {
-        .modalWIndow__content {
+        .modalWindow__content {
             padding: 20px;
         }
     }
