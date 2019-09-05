@@ -8,9 +8,9 @@ import React from 'react';
 import Header from 'components/Header';
 import NotificationsMenu from 'containers/Main/Header/NotificationsMenu';
 import UserMenu from 'containers/Main/Header/UserMenu';
-import Selector from 'containers/Main/Navigator/Sections/Selector';
-import HeaderSeparator from 'components/Header/HeaderSeparator';
 import HeaderFiller from 'components/Header/HeaderFiller';
+// import Selector from 'containers/Main/Navigator/Sections/Selector';
+// import HeaderSeparator from 'components/Header/HeaderSeparator';
 // import HeaderLink from './HeaderLink';
 // import LangMenu from 'containers/Main/Header/LangMenu';
 // import HeaderIndicator from './HeaderIndicator';
@@ -23,8 +23,9 @@ interface Props {
 
 const MainHeader: React.SFC<Props> = props => (
     <Header>
+        {/* <HeaderSeparator />
         <Selector section={props.app === 'browse' ? props.page : null} />
-        <HeaderSeparator />
+        <HeaderSeparator /> */}
         {/* <HeaderLink to="/editor" active={'editor' === props.app}>
             <FormattedMessage id="editor" defaultMessage="Editor" />
         </HeaderLink> */}

@@ -26,6 +26,7 @@ const StyledSection = themed.div`
     z-index: 100;
     margin-left: ${props => props.theme.menuSize}px;
     transition: margin-left ease-in-out .12s, transform ease-in-out .12s;
+    height: 100%;
     
     &.section_folded {
         margin-left: ${props => props.theme.menuSizeFolded}px;

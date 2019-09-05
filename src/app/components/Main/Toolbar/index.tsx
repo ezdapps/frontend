@@ -13,9 +13,7 @@ export const Filler: React.SFC = props => (
 );
 
 export default themed.div`
-    box-shadow: rgba(0,0,0,0.07) 0 2px 5px;
     background: ${props => props.theme.toolbarBackground};
-    border-bottom: solid 1px ${props => props.theme.uiBorderLight};
     min-height: ${props => props.theme.toolbarHeight}px;
     height: ${props => props.theme.toolbarHeight}px;
     line-height: ${props => props.theme.toolbarHeight}px;

@@ -5,7 +5,6 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
-import HeaderSeparator from './HeaderSeparator';
 
 interface Props {
     className?: string;
@@ -19,7 +18,6 @@ const Header: React.SFC<Props> = props => (
         </div>
         {props.children && (
             <>
-                <HeaderSeparator />
                 <div className="header__body">{props.children}</div>
             </>
         )}
@@ -69,6 +67,7 @@ export default themed(Header)`
         display: flex;
         flex-direction: row;
         justify-items: flex-start;
+        align-items: center;
     }
 
     .header__tools {
