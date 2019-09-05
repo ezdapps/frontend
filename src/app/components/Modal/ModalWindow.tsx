@@ -6,6 +6,7 @@
 import React from 'react';
 import themed from 'components/Theme/themed';
 import * as Icons from 'react-feather';
+import classNames from 'classnames';
 
 interface Props {
     className?: string;
@@ -26,7 +27,12 @@ const ModalWindow: React.SFC<Props> = props => {
                     <Icon size={55} />
                 </aside>
             )}
-            <section className="modalWindow__content">
+            <section
+                className={classNames('modalWindow__content', {
+                    modalWindow_side: !!Icon
+                })}
+                style={{ maxWidth: props.width }}
+            >
                 <h3 className="modalWindow__title">
                     <div>{props.title}</div>
                     <button
@@ -55,6 +61,12 @@ export default themed(ModalWindow)`
     background: #fff;
     text-align: left;
     max-width: 50vw;
+
+    .modalWindow_side {
+        .modalWIndow__content {
+            padding: 20px;
+        }
+    }
 
     .modalWindow__aside {
         grid-template: 'aside';
