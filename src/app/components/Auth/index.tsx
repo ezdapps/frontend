@@ -16,28 +16,40 @@ import Button from 'components/Button/Button';
 
 interface Props {
     className?: string;
-    activationEnabled?: boolean;
+    isEmpty: boolean;
+    networkStatus: 'ONLINE' | 'OFFLINE' | 'PENDING';
+    activationEnabled: boolean;
     onCreate: () => any;
+    onRestore: () => any;
 }
 
 const Auth: React.SFC<Props> = props => (
     <Window>
-        <Header tools={<HeaderNetwork status="PENDING" />}>
+        <Header tools={<HeaderNetwork status={props.networkStatus} />}>
             <FormattedMessage id="auth" defaultMessage="Authorization" />
         </Header>
         <WindowBody>
             <AccountList />
         </WindowBody>
         <WindowFooter>
-            <Button
-                className="btn btn-primary btn-block"
-                onClick={props.onCreate}
-            >
-                <FormattedMessage
-                    id="wallet.create"
-                    defaultMessage="Create account"
-                />
-            </Button>
+            {props.isEmpty ? (
+                <Button
+                    className="btn btn-primary btn-block"
+                    onClick={props.onCreate}
+                >
+                    <FormattedMessage
+                        id="wallet.create"
+                        defaultMessage="Create account"
+                    />
+                </Button>
+            ) : (
+                <Button
+                    className="btn btn-primary btn-block"
+                    onClick={props.onRestore}
+                >
+                    <span>Restore access</span>
+                </Button>
+            )}
         </WindowFooter>
     </Window>
 );

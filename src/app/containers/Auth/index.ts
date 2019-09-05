@@ -23,7 +23,21 @@ const selectActivationMail = (state: IRootState) => {
     return network ? network.activationEmail : '';
 };
 
+const selectNetworkStatus = (state: IRootState) => {
+    const network = selectNetwork(state);
+
+    if (state.engine.isConnecting) {
+        return 'PENDING';
+    } else if (network) {
+        return 'ONLINE';
+    } else {
+        return 'OFFLINE';
+    }
+};
+
 const mapStateToProps = (state: IRootState) => ({
+    isEmpty: !state.storage.wallets || 0 === state.storage.wallets.length,
+    networkStatus: selectNetworkStatus(state),
     activationEmail: selectActivationMail(state)
 });
 
@@ -33,6 +47,12 @@ const mapDispatchToProps = {
             id: 'CREATE_ACCOUNT',
             type: 'AUTH_CREATE_ACCOUNT',
             params: {}
+        }),
+    onRestore: () =>
+        modalShow({
+            id: 'AUTH_ACCOUNT_RESTORE',
+            type: 'AUTH_ACCOUNT_RESTORE',
+            params: {}
         })
 };
 
@@ -41,7 +61,10 @@ export default connect(
     mapDispatchToProps,
     (state, dispatch: any, props) => ({
         ...props,
+        isEmpty: state.isEmpty,
+        networkStatus: state.networkStatus,
         activationEnabled: !!state.activationEmail,
-        onCreate: dispatch.onCreate
+        onCreate: dispatch.onCreate,
+        onRestore: dispatch.onRestore
     })
 )(Auth);
