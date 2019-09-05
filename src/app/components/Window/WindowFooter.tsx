@@ -5,6 +5,7 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 const StyledWindowFooter = themed.footer`
     border: solid 1px #479be3;
@@ -17,7 +18,7 @@ const StyledWindowFooter = themed.footer`
         padding: 22px;
     }
 
-    @media (max-width: 800px) {
+    @media (${media.lg}) {
         border-radius: 0;
         border-left: 0;
         border-right: 0;

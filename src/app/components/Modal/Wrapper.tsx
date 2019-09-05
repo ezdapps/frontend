@@ -8,6 +8,7 @@ import Transition from 'react-transition-group/Transition';
 import themed from 'components/Theme/themed';
 import platform from 'lib/platform';
 import classNames from 'classnames';
+import media from 'components/Theme/media';
 
 const containerAnimationDuration = 210;
 const containerAnimationDef = {
@@ -98,7 +99,7 @@ const StyledModalWrapper = themed.div`
         border: solid 1px ${props => props.theme.modalOutline};
     }
 
-    @media (max-width: 800px) {
+    @media (${media.lg}) {
         padding: 10px;
     }
 `;
