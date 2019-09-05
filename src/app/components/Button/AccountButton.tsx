@@ -8,11 +8,12 @@ import { MoreVertical } from 'react-feather';
 import themed from 'components/Theme/themed';
 import DropdownButton from './DropdownButton';
 import Item from 'components/Dropdown/Item';
+import classNames from 'classnames';
 
 interface Props {
     className?: string;
     name: string;
-    account: string;
+    account?: string;
     notifications?: number;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
     onShare: React.MouseEventHandler<HTMLButtonElement>;
@@ -21,16 +22,32 @@ interface Props {
 
 const AccountButton: React.SFC<Props> = props => (
     <div className={props.className}>
-        <button className="accountButton__button" onClick={props.onClick}>
+        <button
+            className="accountButton__button"
+            onClick={props.onClick}
+            disabled={!props.account}
+        >
             <div className="accountButton__icon">
                 <em
-                    className="text-primary icon-wallet"
+                    className={classNames('text-primary', {
+                        'icon-wallet': !!props.account,
+                        'icon-hourglass': !props.account
+                    })}
                     style={{ fontSize: '32px' }}
                 />
             </div>
             <div className="accountButton__info">
                 <div className="accountButton__name">{props.name}</div>
-                <div className="accountButton__account">{props.account}</div>
+                {props.account ? (
+                    <div className="accountButton__account">
+                        {props.account}
+                    </div>
+                ) : (
+                    <div className="accountButton__inactive">
+                        Your account is being validated. You will receive an
+                        email notification after the process has been completed
+                    </div>
+                )}
             </div>
         </button>
         {0 < props.notifications && (
@@ -80,7 +97,7 @@ export default themed(AccountButton)`
     .accountButton__button {
         display: flex;
         flex-direction: row;
-        align-items: center;
+        align-items: flex-start;
         text-align: left;
         padding: 10px;
         background: 0;
@@ -89,6 +106,10 @@ export default themed(AccountButton)`
         overflow: hidden;
         border: 0;
         outline: 0;
+
+        &:disabled {
+            cursor: default;
+        }
     }
 
     .accountButton__info {
@@ -120,6 +141,11 @@ export default themed(AccountButton)`
     .accountButton__account {
         color: #ababab;
         font-size: 14px;
+    }
+
+    .accountButton__inactive {
+        color: #ababab;
+        font-size: 15px;
     }
 
     .accountButton__badge {
