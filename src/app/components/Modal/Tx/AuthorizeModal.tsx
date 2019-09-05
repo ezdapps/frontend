@@ -13,45 +13,73 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import Modal from '../';
 import Validation from 'components/Validation';
+import ModalWindow from 'containers/Modal/ModalWindow';
+import Button from 'components/Button/Button';
+import ValidatedForm from 'components/Validation/ValidatedForm';
 
 class AuthorizeModal extends Modal<void, string> {
-    onSuccess = (values: { [key: string]: any }) => {
-        this.props.onResult(values.password);
+    private _form: ValidatedForm;
+
+    handleSubmit = () => {
+        const form = this._form.validateAll();
+        if (form.valid) {
+            this.props.onResult(form.payload.password.value);
+        }
     }
 
     render() {
         return (
-            <Validation.components.ValidatedForm onSubmitSuccess={this.onSuccess}>
-                <Modal.Header>
-                    <FormattedMessage id="modal.authorization.title" defaultMessage="Authorization" />
-                </Modal.Header>
-                <Modal.Body>
+            <ModalWindow
+                title={
+                    <FormattedMessage
+                        id="modal.authorization.title"
+                        defaultMessage="Authorization"
+                    />
+                }
+                controls={
+                    <>
+                        <Button type="link" onClick={this.props.onCancel}>
+                            <FormattedMessage
+                                id="cancel"
+                                defaultMessage="Cancel"
+                            />
+                        </Button>
+                        <Button onClick={this.handleSubmit}>
+                            <FormattedMessage
+                                id="confirm"
+                                defaultMessage="Confirm"
+                            />
+                        </Button>
+                    </>
+                }
+            >
+                <Validation.components.ValidatedForm
+                    ref={(l: any) => (this._form = l)}
+                >
                     <div className="pb">
-                        <FormattedMessage id="modal.authorization.password" defaultMessage="Please enter your password to perform this action" />
+                        <FormattedMessage
+                            id="modal.authorization.password"
+                            defaultMessage="Please enter your password to perform this action"
+                        />
                     </div>
                     <Validation.components.ValidatedFormGroup for="password">
                         <Validation.components.ValidatedControl
                             type="password"
                             name="password"
                             noValidate
-                            validators={[Validation.validators.required]}
+                            validators={[
+                                Validation.validators.password,
+                                Validation.validators.required
+                            ]}
                         />
+                        <Validation.components.ValidationMessage for="password" />
                     </Validation.components.ValidatedFormGroup>
-                </Modal.Body>
-                <Modal.Footer className="text-right">
-                    <Button type="button" bsStyle="link" onClick={this.props.onCancel.bind(this)}>
-                        <FormattedMessage id="cancel" defaultMessage="Cancel" />
-                    </Button>
-                    <Validation.components.ValidatedSubmit bsStyle="primary">
-                        <FormattedMessage id="confirm" defaultMessage="Confirm" />
-                    </Validation.components.ValidatedSubmit>
-                </Modal.Footer>
-            </Validation.components.ValidatedForm>
+                </Validation.components.ValidatedForm>
+            </ModalWindow>
         );
     }
 }
