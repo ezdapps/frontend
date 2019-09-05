@@ -27,6 +27,7 @@ import loginGuestDoneHandler from './reducers/loginGuestDoneHandler';
 import loginGuestFailedHandler from './reducers/loginGuestFailedHandler';
 import acquireSessionHandler from './reducers/acquireSessionHandler';
 import acquireSessionDoneHandler from './reducers/acquireSessionDoneHandler';
+import loginAccountDoneHandler from './reducers/loginAccountDoneHandler';
 
 export type State = {
     readonly isAcquired: boolean;
@@ -82,4 +83,5 @@ export default reducerWithInitialState<State>(initialState)
     .case(actions.loadWallets.done, loadWalletsDoneHandler)
     .case(actions.loadWallet, loadWalletHandler)
     .case(actions.acquireSession.started, acquireSessionHandler)
-    .case(actions.acquireSession.done, acquireSessionDoneHandler);
+    .case(actions.acquireSession.done, acquireSessionDoneHandler)
+    .case(actions.loginAccount.done, loginAccountDoneHandler);
