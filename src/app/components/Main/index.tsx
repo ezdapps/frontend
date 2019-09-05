@@ -32,6 +32,7 @@ const StyledLayout = themed.main`
     flex: 1;
     flex-direction: column;
     overflow: hidden;
+    height: 100%;
 `;
 
 const Main: React.SFC<Props> = props => {
