@@ -72,7 +72,7 @@
     "auth.session.prompt": "Please enter your password to sign in",
     "auth.welcome": "Welcome",
     "auth.welcome.continue": "Press 'Create or import account' button to begin the process of creating or restoring your account",
-    "auth.welcome.guide": "Before proceeding, you will be guided through the account creation process. This will not take too much time. After completing this process you will be able to use all features of Apla",
+    "auth.welcome.guide": "Before proceeding, you will be guided through the account creation process. This will not take too much time",
     "cancel": "Cancel",
     "clear": "Clear",
     "close": "Close",

@@ -23,16 +23,25 @@
 html,
 body,
 #root,
-#root>div {
+#root > div {
     padding: 0;
     margin: 0;
     min-height: 100%;
     height: 100%;
 }
 
+body,
+button {
+    font-family: 'Source Sans Pro';
+}
+
 body {
     color: #515253;
-    background-color: #e5e9ef;
+    background: url(/img/back.png) center center no-repeat #e5e9ef;
+    background-attachment: fixed;
+    background-size: cover;
+    padding: 0;
+    margin: 0;
 }
 
 .no-float {
@@ -71,9 +80,9 @@ body {
     -webkit-box-flex: 1;
     -ms-flex: 1;
     flex: 1;
-    display: -webkit-box!important;
-    display: -ms-flexbox!important;
-    display: flex!important;
+    display: -webkit-box !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
     -ms-flex-direction: column;
@@ -86,8 +95,8 @@ body {
     align-items: stretch;
     -ms-flex-line-pack: stretch;
     align-content: stretch;
-    -ms-flex-item-align: stretch!important;
-    align-self: stretch!important;
+    -ms-flex-item-align: stretch !important;
+    align-self: stretch !important;
     position: relative;
 }
 
@@ -97,7 +106,7 @@ body {
     height: 100%;
 }
 
-.switch-wrapper>div {
+.switch-wrapper > div {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -110,7 +119,7 @@ body {
     border-bottom: 1px solid #cfdbe2;
     font-weight: normal;
     border-radius: 0;
-    color: #909FA7;
+    color: #909fa7;
     padding: 10px 20px;
     list-style: none;
 }
@@ -124,7 +133,7 @@ body {
     padding-right: 0;
 }
 
-.btn-icon>.btn-label {
+.btn-icon > .btn-label {
     left: 0;
     right: 0;
     top: 0;
@@ -133,13 +142,13 @@ body {
 
 /* Hide HTML5 input[type="number"] up/down arrows */
 
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-input[type="number"] {
+input[type='number'] {
     -moz-appearance: textfield;
 }
 
