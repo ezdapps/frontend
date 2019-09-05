@@ -12,28 +12,34 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import * as React from 'react';
-import { Button } from 'react-bootstrap';
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
+import ModalWindow from 'containers/Modal/ModalWindow';
 
 import Modal from '../';
+import Button from 'components/Button/Button';
 
 class AuthPasswordChangedModal extends Modal<{}, void> {
     render() {
         return (
-            <div>
-                <Modal.Header>
-                    <FormattedMessage id="alert.info" defaultMessage="Information" />
-                </Modal.Header>
-                <Modal.Body>
-                    <div><FormattedMessage id="auth.password.changed" defaultMessage="Password changed. Please login with new password" /></div>
-                </Modal.Body>
-                <Modal.Footer className="text-right">
-                    <Button type="button" bsStyle="primary" onClick={this.props.onCancel.bind(this)}>
+            <ModalWindow
+                title={
+                    <FormattedMessage
+                        id="alert.info"
+                        defaultMessage="Information"
+                    />
+                }
+                controls={(
+                    <Button onClick={this.props.onCancel}>
                         <FormattedMessage id="close" defaultMessage="Close" />
                     </Button>
-                </Modal.Footer>
-            </div>
+                )}
+            >
+                <FormattedMessage
+                    id="auth.password.changed"
+                    defaultMessage="Password changed. Please login with new password"
+                />
+            </ModalWindow>
         );
     }
 }
