@@ -10,11 +10,44 @@ import DropdownButton from './DropdownButton';
 import Item from 'components/Dropdown/Item';
 import classNames from 'classnames';
 
+type Badge = {
+    type?: 'primary' | 'warning';
+    value: string;
+};
+
+const ButtonBadge: React.SFC<{ value: Badge | number }> = props => {
+    const badge: Badge =
+        'number' === typeof props.value
+            ? {
+                  type: 'primary',
+                  value: String(props.value)
+              }
+            : props.value;
+
+    if (0 === props.value) {
+        return null;
+    } else {
+        const className = classNames(
+            'accountButton__badge',
+            `accountButton__badge_${badge.type}`
+        );
+        return (
+            <div className={className}>
+                {'number' === typeof props.value ? (
+                    <span>{Math.min(99, props.value)}</span>
+                ) : (
+                    <em className={props.value.value} />
+                )}
+            </div>
+        );
+    }
+};
+
 interface Props {
     className?: string;
     name: string;
     account?: string;
-    notifications?: number;
+    badge?: Badge | number;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
     onShare: React.MouseEventHandler<HTMLButtonElement>;
     onRemove: React.MouseEventHandler<HTMLButtonElement>;
@@ -27,14 +60,16 @@ const AccountButton: React.SFC<Props> = props => (
             onClick={props.onClick}
             disabled={!props.account}
         >
-            <div className="accountButton__icon">
+            <div
+                className="accountButton__icon"
+                style={{ position: 'relative' }}
+            >
                 <em
-                    className={classNames('text-primary', {
-                        'icon-wallet': !!props.account,
-                        'icon-hourglass': !props.account
-                    })}
+                    className="text-primary icon-wallet"
                     style={{ fontSize: '32px' }}
                 />
+
+                {props.badge ? <ButtonBadge value={props.badge} /> : null}
             </div>
             <div className="accountButton__info">
                 <div className="accountButton__name">{props.name}</div>
@@ -50,11 +85,6 @@ const AccountButton: React.SFC<Props> = props => (
                 )}
             </div>
         </button>
-        {0 < props.notifications && (
-            <div className="accountButton__badge">
-                {Math.min(99, props.notifications)}
-            </div>
-        )}
         <DropdownButton
             className="accountButton__controls"
             align="right"
@@ -149,17 +179,26 @@ export default themed(AccountButton)`
     }
 
     .accountButton__badge {
-        margin-left: 10px;
-        border-radius: 2px;
-        height: 32px;
-        width: 32px;
-        min-width: 32px;
-        min-height: 32px;
-        line-height: 32px;
-        text-align: center;
-        color: #fff;
-        background: #bf6f6f;
+        bottom: 0px;
+        right: 0px;
+        width: 24px;
+        height: 24px;
+        background: rgb(191, 111, 111);
+        color: rgb(255, 255, 255);
         font-weight: bold;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 24px;
+        margin: 0 -6px -6px 0;
+        position: absolute;
+        
+        > em {
+            line-height: 24px;
+        }
+
+        &.accountButton__badge_warning {
+            background: #e0ab4a;
+        }
     }
 
     .accountButton__controls {
