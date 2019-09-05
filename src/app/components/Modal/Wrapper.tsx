@@ -16,6 +16,7 @@ import React from 'react';
 import Transition from 'react-transition-group/Transition';
 import themed from 'components/Theme/themed';
 import platform from 'lib/platform';
+import classNames from 'classnames';
 
 const containerAnimationDuration = 210;
 const containerAnimationDef = {
@@ -70,7 +71,7 @@ const childAnimationDef = {
 };
 
 const StyledModalWrapper = themed.div`
-    background: rgba(0,0,0,0.3);
+    background: rgba(97, 134, 179, 0.5);
     position: fixed;
     top: 0;
     left: 0;
@@ -94,12 +95,20 @@ const StyledModalWrapper = themed.div`
 
     > .modal-wnd {
         display: inline-block;
-        border: solid 1px ${props => props.theme.modalOutline};
-        background: #fff;
         vertical-align: middle;
         text-align: initial;
         max-width: 95%;
         overflow: hidden;
+        box-shadow: rgba(0,0,0,0.2) 0 0 20px;
+    }
+
+    > .styled {
+        background: #fff;
+        border: solid 1px ${props => props.theme.modalOutline};
+    }
+
+    @media (max-width: 800px) {
+        padding: 10px;
     }
 `;
 
@@ -189,8 +198,9 @@ class ModalWrapper extends React.Component<IModalWrapperProps, IModalWrapperStat
     }
 
     renderChild(state: string) {
+        const className = (this.state.activeModal && (this.state.activeModal as any).type.className) || 'styled';
         return (
-            <div className="modal-wnd" style={{ ...childAnimationDef.defaultStyle, ...childAnimationDef[state] }}>
+            <div className={classNames('modal-wnd', className)} style={{ ...childAnimationDef.defaultStyle, ...childAnimationDef[state] }}>
                 {this.state.activeModal}
             </div>
         );

@@ -23,6 +23,7 @@ export const login = actionCreator.async<ILoginCall, { privateKey: string, publi
 export const loginGuest = actionCreator.async<void, { privateKey: string, publicKey: string, wallet: IAccountContext, session: ISession }, string>('LOGIN_GUEST');
 export const logout = actionCreator.async('LOGOUT');
 export const inviteEcosystem = actionCreator<{ ecosystem: string, redirectPage?: string }>('INVITE_ECOSYSTEM');
+export const createAccount = actionCreator.async<string, IWallet>('CREATE_ACCOUNT');
 export const createWallet = actionCreator.async<ICreateWalletCall, IWallet, string>('CREATE_WALLET');
 export const importWallet = actionCreator.async<IImportWalletCall, IWallet, string>('IMPORT_WALLET');
 export const removeWallet = actionCreator<IWallet>('REMOVE_WALLET');

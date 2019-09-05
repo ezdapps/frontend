@@ -43,12 +43,14 @@ const StyledFooter = themed.div`
 `;
 
 export abstract class ModalContainer<P, S = {}> extends React.Component<P, S> {
+    public static className?: string;
     public static Header = Header;
     public static Body = StyledBody;
     public static Footer = StyledFooter;
 }
 
 export default abstract class Modal<P, R, S = {}> extends React.Component<IModalProps<P, R>, S> {
+    public static className?: string;
     public static Header = Header;
     public static Body = StyledBody;
     public static Footer = StyledFooter;

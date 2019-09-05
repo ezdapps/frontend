@@ -36,6 +36,9 @@ import AuthErrorModal from 'components/Modal/Auth/AuthErrorModal';
 import AuthRemoveWalletModal from 'components/Modal/Auth/AuthRemoveWalletModal';
 import AuthChangePasswordModal from 'components/Modal/Auth/AuthChangePasswordModal';
 import AuthPasswordChangedModal from 'components/Modal/Auth/AuthPasswordChangedModal';
+import AuthCreateAccountModal from 'containers/Modal/CreateAccountModal';
+import AuthSecurityNoticeModal from 'containers/Modal/SecurityNoticeModal';
+import AuthAccountCreated from './Auth/AuthAccountCreated';
 import TxConfirmModal from './Tx/ConfirmModal';
 import PageModal from './PageModal';
 import CopyWalletModal from './Auth/CopyWalletModal';
@@ -49,44 +52,51 @@ import EditorCloseAllModal from 'containers/Modal/EditorCloseAllModal';
 import CreateContractModal from './Editor/CreateContractModal';
 import ChangeLocaleModal from 'containers/Modal/ChangeLocaleModal';
 import BackupModal from 'containers/Modal/BackupModal';
+import AuthSecurityProcessModal from 'containers/Modal/SecurityProcessModal';
+import AuthAccountRemove from 'containers/Modal/AccountRemoveModal';
 
 const MODAL_COMPONENTS = {
-    'AUTHORIZE': AuthorizeModal,
-    'AUTH_ERROR': AuthErrorModal,
-    'AUTH_REMOVE_WALLET': AuthRemoveWalletModal,
-    'AUTH_CHANGE_PASSWORD': AuthChangePasswordModal,
-    'AUTH_PASSWORD_CHANGED': AuthPasswordChangedModal,
-    'REGISTER_WALLET': RegisterModal,
-    'COPY_WALLET': CopyWalletModal,
-    'TX_CONFIRM': TxConfirmModal,
-    'TX_ERROR': TxErrorModal,
-    'TX_SIGNATURE': SignatureModal,
-    'CREATE_CONTRACT': CreateContractModal,
-    'CREATE_PAGE': CreatePageModal,
-    'CREATE_INTERFACE': CreateInterfaceModal,
-    'DEBUG_CONTRACT': DebugContractModal,
-    'IMAGE_EDITOR': ImageEditorModal,
-    'MAP_EDITOR': MapEditorModal,
-    'NETWORK_ERROR': NetworkErrorModal,
-    'PAGE_MODAL': PageModal,
-    'PROMPT': PromptModal,
-    'REMOVE_NETWORK': RemoveNetworkModal,
-    'CONFIRM': ConfirmModal,
-    'INFO': InfoModal,
-    'ERROR': ErrorModal,
-    'ABOUT': AboutModal,
-    'ROLE_PICKER': RolePickerModal,
-    'EDITOR_CLOSE_UNSAVED': EditorCloseModal,
-    'EDITOR_REVERT_UNSAVED': EditorRevertModal,
-    'EDITOR_CLOSE_ALL': EditorCloseAllModal,
-    'CHANGE_LOCALE': ChangeLocaleModal,
-    'BACKUP': BackupModal
+    AUTHORIZE: AuthorizeModal,
+    AUTH_ERROR: AuthErrorModal,
+    AUTH_REMOVE_WALLET: AuthRemoveWalletModal,
+    AUTH_CHANGE_PASSWORD: AuthChangePasswordModal,
+    AUTH_PASSWORD_CHANGED: AuthPasswordChangedModal,
+    AUTH_CREATE_ACCOUNT: AuthCreateAccountModal,
+    AUTH_SECURITY_NOTICE: AuthSecurityNoticeModal,
+    AUTH_SECURITY_PROCESS: AuthSecurityProcessModal,
+    AUTH_ACCOUNT_CREATED: AuthAccountCreated,
+    AUTH_ACCOUNT_REMOVE: AuthAccountRemove,
+    REGISTER_WALLET: RegisterModal,
+    COPY_WALLET: CopyWalletModal,
+    TX_CONFIRM: TxConfirmModal,
+    TX_ERROR: TxErrorModal,
+    TX_SIGNATURE: SignatureModal,
+    CREATE_CONTRACT: CreateContractModal,
+    CREATE_PAGE: CreatePageModal,
+    CREATE_INTERFACE: CreateInterfaceModal,
+    DEBUG_CONTRACT: DebugContractModal,
+    IMAGE_EDITOR: ImageEditorModal,
+    MAP_EDITOR: MapEditorModal,
+    NETWORK_ERROR: NetworkErrorModal,
+    PAGE_MODAL: PageModal,
+    PROMPT: PromptModal,
+    REMOVE_NETWORK: RemoveNetworkModal,
+    CONFIRM: ConfirmModal,
+    INFO: InfoModal,
+    ERROR: ErrorModal,
+    ABOUT: AboutModal,
+    ROLE_PICKER: RolePickerModal,
+    EDITOR_CLOSE_UNSAVED: EditorCloseModal,
+    EDITOR_REVERT_UNSAVED: EditorRevertModal,
+    EDITOR_CLOSE_ALL: EditorCloseAllModal,
+    CHANGE_LOCALE: ChangeLocaleModal,
+    BACKUP: BackupModal
 };
 
 export interface IModalProviderProps {
     modal: IModal;
     intl: InjectedIntl;
-    onResult: (params: { reason: TModalResultReason, data: any }) => any;
+    onResult: (params: { reason: TModalResultReason; data: any }) => any;
     enqueueNotification: (params: INotification) => any;
 }
 
@@ -114,7 +124,11 @@ class ModalProvider extends React.Component<IModalProviderProps> {
     }
 
     render() {
-        const Modal = this.props.modal && !this.props.modal.result && MODAL_COMPONENTS[this.props.modal.type] || null;
+        const Modal =
+            (this.props.modal &&
+                !this.props.modal.result &&
+                MODAL_COMPONENTS[this.props.modal.type]) ||
+            null;
         return (
             <Wrapper>
                 {Modal && (

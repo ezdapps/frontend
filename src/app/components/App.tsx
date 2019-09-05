@@ -14,14 +14,13 @@
 
 import React from 'react';
 import { INetworkEndpoint } from 'apla/auth';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { FormattedMessage, IntlProvider } from 'react-intl';
 import { mainRoute } from 'lib/routing';
 import platform from 'lib/platform';
 import classnames from 'classnames';
 import baseTheme from 'components/Theme/baseTheme';
 
-import { AnimatedSwitch } from 'components/Animation';
 import themed from 'components/Theme/themed';
 import Auth from 'containers/Auth';
 import Error from 'containers/Auth/Error';
@@ -31,7 +30,9 @@ import NotificationsProvider from 'containers/Notifications/NotificationsProvide
 import SecurityWarning from 'containers/SecurityWarning';
 import ThemeProvider from 'components/Theme/ThemeProvider';
 import Titlebar from 'components/Titlebar';
+import Legal from 'components/Legal';
 import Main from './Main';
+import Layout from './Layout';
 
 interface AppProps {
     network: INetworkEndpoint;
@@ -66,49 +67,63 @@ class App extends React.Component<AppProps> {
     }
 
     render() {
-        const appTitle = `Apla ${this.props.network ? '(' + this.props.network.apiHost + ')' : ''}`;
+        const appTitle = `Apla ${
+            this.props.network ? '(' + this.props.network.apiHost + ')' : ''
+        }`;
         const classes = classnames({
-            'wrapper': true,
-            'layout-fixed': true,
             'platform-desktop': platform.select({ desktop: true }),
             'platform-web': platform.select({ web: true }),
             'platform-windows': platform.select({ win32: true })
         });
 
         return (
-            <IntlProvider key={this.props.locale} locale={this.props.locale} defaultLocale="en-US" messages={this.props.localeMessages}>
+            <IntlProvider
+                key={this.props.locale}
+                locale={this.props.locale}
+                defaultLocale="en-US"
+                messages={this.props.localeMessages}
+            >
                 <ThemeProvider theme={baseTheme}>
                     <ThemedApp className={classes}>
                         <StyledTitlebar className="drag">
                             <Titlebar>{appTitle}</Titlebar>
                         </StyledTitlebar>
 
-                        <ModalProvider />
-                        <NotificationsProvider />
+                        <Layout footer={<Legal />}>
+                            <ModalProvider />
+                            <NotificationsProvider />
+                            {platform.select({
+                                web: !this.props.securityWarningClosed && (
+                                    <SecurityWarning>
+                                        <FormattedMessage
+                                            id="general.security.warning"
+                                            defaultMessage="Please use desktop version or mobile application for better security"
+                                        />
+                                    </SecurityWarning>
+                                )
+                            })}
 
-                        {platform.select({
-                            web: !this.props.securityWarningClosed && (
-                                <SecurityWarning>
-                                    <FormattedMessage id="general.security.warning" defaultMessage="Please use desktop version or mobile application for better security" />
-                                </SecurityWarning>
-                            )
-                        })}
-
-                        <AnimatedSwitch animation={AnimatedSwitch.animations.fade()}>
-                            {this.props.isFatal && (
-                                <Route path="/" component={Error} />
-                            )}
-                            {!this.props.isLoaded && (
-                                <Route path="/" component={Splash} />
-                            )}
-                            {!this.props.isAuthenticated && (
-                                <Route path="/" component={Auth} />
-                            )}
-                            {!this.props.isSessionAcquired && (
-                                <Route path="/" component={Splash} />
-                            )}
-                            <Route path={mainRoute} render={route => <Main {...route.match.params} />} />
-                        </AnimatedSwitch>
+                            <Switch>
+                                {this.props.isFatal && (
+                                    <Route path="/" component={Error} />
+                                )}
+                                {!this.props.isLoaded && (
+                                    <Route path="/" component={Splash} />
+                                )}
+                                {!this.props.isAuthenticated && (
+                                    <Route path="/" component={Auth} />
+                                )}
+                                {!this.props.isSessionAcquired && (
+                                    <Route path="/" component={Splash} />
+                                )}
+                                <Route
+                                    path={mainRoute}
+                                    render={route => (
+                                        <Main {...route.match.params} />
+                                    )}
+                                />
+                            </Switch>
+                        </Layout>
                     </ThemedApp>
                 </ThemeProvider>
             </IntlProvider>

@@ -12,15 +12,14 @@
 // along with this program; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
-import { Action } from 'redux';
-import { Epic } from 'redux-observable';
-import { IRootState } from 'modules';
+import { Epic } from 'modules';
 import { saveWallet } from '../actions';
-import { createWallet } from 'modules/auth/actions';
+import { createWallet, createAccount } from 'modules/auth/actions';
+import { isType } from 'typescript-fsa';
 
-const saveWalletOnCreateEpic: Epic<Action, IRootState> =
-    (action$, store) => action$.ofAction(createWallet.done)
-        .map(action =>
+const saveWalletOnCreateEpic: Epic =
+    (action$, store) => action$.filter(action => isType(action, createWallet.done) || isType(action, createAccount.done))
+        .map((action: any) =>
             saveWallet(action.payload.result)
         );
 
