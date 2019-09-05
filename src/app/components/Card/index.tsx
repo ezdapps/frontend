@@ -43,6 +43,7 @@ export default themed(Card)`
     background: url(${key}) -60px -25px #2F5C85 no-repeat;
     box-shadow: rgba(0,0,0,0.3) 3px 3px 10px;
     border-radius: 5px;
+    max-width: 370px;
 
     .card__logo {
         position: relative;
