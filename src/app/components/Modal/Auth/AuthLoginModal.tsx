@@ -27,8 +27,6 @@ class AuthLoginModal extends Modal<Params, string> {
 
         if (form.valid) {
             this.props.onResult(form.payload.password.value);
-        } else {
-            this.props.onResult(null);
         }
     }
 
