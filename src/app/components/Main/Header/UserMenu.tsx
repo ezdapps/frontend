@@ -22,6 +22,7 @@ import Avatar from 'containers/Avatar';
 import themed from 'components/Theme/themed';
 import Item from 'components/Dropdown/Item';
 import Heading from 'components/Dropdown/Heading';
+import media from 'components/Theme/media';
 
 const StyledUserMenu = themed.div`
     -webkit-app-region: no-drag;
@@ -67,6 +68,14 @@ const StyledUserMenu = themed.div`
         box-shadow: 0 0 25px rgba(0,0,0,.15);
         border-left: solid 1px #add1ff;
         border-bottom: solid 1px #add1ff;
+    }
+
+    @media (${media.md}) {
+        padding: 0 !important;
+        
+        .user-info {
+            display: none;
+        }
     }
 `;
 

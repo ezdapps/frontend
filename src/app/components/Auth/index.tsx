@@ -22,6 +22,7 @@ import HeaderNetwork from 'components/Header/HeaderNetwork';
 import WindowFooter from 'components/Window/WindowFooter';
 import AccountList from 'containers/AccountList';
 import Button from 'components/Button/Button';
+import HeaderSeparator from 'components/Header/HeaderSeparator';
 
 interface Props {
     className?: string;
@@ -35,6 +36,7 @@ interface Props {
 const Auth: React.SFC<Props> = props => (
     <Window>
         <Header tools={<HeaderNetwork status={props.networkStatus} />}>
+            <HeaderSeparator />
             <FormattedMessage id="auth" defaultMessage="Authorization" />
         </Header>
         <WindowBody>

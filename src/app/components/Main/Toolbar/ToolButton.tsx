@@ -16,6 +16,7 @@ import React from 'react';
 import classNames from 'classnames';
 
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 interface Props {
     disabled?: boolean;
@@ -65,6 +66,16 @@ const StyledToolButton = themed.button`
 
         > * {
             vertical-align: top;
+        }
+    }
+
+    @media (${media.sm}) {
+        .toolbutton__label {
+            display: none;
+        }
+
+        .toolbutton__icon {
+            margin-right: 0;
         }
     }
 `;
