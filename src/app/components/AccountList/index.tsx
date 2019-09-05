@@ -32,10 +32,15 @@ const AccountList: React.SFC<Props> = props => (
                             <AccountButton
                                 name={name}
                                 account={account.address}
-                                notifications={
-                                    props.notifications.filter(
-                                        l => l.id === account.id
-                                    ).length
+                                badge={
+                                    account.address
+                                        ? props.notifications.filter(
+                                              l => l.id === account.id
+                                          ).length
+                                        : {
+                                              type: 'warning',
+                                              value: 'icon-hourglass'
+                                          }
                                 }
                                 onClick={() => props.onSelect(account)}
                                 onShare={() => props.onShare(account)}
