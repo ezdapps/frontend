@@ -27,7 +27,6 @@ interface Props {
 const StyledLayout = themed.main`
     background: ${props => props.theme.contentBackground};
     position: relative;
-    padding-top: ${props => props.theme.menubarSize}px;
     display: flex;
     flex: 1;
     flex-direction: column;

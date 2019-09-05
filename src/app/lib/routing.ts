@@ -13,7 +13,7 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA
 
 import React from 'react';
-import Header from 'containers/Main/Header';
+import MainHeader from 'containers/Main/Header';
 import Navigator from 'containers/Main/Navigator';
 import Editor from 'containers/Main/Editor';
 
@@ -29,7 +29,7 @@ export const mainRoute = '/:app?/:page?/:action?';
 
 export const routes: RouteDict = {
     browse: {
-        Header,
+        Header: MainHeader,
         Content: Navigator,
         mapContentParams: params => ({
             app: params.app,
@@ -38,7 +38,7 @@ export const routes: RouteDict = {
         })
     },
     editor: {
-        Header,
+        Header: MainHeader,
         Content: Editor
     }
 };
