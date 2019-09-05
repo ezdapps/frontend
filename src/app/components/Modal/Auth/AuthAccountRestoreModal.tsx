@@ -39,18 +39,18 @@ class AuthAccountRestoreModal extends ModalContainer<
                 password: this.state.password
             });
         }
-    }
+    };
 
     handleChange: ChangeEventHandler<any> = e => {
         this.setState({
             password: e.target.value
         });
-    }
+    };
 
     render() {
         return (
             <ModalWindow
-                title="Restore account"
+                title="Recover access"
                 width={400}
                 icon="Upload"
                 controls={
@@ -63,8 +63,8 @@ class AuthAccountRestoreModal extends ModalContainer<
                 }
             >
                 <div>
-                    Please enter your private key to restore access to the
-                    system
+                    Please enter your private key to recover access to your
+                    account
                 </div>
                 <div style={{ marginTop: '20px' }}>
                     <Validation.components.ValidatedForm
