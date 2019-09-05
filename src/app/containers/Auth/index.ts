@@ -48,7 +48,7 @@ const mapDispatchToProps = {
             type: 'AUTH_CREATE_ACCOUNT',
             params: {}
         }),
-    onRestore: () =>
+    onRecover: () =>
         modalShow({
             id: 'AUTH_ACCOUNT_RESTORE',
             type: 'AUTH_ACCOUNT_RESTORE',
@@ -65,6 +65,6 @@ export default connect(
         networkStatus: state.networkStatus,
         activationEnabled: !!state.activationEmail,
         onCreate: dispatch.onCreate,
-        onRestore: dispatch.onRestore
+        onRecover: dispatch.onRecover
     })
 )(Auth);
