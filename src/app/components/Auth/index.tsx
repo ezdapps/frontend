@@ -29,7 +29,7 @@ interface Props {
     networkStatus: 'ONLINE' | 'OFFLINE' | 'PENDING';
     activationEnabled: boolean;
     onCreate: () => any;
-    onRestore: () => any;
+    onRecover: () => any;
 }
 
 const Auth: React.SFC<Props> = props => (
@@ -54,9 +54,9 @@ const Auth: React.SFC<Props> = props => (
             ) : (
                 <Button
                     className="btn btn-primary btn-block"
-                    onClick={props.onRestore}
+                    onClick={props.onRecover}
                 >
-                    <span>Restore access</span>
+                    <span>Reover access</span>
                 </Button>
             )}
         </WindowFooter>
