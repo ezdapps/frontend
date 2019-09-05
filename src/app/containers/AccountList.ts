@@ -5,7 +5,6 @@
 
 import { connect } from 'react-redux';
 import { IRootState } from 'modules';
-import { selectWallet } from 'modules/auth/actions';
 import { IWallet } from 'apla/auth';
 import { modalShow } from 'modules/modal/actions';
 
@@ -31,7 +30,14 @@ const mapDispatchToProps = {
             type: 'AUTH_ACCOUNT_REMOVE',
             params
         }),
-    onSelect: selectWallet,
+    onSelect: (wallet: IWallet) =>
+        modalShow({
+            id: 'AUTH_LOGIN',
+            type: 'AUTH_LOGIN',
+            params: {
+                wallet
+            }
+        }),
     onShare: (wallet: IWallet) =>
         modalShow({
             id: 'COPY_WALLET',

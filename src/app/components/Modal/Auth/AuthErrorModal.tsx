@@ -17,6 +17,7 @@ import { Button } from 'react-bootstrap';
 import { FormattedMessage } from 'react-intl';
 
 import Modal from '../';
+import ModalWindow from 'containers/Modal/ModalWindow';
 
 export interface IAuthErrorModalProps {
     error: string;
@@ -26,19 +27,28 @@ export interface IAuthErrorModalProps {
 class AuthErrorModal extends Modal<IAuthErrorModalProps, void> {
     render() {
         return (
-            <div>
-                <Modal.Header>
+            <ModalWindow
+                title={
                     <FormattedMessage id="alert.error" defaultMessage="Error" />
-                </Modal.Header>
-                <Modal.Body>
-                    <FormattedMessage id={`auth.error.${this.props.params.error}`} defaultMessage={this.props.params.message} />
-                </Modal.Body>
-                <Modal.Footer className="text-right">
-                    <Button type="button" bsStyle="primary" onClick={this.props.onCancel.bind(this)}>
+                }
+                width={300}
+                controls={
+                    <Button
+                        type="button"
+                        bsStyle="primary"
+                        onClick={this.props.onCancel}
+                    >
                         <FormattedMessage id="close" defaultMessage="Close" />
                     </Button>
-                </Modal.Footer>
-            </div>
+                }
+            >
+                <p>
+                    <FormattedMessage
+                        id={`auth.error.${this.props.params.error}`}
+                        defaultMessage={this.props.params.message}
+                    />
+                </p>
+            </ModalWindow>
         );
     }
 }
