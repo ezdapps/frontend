@@ -4,6 +4,7 @@
  *---------------------------------------------------------------------------------------------*/
 
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 export default themed.div`
     border-radius: 2px;
@@ -13,7 +14,7 @@ export default themed.div`
     display: flex;
     flex-direction: column;
 
-    @media (max-width: 800px) {
+    @media (${media.lg}) {
         height: 100%;
         border-radius: 0;
     }

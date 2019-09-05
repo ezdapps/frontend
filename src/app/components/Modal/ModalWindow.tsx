@@ -7,6 +7,7 @@ import React from 'react';
 import themed from 'components/Theme/themed';
 import * as Icons from 'react-feather';
 import classNames from 'classnames';
+import media from 'components/Theme/media';
 
 interface Props {
     className?: string;
@@ -129,7 +130,7 @@ export default themed(ModalWindow)`
         float: right;
     }
 
-    @media (max-width: 1000px) {
+    @media (${media.lg}) {
         max-width: none;
 
         .modalWindow__aside {

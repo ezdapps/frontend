@@ -5,6 +5,7 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 interface Props {
     className?: string;
@@ -40,7 +41,7 @@ export default themed(Layout)`
         justify-self: center;
     }
 
-    @media (max-width: 800px) {
+    @media (${media.lg}) {
         justify-content: stretch;
         align-content: stretch;
         grid-template-rows: minmax(auto, 100%) 0;

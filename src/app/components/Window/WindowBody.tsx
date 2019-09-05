@@ -5,6 +5,7 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 interface Props {
     height?: number;
@@ -18,7 +19,7 @@ const StyledWindowBody = themed.div`
     overflow-x: hidden;
     overflow-y: auto;
 
-    @media (max-width: 800px) {
+    @media (${media.lg}) {
         flex: 1;
         border-radius: 0;
         border: 0;

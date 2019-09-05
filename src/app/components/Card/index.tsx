@@ -6,6 +6,7 @@
 import React from 'react';
 import themed from 'components/Theme/themed';
 import key from './key.svg';
+import media from 'components/Theme/media';
 
 interface Props {
     className?: string;
@@ -106,7 +107,7 @@ export default themed(Card)`
         text-transform: uppercase;
     }
 
-    @media (max-width: 800px) {
+    @media (${media.lg}) {
         min-width: 280px;
         max-width: 350px;
         
@@ -140,7 +141,7 @@ export default themed(Card)`
         }
     }
 
-    @media (max-width: 400px) {
+    @media (${media.xs}) {
         min-width: 245px;
         max-width: 280px;
 
