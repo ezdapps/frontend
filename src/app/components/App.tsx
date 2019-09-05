@@ -66,6 +66,11 @@ class App extends React.Component<AppProps> {
             'platform-web': platform.select({ web: true }),
             'platform-windows': platform.select({ win32: true })
         });
+        const isMain =
+            !this.props.isFatal &&
+            this.props.isLoaded &&
+            this.props.isAuthenticated &&
+            this.props.isSessionAcquired;
 
         return (
             <IntlProvider
@@ -80,7 +85,10 @@ class App extends React.Component<AppProps> {
                             <Titlebar>{appTitle}</Titlebar>
                         </StyledTitlebar>
 
-                        <Layout footer={<Legal />}>
+                        <Layout
+                            type={isMain ? 'fullscreen' : 'window'}
+                            footer={<Legal />}
+                        >
                             <ModalProvider />
                             <NotificationsProvider />
                             {platform.select({
