@@ -22,6 +22,7 @@ const Legal: React.SFC<Props & InjectedIntlProps> = props => (
                 defaultMessage: 'https://apla.io'
             })}
         >
+            &nbsp;
             <FormattedMessage id="legal.homepage.title" defaultMessage="Apla" />
         </a>
     </div>
