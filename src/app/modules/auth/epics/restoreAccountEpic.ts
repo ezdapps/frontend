@@ -14,7 +14,7 @@ import { modalShow } from 'modules/modal/actions';
 const restoreAccountEpic: Epic = (action$, store, { api }) => action$.ofAction(restoreAccount.started)
     .flatMap(action => {
         const publicKey = keyring.generatePublicKey(action.payload.privateKey);
-        const encKey = keyring.encryptAES(action.payload.privateKey, action.payload.password);
+        const encKey = keyring.encryptAES(action.payload.privateKey.trim(), action.payload.password);
         const keyID = publicToID(publicKey);
 
         return Observable.of<Action>(
