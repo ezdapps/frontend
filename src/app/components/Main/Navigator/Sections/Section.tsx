@@ -10,6 +10,7 @@ import { IPage, IBreadcrumb } from 'apla/content';
 import Page from '../Page';
 import themed from 'components/Theme/themed';
 import ResizeHandle from 'containers/Main/Navigator/Menu/ResizeHandle';
+import media from 'components/Theme/media';
 
 interface Props {
     name: string;
@@ -27,6 +28,8 @@ const StyledSection = themed.div`
     margin-left: ${props => props.theme.menuSize}px;
     transition: margin-left ease-in-out .12s, transform ease-in-out .12s;
     height: 100%;
+    width: 100%;
+    padding-right: ${props => props.theme.menuSizeFolded}px;
     
     &.section_folded {
         margin-left: ${props => props.theme.menuSizeFolded}px;
@@ -36,14 +39,34 @@ const StyledSection = themed.div`
             transform: translateX(${props => props.theme.menuSize}px);
         }
     }
+
+    @media (${media.md}) {
+        &.section_folded {
+            &.section_unfolded {
+                margin-left: ${props => props.theme.menuSizeFolded}px;
+                transform: none;
+            }
+        }
+    }
+
+    @media (${media.sm}) {
+        padding-right: 0;
+
+        &.section_folded {
+            margin-left: 0;
+        }
+    }
 `;
 
 const Section: React.SFC<Props> = props => (
-    <StyledSection className={classNames('fullscreen', { section_folded: props.folded, section_unfolded: props.menuActive })}>
+    <StyledSection
+        className={classNames('fullscreen', {
+            section_folded: props.folded,
+            section_unfolded: props.menuActive
+        })}
+    >
         <ResizeHandle />
-        {props.page && (
-            <Page value={props.page} section={props.name} />
-        )}
+        {props.page && <Page value={props.page} section={props.name} />}
     </StyledSection>
 );
 

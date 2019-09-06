@@ -20,7 +20,7 @@ const StyledLayout = themed.main`
     position: relative;
     display: grid;
     height: 100%;
-    grid-template-rows: max-content auto;
+    grid-template-rows: max-content 1fr;
     grid-template-columns: minmax(auto, 100vw);
     grid-template-areas:
         'header'
@@ -35,6 +35,7 @@ const StyledLayout = themed.main`
 
     > .layout__content {
         grid-area: content;
+        overflow: hidden;
     }
 `;
 
