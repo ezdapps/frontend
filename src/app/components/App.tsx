@@ -6,7 +6,7 @@
 import React from 'react';
 import { INetworkEndpoint } from 'apla/auth';
 import { Route, Switch } from 'react-router-dom';
-import { FormattedMessage, IntlProvider } from 'react-intl';
+import { IntlProvider } from 'react-intl';
 import { mainRoute } from 'lib/routing';
 import platform from 'lib/platform';
 import classnames from 'classnames';
@@ -18,7 +18,7 @@ import Error from 'containers/Auth/Error';
 import Splash from 'components/Splash';
 import ModalProvider from 'containers/Modal/ModalProvider';
 import NotificationsProvider from 'containers/Notifications/NotificationsProvider';
-import SecurityWarning from 'containers/SecurityWarning';
+// import SecurityWarning from 'containers/SecurityWarning';
 import ThemeProvider from 'components/Theme/ThemeProvider';
 import Titlebar from 'components/Titlebar';
 import Legal from 'components/Legal';
@@ -91,7 +91,7 @@ class App extends React.Component<AppProps> {
                         >
                             <ModalProvider />
                             <NotificationsProvider />
-                            {platform.select({
+                            {/* {platform.select({
                                 web: !this.props.securityWarningClosed && (
                                     <SecurityWarning>
                                         <FormattedMessage
@@ -100,7 +100,7 @@ class App extends React.Component<AppProps> {
                                         />
                                     </SecurityWarning>
                                 )
-                            })}
+                            })} */}
 
                             <Switch>
                                 {this.props.isFatal && (
