@@ -17,13 +17,15 @@ interface Props {
 
 const Header: React.SFC<Props> = props => (
     <header className={props.className}>
-        <div className="header__menu">
-            <HeaderButton content={null} onClick={props.onMenuClick}>
-                <div className="header__menu__icon">
-                    <Menu size={24} color="#fff" />
-                </div>
-            </HeaderButton>
-        </div>
+        {props.onMenuClick && (
+            <div className="header__menu">
+                <HeaderButton content={null} onClick={props.onMenuClick}>
+                    <div className="header__menu__icon">
+                        <Menu size={24} color="#fff" />
+                    </div>
+                </HeaderButton>
+            </div>
+        )}
         <div className="header__logo">
             <img src="/img/logoHeader.png" />
         </div>
