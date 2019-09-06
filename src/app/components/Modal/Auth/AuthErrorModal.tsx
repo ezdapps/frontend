@@ -25,6 +25,8 @@ export interface IAuthErrorModalProps {
 }
 
 class AuthErrorModal extends Modal<IAuthErrorModalProps, void> {
+    public static className = ' ';
+
     render() {
         return (
             <ModalWindow

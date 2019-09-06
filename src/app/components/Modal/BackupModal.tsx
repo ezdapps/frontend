@@ -30,6 +30,8 @@ interface Props {
 }
 
 class BackupModal extends Modal<Props, void> {
+    public static className = ' ';
+
     onKeyDownload = () => {
         sendAttachment(
             `${this.props.params.address || 'account'}.txt`,
