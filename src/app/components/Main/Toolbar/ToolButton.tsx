@@ -20,7 +20,7 @@ const StyledToolButton = themed.button`
     outline: 0;
     border: 0;
     padding: 0 10px;
-    height: ${props => props.theme.toolbarHeight}px;
+    height: 100%;
     line-height: inherit;
 
     &:hover {
@@ -61,6 +61,7 @@ const StyledToolButton = themed.button`
     }
 
     @media (${media.sm}) {
+        padding: 0 15px;
         .toolbutton__label {
             display: none;
         }
