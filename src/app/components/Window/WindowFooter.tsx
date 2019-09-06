@@ -7,7 +7,17 @@ import React from 'react';
 import themed from 'components/Theme/themed';
 import media from 'components/Theme/media';
 
-const StyledWindowFooter = themed.footer`
+interface Props {
+    className?: string;
+}
+
+const WindowFooter: React.SFC<Props> = props => (
+    <footer className={props.className}>
+        <div className="windowFooter__content">{props.children}</div>
+    </footer>
+);
+
+export default themed(WindowFooter)`
     border: solid 1px #479be3;
     border-top: 0;
     background: #e9e9e9;
@@ -25,11 +35,3 @@ const StyledWindowFooter = themed.footer`
         border-bottom: 0;
     }
 `;
-
-const WindowFooter: React.SFC = props => (
-    <StyledWindowFooter>
-        <div className="windowFooter__content">{props.children}</div>
-    </StyledWindowFooter>
-);
-
-export default WindowFooter;

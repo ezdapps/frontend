@@ -8,7 +8,6 @@ import { Redirect } from 'react-router';
 import { routes } from 'lib/routing';
 
 import themed from 'components/Theme/themed';
-import media from 'components/Theme/media';
 
 interface Props {
     app?: string;
@@ -21,8 +20,8 @@ const StyledLayout = themed.main`
     position: relative;
     display: grid;
     height: 100%;
-    grid-template-rows: 40px auto;
-    grid-template-columns: auto;
+    grid-template-rows: max-content auto;
+    grid-template-columns: minmax(auto, 100vw);
     grid-template-areas:
         'header'
         'content';
@@ -36,10 +35,6 @@ const StyledLayout = themed.main`
 
     > .layout__content {
         grid-area: content;
-    }
-
-    @media (${media.md}) {
-        grid-template-rows: 50px auto;
     }
 `;
 

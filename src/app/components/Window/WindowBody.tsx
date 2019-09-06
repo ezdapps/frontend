@@ -8,10 +8,17 @@ import themed from 'components/Theme/themed';
 import media from 'components/Theme/media';
 
 interface Props {
+    className?: string;
     height?: number;
 }
 
-const StyledWindowBody = themed.div`
+const WindowBody: React.SFC<Props> = props => (
+    <div className={props.className} style={{ height: props.height || 'auto' }}>
+        {props.children}
+    </div>
+);
+
+export default themed(WindowBody)`
     border: solid 1px #479be3;
     border-top: 0;
     border-bottom: 0;
@@ -30,11 +37,3 @@ const StyledWindowBody = themed.div`
         border-radius: 0 0 2px 2px;
     }
 `;
-
-const WindowBody: React.SFC<Props> = props => (
-    <StyledWindowBody style={{ height: props.height || 'auto' }}>
-        {props.children}
-    </StyledWindowBody>
-);
-
-export default WindowBody;
