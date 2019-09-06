@@ -8,15 +8,22 @@ import themed from 'components/Theme/themed';
 import media from 'components/Theme/media';
 import HeaderButton from 'components/Main/Header/HeaderButton';
 import { Menu } from 'react-feather';
+import classNames from 'classnames';
+import HeaderSeparator from './HeaderSeparator';
 
 interface Props {
     className?: string;
     tools?: React.ReactNode;
+    vertical?: boolean;
     onMenuClick?: () => any;
 }
 
 const Header: React.SFC<Props> = props => (
-    <header className={props.className}>
+    <header
+        className={classNames(props.className, {
+            header_vertical: props.vertical
+        })}
+    >
         {props.onMenuClick && (
             <div className="header__menu">
                 <HeaderButton content={null} onClick={props.onMenuClick}>
@@ -122,6 +129,29 @@ export default themed(Header)`
     @media (${media.sm}) {
         .header__menu {
             width: 50px;
+        }
+    }
+
+    &.header_vertical {
+        flex-direction: column;
+        height: 85px;
+        padding-top: 15px;
+        align-items: center;
+
+        .header__logo {
+            padding: 0;
+            
+            > img {
+                height: 32px;
+            }
+        }
+
+        .header__tools {
+            display: none;
+        }
+
+        ${HeaderSeparator} {
+            display: none;
         }
     }
 `;

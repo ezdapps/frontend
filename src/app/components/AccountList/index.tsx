@@ -48,6 +48,7 @@ const AccountList: React.SFC<Props> = props => (
                                     props.onRemove({ wallet: account, name })
                                 }
                             />
+                            <hr />
                         </li>
                     );
                 })}
@@ -70,8 +71,21 @@ export default themed(AccountList)`
             text-align: center;
             margin-bottom: 5px;
     
+            > hr {
+                border-bottom: 0;
+                border-left: 0;
+                border-right: 0;
+                border-top: solid 1px #e8e8e8;
+                height: 0;
+                margin: 5px 25px 5px;
+            }
+
             &:last-child {
                 margin-bottom: 0;
+
+                > hr {
+                    display: none;
+                }
             }
         }  
     }
