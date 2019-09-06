@@ -20,7 +20,6 @@ declare module 'apla/theme' {
         headerForeground: string;
         headerHeight: number;
 
-        menubarSize: number;
         menubarBackground: string;
         menubarBackgroundActive: string;
         menubarBackgroundFocused: string;

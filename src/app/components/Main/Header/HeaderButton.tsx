@@ -17,6 +17,7 @@ import classNames from 'classnames';
 
 import themed from 'components/Theme/themed';
 import DropdownButton from 'components/Button/DropdownButton';
+import media from 'components/Theme/media';
 
 interface Props {
     className?: string;
@@ -34,9 +35,8 @@ const StyledHeaderButton = themed(DropdownButton)`
     border: 0;
     outline: 0;
     transition: background ease-in-out .17s;
-    min-width: ${props => props.theme.menubarSize}px;
-    height: ${props => props.theme.menubarSize}px;
-    line-height: ${props => props.theme.menubarSize}px;
+    min-width: 40px;
+    height: 100%;
     
     &:hover {
         background: ${props => props.theme.menubarBackgroundFocused};
@@ -63,6 +63,10 @@ const StyledHeaderButton = themed(DropdownButton)`
         line-height: 16px;
         font-size: 12px;
         font-weight: bold;
+    }
+
+    @media (${media.md}) {
+        min-width: 50px;
     }
 `;
 

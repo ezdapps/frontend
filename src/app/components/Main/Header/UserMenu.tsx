@@ -29,10 +29,14 @@ const StyledUserMenu = themed.div`
     line-height: 0;
     display: inline-block;
     vertical-align: top;
-    height: 40px;   
+    height: 100%;   
     padding: 0 0 0 10px !important;
     line-height: 18px;
     color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 
     > .user-info {
         text-align: right;

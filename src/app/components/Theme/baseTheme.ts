@@ -22,7 +22,6 @@ const baseTheme: IThemeDefinition = {
     headerForeground: '#fff',
     headerHeight: platform.select({ desktop: 28, web: 0 }),
 
-    menubarSize: 40,
     menubarBackground: '#3873A6',
     menubarBackgroundActive: '#9CB9D2',
     menubarBackgroundFocused: 'rgba(255,255,255,0.09)',
