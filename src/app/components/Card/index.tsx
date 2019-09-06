@@ -54,10 +54,12 @@ export default themed(Card)`
 
         > img {
             position: absolute;
-            top: 0;
+            max-height: 100%; 
+            top: 50%;
             left: 6%;
             bottom: 0;
-            max-height: 100%; 
+            height: 26px;
+            transform: translateY(-50%);
         }
     }
 
