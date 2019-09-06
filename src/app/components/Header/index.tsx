@@ -35,7 +35,7 @@ export default themed(Header)`
     align-items: stretch;
 
     & .header__logo {
-        padding: 4px 0 0 16px;
+        padding: 12px 0 10px 15px;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -80,5 +80,9 @@ export default themed(Header)`
 
     @media (${media.md}) {
         height: 50px;
+
+        .header__logo {
+            padding: 17px 0 15px 15px;
+        }
     }
 `;
