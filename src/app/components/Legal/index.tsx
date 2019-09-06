@@ -13,10 +13,7 @@ interface Props {
 
 const Legal: React.SFC<Props & InjectedIntlProps> = props => (
     <div className={props.className}>
-        <FormattedMessage
-            id="legal.copy"
-            defaultMessage="Apla © 2017-2019 - "
-        />
+        <FormattedMessage id="legal.copy" defaultMessage="Powered by" />
         <a
             target="_blank"
             rel="noopener noreferrer"
@@ -25,10 +22,7 @@ const Legal: React.SFC<Props & InjectedIntlProps> = props => (
                 defaultMessage: 'https://apla.io'
             })}
         >
-            <FormattedMessage
-                id="legal.homepage"
-                defaultMessage="https://apla.io"
-            />
+            <FormattedMessage id="legal.homepage.title" defaultMessage="Apla" />
         </a>
     </div>
 );
