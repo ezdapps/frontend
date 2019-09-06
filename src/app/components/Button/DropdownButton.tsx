@@ -10,8 +10,11 @@ import onClickOutside, { InjectedOnClickOutProps } from 'react-onclickoutside';
 import Dropdown from 'components/Dropdown';
 import Button from './';
 
-type ButtonComponent =
-    React.ComponentType<{ onClick: (e: React.MouseEvent<any>) => void, disabled?: boolean, className?: string }>;
+type ButtonComponent = React.ComponentType<{
+    onClick: (e: React.MouseEvent<any>) => void;
+    disabled?: boolean;
+    className?: string;
+}>;
 
 interface Props {
     buttonComponent?: ButtonComponent;
@@ -27,7 +30,10 @@ interface State {
     active: boolean;
 }
 
-class DropdownButton extends React.Component<Props & InjectedOnClickOutProps, State> {
+class DropdownButton extends React.Component<
+    Props & InjectedOnClickOutProps,
+    State
+> {
     state: State = {
         active: false
     };
@@ -59,11 +65,25 @@ class DropdownButton extends React.Component<Props & InjectedOnClickOutProps, St
     render() {
         const Component = this.props.buttonComponent || Button;
         return (
-            <div style={{ display: 'inline-block', position: 'relative' }}>
-                <Component disabled={this.props.disabled} className={this.props.className} onClick={this.handleClick}>
+            <div
+                style={{
+                    display: 'inline-block',
+                    position: 'relative',
+                    height: '100%'
+                }}
+            >
+                <Component
+                    disabled={this.props.disabled}
+                    className={this.props.className}
+                    onClick={this.handleClick}
+                >
                     {this.props.children}
                 </Component>
-                <Dropdown active={this.state.active} align={this.props.align} width={this.props.menuWidth}>
+                <Dropdown
+                    active={this.state.active}
+                    align={this.props.align}
+                    width={this.props.menuWidth}
+                >
                     {this.props.content}
                 </Dropdown>
             </div>
