@@ -5,6 +5,7 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 interface Props {
     className?: string;
@@ -27,7 +28,7 @@ const Header: React.SFC<Props> = props => (
 
 export default themed(Header)`
     background: #3873a6;
-    height: 100%;
+    height: 40px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -41,9 +42,11 @@ export default themed(Header)`
         align-items: flex-start;
         position: relative;
         user-select: none;
+        flex: 0;
+        height: 100%;
 
         > img {
-            height: 50px;
+            height: 100%;
             vertical-align: middle;
         }
 
@@ -73,5 +76,9 @@ export default themed(Header)`
     .header__tools {
         align-self: center;
         padding-right: 14px;
+    }
+
+    @media (${media.md}) {
+        height: 50px;
     }
 `;

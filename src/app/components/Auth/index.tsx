@@ -23,6 +23,8 @@ import WindowFooter from 'components/Window/WindowFooter';
 import AccountList from 'containers/AccountList';
 import Button from 'components/Button/Button';
 import HeaderSeparator from 'components/Header/HeaderSeparator';
+import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 interface Props {
     className?: string;
@@ -34,15 +36,17 @@ interface Props {
 }
 
 const Auth: React.SFC<Props> = props => (
-    <Window>
-        <Header tools={<HeaderNetwork status={props.networkStatus} />}>
-            <HeaderSeparator />
-            <FormattedMessage id="auth" defaultMessage="Authorization" />
-        </Header>
-        <WindowBody>
+    <Window className={props.className}>
+        <div className="window__header">
+            <Header tools={<HeaderNetwork status={props.networkStatus} />}>
+                <HeaderSeparator />
+                <FormattedMessage id="auth" defaultMessage="Authorization" />
+            </Header>
+        </div>
+        <WindowBody className="window__body">
             <AccountList />
         </WindowBody>
-        <WindowFooter>
+        <WindowFooter className="window__footer">
             {props.isEmpty ? (
                 <Button
                     className="btn btn-primary btn-block"
@@ -65,4 +69,31 @@ const Auth: React.SFC<Props> = props => (
     </Window>
 );
 
-export default Auth;
+export default themed(Auth)`
+    display: grid;
+    grid-template-rows: max-content max-content max-content;
+    grid-template-columns: 100%;
+    grid-template-areas:
+        'header'
+        'body'
+        'footer';
+    height: 100%;
+    max-width: 100%;
+    width: 100%;
+
+    > .window__header {
+        grid-area: header;
+    }
+
+    > .window__body {
+        grid-area: body;
+    }
+
+    > .window__footer {
+        grid-area: footer;
+    }
+
+    @media (${media.md}) {
+        grid-template-rows: max-content auto max-content;
+    }
+`;
