@@ -15,6 +15,7 @@
 import React from 'react';
 
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 interface Props {
     onFoldToggle: () => void;
@@ -59,6 +60,10 @@ const StyledResizeHandle = themed.button`
 
     &:hover > div {
         background: ${props => props.theme.menuBorder};
+    }
+
+    @media (${media.md}) {
+        display: none;
     }
 `;
 

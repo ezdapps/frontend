@@ -58,7 +58,7 @@ export default themed(Layout)`
     }
 
     &.layout_fullscreen {
-        grid-template-rows: auto 0;
+        grid-template-rows: 100% 0;
         grid-template-columns: auto;
         grid-template-areas:
             'main'

@@ -28,10 +28,11 @@ interface Props {
     app?: string;
     page?: string;
     isAuthorized: boolean;
+    onMenuClick: () => any;
 }
 
 const MainHeader: React.SFC<Props> = props => (
-    <Header>
+    <Header onMenuClick={props.onMenuClick}>
         {/* <HeaderSeparator />
         <Selector section={props.app === 'browse' ? props.page : null} />
         <HeaderSeparator /> */}

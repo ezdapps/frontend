@@ -27,6 +27,7 @@ interface Props {
     align?: 'left' | 'right';
     menuWidth?: number;
     content: React.ReactNode;
+    onClick?: () => any;
 }
 
 const StyledHeaderButton = themed(DropdownButton)`
@@ -80,12 +81,11 @@ const HeaderButton: React.SFC<Props> = props => (
         disabled={props.disabled}
         align={props.align}
         menuWidth={props.menuWidth}
+        onClick={props.onClick}
     >
         {props.children}
         {props.badge ? (
-            <em className="dropdown__badge">
-                {Math.min(props.badge, 99)}
-            </em>
+            <em className="dropdown__badge">{Math.min(props.badge, 99)}</em>
         ) : null}
     </StyledHeaderButton>
 );

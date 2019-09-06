@@ -33,6 +33,7 @@ interface Props {
     content: React.ReactNode;
     align?: 'left' | 'right';
     menuWidth?: number;
+    onClick?: () => any;
 }
 
 interface State {
@@ -60,9 +61,15 @@ class DropdownButton extends React.Component<
     })
 
     handleClick = () => {
-        this.setState({
-            active: !this.state.active
-        });
+        if (this.props.onClick) {
+            this.props.onClick();
+        }
+
+        if (this.props.content) {
+            this.setState({
+                active: !this.state.active
+            });
+        }
     }
 
     handleClickOutside = (_event: React.MouseEvent<HTMLElement>) => {
