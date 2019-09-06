@@ -135,15 +135,21 @@ export default themed(Header)`
     &.header_vertical {
         flex-direction: column;
         height: 85px;
-        padding-top: 15px;
         align-items: center;
 
         .header__logo {
+            margin-top: 15px;
             padding: 0;
+            height: initial;
+            flex: 1;
             
             > img {
                 height: 32px;
             }
+        }
+
+        .header__body {
+            height: initial;
         }
 
         .header__tools {
