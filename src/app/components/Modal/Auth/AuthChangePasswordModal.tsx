@@ -30,6 +30,8 @@ interface State {
 }
 
 class AuthChangePasswordModal extends Modal<Params, Result, State> {
+    public static className = ' ';
+
     state: State = {
         newPassword: '',
         newPasswordKey: Math.random().toString(),

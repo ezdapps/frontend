@@ -13,6 +13,8 @@ import Button from 'components/Button/Button';
 import ValidatedForm from 'components/Validation/ValidatedForm';
 
 class AuthorizeModal extends Modal<void, string> {
+    public static className = ' ';
+
     private _form: ValidatedForm;
 
     handleSubmit = () => {

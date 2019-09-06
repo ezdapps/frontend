@@ -11,6 +11,8 @@ import Modal from '../';
 import Button from 'components/Button/Button';
 
 class AuthPasswordChangedModal extends Modal<{}, void> {
+    public static className = ' ';
+    
     render() {
         return (
             <ModalWindow
