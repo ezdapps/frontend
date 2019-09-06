@@ -17,6 +17,7 @@ import { Redirect } from 'react-router';
 import { routes } from 'lib/routing';
 
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 interface Props {
     app?: string;
@@ -40,11 +41,20 @@ const StyledLayout = themed.main`
 
     > .layout__header {
         grid-area: header;
+        z-index: 5;
     }
 
     > .layout__content {
+        z-index: 4;
         grid-area: content;
         overflow: hidden;
+    }
+
+
+    @media (${media.md}) {
+        > .layout__header {
+            box-shadow: rgba(0,0,0,0.4) 0 2px 5px;
+        }
     }
 `;
 

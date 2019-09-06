@@ -73,7 +73,7 @@ const StyledContent = themed.section`
             'toolbar';
 
         .content__toolbar {
-            box-shadow: rgba(0,0,0,0.07) 0 -2px 5px;
+            box-shadow: rgba(0,0,0,0.15) 0 -2px 5px;
             border-top: solid 1px ${props => props.theme.uiBorderLight};
         }
     }

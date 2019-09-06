@@ -38,9 +38,12 @@ interface Props {
 const Auth: React.SFC<Props> = props => (
     <Window className={props.className}>
         <div className="window__header">
-            <Header tools={<HeaderNetwork status={props.networkStatus} />}>
+            <Header
+                vertical
+                tools={<HeaderNetwork status={props.networkStatus} />}
+            >
                 <HeaderSeparator />
-                <FormattedMessage id="auth" defaultMessage="Authorization" />
+                <div>Select account to sign in</div>
             </Header>
         </div>
         <WindowBody className="window__body">
@@ -83,14 +86,18 @@ export default themed(Auth)`
 
     > .window__header {
         grid-area: header;
+        z-index: 5;
+        box-shadow: rgba(0,0,0,0.4) 0 2px 5px;
     }
 
     > .window__body {
         grid-area: body;
+        z-index: 4;
     }
 
     > .window__footer {
         grid-area: footer;
+        z-index: 3;
     }
 
     @media (${media.md}) {
