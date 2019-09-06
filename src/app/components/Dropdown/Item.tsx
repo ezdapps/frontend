@@ -16,6 +16,7 @@ import React from 'react';
 import themed from 'components/Theme/themed';
 import classNames from 'classnames';
 import propTypes from 'prop-types';
+import media from 'components/Theme/media';
 
 const StyledItem = themed.button`
     border-radius: 0;
@@ -67,6 +68,19 @@ const StyledItem = themed.button`
 
     &:focus {
         border-color: #84baff;
+    }
+
+    @media (${media.md}) {
+        height: 50px;
+        font-size: 15px;
+        line-height: 50px;
+
+        > .item__icon {
+            > em {
+                font-size: 15px;
+                line-height: 50px;
+            }
+        }
     }
 `;
 
