@@ -49,7 +49,7 @@ const Auth: React.SFC<Props> = props => (
                     className="btn btn-primary btn-block"
                     onClick={props.onRecover}
                 >
-                    <span>Reover access</span>
+                    <span>Recover access</span>
                 </Button>
             )}
         </WindowFooter>
