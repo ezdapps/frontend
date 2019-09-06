@@ -42,7 +42,7 @@ const StyledContent = themed.section`
     transition: none !important;
     overflow: hidden;
     display: grid;
-    grid-template-rows: ${props => props.theme.toolbarHeight + 1}px auto;
+    grid-template-rows: 40px auto;
     grid-template-columns: minmax(100%, 100vw);
     grid-template-areas:
         'toolbar'
@@ -67,7 +67,7 @@ const StyledContent = themed.section`
     }
 
     @media (${media.md}) {
-        grid-template-rows: auto ${props => props.theme.toolbarHeight + 1}px;
+        grid-template-rows: auto 45px;
         grid-template-areas:
             'content'
             'toolbar';

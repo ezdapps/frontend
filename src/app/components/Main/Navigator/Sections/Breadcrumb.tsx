@@ -39,8 +39,9 @@ const StyledBreadcrumb = themed.div`
 
     .breadcrumb__icon {
         line-height: inherit;
-        font-size: 16px;
+        font-size: 20px;
         color: ${props => props.theme.toolbarForeground};
+        opacity: 0.7;
     }
 
     .breadcrumb__label {
@@ -58,7 +59,7 @@ const Breadcrumb: React.SFC<Props> = props => {
     const titleText = props.children || placeholder;
     const title = props.home ?
         (
-            <em className="breadcrumb__icon icon-home" />
+            <em className="breadcrumb__icon fa fa-home" />
         )
         :
         (

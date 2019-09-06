@@ -28,18 +28,18 @@ interface Props {
 
 const StyledBreadcrumbs = themed.ul`
     height: 100%;
-    line-height: inherit;
     margin: 0;
     padding: 0 10px;
     font-size: 0;
     flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style-type: none;
     
     > li {
-        display: inline-block;
         font-size: 13px;
         font-weight: 400;
-        height: 100%;
-        line-height: inherit;
         color: ${props => props.theme.toolbarForegroundActive};
         margin-right: 10px;
         vertical-align: top;

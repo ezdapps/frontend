@@ -14,6 +14,7 @@
 
 import React from 'react';
 import themed from 'components/Theme/themed';
+import media from 'components/Theme/media';
 
 export const Filler: React.SFC = props => (
     <div className="toolbar__filler">
@@ -23,9 +24,7 @@ export const Filler: React.SFC = props => (
 
 export default themed.div`
     background: ${props => props.theme.toolbarBackground};
-    min-height: ${props => props.theme.toolbarHeight}px;
-    height: ${props => props.theme.toolbarHeight}px;
-    line-height: ${props => props.theme.toolbarHeight}px;
+    height: 100%;
     color: ${props => props.theme.toolbarForeground};
     padding: 0 10px;
     margin: 0;
@@ -34,9 +33,13 @@ export default themed.div`
     white-space: nowrap;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
 
     .toolbar__filler {
         flex: 1;
+    }
+
+    @media(${media.sm}) {
+        padding: 0;
     }
 `;

@@ -35,7 +35,6 @@ declare module 'apla/theme' {
         toolbarForegroundPrimary: string;
         toolbarForegroundDisabled: string;
         toolbarForeground: string;
-        toolbarHeight: number;
         toolbarSpacerForeground: string;
 
         menuBackground: string;
