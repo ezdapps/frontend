@@ -21,8 +21,8 @@ import HeaderButton from './HeaderButton';
 import Avatar from 'containers/Avatar';
 import themed from 'components/Theme/themed';
 import Item from 'components/Dropdown/Item';
-import Heading from 'components/Dropdown/Heading';
 import media from 'components/Theme/media';
+// import Heading from 'components/Dropdown/Heading';
 
 const StyledUserMenu = themed.div`
     -webkit-app-region: no-drag;
@@ -108,7 +108,7 @@ const UserMenu: React.SFC<Props> = props => props.wallet && props.wallet.wallet 
                 <Item onClick={props.onLogout} icon="icon-logout text-danger">
                     <FormattedMessage id="general.wallet.signout" defaultMessage="Sign out" />
                 </Item>
-                <Heading>
+                {/* <Heading>
                     <FormattedMessage id="general.ecosystems" defaultMessage="Ecosystems" />
                 </Heading>
                 {props.walletEcosystems.map(value => (
@@ -122,7 +122,7 @@ const UserMenu: React.SFC<Props> = props => props.wallet && props.wallet.wallet 
                             )
                         }
                     </Item>
-                ))}
+                ))} */}
             </div>
         }
     >
