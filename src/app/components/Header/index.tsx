@@ -46,7 +46,7 @@ export default themed(Header)`
         height: 100%;
 
         > img {
-            height: 100%;
+            height: 18px;
             vertical-align: middle;
         }
 
