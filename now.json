@@ -2,7 +2,7 @@
     "version": 2,
     "routes": [
         {
-            "src": "/(fonts|img|locales|styles|static)/(.*)",
+            "src": "/(fonts|img|locales|styles|static|icons|splashscreens)/(.*)",
             "dest": "/$1/$2"
         },
         {
