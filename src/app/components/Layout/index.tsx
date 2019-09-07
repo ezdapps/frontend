@@ -24,8 +24,10 @@ const Layout: React.SFC<Props> = props => (
 );
 
 export default themed(Layout)`
-    height: 100%;
     display: grid;
+    width: 100vw;
+    height: 100vh;
+    height: ${media.standalone ? '100vh' : 'calc(var(--vh, 1vh) * 100)'};
     
     .layout__main {
         grid-area: main;

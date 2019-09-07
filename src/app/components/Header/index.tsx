@@ -24,34 +24,39 @@ const Header: React.SFC<Props> = props => (
             header_vertical: props.vertical
         })}
     >
-        {props.onMenuClick && (
-            <div className="header__menu">
-                <HeaderButton content={null} onClick={props.onMenuClick}>
-                    <div className="header__menu__icon">
-                        <Menu size={24} color="#fff" />
-                    </div>
-                </HeaderButton>
+        <div className="header__wrapper">
+            {props.onMenuClick && (
+                <div className="header__menu">
+                    <HeaderButton content={null} onClick={props.onMenuClick}>
+                        <div className="header__menu__icon">
+                            <Menu size={24} color="#fff" />
+                        </div>
+                    </HeaderButton>
+                </div>
+            )}
+            <div className="header__logo">
+                <img src="/img/logoHeader.png" />
             </div>
-        )}
-        <div className="header__logo">
-            <img src="/img/logoHeader.png" />
+            {props.children && (
+                <>
+                    <div className="header__body">{props.children}</div>
+                </>
+            )}
+            {props.tools && <div className="header__tools">{props.tools}</div>}
         </div>
-        {props.children && (
-            <>
-                <div className="header__body">{props.children}</div>
-            </>
-        )}
-        {props.tools && <div className="header__tools">{props.tools}</div>}
     </header>
 );
 
 export default themed(Header)`
     background: #3873a6;
-    height: 40px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
+    
+    .header__wrapper {
+        height: 40px;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: stretch;
+    }
 
     & .header__logo {
         padding: 12px 0 10px 15px;
@@ -115,7 +120,11 @@ export default themed(Header)`
     }
 
     @media (${media.md}) {
-        height: 50px;
+        padding-top: env(safe-area-inset-top);
+        
+        & .header__wrapper {
+            height: 50px;
+        }
 
         & .header__logo {
             padding: 17px 0 15px 10px;
@@ -133,9 +142,11 @@ export default themed(Header)`
     }
 
     &.header_vertical {
-        flex-direction: column;
-        height: 85px;
-        align-items: center;
+        .header__wrapper {
+            flex-direction: column;
+            height: 85px;
+            align-items: center;
+        }
 
         .header__logo {
             margin-top: 15px;

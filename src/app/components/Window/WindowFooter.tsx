@@ -22,16 +22,20 @@ export default themed(WindowFooter)`
     border-top: 0;
     background: #e9e9e9;
     border-radius: 0 0 2px 2px;
-
+    
     .windowFooter__content {
         border-top: solid 1px #dae4ec;
         padding: 22px;
     }
-
+    
     @media (${media.lg}) {
         border-radius: 0;
         border-left: 0;
         border-right: 0;
         border-bottom: 0;
+    }
+    
+    @media (${media.md}) {
+        padding-bottom: env(safe-area-inset-bottom);
     }
 `;
