@@ -33,7 +33,7 @@ const StyledContent = themed.section`
     transition: none !important;
     overflow: hidden;
     display: grid;
-    grid-template-rows: 40px 1fr;
+    grid-template-rows: max-content 1fr;
     grid-template-columns: minmax(100%, 100vw);
     grid-template-areas:
         'toolbar'
@@ -41,6 +41,7 @@ const StyledContent = themed.section`
     justify-content: stretch;
     align-content: stretch;
     height: 100%;
+    padding-bottom: env(safe-area-inset-bottom);
 
     .content__toolbar {
         position: relative;
@@ -48,6 +49,7 @@ const StyledContent = themed.section`
         box-shadow: rgba(0,0,0,0.07) 0 2px 5px;
         border-bottom: solid 1px ${props => props.theme.uiBorderLight};
         z-index: 500;
+        height: 40px;
     }
 
     .content__content {
@@ -58,7 +60,7 @@ const StyledContent = themed.section`
     }
 
     @media (${media.md}) {
-        grid-template-rows: auto 45px;
+        grid-template-rows: auto max-content;
         grid-template-areas:
             'content'
             'toolbar';
@@ -66,6 +68,7 @@ const StyledContent = themed.section`
         .content__toolbar {
             box-shadow: rgba(0,0,0,0.15) 0 -2px 5px;
             border-top: solid 1px ${props => props.theme.uiBorderLight};
+            height: 50px;
         }
     }
 `;

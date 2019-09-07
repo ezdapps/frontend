@@ -84,13 +84,13 @@ class App extends React.Component<AppProps> {
                         <StyledTitlebar className="drag">
                             <Titlebar>{appTitle}</Titlebar>
                         </StyledTitlebar>
+                        <ModalProvider />
+                        <NotificationsProvider />
 
                         <Layout
                             type={isMain ? 'fullscreen' : 'window'}
                             footer={<Legal />}
                         >
-                            <ModalProvider />
-                            <NotificationsProvider />
                             {/* {platform.select({
                                 web: !this.props.securityWarningClosed && (
                                     <SecurityWarning>
@@ -129,5 +129,8 @@ class App extends React.Component<AppProps> {
         );
     }
 }
+
+const vh = window.innerHeight * 0.01;
+document.documentElement.style.setProperty('--vh', `${vh}px`);
 
 export default App;

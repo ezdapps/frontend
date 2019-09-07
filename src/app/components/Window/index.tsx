@@ -11,6 +11,8 @@ export default themed.div`
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.16) 0 3px 20px;
     background: #fff;
+    display: flex;
+    flex-direction: column;
 
     @media (${media.md}) {
         height: 100%;
