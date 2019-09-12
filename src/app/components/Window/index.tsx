@@ -10,7 +10,7 @@ import classNames from 'classnames';
 
 interface Props {
     className?: string;
-    type?: 'brand' | 'default';
+    type?: 'brand' | 'default' | 'fullscreen';
     header?: React.ReactNode;
     footer?: React.ReactNode;
 }
@@ -47,6 +47,33 @@ export default themed(Window)`
 
             > .window__header {
                 height: 85px;
+            }
+        }
+    }
+
+    &.window_fullscreen {
+        justify-content: stretch;
+        align-items: stretch;
+
+        > .window__layout {
+            grid-template-rows: 40px 1fr;
+            grid-template-columns: 1fr;
+            flex: 1;
+            min-height: 100vh;
+            min-height: calc(var(--vh, 1vh) * 100);
+            box-shadow: none;
+            border-radius: 0;
+
+            > .window__header {
+                height: 40px;
+            }
+
+            > .window__body {
+                border: 0;
+            }
+
+            > .window_footer {
+                border: 0;
             }
         }
     }
@@ -92,6 +119,18 @@ export default themed(Window)`
             .window__footer__content {
                 border-top: solid 1px #dae4ec;
                 padding: 22px;
+            }
+        }
+    }
+    
+    @media (${media.md}) {
+        &.window_fullscreen {
+            > .window__layout {
+                grid-template-rows: 50px 1fr;
+
+                > .window__header {
+                    height: 50px;
+                }
             }
         }
     }

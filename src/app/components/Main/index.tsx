@@ -18,6 +18,7 @@ import { routes } from 'lib/routing';
 
 import themed from 'components/Theme/themed';
 import media from 'components/Theme/media';
+import Window from 'components/Window';
 
 interface Props {
     app?: string;
@@ -65,22 +66,27 @@ const Main: React.SFC<Props> = props => {
     const contentProps =
         Route && Route.mapContentParams ? Route.mapContentParams(props) : props;
 
-    return (
-        <StyledLayout>
-            {Route ? (
-                <>
-                    <div className="layout__header">
-                        <Route.Header {...headerProps} />
-                    </div>
+    return Route ? (
+        true ? (
+            <Window
+                type="fullscreen"
+                header={<Route.Header {...headerProps} />}
+            >
+                <Route.Content {...contentProps} />
+            </Window>
+        ) : (
+            <StyledLayout>
+                <div className="layout__header">
+                    <Route.Header {...headerProps} />
+                </div>
 
-                    <div className="layout__content">
-                        <Route.Content {...contentProps} />
-                    </div>
-                </>
-            ) : (
-                <Redirect to="/browse" />
-            )}
-        </StyledLayout>
+                <div className="layout__content">
+                    <Route.Content {...contentProps} />
+                </div>
+            </StyledLayout>
+        )
+    ) : (
+        <Redirect to="/browse" />
     );
 };
 
