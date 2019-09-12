@@ -66,6 +66,10 @@ export default themed(Window)`
 
             > .window__header {
                 height: 40px;
+                position: fixed;
+                left: 0;
+                top: 0;
+                right: 0;
             }
 
             > .window__body {
