@@ -10,6 +10,7 @@ import { IWallet } from 'apla/auth';
 import { IAccount } from 'apla/api';
 import { INotificationsMessage } from 'apla/socket';
 import Welcome from 'components/Auth/Welcome';
+import classNames from 'classnames';
 
 interface Props {
     className?: string;
@@ -22,7 +23,11 @@ interface Props {
 }
 
 const AccountList: React.SFC<Props> = props => (
-    <div className={props.className}>
+    <div
+        className={classNames(props.className, {
+            accountList_empty: 0 === props.items.length
+        })}
+    >
         {props.items.length ? (
             <ul className="accountList__items">
                 {props.items.map((account, index) => {
@@ -60,7 +65,9 @@ const AccountList: React.SFC<Props> = props => (
 );
 
 export default themed(AccountList)`
-    height: 100%;
+    &.accountList_empty {
+        height: 100%;
+    }
 
     .accountList__items {
         list-style-type: none;

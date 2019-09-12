@@ -6,9 +6,9 @@
 import { connect } from 'react-redux';
 import { modalShow } from 'modules/modal/actions';
 import { IModalProps } from 'components/Modal';
+import { createAccount } from 'modules/auth/actions';
 
 import SecurityProcessModal from 'components/Modal/Auth/SecurityProcessModal';
-import { createAccount } from 'modules/auth/actions';
 
 export default connect(
     null,
@@ -22,6 +22,9 @@ export default connect(
         props: IModalProps<{ password: string }, void>
     ) => ({
         ...props,
-        onResult: (_data: void) => dispatch.createAccount(props.params.password)
+        onResult: (_data: void) => {
+            props.onResult(null);
+            dispatch.createAccount(props.params.password);
+        }
     })
 )(SecurityProcessModal);

@@ -30,9 +30,9 @@ import NotificationsProvider from 'containers/Notifications/NotificationsProvide
 // import SecurityWarning from 'containers/SecurityWarning';
 import ThemeProvider from 'components/Theme/ThemeProvider';
 import Titlebar from 'components/Titlebar';
-import Legal from 'components/Legal';
+// import Legal from 'components/Legal';
 import Main from './Main';
-import Layout from './Layout';
+// import Layout from './Layout';
 
 interface AppProps {
     network: INetworkEndpoint;
@@ -75,11 +75,6 @@ class App extends React.Component<AppProps> {
             'platform-web': platform.select({ web: true }),
             'platform-windows': platform.select({ win32: true })
         });
-        const isMain =
-            !this.props.isFatal &&
-            this.props.isLoaded &&
-            this.props.isAuthenticated &&
-            this.props.isSessionAcquired;
 
         return (
             <IntlProvider
@@ -96,11 +91,7 @@ class App extends React.Component<AppProps> {
                         <ModalProvider />
                         <NotificationsProvider />
 
-                        <Layout
-                            type={isMain ? 'fullscreen' : 'window'}
-                            footer={<Legal />}
-                        >
-                            {/* {platform.select({
+                        {/* {platform.select({
                                 web: !this.props.securityWarningClosed && (
                                     <SecurityWarning>
                                         <FormattedMessage
@@ -111,27 +102,26 @@ class App extends React.Component<AppProps> {
                                 )
                             })} */}
 
-                            <Switch>
-                                {this.props.isFatal && (
-                                    <Route path="/" component={Error} />
+                        <Switch>
+                            {this.props.isFatal && (
+                                <Route path="/" component={Error} />
+                            )}
+                            {!this.props.isLoaded && (
+                                <Route path="/" component={Splash} />
+                            )}
+                            {!this.props.isAuthenticated && (
+                                <Route path="/" component={Auth} />
+                            )}
+                            {!this.props.isSessionAcquired && (
+                                <Route path="/" component={Splash} />
+                            )}
+                            <Route
+                                path={mainRoute}
+                                render={route => (
+                                    <Main {...route.match.params} />
                                 )}
-                                {!this.props.isLoaded && (
-                                    <Route path="/" component={Splash} />
-                                )}
-                                {!this.props.isAuthenticated && (
-                                    <Route path="/" component={Auth} />
-                                )}
-                                {!this.props.isSessionAcquired && (
-                                    <Route path="/" component={Splash} />
-                                )}
-                                <Route
-                                    path={mainRoute}
-                                    render={route => (
-                                        <Main {...route.match.params} />
-                                    )}
-                                />
-                            </Switch>
-                        </Layout>
+                            />
+                        </Switch>
                     </ThemedApp>
                 </ThemeProvider>
             </IntlProvider>
@@ -139,7 +129,12 @@ class App extends React.Component<AppProps> {
     }
 }
 
-const vh = window.innerHeight * 0.01;
-document.documentElement.style.setProperty('--vh', `${vh}px`);
+function updateSizes() {
+    const vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+window.addEventListener('resize', updateSizes);
+updateSizes();
 
 export default App;
