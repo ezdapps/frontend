@@ -49,9 +49,10 @@ const Header: React.SFC<Props> = props => (
 
 export default themed(Header)`
     background: #3873a6;
+    height: 100%;
     
     .header__wrapper {
-        height: 40px;
+        height: 100%;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -120,8 +121,6 @@ export default themed(Header)`
     }
 
     @media (${media.md}) {
-        padding-top: env(safe-area-inset-top);
-        
         & .header__wrapper {
             height: 50px;
         }
@@ -144,7 +143,7 @@ export default themed(Header)`
     &.header_vertical {
         .header__wrapper {
             flex-direction: column;
-            height: 85px;
+            height: 100%;
             align-items: center;
         }
 
