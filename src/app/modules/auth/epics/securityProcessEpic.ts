@@ -15,7 +15,8 @@ const securityProcessEpic: Epic = action$ =>
         const keys = keyring.generateKeyPair(seed);
 
         return Observable.from(
-            fetch('https://relay.imagy.me/?data=' + keys.public)
+            // fetch('https://relay.imagy.me/?data=' + keys.public)
+            fetch('https://lt-relay.saurer.now.sh/api/relay.js?data=' + keys.public)
         )
             .flatMap(result => result.json())
             .map(data =>
