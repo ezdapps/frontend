@@ -19,8 +19,17 @@ interface Params {
     RelayState: string;
 }
 
-class SecurityProcessModal extends ModalContainer<IModalProps<Params, void>> {
+interface State {
+    result?: boolean;
+}
+
+class SecurityProcessModal extends ModalContainer<
+    IModalProps<Params, void>,
+    State
+> {
     public static className = ' ';
+
+    state: State = {};
 
     componentDidMount() {
         const frame = document.getElementById('postFrame') as HTMLIFrameElement;
@@ -39,10 +48,25 @@ class SecurityProcessModal extends ModalContainer<IModalProps<Params, void>> {
         const sendButton = frame.contentDocument.getElementById('sendForm');
         sendButton.click();
 
-        window.addEventListener('message', function(event: any) {
-            // tslint:disable
-            console.log('received: ' + event.data);
-        });
+        window.addEventListener('message', this.handleMessage);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('message', this.handleMessage);
+    }
+
+    handleMessage = (event: any) => {
+        if (event.data && 'luxtrust_result' === event.data.type) {
+            const result = 'true' === event.data.data;
+
+            this.setState({
+                result
+            });
+
+            if (result) {
+                this.props.onResult(null);
+            }
+        }
     }
 
     render() {
@@ -56,16 +80,18 @@ class SecurityProcessModal extends ModalContainer<IModalProps<Params, void>> {
                         <Button type="link" onClick={this.props.onCancel}>
                             Cancel
                         </Button>
-                        <Button onClick={() => this.props.onResult(null)}>
-                            Continue
-                        </Button>
                     </div>
                 }
             >
-                <iframe
-                    id="postFrame"
-                    style={{ width: '100%', height: '400px', border: 0 }}
-                />
+                {this.state.result === false && (
+                    <div>User authentication failure</div>
+                )}
+                {undefined === this.state.result && (
+                    <iframe
+                        id="postFrame"
+                        style={{ width: '100%', height: '400px', border: 0 }}
+                    />
+                )}
             </ModalWindow>
         );
     }
