@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 import { connect } from 'react-redux';
-import { modalShow } from 'modules/modal/actions';
+import { securityProcess } from 'modules/auth/actions';
 import { IModalProps } from 'components/Modal';
 
 import SecurityNoticeModal from 'components/Modal/Auth/SecurityNoticeModal';
@@ -12,7 +12,7 @@ import SecurityNoticeModal from 'components/Modal/Auth/SecurityNoticeModal';
 export default connect(
     null,
     {
-        modalShow
+        securityProcess
     },
     (
         _state,
@@ -21,11 +21,7 @@ export default connect(
     ) => ({
         ...props,
         onResult: (_data: void) => {
-            dispatch.modalShow({
-                id: 'AUTH_SECURITY_PROCESS',
-                type: 'AUTH_SECURITY_PROCESS',
-                params: props.params
-            });
+            dispatch.securityProcess(props.params.password);
         }
     })
 )(SecurityNoticeModal);

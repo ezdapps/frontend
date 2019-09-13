@@ -10,40 +10,39 @@ import ModalWindow from 'containers/Modal/ModalWindow';
 import Button from 'components/Button/Button';
 
 interface Params {
+    keys: {
+        private: string;
+        public: string;
+    };
     password: string;
+    SAMLRequest: string;
+    RelayState: string;
 }
 
-interface State {
-    timer: number;
-}
-
-class SecurityProcessModal extends ModalContainer<
-    IModalProps<Params, void>,
-    State
-> {
+class SecurityProcessModal extends ModalContainer<IModalProps<Params, void>> {
     public static className = ' ';
 
-    private _mounted = true;
-    private _interval: any;
-
-    state: State = {
-        timer: 5
-    };
-
     componentDidMount() {
-        this._interval = setInterval(() => {
-            if (!this._mounted || 0 >= this.state.timer) {
-                clearInterval(this._interval);
-            } else {
-                this.setState(oldState => ({
-                    timer: oldState.timer - 1
-                }));
-            }
-        }, 1000);
-    }
+        const frame = document.getElementById('postFrame') as HTMLIFrameElement;
 
-    componentWillUnmount() {
-        this._mounted = false;
+        frame.contentDocument.body.innerHTML =
+            '<form method="post" action="https://orely.test.luxtrust.com/FederatedServiceFrontEnd/saml/dss/req">' +
+            '<input name="SAMLRequest" type="hidden" value="' +
+            this.props.params.SAMLRequest +
+            '"/>' +
+            '<input name="RelayState" type="hidden" value="' +
+            this.props.params.RelayState +
+            '"/>' +
+            '<input id="sendForm" type="submit" value="Send" style="position:absolute;top:-999999px;left:-999999px"/>' +
+            '</form>';
+
+        const sendButton = frame.contentDocument.getElementById('sendForm');
+        sendButton.click();
+
+        window.addEventListener('message', function(event: any) {
+            // tslint:disable
+            console.log('received: ' + event.data);
+        });
     }
 
     render() {
@@ -57,20 +56,15 @@ class SecurityProcessModal extends ModalContainer<
                         <Button type="link" onClick={this.props.onCancel}>
                             Cancel
                         </Button>
-                        <Button
-                            onClick={() => this.props.onResult(null)}
-                            disabled={0 < this.state.timer}
-                        >
-                            {0 >= this.state.timer
-                                ? 'Continue'
-                                : `Continue(${this.state.timer})`}
+                        <Button onClick={() => this.props.onResult(null)}>
+                            Continue
                         </Button>
                     </div>
                 }
             >
-                <img
-                    src="http://3.bp.blogspot.com/-cZ-wg_Apc1g/UIYy_zVPRvI/AAAAAAAAAis/-QdxtTxoPAs/s1600/Own+New+Funny+Pic.jpg"
-                    style={{ maxWidth: '100%', width: '100%' }}
+                <iframe
+                    id="postFrame"
+                    style={{ width: '100%', height: '400px', border: 0 }}
                 />
             </ModalWindow>
         );

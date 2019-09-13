@@ -12,11 +12,8 @@ import { modalShow } from 'modules/modal/actions';
 
 const createAccountEpic: Epic = action$ => action$.ofAction(createAccount.started)
     .flatMap(action => {
-        const seed = keyring.generateSeed();
-        const keys = keyring.generateKeyPair(seed);
-        const publicKey = keyring.generatePublicKey(keys.private);
-        const encKey = keyring.encryptAES(keys.private, action.payload);
-        const keyID = publicToID(keys.public);
+        const encKey = keyring.encryptAES(action.payload.keys.private, action.payload.password);
+        const keyID = publicToID(action.payload.keys.public);
 
         return Observable.concat(
             Observable.of(createAccount.done({
@@ -24,7 +21,7 @@ const createAccountEpic: Epic = action$ => action$.ofAction(createAccount.starte
                 result: {
                     id: keyID,
                     encKey,
-                    publicKey
+                    publicKey: action.payload.keys.public
                 }
             })),
             Observable.of(modalShow({
