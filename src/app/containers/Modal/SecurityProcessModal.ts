@@ -19,12 +19,18 @@ export default connect(
     (
         _state,
         dispatch: any,
-        props: IModalProps<{ password: string }, void>
+        props: IModalProps<
+            { keys: { private: string; public: string }; password: string },
+            void
+        >
     ) => ({
         ...props,
         onResult: (_data: void) => {
             props.onResult(null);
-            dispatch.createAccount(props.params.password);
+            dispatch.createAccount({
+                keys: props.params.keys,
+                password: props.params.password
+            });
         }
     })
 )(SecurityProcessModal);
