@@ -29,19 +29,23 @@ export interface IWalletGeneratorProps {
 const Generator: React.SFC<IWalletGeneratorProps> = props => (
     <div className={props.className}>
         <fieldset>
-            <p className="text-center">
-                {props.descriptionValue}
-            </p>
+            <p className="text-center">{props.descriptionValue}</p>
         </fieldset>
         <fieldset>
             <Validation.components.ValidatedFormGroup for="seed">
                 <Col md={3} className="clearfix">
                     <div className="pull-left">
-                        {props.action === 'import' ?
-                            (<FormattedMessage id="auth.backup" defaultMessage="Backup payload"/>)
-                            :
-                            (<FormattedMessage id="auth.seed" defaultMessage="Auth seed"/>)
-                        }
+                        {props.action === 'import' ? (
+                            <FormattedMessage
+                                id="auth.backup"
+                                defaultMessage="Backup payload"
+                            />
+                        ) : (
+                            <FormattedMessage
+                                id="auth.seed"
+                                defaultMessage="Auth seed"
+                            />
+                        )}
                     </div>
                     <div className="pull-right visible-sm visible-xs">
                         <Validation.components.ValidationMessage for="seed" />
@@ -54,26 +58,44 @@ const Generator: React.SFC<IWalletGeneratorProps> = props => (
                             onChange={e => props.onSeedChange(e.target.value)}
                             value={props.seed}
                             name="seed"
-                            validators={props.compareSeed ?
-                                [Validation.validators.required, Validation.validators.compare(props.compareSeed)] :
-                                [Validation.validators.required]
+                            validators={
+                                props.compareSeed
+                                    ? [
+                                          Validation.validators.required,
+                                          Validation.validators.compare(
+                                              props.compareSeed
+                                          )
+                                      ]
+                                    : [Validation.validators.required]
                             }
                         />
                     </div>
                     <div>
                         {props.onGenerate && (
                             <GeneratorTool onClick={props.onGenerate}>
-                                <FormattedMessage id="auth.seed.generate" defaultMessage="Generate" />
+                                <FormattedMessage
+                                    id="auth.seed.generate"
+                                    defaultMessage="Generate"
+                                />
                             </GeneratorTool>
                         )}
                         {props.onSave && (
-                            <GeneratorTool disabled={!props.seed} onClick={props.onSave}>
-                                <FormattedMessage id="auth.seed.save" defaultMessage="Save" />
+                            <GeneratorTool
+                                disabled={!props.seed}
+                                onClick={props.onSave}
+                            >
+                                <FormattedMessage
+                                    id="auth.seed.save"
+                                    defaultMessage="Save"
+                                />
                             </GeneratorTool>
                         )}
                         {props.onLoad && (
                             <GeneratorTool onClick={props.onLoad}>
-                                <FormattedMessage id="auth.seed.load" defaultMessage="Load" />
+                                <FormattedMessage
+                                    id="auth.seed.load"
+                                    defaultMessage="Load"
+                                />
                             </GeneratorTool>
                         )}
                     </div>
@@ -87,7 +109,10 @@ const Generator: React.SFC<IWalletGeneratorProps> = props => (
             <Validation.components.ValidatedFormGroup for="password">
                 <Col md={3} className="clearfix">
                     <div className="pull-left">
-                        <FormattedMessage id="general.password" defaultMessage="Password" />
+                        <FormattedMessage
+                            id="general.password"
+                            defaultMessage="Password"
+                        />
                     </div>
                     <div className="pull-right visible-sm visible-xs">
                         <Validation.components.ValidationMessage for="password" />
@@ -95,13 +120,25 @@ const Generator: React.SFC<IWalletGeneratorProps> = props => (
                 </Col>
                 <Col md={9}>
                     <Validation.components.ValidatedControl
-                        onChange={e => props.onPasswordChange((e.target as any).value)}
+                        onChange={e =>
+                            props.onPasswordChange((e.target as any).value)
+                        }
                         value={props.password}
                         name="password"
                         type="password"
-                        validators={props.comparePassword ?
-                            [Validation.validators.required, Validation.validators.minlength(6), Validation.validators.compare(props.comparePassword)] :
-                            [Validation.validators.required, Validation.validators.minlength(6)]
+                        validators={
+                            props.comparePassword
+                                ? [
+                                      Validation.validators.required,
+                                      Validation.validators.password,
+                                      Validation.validators.compare(
+                                          props.comparePassword
+                                      )
+                                  ]
+                                : [
+                                      Validation.validators.required,
+                                      Validation.validators.password
+                                  ]
                         }
                     />
                     <div className="visible-md visible-lg text-left">
@@ -114,7 +151,7 @@ const Generator: React.SFC<IWalletGeneratorProps> = props => (
     </div>
 );
 
-const StyledGenerator = styled(Generator) `
+const StyledGenerator = styled(Generator)`
     textarea.input-seed {
         height: 60px;
         resize: none;
