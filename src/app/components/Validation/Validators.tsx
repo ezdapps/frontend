@@ -143,7 +143,7 @@ export const password = new Validator({
     name: 'password',
     validate: (value) => {
         const type = typeof value;
-        const minLength = 6;
+        const minLength = 4;
         const maxLength = 30;
 
         if (null === value) {
