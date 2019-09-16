@@ -86,6 +86,20 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                     params.txhashes = ((action.meta || {}).txHashes || []).join(',');
                 }
 
+                if ('SIGN_PDF' === action.payload.page.name) {
+                    return Observable.of(signPdf({
+                        name: action.payload.page.params.Name,
+                        company: action.payload.page.params.Company,
+                        address: action.payload.page.params.Address,
+                        address2: action.payload.page.params.Address2,
+                        proxy: action.payload.page.params.Proxy,
+                        location: action.payload.page.params.Location,
+                        date: action.payload.page.params.Date,
+                        signature: action.payload.page.params.Signature,
+                        redirect: action.payload.page.params.Page && routerService.generateRoute(`/browse/${action.payload.page.section}/${action.payload.page.params.Page}`)
+                    }));
+                }
+
                 if (action.payload.popup) {
                     return Observable.of(renderPage.started({
                         location: null,
