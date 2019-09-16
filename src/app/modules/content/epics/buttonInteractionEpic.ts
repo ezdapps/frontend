@@ -6,7 +6,7 @@
 import { Action } from 'redux';
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { buttonInteraction } from 'modules/content/actions';
+import { buttonInteraction, signPdf } from 'modules/content/actions';
 import { isType } from 'typescript-fsa';
 import { txCall, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
@@ -112,6 +112,17 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                     switch (buttonAction.name) {
                         case 'CREATE': return Observable.of(createEditorTab.started(buttonAction.params.Type));
                         case 'EDIT': return Observable.of(loadEditorTab.started({ type: buttonAction.params.Type, name: buttonAction.params.Name }));
+                        case 'SIGN_PDF': return Observable.of(signPdf({
+                            name: buttonAction.params.Name,
+                            company: buttonAction.params.Company,
+                            address: buttonAction.params.Address,
+                            address2: buttonAction.params.Address2,
+                            proxy: buttonAction.params.Proxy,
+                            location: buttonAction.params.Location,
+                            date: buttonAction.params.Date,
+                            signature: buttonAction.params.Signature,
+                            redirect: buttonAction.params.Page && routerService.generateRoute(`/browse/${action.payload.page.section}/${buttonAction.params.Page}`)
+                        }));
                         default: return Observable.empty<never>();
                     }
                 });

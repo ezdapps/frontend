@@ -15,6 +15,17 @@ export const setMenuActive = actionCreator<boolean>('SET_MENU_ACTIVE');
 // Interaction
 export const buttonInteraction = actionCreator<IButtonInteraction>('BUTTON_INTERACTION');
 export const displayData = actionCreator.async<string, string, string>('DISPLAY_DATA');
+export const signPdf = actionCreator<{
+    name: string;
+    company: string;
+    address: string;
+    address2: string;
+    proxy: string;
+    location: string;
+    date: string;
+    signature: string;
+    redirect?: string;
+}>('SIGN_PDF');
 
 // Notifications
 export const fetchNotifications = actionCreator.async<void, TProtypoElement[], void>('FETCH_NOTIFICATIONS');

@@ -5,28 +5,21 @@
 
 import React from 'react';
 
-import { ModalContainer, IModalProps } from '../';
+import { ModalContainer, IModalProps } from './';
 import ModalWindow from 'containers/Modal/ModalWindow';
 import Button from 'components/Button/Button';
 
 interface Params {
-    keys: {
-        private: string;
-        public: string;
-    };
-    password: string;
     SAMLRequest: string;
     RelayState: string;
+    redirect: string;
 }
 
 interface State {
     result?: boolean;
 }
 
-class SecurityProcessModal extends ModalContainer<
-    IModalProps<Params, void>,
-    State
-> {
+class SignPdfModal extends ModalContainer<IModalProps<Params, void>, State> {
     public static className = ' ';
 
     state: State = {};
@@ -56,7 +49,11 @@ class SecurityProcessModal extends ModalContainer<
     }
 
     handleMessage = (event: any) => {
-        if (event.data && 'luxtrust_result' === event.data.type && 'xml' === event.data.operation) {
+        if (
+            event.data &&
+            'luxtrust_result' === event.data.type &&
+            'pdf' === event.data.operation
+        ) {
             const result = 'true' === event.data.data;
 
             this.setState({
@@ -72,7 +69,7 @@ class SecurityProcessModal extends ModalContainer<
     render() {
         return (
             <ModalWindow
-                title="Create new account"
+                title="Document signing"
                 width={400}
                 icon="Key"
                 controls={
@@ -84,7 +81,7 @@ class SecurityProcessModal extends ModalContainer<
                 }
             >
                 {this.state.result === false && (
-                    <div>User authentication failure</div>
+                    <div>Unable to sign the document</div>
                 )}
                 {undefined === this.state.result && (
                     <iframe
@@ -96,4 +93,4 @@ class SecurityProcessModal extends ModalContainer<
         );
     }
 }
-export default SecurityProcessModal;
+export default SignPdfModal;
