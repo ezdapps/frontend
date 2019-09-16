@@ -5,32 +5,32 @@
 
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { securityProcess } from '../actions';
-import keyring from 'lib/keyring';
+import { signPdf } from 'modules/content/actions';
 import { modalShow } from 'modules/modal/actions';
+import queryString from 'query-string';
 
-const securityProcessEpic: Epic = action$ =>
-    action$.ofAction(securityProcess).flatMap(action => {
-        const seed = keyring.generateSeed();
-        const keys = keyring.generateKeyPair(seed);
-
+const signPdfEpic: Epic = action$ =>
+    action$.ofAction(signPdf).flatMap(action => {
+        const { redirect, ...relayParams } = action.payload;
         return Observable.from(
-            fetch('https://lt-relay.saurer.now.sh/api/relay.js?data=' + keys.public)
+            fetch(
+                'https://lt-relay.saurer.now.sh/api/relayPDF.js?' +
+                    queryString.stringify(relayParams)
+            )
         )
             .flatMap(result => result.json())
             .map(data =>
                 modalShow({
-                    id: 'AUTH_SECURITY_PROCESS',
-                    type: 'AUTH_SECURITY_PROCESS',
+                    id: 'SIGN_PDF',
+                    type: 'SIGN_PDF',
                     params: {
-                        keys,
-                        password: action.payload,
                         SAMLRequest: data.SAMLRequest,
-                        RelayState: data.RelayState
+                        RelayState: data.RelayState,
+                        redirect: action.payload.redirect
                     }
                 })
             )
             .catch(e => Observable.empty<never>());
     });
 
-export default securityProcessEpic;
+export default signPdfEpic;

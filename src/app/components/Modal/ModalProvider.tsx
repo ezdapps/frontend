@@ -56,6 +56,7 @@ import AuthSecurityProcessModal from 'containers/Modal/SecurityProcessModal';
 import AuthAccountRemove from 'containers/Modal/AccountRemoveModal';
 import AuthAccountRestoreModal from 'containers/Modal/AuthAccountRestoreModal';
 import AuthLoginModal from 'containers/Modal/AuthLoginModal';
+import SignPdfModal from 'containers/Modal/SignPdfModal';
 
 const MODAL_COMPONENTS = {
     AUTHORIZE: AuthorizeModal,
@@ -94,7 +95,8 @@ const MODAL_COMPONENTS = {
     EDITOR_REVERT_UNSAVED: EditorRevertModal,
     EDITOR_CLOSE_ALL: EditorCloseAllModal,
     CHANGE_LOCALE: ChangeLocaleModal,
-    BACKUP: BackupModal
+    BACKUP: BackupModal,
+    SIGN_PDF: SignPdfModal
 };
 
 export interface IModalProviderProps {
