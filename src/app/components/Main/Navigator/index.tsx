@@ -41,9 +41,11 @@ const StyledContent = themed.section`
     justify-content: stretch;
     align-content: stretch;
     height: 100%;
-    padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: 50px;
+    margin-bottom: env(safe-area-inset-bottom);
 
     .content__toolbar {
+        background: ${props => props.theme.toolbarBackground};
         position: relative;
         grid-area: toolbar;
         box-shadow: rgba(0,0,0,0.07) 0 2px 5px;
@@ -69,6 +71,13 @@ const StyledContent = themed.section`
             box-shadow: rgba(0,0,0,0.15) 0 -2px 5px;
             border-top: solid 1px ${props => props.theme.uiBorderLight};
             height: 50px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            box-sizing: content-box;
+            padding-bottom: env(safe-area-inset-bottom);
+            margin-bottom: -1px;
         }
     }
 `;
