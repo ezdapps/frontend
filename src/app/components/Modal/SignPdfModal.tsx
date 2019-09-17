@@ -26,6 +26,9 @@ class SignPdfModal extends ModalContainer<IModalProps<Params, void>, State> {
 
     componentDidMount() {
         const frame = document.getElementById('postFrame') as HTMLIFrameElement;
+        const doc = frame.contentWindow.document;
+        doc.open();
+        doc.close();
 
         frame.contentDocument.body.innerHTML =
             '<form method="post" action="https://orely.luxtrust.com/FederatedServiceFrontEnd/saml/dss/req">' +

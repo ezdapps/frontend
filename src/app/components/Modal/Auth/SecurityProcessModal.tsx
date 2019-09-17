@@ -33,6 +33,9 @@ class SecurityProcessModal extends ModalContainer<
 
     componentDidMount() {
         const frame = document.getElementById('postFrame') as HTMLIFrameElement;
+        const doc = frame.contentWindow.document;
+        doc.open();
+        doc.close();
 
         frame.contentDocument.body.innerHTML =
             '<form method="post" action="https://orely.luxtrust.com/FederatedServiceFrontEnd/saml/dss/req">' +
@@ -56,7 +59,11 @@ class SecurityProcessModal extends ModalContainer<
     }
 
     handleMessage = (event: any) => {
-        if (event.data && 'luxtrust_result' === event.data.type && 'xml' === event.data.operation) {
+        if (
+            event.data &&
+            'luxtrust_result' === event.data.type &&
+            'xml' === event.data.operation
+        ) {
             const result = 'true' === event.data.data;
 
             this.setState({
