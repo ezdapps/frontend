@@ -3,7 +3,7 @@
     "name": "Apla",
     "icons": [
         {
-            "src": "./icons/icon-512.png",
+            "src": "./icons/icon_512.png",
             "sizes": "512x512",
             "type": "image/png"
         }
