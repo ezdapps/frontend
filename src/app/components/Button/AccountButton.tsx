@@ -48,6 +48,7 @@ interface Props {
     name: string;
     account?: string;
     badge?: Badge | number;
+    last?: boolean;
     onClick: React.MouseEventHandler<HTMLButtonElement>;
     onShare: React.MouseEventHandler<HTMLButtonElement>;
     onRemove: React.MouseEventHandler<HTMLButtonElement>;
@@ -88,6 +89,13 @@ const AccountButton: React.SFC<Props> = props => (
         <DropdownButton
             className="accountButton__controls"
             align="right"
+            direction={props.last ? 'up' : 'down'}
+            dropdownStyle={{
+                position: 'absolute',
+                right: '100%',
+                top: 0,
+                marginTop: props.last ? '-100%' : 0
+            }}
             content={
                 <div>
                     {/* <Item onCLick={props.onEdit} icon="icon-note">Edit</Item> */}

@@ -47,6 +47,7 @@ const AccountList: React.SFC<Props> = props => (
                                               value: 'icon-hourglass'
                                           }
                                 }
+                                last={index === props.items.length - 1}
                                 onClick={() => props.onSelect(account)}
                                 onShare={() => props.onShare(account)}
                                 onRemove={() =>
