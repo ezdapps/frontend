@@ -26,6 +26,8 @@ export const buttonInteraction = actionCreator<IButtonInteraction>('BUTTON_INTER
 export const displayData = actionCreator.async<string, string, string>('DISPLAY_DATA');
 export const signPdf = actionCreator<{
     name: string;
+    account: string;
+    meetingID: string;
     company: string;
     address: string;
     address2: string;
