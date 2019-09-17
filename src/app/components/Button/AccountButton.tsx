@@ -94,7 +94,7 @@ const AccountButton: React.SFC<Props> = props => (
                 position: 'absolute',
                 right: '100%',
                 top: 0,
-                marginTop: props.last ? '-100%' : 0
+                marginTop: props.last ? '-50%' : 0
             }}
             content={
                 <div>
