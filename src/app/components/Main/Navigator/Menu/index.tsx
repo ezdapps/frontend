@@ -21,6 +21,7 @@ import Protypo from 'containers/Widgets/Protypo';
 import ScrollView from 'components/ScrollView';
 import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
+import media from 'components/Theme/media';
 
 const StyledNavigation = themed.aside`
     background: ${props => props.theme.menuBackground};
@@ -40,6 +41,10 @@ const StyledNavigation = themed.aside`
     top: 0;
     left: 0;
     bottom: 0;
+
+    @media(${media.md}) {
+        display: none;
+    }
 `;
 
 const StyledBackButton = themed.button`
@@ -118,7 +123,14 @@ interface Props {
 }
 
 const Menu: React.SFC<Props> = props => (
-    <StyledNavigation className={classNames({ menu_folded: props.folded, menu_active: props.active })} onMouseOver={props.onMouseOver} onMouseLeave={props.onMouseLeave}>
+    <StyledNavigation
+        className={classNames({
+            menu_folded: props.folded,
+            menu_active: props.active
+        })}
+        onMouseOver={props.onMouseOver}
+        onMouseLeave={props.onMouseLeave}
+    >
         <nav>
             <StyledMenu>
                 <StackGroup
@@ -126,13 +138,18 @@ const Menu: React.SFC<Props> = props => (
                         <ScrollView disableHorizontal>
                             <StyledMenuContent>
                                 {index > 0 && (
-                                    <StyledBackButton onClick={() => props.menuPop()}>
+                                    <StyledBackButton
+                                        onClick={() => props.menuPop()}
+                                    >
                                         <div className="title-wrap">
                                             <span className="icon">
                                                 <em className="icon-arrow-left" />
                                             </span>
                                             <span>
-                                                <FormattedMessage id="navigation.return" defaultMessage="Return" />
+                                                <FormattedMessage
+                                                    id="navigation.return"
+                                                    defaultMessage="Return"
+                                                />
                                             </span>
                                         </div>
                                     </StyledBackButton>

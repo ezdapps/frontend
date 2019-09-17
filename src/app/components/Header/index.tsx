@@ -130,7 +130,8 @@ export default themed(Header)`
         }
 
         .header__menu {
-            display: block;
+            // display: block;
+            display: none;
         }
     }
 
