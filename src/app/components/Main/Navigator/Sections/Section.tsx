@@ -25,11 +25,10 @@ const StyledSection = themed.div`
     box-shadow: rgba(0,0,0,0.06) -5px 0 10px;
     position: relative;
     z-index: 100;
-    margin-left: ${props => props.theme.menuSize}px;
     transition: margin-left ease-in-out .12s, transform ease-in-out .12s;
     height: 100%;
-    width: 100%;
-    padding-right: ${props => props.theme.menuSizeFolded}px;
+    // margin-left: ${props => props.theme.menuSize}px;
+    // padding-right: ${props => props.theme.menuSizeFolded}px;
     
     &.section_folded {
         margin-left: ${props => props.theme.menuSizeFolded}px;
