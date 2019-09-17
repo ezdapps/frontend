@@ -96,6 +96,8 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                         location: action.payload.page.params.Location,
                         date: action.payload.page.params.Date,
                         signature: action.payload.page.params.Signature,
+                        meetingID: action.payload.page.params.MeetingID,
+                        account: store.getState().auth.wallet.wallet.address,
                         redirect: action.payload.page.params.Page && routerService.generateRoute(`/browse/${action.payload.page.section}/${action.payload.page.params.Page}`)
                     }));
                 }
@@ -135,6 +137,8 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                             location: buttonAction.params.Location,
                             date: buttonAction.params.Date,
                             signature: buttonAction.params.Signature,
+                            meetingID: action.payload.page.params.MeetingID,
+                            account: store.getState().auth.wallet.wallet.address,
                             redirect: buttonAction.params.Page && routerService.generateRoute(`/browse/${action.payload.page.section}/${buttonAction.params.Page}`)
                         }));
                         default: return Observable.empty<never>();
