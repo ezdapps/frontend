@@ -41,6 +41,11 @@ const StyledSection = themed.div`
     }
 
     @media (${media.md}) {
+        &&&&& {
+            margin-left: 0;
+            transform: none;
+        }
+
         &.section_folded {
             &.section_unfolded {
                 margin-left: ${props => props.theme.menuSizeFolded}px;
