@@ -31,7 +31,9 @@ const AccountList: React.SFC<Props> = props => (
         {props.items.length ? (
             <ul className="accountList__items">
                 {props.items.map((account, index) => {
-                    const name = `TEST_ACCOUNT_#${index + 1}`;
+                    const name = account.address
+                        ? `Account #${account.address.slice(-4)}`
+                        : `Unvalidated account #${index + 1}`;
                     return (
                         <li key={account.address || index}>
                             <AccountButton
