@@ -51,41 +51,82 @@ const containerAnimationDef = {
 };
 
 const animationDef = {
-    defaultStyle: {
-        transition: `transform ${animationDuration}ms cubic-bezier(0,0.5,0.5,1), opacity ${animationDuration}ms`,
-        transform: 'translateY(-25%)',
-        marginTop: '0',
-        opacity: 0
-    },
-    entering: {
-        transform: 'translateY(0)',
-        opacity: 1
-    },
-    entered: {
-        transform: 'translateY(0)',
-        opacity: 1
-    },
+    down: {
+        defaultStyle: {
+            transition: `transform ${animationDuration}ms cubic-bezier(0,0.5,0.5,1), opacity ${animationDuration}ms`,
+            transform: 'translateY(-25%)',
+            marginTop: '0',
+            opacity: 0
+        },
+        entering: {
+            transform: 'translateY(0)',
+            opacity: 1
+        },
+        entered: {
+            transform: 'translateY(0)',
+            opacity: 1
+        },
 
-    // We use negative margin to make children unclickable and not to break
-    // animation that will be used later
-    exited: {
-        transform: 'translateY(-25%)',
-        marginTop: '-100000px',
-        opacity: 0
+        // We use negative margin to make children unclickable and not to break
+        // animation that will be used later
+        exited: {
+            transform: 'translateY(-25%)',
+            marginTop: '-100000px',
+            opacity: 0
+        }
+    },
+    up: {
+        defaultStyle: {
+            transition: `transform ${animationDuration}ms cubic-bezier(0,0.5,0.5,1), opacity ${animationDuration}ms`,
+            transform: 'translateY(25%)',
+            marginBottom: '0',
+            opacity: 0
+        },
+        entering: {
+            transform: 'translateY(0)',
+            opacity: 1
+        },
+        entered: {
+            transform: 'translateY(0)',
+            opacity: 1
+        },
+
+        // We use negative margin to make children unclickable and not to break
+        // animation that will be used later
+        exited: {
+            transform: 'translateY(25%)',
+            marginBottom: '-100000px',
+            opacity: 0
+        }
     }
 };
 
 export interface IDropdownProps {
     visible: boolean;
     align?: 'left' | 'right';
+    direction?: 'up' | 'down';
     width?: number;
 }
 
 const Dropdown: React.SFC<IDropdownProps> = props => (
     <Transition in={props.visible} timeout={animationDuration}>
         {(state: string) => (
-            <div style={{ ...containerAnimationDef.defaultStyle, ...containerAnimationDef[state], ...(props.align ? containerAnimationDef.alignStyle[props.align] : null) }}>
-                <div style={{ ...animationDef.defaultStyle, ...animationDef[state], width: props.width }}>
+            <div
+                style={{
+                    ...containerAnimationDef.defaultStyle,
+                    ...containerAnimationDef[state],
+                    ...(props.align
+                        ? containerAnimationDef.alignStyle[props.align]
+                        : null)
+                }}
+            >
+                <div
+                    style={{
+                        ...animationDef[props.direction || 'down'].defaultStyle,
+                        ...animationDef[props.direction || 'down'][state],
+                        width: props.width
+                    }}
+                >
                     {props.children}
                 </div>
             </div>

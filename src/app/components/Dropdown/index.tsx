@@ -33,15 +33,22 @@ interface Props {
     className?: string;
     active?: boolean;
     align?: 'left' | 'right';
+    direction?: 'up' | 'down';
     width?: number;
 }
 
 const Dropdown: React.SFC<Props> = props => (
-    <DropdownAnimation visible={props.active} align={props.align}>
-        <StyledDropdown className={props.active ? 'dropdown-active' : ''} style={{ width: props.width ? `${props.width}px` : 'auto' }}>
+    <DropdownAnimation
+        visible={props.active}
+        align={props.align}
+        direction={props.direction}
+    >
+        <StyledDropdown
+            style={{ width: props.width ? `${props.width}px` : 'auto' }}
+        >
             {props.children}
         </StyledDropdown>
-    </DropdownAnimation >
+    </DropdownAnimation>
 );
 
 export default Dropdown;

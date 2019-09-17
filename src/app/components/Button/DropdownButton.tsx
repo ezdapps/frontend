@@ -31,7 +31,9 @@ interface Props {
     className?: string;
     active?: boolean;
     content: React.ReactNode;
+    dropdownStyle?: React.CSSProperties;
     align?: 'left' | 'right';
+    direction?: 'up' | 'down';
     menuWidth?: number;
     onClick?: () => any;
 }
@@ -95,13 +97,16 @@ class DropdownButton extends React.Component<
                 >
                     {this.props.children}
                 </Component>
-                <Dropdown
-                    active={this.state.active}
-                    align={this.props.align}
-                    width={this.props.menuWidth}
-                >
-                    {this.props.content}
-                </Dropdown>
+                <div style={this.props.dropdownStyle}> 
+                    <Dropdown
+                        active={this.state.active}
+                        align={this.props.align}
+                        direction={this.props.direction}
+                        width={this.props.menuWidth}
+                    >
+                        {this.props.content}
+                    </Dropdown>
+                </div>
             </div>
         );
     }
