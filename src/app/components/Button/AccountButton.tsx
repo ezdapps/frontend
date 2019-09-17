@@ -99,9 +99,9 @@ const AccountButton: React.SFC<Props> = props => (
             content={
                 <div>
                     {/* <Item onCLick={props.onEdit} icon="icon-note">Edit</Item> */}
-                    <Item onClick={props.onShare} icon="icon-share">
+                    {/* <Item onClick={props.onShare} icon="icon-share">
                         Share
-                    </Item>
+                    </Item> */}
                     <Item
                         onClick={props.onRemove}
                         icon="icon-trash text-danger"
