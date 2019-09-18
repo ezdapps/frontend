@@ -14,11 +14,10 @@
 
 import { Epic } from 'modules';
 import { saveWallet } from '../actions';
-import { createWallet, createAccount } from 'modules/auth/actions';
-import { isType } from 'typescript-fsa';
+import { createWallet } from 'modules/auth/actions';
 
 const saveWalletOnCreateEpic: Epic =
-    (action$, store) => action$.filter(action => isType(action, createWallet.done) || isType(action, createAccount.done))
+    (action$, store) => action$.ofAction(createWallet.done)
         .map((action: any) =>
             saveWallet(action.payload.result)
         );

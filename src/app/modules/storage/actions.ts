@@ -29,3 +29,4 @@ export const mergeFullNodes = actionCreator<{ uuid: string, fullNodes: string[] 
 export const saveEncKey = actionCreator<ISaveEncKeyCall>('SAVE_ENC_KEY');
 export const closeSecurityWarning = actionCreator<string>('CLOSE_SECURITY_WARNING');
 export const setMenuFolded = actionCreator<boolean>('SET_MENU_FOLDED');
+export const replaceAccount = actionCreator<IWallet>('REPLACE_ACCOUNT');
