@@ -9,6 +9,7 @@ import { createWallet, createAccount } from '../actions';
 import keyring from 'lib/keyring';
 import { publicToID, addressString } from 'lib/crypto';
 import { modalShow } from 'modules/modal/actions';
+import { replaceAccount } from 'modules/storage/actions';
 
 const createAccountEpic: Epic = action$ => action$.ofAction(createAccount.started)
     .flatMap(action => {
@@ -23,6 +24,11 @@ const createAccountEpic: Epic = action$ => action$.ofAction(createAccount.starte
                     encKey,
                     publicKey: action.payload.keys.public
                 }
+            })),
+            Observable.of(replaceAccount({
+                id: keyID,
+                encKey,
+                publicKey: action.payload.keys.public
             })),
             Observable.of(modalShow({
                 id: 'AUTH_ACCOUNT_CREATED',
