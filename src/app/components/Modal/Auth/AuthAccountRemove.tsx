@@ -5,7 +5,6 @@
 
 import React from 'react';
 import { IWallet } from 'apla/auth';
-import { addressString } from 'lib/crypto';
 
 import Modal from '../';
 import ModalWindow from 'containers/Modal/ModalWindow';
