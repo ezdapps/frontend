@@ -33,7 +33,7 @@ const AccountList: React.SFC<Props> = props => (
                 {props.items.map((account, index) => {
                     const name = account.address
                         ? `Account #${account.address.slice(-4)}`
-                        : `Unvalidated account #${index + 1}`;
+                        : 'Unvalidated account';
                     return (
                         <li key={account.address || index}>
                             <AccountButton
