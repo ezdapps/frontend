@@ -11,10 +11,11 @@ import Modal from '../';
 import ModalWindow from 'containers/Modal/ModalWindow';
 import Button from 'components/Button/Button';
 import Card from 'components/Card';
+import { IAccount } from 'apla/api';
 
 interface Params {
     name: string;
-    wallet: IWallet;
+    wallet: IWallet | IAccount;
 }
 
 class AuthAccountRemove extends Modal<Params, void> {
@@ -44,7 +45,11 @@ class AuthAccountRemove extends Modal<Params, void> {
                 <div style={{ marginTop: '20px' }}>
                     <Card
                         name={this.props.params.name}
-                        account={addressString(this.props.params.wallet.id)}
+                        account={
+                            'address' in this.props.params.wallet
+                                ? this.props.params.wallet.address
+                                : addressString(this.props.params.wallet.id)
+                        }
                     />
                 </div>
             </ModalWindow>
