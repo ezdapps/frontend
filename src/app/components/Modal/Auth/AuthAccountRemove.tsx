@@ -48,7 +48,7 @@ class AuthAccountRemove extends Modal<Params, void> {
                         account={
                             'address' in this.props.params.wallet
                                 ? this.props.params.wallet.address
-                                : addressString(this.props.params.wallet.id)
+                                : '0000-0000-0000-0000-0000'
                         }
                     />
                 </div>
