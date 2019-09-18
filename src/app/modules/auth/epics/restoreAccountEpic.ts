@@ -8,7 +8,7 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { restoreAccount } from '../actions';
 import keyring from 'lib/keyring';
-import { publicToID, addressString } from 'lib/crypto';
+import { publicToID } from 'lib/crypto';
 import { modalShow } from 'modules/modal/actions';
 
 const restoreAccountEpic: Epic = (action$, store, { api }) => action$.ofAction(restoreAccount.started)
@@ -30,8 +30,8 @@ const restoreAccountEpic: Epic = (action$, store, { api }) => action$.ofAction(r
                 id: 'AUTH_ACCOUNT_CREATED',
                 type: 'AUTH_ACCOUNT_CREATED',
                 params: {
-                    name: 'Stampify account',
-                    account: addressString(keyID)
+                    name: 'Pending Validation',
+                    account: 'XXXX-XXXX-XXXX-XXXX-XXXX'
                 }
             })
         );
