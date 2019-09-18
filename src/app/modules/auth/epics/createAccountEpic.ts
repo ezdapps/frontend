@@ -7,7 +7,7 @@ import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
 import { createWallet, createAccount } from '../actions';
 import keyring from 'lib/keyring';
-import { publicToID, addressString } from 'lib/crypto';
+import { publicToID } from 'lib/crypto';
 import { modalShow } from 'modules/modal/actions';
 import { replaceAccount } from 'modules/storage/actions';
 
@@ -34,8 +34,8 @@ const createAccountEpic: Epic = action$ => action$.ofAction(createAccount.starte
                 id: 'AUTH_ACCOUNT_CREATED',
                 type: 'AUTH_ACCOUNT_CREATED',
                 params: {
-                    name: 'Stampify account',
-                    account: addressString(keyID)
+                    name: 'Pending Validation',
+                    account: 'XXXX-XXXX-XXXX-XXXX-XXXX'
                 }
             }))
         );
