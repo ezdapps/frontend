@@ -43,7 +43,7 @@ export default themed(Window)`
 
     &.window_brand {
         > .window__layout {
-            grid-template-rows: 85px auto 80px;
+            grid-template-rows: 85px auto 100px;
 
             > .window__header {
                 height: 85px;
@@ -88,7 +88,7 @@ export default themed(Window)`
         background: #fff;
         box-shadow: rgba(0, 0, 0, 0.16) 0 3px 20px;
         display: grid;
-        grid-template-rows: 40px 1fr 80px;
+        grid-template-rows: 40px 1fr 100px;
         grid-template-columns: 400px;
         grid-template-areas:
             'header'
@@ -187,7 +187,7 @@ export default themed(Window)`
                 bottom: 0;
                 left: 0;
                 right: 0;
-                height: 80px;
+                height: 100px;
                 box-sizing: content-box;
                 border-left: 0;
                 border-right: 0;

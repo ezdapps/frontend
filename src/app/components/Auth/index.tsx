@@ -55,11 +55,27 @@ const Auth: React.SFC<Props> = props => (
                 ) : (
                     <Button
                         className="btn btn-primary btn-block"
-                        onClick={props.onRecover}
+                        onClick={props.onCreate}
                     >
                         <span>Recover access</span>
                     </Button>
                 )}
+                <div
+                    style={{
+                        textAlign: 'center',
+                        marginTop: 10,
+                        marginBottom: 10
+                    }}
+                >
+                    Powered by&nbsp;
+                    <a
+                        href="https://apla.io"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Apla
+                    </a>
+                </div>
             </div>
         }
     >
