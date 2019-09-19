@@ -47,7 +47,7 @@ class CreateAccountModal extends ModalContainer<
     render() {
         return (
             <ModalWindow
-                title="Create new account"
+                title="Create or Recover Account"
                 width={400}
                 icon="Key"
                 controls={

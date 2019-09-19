@@ -19,7 +19,7 @@ class SecurityNoticeModal extends Modal<Params, void> {
     render() {
         return (
             <ModalWindow
-                title="Create new account"
+                title="Create or Recover Account"
                 width={400}
                 icon="Key"
                 controls={
@@ -36,11 +36,9 @@ class SecurityNoticeModal extends Modal<Params, void> {
                 <div>
                     In order to make your e-signature in the system legally
                     binding, please confirm the generated public/private keys by
-                    signing with your existing LuxTrust token. Please note that
-                    the LuxTrust e-signing certificate, including your
-                    credentials (i.e., full name and contact details), will be
-                    sent to the users' onboarding authority for account
-                    validation purposes
+                    signing with your existing LuxTrust token. Your LuxTrust
+                    e-signing credentials will be sent to the LHoFT for account
+                    validation purposes.
                 </div>
             </ModalWindow>
         );

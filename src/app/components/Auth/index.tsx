@@ -13,7 +13,6 @@
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 
 import Window from 'components/Window';
 import AccountList from 'containers/AccountList';
@@ -37,29 +36,16 @@ const Auth: React.SFC<Props> = props => (
         header={
             <Header vertical>
                 <HeaderSeparator />
-                <div>Select account to sign in</div>
             </Header>
         }
         footer={
             <div>
-                {props.isEmpty ? (
-                    <Button
-                        className="btn btn-primary btn-block"
-                        onClick={props.onCreate}
-                    >
-                        <FormattedMessage
-                            id="wallet.create"
-                            defaultMessage="Create account"
-                        />
-                    </Button>
-                ) : (
-                    <Button
-                        className="btn btn-primary btn-block"
-                        onClick={props.onCreate}
-                    >
-                        <span>Recover access</span>
-                    </Button>
-                )}
+                <Button
+                    className="btn btn-primary btn-block"
+                    onClick={props.onCreate}
+                >
+                    Create or Recover Account
+                </Button>
                 <div
                     style={{
                         textAlign: 'center',
