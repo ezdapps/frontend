@@ -8,7 +8,6 @@ import { ISection } from 'apla/content';
 
 import themed from 'components/Theme/themed';
 import Sections from 'containers/Main/Navigator/Sections';
-import Breadcrumbs from './Sections/Breadcrumbs';
 import NotFound from './Page/NotFound';
 import media from 'components/Theme/media';
 
@@ -33,25 +32,24 @@ const StyledContent = themed.section`
     transition: none !important;
     overflow: hidden;
     display: grid;
-    grid-template-rows: max-content 1fr;
+    grid-template-rows: auto max-content;
     grid-template-columns: minmax(100%, 100vw);
     grid-template-areas:
-        'toolbar'
-        'content';
+        'content'
+        'toolbar';
     justify-content: stretch;
     align-content: stretch;
     height: 100%;
-    padding-bottom: 50px;
-    margin-bottom: env(safe-area-inset-bottom);
+    // padding-bottom: 50px;
+    // margin-bottom: env(safe-area-inset-bottom);
 
     .content__toolbar {
-        background: ${props => props.theme.toolbarBackground};
+        // background: ${props => props.theme.toolbarBackground};
         position: relative;
         grid-area: toolbar;
         box-shadow: rgba(0,0,0,0.07) 0 2px 5px;
-        border-bottom: solid 1px ${props => props.theme.uiBorderLight};
+        // border-bottom: solid 1px ${props => props.theme.uiBorderLight};
         z-index: 500;
-        height: 40px;
     }
 
     .content__content {
@@ -68,16 +66,10 @@ const StyledContent = themed.section`
             'toolbar';
 
         .content__toolbar {
-            box-shadow: rgba(0,0,0,0.15) 0 -2px 5px;
             border-top: solid 1px ${props => props.theme.uiBorderLight};
-            height: 50px;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            box-sizing: content-box;
-            padding-bottom: env(safe-area-inset-bottom);
-            margin-bottom: -1px;
+            padding: 15px 20px 15px 20px;
+            margin-bottom: env(safe-area-inset-bottom);
+            font-weight: bold;
         }
     }
 `;
@@ -92,10 +84,14 @@ const Navigator: React.SFC<Props> = props => {
                 {section ? (
                     <>
                         <div className="content__toolbar">
-                            <Breadcrumbs
-                                values={section.breadcrumbs}
-                                onRefresh={props.onRefresh}
-                            />
+                            Powered by&nbsp;
+                            <a
+                                href="https://apla.io"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Apla
+                            </a>
                         </div>
                         <div className="content__content">
                             <Sections
