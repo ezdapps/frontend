@@ -17,10 +17,12 @@ import displayDataEpic from './epics/displayDataEpic';
 import fetchNotificationsEpic from './epics/fetchNotificationsEpic';
 import buttonInteractionEpic from './epics/buttonInteractionEpic';
 import signPdfEpic from './epics/signPdfEpic';
+import signResultPdfEpic from './epics/signResultPdfEpic';
 
 export default combineEpics(
     displayDataEpic,
     fetchNotificationsEpic,
     buttonInteractionEpic,
-    signPdfEpic
+    signPdfEpic,
+    signResultPdfEpic
 );

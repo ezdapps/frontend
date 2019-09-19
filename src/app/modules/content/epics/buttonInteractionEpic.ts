@@ -15,7 +15,7 @@
 import { Action } from 'redux';
 import { Epic } from 'modules';
 import { Observable } from 'rxjs/Observable';
-import { buttonInteraction, signPdf } from 'modules/content/actions';
+import { buttonInteraction, signPdf, signResultPdf } from 'modules/content/actions';
 import { isType } from 'typescript-fsa';
 import { txCall, txExec } from 'modules/tx/actions';
 import { modalShow, modalClose } from 'modules/modal/actions';
@@ -95,6 +95,10 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                     params.txhashes = ((action.meta || {}).txHashes || []).join(',');
                 }
 
+                const date = new Date();
+                const dd = date.getDate();
+                const mm = ('0' + (1 + date.getMonth())).slice(-2);
+                const yyyy = date.getFullYear();
                 if ('SIGN_PDF' === action.payload.page.name) {
                     return Observable.of(signPdf({
                         name: action.payload.page.params.Name,
@@ -103,11 +107,40 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                         address2: action.payload.page.params.Address2,
                         proxy: action.payload.page.params.Proxy,
                         location: action.payload.page.params.Location,
-                        date: action.payload.page.params.Date,
+                        date: `${dd}/${mm}/${yyyy}`,
                         signature: action.payload.page.params.Signature,
                         meetingID: action.payload.page.params.MeetingID,
                         account: store.getState().auth.wallet.wallet.address,
                         redirect: action.payload.page.params.Page && routerService.generateRoute(`/browse/${action.payload.page.section}/${action.payload.page.params.Page}`)
+                    }));
+                }
+                else if ('SIGN_RESULT_PDF' === action.payload.page.name) {
+                    const qa: { index: number, q: string, a: string}[] = [];
+                    for (let itr in action.payload.page.params) {
+                        if (action.payload.page.params.hasOwnProperty(itr)) {
+                            const matches = /Question([0-9]+)/.exec(itr);    
+                            if (matches) {
+                                const [q, a] = action.payload.page.params.split(':');
+                                qa.push({
+                                    index: Number(matches[1]),
+                                    q: (q || '').trim(),
+                                    a: (a || '').trim()
+                                });
+                            }
+                        }
+                    }
+
+                    return Observable.of(signResultPdf({
+                        name: action.payload.page.params.Name,
+                        company: action.payload.page.params.Company,
+                        address: action.payload.page.params.Address,
+                        address2: action.payload.page.params.Address2,
+                        date: `${dd}/${mm}/${yyyy}`,
+                        qa: qa.sort((a,b) => a.index - b.index),
+                        location: action.payload.page.params.Location,
+                        signature: action.payload.page.params.Signature,
+                        meetingID: action.payload.page.params.MeetingID,
+                        account: store.getState().auth.wallet.wallet.address
                     }));
                 }
 
