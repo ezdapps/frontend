@@ -194,7 +194,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
             else {
                 return Observable.of(action);
             }
-        })
+        });
     });
 
 export default buttonInteractionEpic;
