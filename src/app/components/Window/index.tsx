@@ -43,10 +43,10 @@ export default themed(Window)`
 
     &.window_brand {
         > .window__layout {
-            grid-template-rows: 85px auto 100px;
+            grid-template-rows: 60px auto 100px;
 
             > .window__header {
-                height: 85px;
+                height: 60px;
             }
         }
     }
