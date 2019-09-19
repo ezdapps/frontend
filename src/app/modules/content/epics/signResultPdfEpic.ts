@@ -30,7 +30,7 @@ const signResultPdfEpic: Epic = action$ =>
                         RelayState: data.RelayState
                     }
                 })
-            )
+            );
     });
 
 export default signResultPdfEpic;
