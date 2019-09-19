@@ -28,6 +28,18 @@ export const signPdf = actionCreator<{
     signature: string;
     redirect?: string;
 }>('SIGN_PDF');
+export const signResultPdf = actionCreator<{
+    name: string;
+    account: string;
+    meetingID: string;
+    company: string;
+    address: string;
+    address2: string;
+    location: string;
+    date: string;
+    signature: string;
+    qa: { q: string, a: string }[];
+}>('SIGN_RESULT_PDF');
 
 // Notifications
 export const fetchNotifications = actionCreator.async<void, TProtypoElement[], void>('FETCH_NOTIFICATIONS');
