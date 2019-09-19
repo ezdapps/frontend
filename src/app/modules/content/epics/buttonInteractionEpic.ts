@@ -136,7 +136,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                         address: action.payload.page.params.Address,
                         address2: action.payload.page.params.Address2,
                         date: `${dd}/${mm}/${yyyy}`,
-                        qa: qa.sort((a,b) => a.index - b.index),
+                        qa: qa.sort((a, b) => a.index - b.index),
                         location: action.payload.page.params.Location,
                         signature: action.payload.page.params.Signature,
                         meetingID: action.payload.page.params.MeetingID,
