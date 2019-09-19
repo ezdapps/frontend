@@ -31,7 +31,6 @@ const signResultPdfEpic: Epic = action$ =>
                     }
                 })
             )
-            .catch(e => Observable.empty<never>());
     });
 
 export default signResultPdfEpic;

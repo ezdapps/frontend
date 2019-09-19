@@ -120,12 +120,16 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
                         if (action.payload.page.params.hasOwnProperty(itr)) {
                             const matches = /Question([0-9]+)/.exec(itr);    
                             if (matches) {
-                                const [q, a] = action.payload.page.params.split(':');
-                                qa.push({
-                                    index: Number(matches[1]),
-                                    q: (q || '').trim(),
-                                    a: (a || '').trim()
-                                });
+                                const [q, a] = (action.payload.page.params[itr] || '').split(':');
+                                const qt = q ? q.trim() : '';
+                                const at = a ? a.trim() : '';
+                                if (qt.length && at.length) {
+                                    qa.push({
+                                        index: Number(matches[1]),
+                                        q: qt,
+                                        a: at
+                                    });
+                                }
                             }
                         }
                     }
@@ -190,7 +194,7 @@ const buttonInteractionEpic: Epic = (action$, store, { routerService }) => actio
             else {
                 return Observable.of(action);
             }
-        });
+        })
     });
 
 export default buttonInteractionEpic;
