@@ -48,6 +48,7 @@ import AuthAccountRemove from 'containers/Modal/AccountRemoveModal';
 import AuthAccountRestoreModal from 'containers/Modal/AuthAccountRestoreModal';
 import AuthLoginModal from 'containers/Modal/AuthLoginModal';
 import SignPdfModal from 'containers/Modal/SignPdfModal';
+import AccountProcessModal from 'containers/Modal/AccountProcessModal';
 
 const MODAL_COMPONENTS = {
     AUTHORIZE: AuthorizeModal,
@@ -87,7 +88,8 @@ const MODAL_COMPONENTS = {
     EDITOR_CLOSE_ALL: EditorCloseAllModal,
     CHANGE_LOCALE: ChangeLocaleModal,
     BACKUP: BackupModal,
-    SIGN_PDF: SignPdfModal
+    SIGN_PDF: SignPdfModal,
+    ACCOUNT_PROCESS: AccountProcessModal
 };
 
 export interface IModalProviderProps {
