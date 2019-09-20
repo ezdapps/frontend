@@ -10,6 +10,7 @@ import HeaderButton from 'components/Main/Header/HeaderButton';
 import { Menu } from 'react-feather';
 import classNames from 'classnames';
 import HeaderSeparator from './HeaderSeparator';
+import { Link } from 'react-router-dom';
 
 interface Props {
     className?: string;
@@ -34,9 +35,9 @@ const Header: React.SFC<Props> = props => (
                     </HeaderButton>
                 </div>
             )}
-            <div className="header__logo">
+            <Link className="header__logo" to="/">
                 <img src="/img/logoHeader.png" />
-            </div>
+            </Link>
             {props.children && (
                 <>
                     <div className="header__body">{props.children}</div>
@@ -69,6 +70,7 @@ export default themed(Header)`
         user-select: none;
         flex: 0;
         height: 100%;
+        text-decoration: none;
 
         > img {
             height: 18px;
