@@ -34,6 +34,7 @@ import createAccountEpic from './epics/createAccountEpic';
 import restoreAccountEpic from './epics/restoreAccountEpic';
 import loginAccountEpic from './epics/loginAccountEpic';
 import securityProcessEpic from './epics/securityProcessEpic';
+import accountProcessEpic from './epics/accountProcessEpic';
 
 export default combineEpics(
     acquireSessionEpic,
@@ -56,5 +57,6 @@ export default combineEpics(
     createAccountEpic,
     restoreAccountEpic,
     loginAccountEpic,
-    securityProcessEpic
+    securityProcessEpic,
+    accountProcessEpic
 );

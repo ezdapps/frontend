@@ -13,7 +13,7 @@ interface Params {
     password: string;
 }
 
-class SecurityNoticeModal extends Modal<Params, void> {
+class SecurityNoticeModal extends Modal<Params, boolean> {
     public static className = ' ';
 
     render() {
@@ -27,7 +27,7 @@ class SecurityNoticeModal extends Modal<Params, void> {
                         <Button type="link" onClick={this.props.onCancel}>
                             Cancel
                         </Button>
-                        <Button onClick={() => this.props.onResult(null)}>
+                        <Button onClick={() => this.props.onResult(true)}>
                             Continue
                         </Button>
                     </div>
@@ -39,6 +39,14 @@ class SecurityNoticeModal extends Modal<Params, void> {
                     signing with your existing LuxTrust token. Your LuxTrust
                     e-signing credentials will be sent to the LHoFT for account
                     validation purposes.
+                </div>
+                <div className="text-center">
+                    <button
+                        className="btn btn-link"
+                        onClick={() => this.props.onResult(false)}
+                    >
+                        I don’t have a LuxTrust token
+                    </button>
                 </div>
             </ModalWindow>
         );
