@@ -25,23 +25,24 @@ class SignPdfModal extends ModalContainer<IModalProps<Params, void>, State> {
     state: State = {};
 
     componentDidMount() {
-        const frame = document.getElementById('postFrame') as HTMLIFrameElement;
-        const doc = frame.contentWindow.document;
-        doc.open();
-        doc.close();
+        // const frame = document.getElementById('postFrame') as HTMLIFrameElement;
+        // const doc = frame.contentWindow.document;
+        // doc.open();
+        // doc.close();
 
-        frame.contentDocument.body.innerHTML =
-            '<form method="post" action="https://orely.luxtrust.com/FederatedServiceFrontEnd/saml/dss/req">' +
-            '<input name="SAMLRequest" type="hidden" value="' +
-            this.props.params.SAMLRequest +
-            '"/>' +
-            '<input name="RelayState" type="hidden" value="' +
-            this.props.params.RelayState +
-            '"/>' +
-            '<input id="sendForm" type="submit" value="Send" style="position:absolute;top:-999999px;left:-999999px"/>' +
-            '</form>';
+        // frame.contentDocument.body.innerHTML =
+        //     '<form method="post" action="https://orely.luxtrust.com/FederatedServiceFrontEnd/saml/dss/req">' +
+        //     '<input name="SAMLRequest" type="hidden" value="' +
+        //     this.props.params.SAMLRequest +
+        //     '"/>' +
+        //     '<input name="RelayState" type="hidden" value="' +
+        //     this.props.params.RelayState +
+        //     '"/>' +
+        //     '<input id="sendForm" type="submit" value="Send" style="position:absolute;top:-999999px;left:-999999px"/>' +
+        //     '</form>';
 
-        const sendButton = frame.contentDocument.getElementById('sendForm');
+        // const sendButton = frame.contentDocument.getElementById('sendForm');
+        const sendButton = document.getElementById('sendForm');
         sendButton.click();
 
         window.addEventListener('message', this.handleMessage);
@@ -70,7 +71,33 @@ class SignPdfModal extends ModalContainer<IModalProps<Params, void>, State> {
     }
 
     render() {
-        return (
+        return true ? (
+            <form
+                method="post"
+                action="https://orely.luxtrust.com/FederatedServiceFrontEnd/saml/dss/req"
+            >
+                <input
+                    name="SAMLRequest"
+                    type="text"
+                    value={this.props.params.SAMLRequest}
+                />
+                <input
+                    name="RelayState"
+                    type="text"
+                    value={this.props.params.RelayState}
+                />
+                <input
+                    id="sendForm"
+                    type="submit"
+                    value="Send"
+                    style={{
+                        position: 'absolute',
+                        top: -999999,
+                        left: -999999
+                    }}
+                />
+            </form>
+        ) : (
             <ModalWindow
                 title="Document signing"
                 width={400}
