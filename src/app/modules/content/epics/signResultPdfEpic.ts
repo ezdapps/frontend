@@ -17,7 +17,11 @@ const signResultPdfEpic: Epic = action$ =>
         return Observable.from(
             fetch(
                 'https://lt-relay.saurer.now.sh/api/relayResultPDF.js?' +
-                    queryString.stringify({ ...relayParams, qa: qaValues })
+                    queryString.stringify({
+                        ...relayParams,
+                        returnUrl: window.location.href,
+                        qa: qaValues
+                    })
             )
         )
             .flatMap(result => result.json())
