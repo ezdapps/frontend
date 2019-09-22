@@ -78,12 +78,12 @@ class SignPdfModal extends ModalContainer<IModalProps<Params, void>, State> {
             >
                 <input
                     name="SAMLRequest"
-                    type="text"
+                    type="hidden"
                     value={this.props.params.SAMLRequest}
                 />
                 <input
                     name="RelayState"
-                    type="text"
+                    type="hidden"
                     value={this.props.params.RelayState}
                 />
                 <input
