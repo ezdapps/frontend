@@ -12,12 +12,16 @@ import queryString from 'query-string';
 const signPdfEpic: Epic = action$ =>
     action$.ofAction(signPdf).flatMap(action => {
         const { redirect, ...relayParams } = action.payload;
+        const returnUrl = action.payload.redirect
+            ? new URL(window.location.href).origin + action.payload.redirect
+            : window.location.href;
+
         return Observable.from(
             fetch(
                 'https://lt-relay.saurer.now.sh/api/relayPDF.js?' +
                     queryString.stringify({
                         ...relayParams,
-                        returnUrl: window.location.href
+                        returnUrl
                     })
             )
         )
