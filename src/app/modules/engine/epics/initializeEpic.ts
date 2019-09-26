@@ -48,6 +48,7 @@ const initializeEpic: Epic = (action$, store, { defaultPassword }) => action$.of
                     fullNodes: platform.args.fullNode,
                     socketUrl: platform.args.socketUrl,
                     activationEmail: platform.args.activationEmail,
+                    activationUrl: platform.args.activationUrl,
                     disableSync: platform.args.disableFullNodesSync,
                     demoEnabled: platform.args.guestMode
                 });
@@ -71,6 +72,7 @@ const initializeEpic: Epic = (action$, store, { defaultPassword }) => action$.of
                 fullNodes: network.fullNodes,
                 socketUrl: network.socketUrl,
                 activationEmail: network.activationEmail,
+                activationUrl: network.activationUrl,
                 disableSync: network.disableSync,
                 demoEnabled: network.enableDemoMode,
                 txViewerUrl: network.txViewerUrl

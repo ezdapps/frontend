@@ -38,6 +38,7 @@ const command = commander
     .option('-u, --disable-full-nodes-sync', null)
     .option('-g, --guest-mode')
     .option('-e, --activation-email', null)
+    .option('-U, --activation-url', null)
     .parse(argv);
 
 const args: IInferredArguments = {
@@ -50,6 +51,8 @@ const args: IInferredArguments = {
     networkName: command.networkName,
     socketUrl: command.socketUrl,
     disableFullNodesSync: command.disableFullNodesSync,
+    activationEmail: command.activationEmail,
+    activationUrl: command.activationUrl,
     guestMode: command.guestMode
 };
 

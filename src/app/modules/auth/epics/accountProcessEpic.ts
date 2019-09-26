@@ -17,10 +17,25 @@ import { Observable } from 'rxjs/Observable';
 import { accountProcess, createAccount } from '../actions';
 import keyring from 'lib/keyring';
 
-const accountProcessEpic: Epic = action$ =>
+const accountProcessEpic: Epic = (action$, store) =>
     action$.ofAction(accountProcess).flatMap(action => {
         const seed = keyring.generateSeed();
         const keys = keyring.generateKeyPair(seed);
+        const state = store.getState();
+
+        const session = state.engine.guestSession;
+
+        if (!session) {
+            return Observable.empty();
+        }
+
+        const network = state.storage.networks.find(
+            l => l.uuid === session.network.uuid
+        );
+
+        if (!network) {
+            return Observable.empty();
+        }
 
         const form = new URLSearchParams();
         form.append('pub', keys.public);
@@ -29,7 +44,7 @@ const accountProcessEpic: Epic = action$ =>
         form.append('surname', action.payload.lastName);
 
         return Observable.from(
-            fetch('https://lhoft.apla.io/request/add', {
+            fetch(network.activationUrl, {
                 method: 'post',
                 body: form
             })

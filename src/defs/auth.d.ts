@@ -28,6 +28,7 @@ declare module 'apla/auth' {
         disableSync?: boolean;
         socketUrl?: string;
         activationEmail?: string;
+        activationUrl?: string;
         demoEnabled?: boolean;
         txViewerUrl?: string;
     }

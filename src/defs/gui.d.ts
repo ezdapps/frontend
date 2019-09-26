@@ -24,6 +24,7 @@ declare module 'apla/gui' {
         readonly socketUrl?: string;
         readonly disableFullNodesSync?: boolean;
         readonly activationEmail?: string;
+        readonly activationUrl?: string;
         readonly guestMode?: boolean;
     }
 }
