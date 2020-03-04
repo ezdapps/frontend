@@ -90,7 +90,7 @@
         "package": "electron-builder --config electron-builder.json --dir",
         "release": "electron-builder --config electron-builder.json",
         "serve": "now ./build -A ./now.json",
-        "deploy": "now ./build -A ./now.json --prod"
+        "deploy": "now ./build -A ./now.json --prod --confirm"
     },
     "devDependencies": {
         "@types/bluebird": "^3.5.18",
