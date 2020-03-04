@@ -32,6 +32,10 @@ script:
       yarn release -w
     fi
   - yarn build
+  - |
+    if [ "${TRAVIS_PULL_REQUEST}" = "false" ] && [ "${TRAVIS_BRANCH}" = "master" ]; then
+      yarn deploy --token ${NOW_TOKEN}
+    fi
 
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
